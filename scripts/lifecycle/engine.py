@@ -19,6 +19,18 @@ TOKEN_PATTERN = re.compile(r"\{\{([A-Z0-9_]+)\}\}")
 LOCKFILE_REQUIRED_KEYS = ("schemaVersion", "package", "fileHashes")
 
 
+def lockfile_package_root(workspace: Path, package_root: Path) -> str:
+    """Store a portable package root: '.' when package_root is the workspace."""
+    ws = workspace.resolve()
+    pkg = package_root.resolve()
+    if pkg == ws:
+        return "."
+    try:
+        return str(pkg.relative_to(ws))
+    except ValueError:
+        return str(pkg)
+
+
 def package_version(package_root: Path) -> str:
     version_file = package_root / "VERSION"
     if not version_file.is_file():
@@ -426,7 +438,7 @@ def _build_lockfile_payload(
         "package": {
             "name": policy.get("packageName", "cursorAssistant"),
             "version": package_version(package_root),
-            "packageRoot": str(package_root.resolve()),
+            "packageRoot": lockfile_package_root(workspace, package_root),
         },
         "profile": lock_fields["profile"],
         "selectedPacks": lock_fields["selectedPacks"],

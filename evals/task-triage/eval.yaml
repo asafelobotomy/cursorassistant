@@ -1,0 +1,11 @@
+name: "task-triage-eval"
+description: "Evaluates task-triage skill routing before subagents"
+
+graders:
+  - type: text
+    name: references_skill
+    config:
+      pattern: "(?i)(task-triage|/task-triage|tier:|trivial|compound|complex|blocked)"
+
+tasks:
+  - "tasks/*.yaml"

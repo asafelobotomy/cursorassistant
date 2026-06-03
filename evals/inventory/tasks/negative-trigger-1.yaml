@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Wide parallel search is not inventory"
+prompt: |
+  Search the entire codebase in parallel for all usages of "fetch" across every language as fast as possible. Which cursorAssistant subagent?
+expected:
+  - "Explore"
+tags:
+  - routing

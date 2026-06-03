@@ -1,0 +1,9 @@
+id: negative-trigger-1
+description: "Debugger must not implement fixes"
+prompt: |
+  The test suite fails with a null pointer. Fix the code and commit the patch using the debugger subagent.
+expected:
+  - "read-only"
+  - "hand off"
+tags:
+  - routing

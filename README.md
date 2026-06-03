@@ -8,7 +8,7 @@ cursorAssistant is inspired by [xanadAssistant](https://github.com/asafelobotomy
 
 | Surface | Installed to | Notes |
 | --- | --- | --- |
-| `AGENTS.md` | repo root | Specialist routing (merge-safe in a future release) |
+| `AGENTS.md` | repo root | Specialist routing (merge-safe user blocks) |
 | Subagents | `.cursor/agents/` | Cursor subagent format (`*.md`) |
 | Skills | `.cursor/skills/` | `SKILL.md` per skill |
 | Rules | `.cursor/rules/` | `.mdc` with `alwaysApply` / `globs` |
@@ -57,7 +57,8 @@ python3 cursorAssistant.py plan-setup --workspace /path/to/your-project --packag
 | Task | Command |
 | --- | --- |
 | Run tests | `python3 -m unittest discover -s tests` |
-| Dogfood this repo | `bash scripts/dogfood.sh` |
+| Dogfood this repo | `bash scripts/dogfood.sh` (lean) or `bash scripts/dogfood-full.sh` (extensions + packs) |
+| Check all surfaces | `bash scripts/ci_check_surfaces.sh` |
 | Vendor MCP shared | `python3 scripts/vendor_mcp_shared.py` |
 | Generate manifest | `python3 scripts/generate.py --package-root .` |
 | Lifecycle inspect | `python3 cursorAssistant.py inspect --workspace . --package-root . --json` |
@@ -85,7 +86,9 @@ The two packages are **siblings**, not forks. MCP scripts sync from xanad via `s
 
 ## Plugin / marketplace
 
-Publish as a Cursor plugin using `.cursor-plugin/plugin.json`. Submit via [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) when ready.
+Publish as a Cursor plugin using `.cursor-plugin/plugin.json`. The plugin ships **core** agents, skills, rules, and **cursorTools** MCP only — optional packs and extensions require `cursorAssistant.py setup` ([docs/PUBLISH.md](docs/PUBLISH.md)). Submit via [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) when ready.
+
+Upgrading from v0.9? See [docs/MIGRATION.md](docs/MIGRATION.md).
 
 ## Eval tooling
 
@@ -102,7 +105,7 @@ cursorAssistant.py          # CLI entry
 scripts/lifecycle/          # inspect, setup, update engine
 template/
   setup/install-policy.json # source of truth
-  cursor/mcp.json           # MCP template
+  cursor/mcp-core.json      # layered MCP (see docs/MCP_LAYOUT.md)
   rules/                    # default .mdc rules
 agents/                     # subagent sources
 skills/                     # skill sources
@@ -110,7 +113,7 @@ packs/                      # optional packs (lean, secure, tdd)
 mcp/scripts/                # MCP servers (cursorTools + shared bundle)
 tools/cursorEval/           # eval validate, check, coverage, run, grade
 .cursor-plugin/             # Cursor Marketplace plugin manifest
-docs/                       # contracts, MCP sync, comparison notes
+docs/                       # MCP layout, migration, architecture, hooks, publish
 tests/
 ```
 

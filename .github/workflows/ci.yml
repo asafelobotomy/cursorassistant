@@ -39,7 +39,5 @@ jobs:
       - name: cursorEval policy (skills)
         run: python3 tools/cursorEval/cursorEval.py --repo-root . policy
 
-      - name: cursorEval check (sample surfaces)
-        run: |
-          python3 tools/cursorEval/cursorEval.py --repo-root . check skills/lifecycleAudit/SKILL.md
-          python3 tools/cursorEval/cursorEval.py --repo-root . check agents/inventory.md
+      - name: cursorEval check (all core surfaces)
+        run: bash scripts/ci_check_surfaces.sh

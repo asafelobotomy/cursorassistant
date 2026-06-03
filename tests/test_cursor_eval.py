@@ -57,6 +57,12 @@ class CursorEvalTests(unittest.TestCase):
         result = run_cursor_eval("check", str(agent))
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_policy_passes_on_core_sources(self) -> None:
+        result = run_cursor_eval("policy", fmt="json")
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        payload = json.loads(result.stdout)
+        self.assertTrue(payload["ok"])
+
     def test_coverage_reports_surfaces(self) -> None:
         result = run_cursor_eval("coverage", fmt="json")
         self.assertEqual(result.returncode, 0, result.stderr)

@@ -37,6 +37,12 @@ class EngineTests(unittest.TestCase):
             self.assertEqual(lock["selectedPacks"], [])
             self.assertFalse(lock["mcpEnabled"])
 
+    def test_lockfile_package_root_is_dot_when_workspace_equals_package(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            self.assertEqual(engine.lockfile_package_root(root, root), ".")
+        self.assertEqual(engine.lockfile_package_root(REPO_ROOT, REPO_ROOT), ".")
+
     def test_setup_mcp_disabled_skips_bundle_scripts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             workspace = Path(tmp)

@@ -1,0 +1,8 @@
+id: positive-trigger-1
+description: "Pre-push CI checks route to ciPreflight skill"
+prompt: |
+  Before I commit and push, I want to run the same checks CI would run locally. Which cursorAssistant skill applies?
+expected:
+  - "ciPreflight"
+tags:
+  - smoke

@@ -22,8 +22,9 @@ jobs:
 
       - name: Dry-run core eval suites
         run: |
-          python3 tools/cursorEval/cursorEval.py --repo-root . run evals/lifecycleAudit/eval.yaml --dry-run
-          python3 tools/cursorEval/cursorEval.py --repo-root . run evals/testing/eval.yaml --dry-run
+          for suite in lifecycleAudit testing inventory task-triage workspaceSearch ciPreflight depSearch; do
+            python3 tools/cursorEval/cursorEval.py --repo-root . run "evals/${suite}/eval.yaml" --dry-run
+          done
 
   eval-models:
     runs-on: ubuntu-latest
@@ -39,5 +40,6 @@ jobs:
 
       - name: Run lifecycleAudit eval (GitHub Models)
         env:
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/cursorEval/cursorEval.py --repo-root . run evals/lifecycleAudit/eval.yaml

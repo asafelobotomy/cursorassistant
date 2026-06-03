@@ -51,9 +51,18 @@
     "deprecated": [
       "web",
       "filesystem",
-      "time"
+      "time",
+      "git"
     ]
   },
+  "skills": [
+    "ciPreflight",
+    "depSearch",
+    "lifecycleAudit",
+    "task-triage",
+    "testing",
+    "workspaceSearch"
+  ],
   "profiles": [
     "balanced",
     "lean"

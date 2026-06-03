@@ -31,7 +31,8 @@ def resolve_package_root(package_root: str | None) -> tuple[Path | None, str | N
     if isinstance(package_block, dict):
         value = package_block.get("packageRoot")
         if isinstance(value, str) and value.strip():
-            root = Path(value).expanduser().resolve()
+            raw = Path(value).expanduser()
+            root = (WORKSPACE_ROOT / raw).resolve() if not raw.is_absolute() else raw.resolve()
             if root.is_dir():
                 return root, None
     return None, "Provide packageRoot or install cursorAssistant so the lockfile records package.packageRoot."

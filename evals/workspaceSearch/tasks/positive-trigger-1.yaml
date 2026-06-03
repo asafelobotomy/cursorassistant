@@ -1,0 +1,8 @@
+id: positive-trigger-1
+description: "Symbol lookup should prefer workspaceSearch guidance"
+prompt: |
+  I need to find every reference to a function name across this repo before refactoring. Which skill or approach should the Agent use in cursorAssistant?
+expected:
+  - "workspaceSearch"
+tags:
+  - smoke

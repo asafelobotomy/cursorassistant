@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.10.0",
+  "packageVersion": "0.10.1",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -17,7 +17,7 @@
       "target": ".cursor/agents/commit.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:d8aa38098c6e00b4d240901d850e6d786bedef3950161465049b84bdb5716758"
+      "hash": "sha256:98e31a6827f132c2d3feea159db8daaa34b26494a392cd00bace2fe0c35413e4"
     },
     {
       "id": "agents.cursorLifecycle",
@@ -25,7 +25,7 @@
       "target": ".cursor/agents/cursorLifecycle.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:a46e152ed0057a155a66cb051563b5497f399230bbbe8edc6c59f9de27e5d63b"
+      "hash": "sha256:a0821ab94e7bd0a8425d7d97f352b2fb053cb946211c7deb2c72afb81311f9c9"
     },
     {
       "id": "agents.debugger",
@@ -33,7 +33,7 @@
       "target": ".cursor/agents/debugger.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:ec4b7753de3cdd512d9b6e29e48728da8502685f4f29fd5b976836e56506ecbf"
+      "hash": "sha256:20a6b3ca2e91a0e83c579559fd588bd18f6b3f236c03299820d0c43d7147ddf6"
     },
     {
       "id": "agents.deps",
@@ -73,7 +73,7 @@
       "target": ".cursor/agents/planner.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:cb7def105b750d0bfe6f6458a93caaa710cb733f77743f2599e79fcc6bb6ec89"
+      "hash": "sha256:54856d7df34edb312f8d01ffec76afc72d47b0e4acce711276155eb89982bdc4"
     },
     {
       "id": "agents.researcher",
@@ -89,7 +89,7 @@
       "target": ".cursor/agents/review.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:0e1d09e134cfadcfda664e11c14f0fbd6ed926c7d6e1f0f934cae6e70c170029"
+      "hash": "sha256:2dde2bc159ba85b0e712097b1d9bb3829bc6b7f90b7f474cd60d4827249d57e4"
     },
     {
       "id": "mcp.config",
@@ -145,7 +145,7 @@
       "target": ".cursor/mcp/scripts/cursorToolsMcp.py",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:3552630932105add2bd637c370e26b5c80a8b609118fd9a6dbb1dc1d8b0977af",
+      "hash": "sha256:cdceddb0817dbe7e6d5de78f0920c7d2f74c4dff3c462d527d4067bcfb7cc03d",
       "requiredWhen": []
     },
     {

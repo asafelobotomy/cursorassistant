@@ -1,0 +1,11 @@
+name: "workspaceSearch-eval"
+description: "Evaluates workspaceSearch skill tool choice (Grep vs SemanticSearch vs Glob)"
+
+graders:
+  - type: text
+    name: references_skill
+    config:
+      pattern: "(?i)(workspaceSearch|Grep|SemanticSearch|Glob|Read)"
+
+tasks:
+  - "tasks/*.yaml"

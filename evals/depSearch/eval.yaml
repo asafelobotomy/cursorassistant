@@ -1,0 +1,11 @@
+name: "depSearch-eval"
+description: "Evaluates depSearch skill for dependency discovery and audit research"
+
+graders:
+  - type: text
+    name: references_skill
+    config:
+      pattern: "(?i)(depSearch|dependency|audit|lockfile|package)"
+
+tasks:
+  - "tasks/*.yaml"

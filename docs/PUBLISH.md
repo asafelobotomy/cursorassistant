@@ -22,6 +22,15 @@ python3 tools/cursorEval/cursorEval.py --repo-root . coverage
 - `name` is kebab-case (`cursor-assistant`)
 - Component paths (`agents`, `skills`, `rules`, `mcpServers`) must exist in this repo
 
+The marketplace manifest lists **core** `agents/`, `skills/`, `template/rules/`, and `mcp-core.json` only. **Packs** (lean, secure, tdd) and **MCP extensions** (devDocs, memory) are installed via the lifecycle CLI:
+
+```sh
+python3 cursorAssistant.py setup --workspace . --package-root . \
+  --answers '{"mcp.enabled": true, "packs.selected": ["secure"]}'
+```
+
+Dogfood in this repo: `scripts/dogfood.sh` (lean) vs `scripts/dogfood-full.sh` (extensions + all packs).
+
 ## Submit
 
 1. Open [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish)

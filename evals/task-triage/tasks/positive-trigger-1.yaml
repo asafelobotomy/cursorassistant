@@ -1,0 +1,8 @@
+id: positive-trigger-1
+description: "Ambiguous scope should use task-triage skill first"
+prompt: |
+  I'm not sure whether this needs a planner, several subagents, or a quick fix. What should we do first in a cursorAssistant workspace before spawning specialists?
+expected:
+  - "task-triage"
+tags:
+  - smoke

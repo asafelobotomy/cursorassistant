@@ -159,8 +159,13 @@ def generate_catalog(package_root: Path) -> dict:
                 "tdd": ["workspaceTesting", "tddTestRunner"],
                 "lean": ["leanContextBudget", "leanTestReporter"],
             },
-            "deprecated": ["web", "filesystem", "time"],
+            "deprecated": ["web", "filesystem", "time", "git"],
         },
+        "skills": sorted(
+            skill_dir.name
+            for skill_dir in (package_root / "skills").iterdir()
+            if skill_dir.is_dir() and (skill_dir / "SKILL.md").is_file()
+        ),
         "profiles": [
             profile["id"]
             for profile in profile_registry.get("profiles", [])

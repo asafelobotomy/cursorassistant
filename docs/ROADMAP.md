@@ -55,7 +55,7 @@
 - [x] Rewrite core skills for Cursor tools (`workspaceSearch`, `ciPreflight`, `depSearch`)
 - [x] Rules: built-in subagents + Agent tools before MCP
 - [x] Interview default `mcp.enabled: false`; conditions aligned
-- [x] Catalog lists all 12 agents; scrub xanad strings in `webMcp.py`
+- [x] Catalog lists core agents (later: 11 after inventory rename); scrub xanad strings in `webMcp.py`
 
 ## v0.9 — Cursor Canonical Phase B
 
@@ -65,7 +65,7 @@
 - [x] `inspect` `mcpWarnings` for legacy servers/scripts
 - [x] Agents/skills: Shell-first; MCP only when lockfile/pack enables it
 
-## v0.10 (current) — Cursor Canonical Phase C
+## v0.10 — Cursor Canonical Phase C
 
 - [x] Drop `git` MCP; use `commit` subagent + Shell/`gh`
 - [x] `triage` subagent → **task-triage** skill; 11 core agents
@@ -74,6 +74,15 @@
 - [x] `cursorEval policy` — forbid VS Code tool names in skills
 - [x] `scripts/dogfood-full.sh` (extensions + all packs)
 - [x] `docs/HOOKS.md` (optional user-owned hooks)
+
+## v0.10.1 (current) — review remediation
+
+- [x] Docs: `MIGRATION.md`, `ARCHITECTURE.md`, `SECURITY.md`, updated comparison/README
+- [x] Evals for all 6 core skills; routing tasks for inventory/debugger
+- [x] Agent delegation sections (`task-triage`, handoffs)
+- [x] Relative lockfile `packageRoot` when package is workspace; catalog `git` deprecated
+- [x] CI: policy + surface checks; evals workflow uses `GITHUB_MODELS_TOKEN`
+- [x] Archive obsolete `mcp-bundle.json` / `mcp-minimal.json`
 
 ## v1.0+
 

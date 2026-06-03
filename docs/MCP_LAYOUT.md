@@ -27,4 +27,4 @@ Deprecated sources live under `mcp/scripts/_deprecated/`. `sanitize_mcp_config` 
 
 ## Legacy file
 
-`template/cursor/mcp-bundle.json` is **obsolete** — do not reference in new installs. Use the layered manifests above.
+Obsolete monolithic manifests are under `template/cursor/_obsolete/` — do not reference in new installs.

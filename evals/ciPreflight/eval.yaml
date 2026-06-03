@@ -1,0 +1,11 @@
+name: "ciPreflight-eval"
+description: "Evaluates ciPreflight skill for local CI before commit"
+
+graders:
+  - type: text
+    name: references_skill
+    config:
+      pattern: "(?i)(ciPreflight|workflow|\\.github/workflows|Shell|staged)"
+
+tasks:
+  - "tasks/*.yaml"

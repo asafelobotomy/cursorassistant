@@ -59,6 +59,14 @@ bash scripts/dogfood.sh
 
 This writes `.cursor/*` into the package tree for local development (MCP bundle off; `cursorTools` only). Commit the resulting snapshot so the package repo uses the same surfaces as consumers.
 
+Full stack locally (extensions + all packs):
+
+```sh
+bash scripts/dogfood-full.sh
+```
+
+See [docs/HOOKS.md](docs/HOOKS.md) for optional user-owned Cursor hooks (not installed by lifecycle).
+
 ## MCP scripts
 
 v0.10+ always installs **cursorTools** (`mcp-core`). Optional **extensions** (devDocs, memory) require `mcp.enabled: true`. Pack MCP (secure, tdd, lean) installs when you select that pack. **git**, **web**, **filesystem**, and **time** servers are deprecated — use Shell/`gh`, the **commit** subagent, and Cursor Agent tools. See [docs/MCP_LAYOUT.md](docs/MCP_LAYOUT.md).

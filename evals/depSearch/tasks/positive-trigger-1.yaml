@@ -1,0 +1,8 @@
+id: positive-trigger-1
+description: "Dependency audit research routes to depSearch"
+prompt: |
+  I need to understand which packages we depend on and whether there are known CVEs before upgrading. Which skill should run first?
+expected:
+  - "depSearch"
+tags:
+  - smoke

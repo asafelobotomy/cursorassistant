@@ -13,6 +13,7 @@ Manage the git lifecycle for the current workspace using **Shell** and **`gh`** 
 - `git status`, staging, commits, push/pull, branches, stashes, tags
 - Pull request titles and bodies via `gh` when available
 - Pre-push verification (use **ciPreflight** skill first when checks are unknown)
+- Git operations previously done via deprecated **git** MCP — use Shell/`gh` here
 
 ## When not to use
 
