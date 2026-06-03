@@ -1,0 +1,406 @@
+{
+  "schemaVersion": "0.4.0",
+  "packageVersion": "0.4.0",
+  "policySchemaVersion": "0.4.0",
+  "managedFiles": [
+    {
+      "id": "agents.commit",
+      "source": "agents/commit.md",
+      "target": ".cursor/agents/commit.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:e016cace566a033f8809d2f10fcdb830233a6ebd87e4a4796919e9fbc68bbb8c"
+    },
+    {
+      "id": "agents.cursorLifecycle",
+      "source": "agents/cursorLifecycle.md",
+      "target": ".cursor/agents/cursorLifecycle.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:250e2b374380800610caeca7411d1a65e1a6f89965f63c83e9a5973dd5ac4819"
+    },
+    {
+      "id": "agents.debugger",
+      "source": "agents/debugger.md",
+      "target": ".cursor/agents/debugger.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:ec4b7753de3cdd512d9b6e29e48728da8502685f4f29fd5b976836e56506ecbf"
+    },
+    {
+      "id": "agents.deps",
+      "source": "agents/deps.md",
+      "target": ".cursor/agents/deps.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:f66ec20f0302c7a4ad01ab6c517b0fcd76e777c79395740b27b3dc2a05d7f1df"
+    },
+    {
+      "id": "agents.docs",
+      "source": "agents/docs.md",
+      "target": ".cursor/agents/docs.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:dca28fb903c30757ec0fbb9a1ce05b7f5ec472fcb566bc88479a97e289fca718"
+    },
+    {
+      "id": "agents.explore",
+      "source": "agents/explore.md",
+      "target": ".cursor/agents/explore.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:e21fef5cc0791734d7a7832fc31807cd0674a1133432213f7d68c5adb75874e7"
+    },
+    {
+      "id": "agents.planner",
+      "source": "agents/planner.md",
+      "target": ".cursor/agents/planner.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:cb7def105b750d0bfe6f6458a93caaa710cb733f77743f2599e79fcc6bb6ec89"
+    },
+    {
+      "id": "agents.review",
+      "source": "agents/review.md",
+      "target": ".cursor/agents/review.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:0e1d09e134cfadcfda664e11c14f0fbd6ed926c7d6e1f0f934cae6e70c170029"
+    },
+    {
+      "id": "mcp.config",
+      "source": "template/cursor/mcp-minimal.json",
+      "target": ".cursor/mcp.json",
+      "layer": "core",
+      "strategy": "merge-json-object",
+      "hash": "sha256:972ea8c551b3dfe27678bc4f49b1255df38a220730e7f85c293340c41d1113b5"
+    },
+    {
+      "id": "mcp.shared._memory_mcp_shared",
+      "source": "mcp/scripts/_memory_mcp_shared.py",
+      "target": ".cursor/mcp/scripts/_memory_mcp_shared.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [
+        "mcp.enabled=true"
+      ],
+      "hash": "sha256:24537a3420114b51988f7d598b78f3a705843a3e6aad6075075b91c0e1cb1732"
+    },
+    {
+      "id": "mcp.shared._workspace_testing_shared",
+      "source": "mcp/scripts/_workspace_testing_shared.py",
+      "target": ".cursor/mcp/scripts/_workspace_testing_shared.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [
+        "mcp.enabled=true"
+      ],
+      "hash": "sha256:4dc0fa49161e9cdd792d319833bee9e97fe45a1fc403b2f3f160b6c6a27ddbbb"
+    },
+    {
+      "id": "mcp.cursorToolsMcp",
+      "source": "mcp/scripts/cursorToolsMcp.py",
+      "target": ".cursor/mcp/scripts/cursorToolsMcp.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [],
+      "hash": "sha256:24f7d7099c0fc7a363e51b269a44acca87af33017d3f7b55aa3a1f2b4608602b"
+    },
+    {
+      "id": "mcp.devDocsMcp",
+      "source": "mcp/scripts/devDocsMcp.py",
+      "target": ".cursor/mcp/scripts/devDocsMcp.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [
+        "mcp.enabled=true"
+      ],
+      "hash": "sha256:e0229a2186af17f74a65becf61d74dbff944ea699c40093e4c5f1273e3ec6b0d"
+    },
+    {
+      "id": "mcp.fsMcp",
+      "source": "mcp/scripts/fsMcp.py",
+      "target": ".cursor/mcp/scripts/fsMcp.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [
+        "mcp.enabled=true"
+      ],
+      "hash": "sha256:e31b756b16cc3d573d6018882e2f8c3662589fd8a80020f422aa6fc97a5d46c6"
+    },
+    {
+      "id": "mcp.gitMcp",
+      "source": "mcp/scripts/gitMcp.py",
+      "target": ".cursor/mcp/scripts/gitMcp.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [
+        "mcp.enabled=true"
+      ],
+      "hash": "sha256:bb9996883a73ea333f578686e36427e081ee64e44e8590531c65f944cc903a1c"
+    },
+    {
+      "id": "mcp.memoryMcp",
+      "source": "mcp/scripts/memoryMcp.py",
+      "target": ".cursor/mcp/scripts/memoryMcp.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [
+        "mcp.enabled=true"
+      ],
+      "hash": "sha256:797778cd27a9b1c5882c99930e990722743b54b2526d2701cbb951fe2811f86c"
+    },
+    {
+      "id": "mcp.securityMcp",
+      "source": "mcp/scripts/securityMcp.py",
+      "target": ".cursor/mcp/scripts/securityMcp.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [
+        "mcp.enabled=true"
+      ],
+      "hash": "sha256:3e09cacc572bdedf036c1e54202499a6d4d1e2000089171c759f4414ed98773a"
+    },
+    {
+      "id": "mcp.timeMcp",
+      "source": "mcp/scripts/timeMcp.py",
+      "target": ".cursor/mcp/scripts/timeMcp.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [
+        "mcp.enabled=true"
+      ],
+      "hash": "sha256:14de5df5a73182cf6ec1ec0ab92b63d2c9675e30611e47bc76edc975c9167df8"
+    },
+    {
+      "id": "mcp.webMcp",
+      "source": "mcp/scripts/webMcp.py",
+      "target": ".cursor/mcp/scripts/webMcp.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [
+        "mcp.enabled=true"
+      ],
+      "hash": "sha256:52881675d8ec99c3a6273eb5212a5836d4090bae30bcd12dbae5cc3072ee2666"
+    },
+    {
+      "id": "mcp.workspaceTestingMcp",
+      "source": "mcp/scripts/workspaceTestingMcp.py",
+      "target": ".cursor/mcp/scripts/workspaceTestingMcp.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [
+        "mcp.enabled=true"
+      ],
+      "hash": "sha256:b09d95e9248b8bbfcff099b92a2e4224a7f2a360c01ffde6c0215c642119ebdb"
+    },
+    {
+      "id": "rules.core",
+      "source": "template/rules/core.mdc",
+      "target": ".cursor/rules/core.mdc",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:c87008a6d1c1e2190461eb3fe0745d86bd8c1b98765ccd704bee8eedba70af0f"
+    },
+    {
+      "id": "rules.lifecycle",
+      "source": "template/rules/lifecycle.mdc",
+      "target": ".cursor/rules/lifecycle.mdc",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:a7b60f7ef70d79652b469b91e8d7f473bb33afb5f94654d47c6087b2df2a5b55"
+    },
+    {
+      "id": "skills.ciPreflight",
+      "source": "skills/ciPreflight/SKILL.md",
+      "target": ".cursor/skills/ciPreflight/SKILL.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:0e54b00d2db321d09509f6ec61f05e1874534c84c1b0f2d1af288765358a23e6"
+    },
+    {
+      "id": "skills.depSearch",
+      "source": "skills/depSearch/SKILL.md",
+      "target": ".cursor/skills/depSearch/SKILL.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:ee9e8b3324101d7db0f3de7c15e76b8c6b3815138d0804eba5639c5e0573c816"
+    },
+    {
+      "id": "packs.secure.dependencyAudit",
+      "source": "packs/secure/skills/dependencyAudit/SKILL.md",
+      "target": ".cursor/skills/dependencyAudit/SKILL.md",
+      "layer": "pack",
+      "pack": "secure",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=secure"
+      ],
+      "hash": "sha256:2510573be019e59ebc58587bbb6750ff75765da30dcabceb1b498592c2ebcd44"
+    },
+    {
+      "id": "packs.lean.leanAndon",
+      "source": "packs/lean/skills/leanAndon/SKILL.md",
+      "target": ".cursor/skills/leanAndon/SKILL.md",
+      "layer": "pack",
+      "pack": "lean",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=lean"
+      ],
+      "hash": "sha256:27b39284ff3c13dd7f2d05d395fb5a33d6e73327f177df927b371ab216257dda"
+    },
+    {
+      "id": "packs.lean.leanContext",
+      "source": "packs/lean/skills/leanContext/SKILL.md",
+      "target": ".cursor/skills/leanContext/SKILL.md",
+      "layer": "pack",
+      "pack": "lean",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=lean"
+      ],
+      "hash": "sha256:738271b81995b75221f722c9fc4a2baf0cc4fb60b9f840e150cf43319b9ca69c"
+    },
+    {
+      "id": "packs.lean.leanOutput",
+      "source": "packs/lean/skills/leanOutput/SKILL.md",
+      "target": ".cursor/skills/leanOutput/SKILL.md",
+      "layer": "pack",
+      "pack": "lean",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=lean"
+      ],
+      "hash": "sha256:b9be4667f5026827d081e45de32322eccc41d8946ddbdbfc8ee0e10b448c5e45"
+    },
+    {
+      "id": "packs.lean.leanVerification",
+      "source": "packs/lean/skills/leanVerification/SKILL.md",
+      "target": ".cursor/skills/leanVerification/SKILL.md",
+      "layer": "pack",
+      "pack": "lean",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=lean"
+      ],
+      "hash": "sha256:7efc7d24e038c64cc56acaf16ee94c13e1ea0f5a9d3c9a0bc74ba577deaf5b8e"
+    },
+    {
+      "id": "skills.lifecycleAudit",
+      "source": "skills/lifecycleAudit/SKILL.md",
+      "target": ".cursor/skills/lifecycleAudit/SKILL.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:1f0656e9dc3d09ca95a3741b6a6786d792900fecfd9a200f0863a78714bdc65a"
+    },
+    {
+      "id": "packs.secure.secretScanning",
+      "source": "packs/secure/skills/secretScanning/SKILL.md",
+      "target": ".cursor/skills/secretScanning/SKILL.md",
+      "layer": "pack",
+      "pack": "secure",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=secure"
+      ],
+      "hash": "sha256:9184684603a13bd06e857cdfe05fa9c3d04a43d588f119a2de7f7cfe90217f8b"
+    },
+    {
+      "id": "packs.secure.secureReview",
+      "source": "packs/secure/skills/secureReview/SKILL.md",
+      "target": ".cursor/skills/secureReview/SKILL.md",
+      "layer": "pack",
+      "pack": "secure",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=secure"
+      ],
+      "hash": "sha256:e6bb4686d90554950b6f8ae8a3609012d43555c37bc442d260bfb42f0c50c8df"
+    },
+    {
+      "id": "packs.tdd.tddCycle",
+      "source": "packs/tdd/skills/tddCycle/SKILL.md",
+      "target": ".cursor/skills/tddCycle/SKILL.md",
+      "layer": "pack",
+      "pack": "tdd",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=tdd"
+      ],
+      "hash": "sha256:0eb98b72fdeb643b5e53a737031be57daec305c1b70108b97175da8ce8d791ef"
+    },
+    {
+      "id": "packs.tdd.testArchitecture",
+      "source": "packs/tdd/skills/testArchitecture/SKILL.md",
+      "target": ".cursor/skills/testArchitecture/SKILL.md",
+      "layer": "pack",
+      "pack": "tdd",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=tdd"
+      ],
+      "hash": "sha256:240daf28161836c95d68c408ec514e7b62132acfd55e2052cd2d23b15bfe4703"
+    },
+    {
+      "id": "packs.tdd.testCoverage",
+      "source": "packs/tdd/skills/testCoverage/SKILL.md",
+      "target": ".cursor/skills/testCoverage/SKILL.md",
+      "layer": "pack",
+      "pack": "tdd",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=tdd"
+      ],
+      "hash": "sha256:812db820d0125b97f81dc404246592d27e52c2e83559e4113f530017a8308db4"
+    },
+    {
+      "id": "packs.tdd.testDoubles",
+      "source": "packs/tdd/skills/testDoubles/SKILL.md",
+      "target": ".cursor/skills/testDoubles/SKILL.md",
+      "layer": "pack",
+      "pack": "tdd",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=tdd"
+      ],
+      "hash": "sha256:aee37991f1472595dc74585af7777c993f1dbd9ecca7a6211e321e3352d44ccb"
+    },
+    {
+      "id": "skills.testing",
+      "source": "skills/testing/SKILL.md",
+      "target": ".cursor/skills/testing/SKILL.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:fa21f15264c7ff8541ad9fb898c6b81547973c0f5195801433fabd5bff663d08"
+    },
+    {
+      "id": "packs.secure.threatModel",
+      "source": "packs/secure/skills/threatModel/SKILL.md",
+      "target": ".cursor/skills/threatModel/SKILL.md",
+      "layer": "pack",
+      "pack": "secure",
+      "strategy": "replace",
+      "requiredWhen": [
+        "packs.selected=secure"
+      ],
+      "hash": "sha256:51b00bb47b4879bb64134eac9e6587171cf93a67c326efe2d25b1c932c37267f"
+    },
+    {
+      "id": "skills.workspaceSearch",
+      "source": "skills/workspaceSearch/SKILL.md",
+      "target": ".cursor/skills/workspaceSearch/SKILL.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:a2348bf6ef3a7074fbe6d603cdfd06b17c0cdefbacda7c65c8f6b4ca41caf25f"
+    },
+    {
+      "id": "routing.agents-md",
+      "source": "AGENTS.md",
+      "target": "AGENTS.md",
+      "layer": "core",
+      "strategy": "preserve-marked-markdown-blocks",
+      "hash": "sha256:a8ce2aaedaee68f2522a2e91ec6651452c1c720a88ee1f403f9f824dc75f2909"
+    }
+  ]
+}

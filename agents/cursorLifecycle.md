@@ -14,25 +14,34 @@ Use `cursorAssistant.py` as the single entrypoint:
 
 ```sh
 python3 cursorAssistant.py inspect --workspace <workspace> --package-root <package-root> --json
+python3 cursorAssistant.py plan-setup --workspace <workspace> --package-root <package-root> --json
 python3 cursorAssistant.py setup --workspace <workspace> --package-root <package-root> --json
 python3 cursorAssistant.py update --workspace <workspace> --package-root <package-root> --json
+python3 cursorAssistant.py repair --workspace <workspace> --package-root <package-root> --json
+python3 cursorAssistant.py factory-restore --workspace <workspace> --package-root <package-root> --json
 ```
 
 Resolve `<package-root>` to the cursorAssistant git checkout or release extract. Resolve `<workspace>` to the consumer project root.
+
+Prefer **cursorTools** MCP (`lifecycle_*` tools) when MCP is enabled; fall back to the CLI above.
 
 ## Trigger phrases
 
 - **Set up cursorAssistant** → `setup` if not installed; otherwise `update`
 - **Inspect workspace** / **health check** → `inspect`
 - **Update cursorAssistant** → `update`
+- **Repair cursorAssistant** / broken lockfile → `repair`
+- **Factory restore** → `factory-restore` (destructive; confirm first)
 
 ## Risk tiers
 
 | Command | Risk | Rule |
 | --- | --- | --- |
-| `inspect` | Low | Read-only |
+| `inspect` / `plan-setup` | Low | Read-only |
 | `setup` | Medium | Show plan summary; confirm before apply on existing installs |
 | `update` | Medium | Show stale/missing list; confirm when overwriting local edits |
+| `repair` | Medium | Fix lockfile or incomplete install; confirm before apply |
+| `factory-restore` | High | Overwrites all managed files; require explicit user confirmation |
 
 ## Cold start
 

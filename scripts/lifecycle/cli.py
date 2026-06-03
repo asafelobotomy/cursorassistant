@@ -14,15 +14,38 @@ def _resolve_path(value: str) -> Path:
     return Path(value).expanduser().resolve()
 
 
-def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="cursorAssistant", description="Cursor surface lifecycle")
+def _load_answers(path: str | None) -> dict | None:
+    if not path:
+        return None
+    payload = json.loads(Path(path).expanduser().read_text(encoding="utf-8"))
+    if not isinstance(payload, dict):
+        raise ValueError("--answers file must contain a JSON object")
+    return payload
+
+
+def _add_common_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--workspace", required=True, help="Consumer workspace root")
     parser.add_argument("--package-root", required=True, help="cursorAssistant package root")
     parser.add_argument("--json", action="store_true", help="Emit JSON on stdout")
+    parser.add_argument(
+        "--answers",
+        help="Path to JSON file with interview answers (non-interactive setup/update)",
+    )
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="cursorAssistant", description="Cursor surface lifecycle")
     sub = parser.add_subparsers(dest="command", required=True)
-    sub.add_parser("inspect", help="Read-only install state")
-    sub.add_parser("setup", help="First-time or full refresh install")
-    sub.add_parser("update", help="Write stale or missing managed files only")
+    for name, help_text in (
+        ("inspect", "Read-only install state"),
+        ("plan-setup", "Plan setup/update without writing files"),
+        ("setup", "First-time or full refresh install"),
+        ("update", "Write stale or missing managed files only"),
+        ("repair", "Fix lockfile drift and incomplete installs"),
+        ("factory-restore", "Force reinstall of all managed files"),
+    ):
+        subparser = sub.add_parser(name, help=help_text)
+        _add_common_args(subparser)
     return parser
 
 
@@ -37,16 +60,39 @@ def main(argv: list[str] | None = None) -> int:
         parser.error(f"package-root is not a directory: {package_root}")
 
     try:
+        answers = _load_answers(getattr(args, "answers", None))
+    except (OSError, json.JSONDecodeError, ValueError) as exc:
+        payload = {"ok": False, "error": f"Invalid --answers: {exc}"}
+        if args.json:
+            print(json.dumps(payload, indent=2))
+        else:
+            print(payload["error"], file=sys.stderr)
+        return 1
+
+    try:
         if args.command == "inspect":
-            result = engine.inspect(workspace, package_root)
+            result = engine.inspect(workspace, package_root, answers=answers)
+        elif args.command == "plan-setup":
+            result = engine.plan_setup(workspace, package_root, answers=answers)
         elif args.command == "setup":
-            result = {"command": "setup", **engine.setup(workspace, package_root)}
+            result = {"command": "setup", **engine.setup(workspace, package_root, answers=answers)}
         elif args.command == "update":
-            result = {"command": "update", **engine.update(workspace, package_root)}
+            result = {"command": "update", **engine.update(workspace, package_root, answers=answers)}
+        elif args.command == "repair":
+            result = engine.repair(workspace, package_root, answers=answers)
+        elif args.command == "factory-restore":
+            result = engine.factory_restore(workspace, package_root, answers=answers)
         else:
             parser.error(f"unknown command: {args.command}")
             return 2
     except FileNotFoundError as exc:
+        payload = {"ok": False, "error": str(exc)}
+        if args.json:
+            print(json.dumps(payload, indent=2))
+        else:
+            print(payload["error"], file=sys.stderr)
+        return 1
+    except ValueError as exc:
         payload = {"ok": False, "error": str(exc)}
         if args.json:
             print(json.dumps(payload, indent=2))

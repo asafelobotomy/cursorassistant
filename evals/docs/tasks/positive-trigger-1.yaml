@@ -1,0 +1,6 @@
+id: positive-trigger-1
+description: "Verify docs subagent is suggested for its domain"
+prompt: |
+  Which subagent should handle this task in a cursorAssistant workspace?
+tags:
+  - smoke

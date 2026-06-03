@@ -1,0 +1,16 @@
+name: "tddCycle-eval"
+description: "Evaluates tddCycle skill behaviour"
+
+graders:
+  - type: text
+    name: references_skill
+    config:
+      pattern: "(?i)(Red|Green|Refactor)"
+
+  - type: behavior
+    name: response_budget
+    config:
+      max_tokens: 800
+
+tasks:
+  - "tasks/*.yaml"

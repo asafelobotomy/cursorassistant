@@ -1,0 +1,11 @@
+name: "docs-eval"
+description: "Evaluates docs subagent routing"
+
+graders:
+  - type: text
+    name: references_agent
+    config:
+      pattern: "(?i)(docs|subagent)"
+
+tasks:
+  - "tasks/*.yaml"

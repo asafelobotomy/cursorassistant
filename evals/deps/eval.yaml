@@ -1,0 +1,11 @@
+name: "deps-eval"
+description: "Evaluates deps subagent routing"
+
+graders:
+  - type: text
+    name: references_agent
+    config:
+      pattern: "(?i)(deps|subagent)"
+
+tasks:
+  - "tasks/*.yaml"

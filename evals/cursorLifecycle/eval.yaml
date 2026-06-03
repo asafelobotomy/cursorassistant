@@ -1,0 +1,11 @@
+name: "cursorLifecycle-eval"
+description: "Evaluates cursorLifecycle subagent routing"
+
+graders:
+  - type: text
+    name: references_agent
+    config:
+      pattern: "(?i)(cursorLifecycle|subagent)"
+
+tasks:
+  - "tasks/*.yaml"

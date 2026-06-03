@@ -1,0 +1,16 @@
+name: "testArchitecture-eval"
+description: "Evaluates testArchitecture skill behaviour"
+
+graders:
+  - type: text
+    name: references_skill
+    config:
+      pattern: "(?i)(unit|integration|pyramid|boundary)"
+
+  - type: behavior
+    name: response_budget
+    config:
+      max_tokens: 800
+
+tasks:
+  - "tasks/*.yaml"

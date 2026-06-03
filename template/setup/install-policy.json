@@ -1,12 +1,17 @@
 {
-  "schemaVersion": "0.1.0",
+  "schemaVersion": "0.4.0",
   "packageName": "cursorAssistant",
+  "generationSettings": {
+    "manifestOutput": "template/setup/install-manifest.json",
+    "manifestSchemaVersion": "0.4.0"
+  },
   "entries": [
     {
       "id": "routing.agents-md",
       "source": "AGENTS.md",
       "target": "AGENTS.md",
-      "layer": "core"
+      "layer": "core",
+      "strategy": "preserve-marked-markdown-blocks"
     },
     {
       "id": "rules.core",
@@ -39,6 +44,24 @@
       "layer": "core"
     },
     {
+      "id": "agents.commit",
+      "source": "agents/commit.md",
+      "target": ".cursor/agents/commit.md",
+      "layer": "core"
+    },
+    {
+      "id": "agents.deps",
+      "source": "agents/deps.md",
+      "target": ".cursor/agents/deps.md",
+      "layer": "core"
+    },
+    {
+      "id": "agents.docs",
+      "source": "agents/docs.md",
+      "target": ".cursor/agents/docs.md",
+      "layer": "core"
+    },
+    {
       "id": "agents.debugger",
       "source": "agents/debugger.md",
       "target": ".cursor/agents/debugger.md",
@@ -63,10 +86,29 @@
       "layer": "core"
     },
     {
-      "id": "mcp.config",
-      "source": "template/cursor/mcp.json",
-      "target": ".cursor/mcp.json",
+      "id": "skills.workspaceSearch",
+      "source": "skills/workspaceSearch/SKILL.md",
+      "target": ".cursor/skills/workspaceSearch/SKILL.md",
       "layer": "core"
+    },
+    {
+      "id": "skills.ciPreflight",
+      "source": "skills/ciPreflight/SKILL.md",
+      "target": ".cursor/skills/ciPreflight/SKILL.md",
+      "layer": "core"
+    },
+    {
+      "id": "skills.depSearch",
+      "source": "skills/depSearch/SKILL.md",
+      "target": ".cursor/skills/depSearch/SKILL.md",
+      "layer": "core"
+    },
+    {
+      "id": "mcp.config",
+      "source": "template/cursor/mcp-minimal.json",
+      "target": ".cursor/mcp.json",
+      "layer": "core",
+      "strategy": "merge-json-object"
     }
   ]
 }

@@ -1,0 +1,16 @@
+name: "lifecycleAudit-eval"
+description: "Evaluates lifecycleAudit skill behaviour"
+
+graders:
+  - type: text
+    name: references_skill
+    config:
+      pattern: "(?i)(lifecycleAudit|skill)"
+
+  - type: behavior
+    name: response_budget
+    config:
+      max_tokens: 800
+
+tasks:
+  - "tasks/*.yaml"

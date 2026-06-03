@@ -1,0 +1,6 @@
+id: positive-trigger-1
+description: "Verify deps subagent is suggested for its domain"
+prompt: |
+  Which subagent should handle this task in a cursorAssistant workspace?
+tags:
+  - smoke

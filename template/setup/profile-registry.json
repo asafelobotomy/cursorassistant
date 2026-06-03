@@ -1,0 +1,23 @@
+{
+  "schemaVersion": "0.1.0",
+  "representation": {
+    "lockfileField": "profile",
+    "answerField": "profile.selected"
+  },
+  "profiles": [
+    {
+      "id": "balanced",
+      "name": "Balanced",
+      "summary": "Standard detail and guidance for normal interactive work.",
+      "status": "active",
+      "defaultPacks": []
+    },
+    {
+      "id": "lean",
+      "name": "Lean",
+      "summary": "Concise output with the lean pack selected by default.",
+      "status": "active",
+      "defaultPacks": ["lean"]
+    }
+  ]
+}

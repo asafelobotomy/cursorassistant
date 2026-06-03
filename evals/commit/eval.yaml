@@ -1,0 +1,11 @@
+name: "commit-eval"
+description: "Evaluates commit subagent routing"
+
+graders:
+  - type: text
+    name: references_agent
+    config:
+      pattern: "(?i)(commit|subagent)"
+
+tasks:
+  - "tasks/*.yaml"

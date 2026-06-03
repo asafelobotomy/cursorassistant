@@ -11,8 +11,10 @@ cursorAssistant reuses the **product model** from xanadAssistant (lifecycle, loc
 | Skills | `.github/skills/` | `.cursor/skills/` |
 | MCP config | `.vscode/mcp.json` | `.cursor/mcp.json` |
 | Lockfile | `.github/xanadAssistant-lock.json` | `.cursor/cursorAssistant-lock.json` |
-| Interview / plan / repair / factory-restore | Full engine | **Planned** (v0.1: inspect, setup, update only) |
-| MCP script bundle | 12+ servers | Empty template; vendor or share later |
+| Interview / plan / repair / factory-restore | Full engine | **v0.2** — inspect, setup, update, plan-setup, repair, factory-restore |
+| MCP script bundle | 12+ servers | **9 servers** ported from xanad (git, web, testing, memory, …) |
+| Agents | 12 | **8** (lifecycle, explore, review, commit, deps, docs, debugger, planner) |
+| Core skills | 11 | **5** (+ packs) |
 
 ## Shared DNA
 

@@ -1,0 +1,41 @@
+{
+  "schemaVersion": "0.1.0",
+  "commands": [
+    "inspect",
+    "plan-setup",
+    "setup",
+    "update",
+    "repair",
+    "factory-restore"
+  ],
+  "packs": [
+    "lean",
+    "secure",
+    "tdd"
+  ],
+  "agents": [
+    "cursorLifecycle",
+    "explore",
+    "review",
+    "commit",
+    "deps",
+    "docs",
+    "debugger",
+    "planner"
+  ],
+  "mcpServers": [
+    "cursorTools",
+    "workspaceTesting",
+    "git",
+    "web",
+    "devDocs",
+    "time",
+    "memory",
+    "security",
+    "filesystem"
+  ],
+  "profiles": [
+    "balanced",
+    "lean"
+  ]
+}

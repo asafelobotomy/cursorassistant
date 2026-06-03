@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "0.4.0",
+  "questions": [
+    {
+      "id": "profile.selected",
+      "prompt": "Behavior profile for this workspace",
+      "type": "choice",
+      "options": ["balanced", "lean"],
+      "default": "balanced"
+    },
+    {
+      "id": "packs.selected",
+      "prompt": "Optional capability packs",
+      "type": "multi-choice",
+      "options": ["lean", "secure", "tdd"],
+      "default": []
+    },
+    {
+      "id": "mcp.enabled",
+      "prompt": "Install shared MCP script bundle (git, web, testing, memory, etc.)",
+      "type": "boolean",
+      "default": true
+    }
+  ]
+}

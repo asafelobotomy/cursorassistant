@@ -12,8 +12,8 @@ cursorAssistant is inspired by [xanadAssistant](https://github.com/asafelobotomy
 | Subagents | `.cursor/agents/` | Cursor subagent format (`*.md`) |
 | Skills | `.cursor/skills/` | `SKILL.md` per skill |
 | Rules | `.cursor/rules/` | `.mdc` with `alwaysApply` / `globs` |
-| MCP config | `.cursor/mcp.json` | `mcpServers` entries |
-| MCP scripts | `.cursor/mcp/scripts/` | stdio Python servers (optional at setup) |
+| MCP config | `.cursor/mcp.json` | `mcpServers` entries (includes `cursorTools` when installed) |
+| MCP scripts | `.cursor/mcp/scripts/` | stdio Python servers (`cursorTools` wraps lifecycle CLI) |
 
 ## Requirements
 
@@ -40,6 +40,26 @@ Update stale managed files:
 python3 cursorAssistant.py update --workspace /path/to/your-project --package-root . --json
 ```
 
+Repair lockfile drift or incomplete installs:
+
+```sh
+python3 cursorAssistant.py repair --workspace /path/to/your-project --package-root . --json
+```
+
+Plan without writing:
+
+```sh
+python3 cursorAssistant.py plan-setup --workspace /path/to/your-project --package-root . --json
+```
+
+## Key Commands
+
+| Task | Command |
+| --- | --- |
+| Run tests | `python3 -m unittest discover -s tests` |
+| Generate manifest | `python3 scripts/generate.py --package-root .` |
+| Lifecycle inspect | `python3 cursorAssistant.py inspect --workspace . --package-root . --json` |
+
 ## Use in Cursor
 
 1. Open the consumer workspace in Cursor.
@@ -59,7 +79,19 @@ Ask the main Agent: **Set up cursorAssistant in this workspace** — it should r
 | **MCP config** | `.vscode/mcp.json` | `.cursor/mcp.json` |
 | **Lockfile** | `.github/xanadAssistant-lock.json` | `.cursor/cursorAssistant-lock.json` |
 
-The two packages are **siblings**, not forks. Long term, shared MCP scripts may live in a common library; v0 ships a minimal lifecycle engine and Cursor-shaped content only.
+The two packages are **siblings**, not forks. MCP scripts sync from xanad via `scripts/sync_mcp_from_xanad.py`; a shared library is planned for v0.6+.
+
+## Plugin / marketplace
+
+Publish as a Cursor plugin using `.cursor-plugin/plugin.json`. Submit via [cursor.com/marketplace/publish](https://cursor.com/marketplace/publish) when ready.
+
+## Eval tooling
+
+```sh
+python3 tools/cursorEval/cursorEval.py validate --repo-root .
+python3 tools/cursorEval/cursorEval.py coverage --repo-root .
+python3 tools/cursorEval/cursorEval.py run evals/lifecycleAudit/eval.yaml --dry-run
+```
 
 ## Repository layout
 
@@ -72,8 +104,11 @@ template/
   rules/                    # default .mdc rules
 agents/                     # subagent sources
 skills/                     # skill sources
-mcp/scripts/                # optional MCP servers (v0: lifecycle CLI; expand over time)
-docs/                       # contracts and comparison notes
+packs/                      # optional packs (lean, secure, tdd)
+mcp/scripts/                # MCP servers (cursorTools + shared bundle)
+tools/cursorEval/           # eval validate, check, coverage, run, grade
+.cursor-plugin/             # Cursor Marketplace plugin manifest
+docs/                       # contracts, MCP sync, comparison notes
 tests/
 ```
 
