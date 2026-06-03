@@ -2,12 +2,23 @@
 
 Canonical routing for Cursor subagents in this package and in consumer workspaces after install.
 
+## Built-in Cursor subagents
+
+Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser** (web automation) automatically. Do not define a custom subagent named `explore` — it shadows the built-in.
+
+| Need | Use |
+| --- | --- |
+| Broad parallel codebase search | Cursor built-in **Explore** |
+| Verbose shell output isolated | Cursor built-in **Bash** |
+| Browser / DOM work | Cursor built-in **Browser** |
+| Structured repo inventory + handoff | **`inventory`** (`/inventory` or Task) |
+
 ## Roster
 
 | Subagent | Invoke | Use when |
 | --- | --- | --- |
 | `cursorLifecycle` | `/cursorLifecycle` or Task | setup, inspect, update, repair managed Cursor surfaces |
-| `explore` | `/explore` or Task | read-only codebase exploration |
+| `inventory` | `/inventory` or Task | structured read-only maps, caller lists, architecture notes |
 | `review` | `/review` or Task | code review, PR review, architecture review |
 | `commit` | `/commit` or Task | git staging, commits, push, PRs, branches |
 | `deps` | `/deps` or Task | dependency scan, audit, install, update |
@@ -24,7 +35,8 @@ Canonical routing for Cursor subagents in this package and in consumer workspace
 | Work type | Subagent |
 | --- | --- |
 | Install or update cursorAssistant surfaces | `cursorLifecycle` |
-| Broad read-only exploration | `explore` |
+| Wide codebase search (parallel) | Cursor built-in **Explore** |
+| Structured inventory before a change | `inventory` |
 | Review diffs or architecture | `review` |
 | Git commits, push, PRs, branches | `commit` |
 | Dependency audit or package changes | `deps` |
@@ -38,16 +50,16 @@ Canonical routing for Cursor subagents in this package and in consumer workspace
 
 ## Handoff rules
 
-- `cursorLifecycle` may delegate to `explore` for inventory and `planner` for phased remediation.
+- `cursorLifecycle` may delegate to `inventory` for layout maps and `planner` for phased remediation.
 - `commit` may delegate to `review` before merge and `debugger` when hooks fail.
 - `deps` confirms before mutating installed packages; hand off test failures to `debugger`.
-- `docs` may delegate to `explore` for accuracy and `review` for quality passes.
+- `docs` may delegate to `inventory` for accuracy and `review` for quality passes.
 - `debugger` stays read-only; hand off implementation to the main Agent after diagnosis.
 - `planner` stays read-only; returns an executable plan with file list and verification steps.
 - `review` may delegate to `debugger` when a finding needs reproduction.
 - `triage` hands Compound/Complex work to `planner`; does not replace specialists.
 - `researcher` stays read-only; hand off implementation to the main Agent or `planner`.
-- `organise` may delegate to `explore` for inventories and `docs` for migration docs.
+- `organise` may delegate to `inventory` for caller maps and `docs` for migration docs.
 - `cleaner` may delegate to `review`, `organise`, `docs`, and `commit` per scope.
 
 ## Lifecycle trigger phrases

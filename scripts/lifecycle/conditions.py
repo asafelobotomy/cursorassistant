@@ -21,5 +21,5 @@ def conditions_match(required_when: dict[str, Any] | None, answers: dict[str, An
 
 def mcp_enabled(answers: dict[str, Any] | None) -> bool:
     if not answers:
-        return True
-    return bool(answers.get("mcp.enabled", True))
+        return False
+    return bool(answers.get("mcp.enabled", False))

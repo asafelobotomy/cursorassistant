@@ -1,0 +1,11 @@
+name: "inventory-eval"
+description: "Evaluates inventory subagent routing and built-in Explore distinction"
+
+graders:
+  - type: text
+    name: references_agent
+    config:
+      pattern: "(?i)(inventory|built-in.*explore|explore subagent)"
+
+tasks:
+  - "tasks/*.yaml"

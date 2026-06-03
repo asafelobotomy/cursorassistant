@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "leanContextBudget": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp[cli]",
+        "mcp",
+        "run",
+        "${workspaceFolder}/.cursor/mcp/scripts/leanContextBudget.py"
+      ]
+    },
+    "leanTestReporter": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp[cli]",
+        "mcp",
+        "run",
+        "${workspaceFolder}/.cursor/mcp/scripts/leanTestReporter.py"
+      ]
+    }
+  }
+}

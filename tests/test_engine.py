@@ -27,14 +27,15 @@ class EngineTests(unittest.TestCase):
             result = engine.setup(workspace, REPO_ROOT)
             self.assertIn("routing.agents-md", result["written"])
             self.assertTrue((workspace / "AGENTS.md").is_file())
-            self.assertTrue((workspace / ".cursor/agents/explore.md").is_file())
+            self.assertTrue((workspace / ".cursor/agents/inventory.md").is_file())
+            self.assertFalse((workspace / ".cursor/agents/explore.md").exists())
             self.assertTrue((workspace / ".cursor/mcp/scripts/cursorToolsMcp.py").is_file())
             lock = json.loads((workspace / ".cursor/cursorAssistant-lock.json").read_text())
             self.assertEqual(lock["package"]["name"], "cursorAssistant")
             self.assertEqual(lock["schemaVersion"], "0.4.0")
             self.assertEqual(lock["profile"], "balanced")
             self.assertEqual(lock["selectedPacks"], [])
-            self.assertTrue(lock["mcpEnabled"])
+            self.assertFalse(lock["mcpEnabled"])
 
     def test_setup_mcp_disabled_skips_bundle_scripts(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -103,12 +104,12 @@ class EngineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             workspace = Path(tmp)
             engine.setup(workspace, REPO_ROOT)
-            agent = workspace / ".cursor/agents/explore.md"
+            agent = workspace / ".cursor/agents/inventory.md"
             agent.write_text(agent.read_text() + "\n# stale\n", encoding="utf-8")
             report = engine.inspect(workspace, REPO_ROOT)
             self.assertEqual(report["installState"], "needs-update")
             stale = [f for f in report["files"] if f["status"] == "stale"]
-            self.assertTrue(any(row["id"] == "agents.explore" for row in stale))
+            self.assertTrue(any(row["id"] == "agents.inventory" for row in stale))
 
     def test_merge_preserves_user_added_agents_block(self) -> None:
         source = "# Routing\n\nDefault content.\n"
@@ -124,7 +125,11 @@ class EngineTests(unittest.TestCase):
     def test_merge_json_mcp_servers(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             workspace = Path(tmp)
-            engine.setup(workspace, REPO_ROOT)
+            engine.setup(
+                workspace,
+                REPO_ROOT,
+                answers={"mcp.enabled": True},
+            )
             mcp_path = workspace / ".cursor/mcp.json"
             mcp_path.write_text(
                 json.dumps({"mcpServers": {"custom": {"command": "echo"}}}, indent=2) + "\n",
@@ -135,17 +140,18 @@ class EngineTests(unittest.TestCase):
             self.assertIn("custom", payload["mcpServers"])
             self.assertIn("cursorTools", payload["mcpServers"])
             self.assertIn("git", payload["mcpServers"])
+            self.assertNotIn("web", payload["mcpServers"])
 
     def test_repair_fixes_missing_managed_file(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             workspace = Path(tmp)
             engine.setup(workspace, REPO_ROOT)
-            (workspace / ".cursor/agents/explore.md").unlink()
+            (workspace / ".cursor/agents/inventory.md").unlink()
             report = engine.inspect(workspace, REPO_ROOT)
             self.assertIn("incomplete-install", report["repairReasons"])
             result = engine.repair(workspace, REPO_ROOT)
-            self.assertIn("agents.explore", result["written"])
-            self.assertTrue((workspace / ".cursor/agents/explore.md").is_file())
+            self.assertIn("agents.inventory", result["written"])
+            self.assertTrue((workspace / ".cursor/agents/inventory.md").is_file())
 
     def test_plan_setup_lists_would_write(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -158,10 +164,10 @@ class EngineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             workspace = Path(tmp)
             engine.setup(workspace, REPO_ROOT)
-            agent = workspace / ".cursor/agents/explore.md"
+            agent = workspace / ".cursor/agents/inventory.md"
             agent.write_text("# customized\n", encoding="utf-8")
             result = engine.factory_restore(workspace, REPO_ROOT)
-            self.assertIn("agents.explore", result["written"])
+            self.assertIn("agents.inventory", result["written"])
             self.assertNotEqual(agent.read_text(), "# customized\n")
 
     def test_pack_registry_lists_active_packs(self) -> None:
@@ -179,12 +185,18 @@ class EngineTests(unittest.TestCase):
         ]
         self.assertEqual(len(agent_ids), 12)
         for name in (
+            "inventory",
             "researcher",
             "triage",
             "organise",
             "cleaner",
         ):
             self.assertIn(f"agents.{name}", agent_ids)
+        self.assertNotIn("agents.explore", agent_ids)
+
+    def test_explore_agent_source_removed(self) -> None:
+        self.assertFalse((REPO_ROOT / "agents/explore.md").exists())
+        self.assertTrue((REPO_ROOT / "agents/inventory.md").is_file())
 
 
 if __name__ == "__main__":

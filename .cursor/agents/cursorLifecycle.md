@@ -55,5 +55,5 @@ After install, `.cursor/agents/cursorLifecycle.md` is available for Task delegat
 
 ## Delegation
 
-- Inventory unfamiliar trees → `explore`
+- Inventory unfamiliar trees → `inventory`
 - Multi-file remediation plan → `planner`

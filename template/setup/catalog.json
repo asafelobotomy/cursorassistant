@@ -15,25 +15,47 @@
   ],
   "agents": [
     "cursorLifecycle",
-    "explore",
+    "inventory",
     "review",
     "commit",
     "deps",
     "docs",
     "debugger",
-    "planner"
+    "planner",
+    "researcher",
+    "triage",
+    "organise",
+    "cleaner"
   ],
-  "mcpServers": [
-    "cursorTools",
-    "workspaceTesting",
-    "git",
-    "web",
-    "devDocs",
-    "time",
-    "memory",
-    "security",
-    "filesystem"
-  ],
+  "mcpServers": {
+    "core": [
+      "cursorTools"
+    ],
+    "extensions": [
+      "git",
+      "devDocs",
+      "memory"
+    ],
+    "packs": {
+      "secure": [
+        "security",
+        "secureOsv"
+      ],
+      "tdd": [
+        "workspaceTesting",
+        "tddTestRunner"
+      ],
+      "lean": [
+        "leanContextBudget",
+        "leanTestReporter"
+      ]
+    },
+    "deprecated": [
+      "web",
+      "filesystem",
+      "time"
+    ]
+  },
   "profiles": [
     "balanced",
     "lean"

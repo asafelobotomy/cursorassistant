@@ -12,7 +12,7 @@ cursorAssistant is inspired by [xanadAssistant](https://github.com/asafelobotomy
 | Subagents | `.cursor/agents/` | Cursor subagent format (`*.md`) |
 | Skills | `.cursor/skills/` | `SKILL.md` per skill |
 | Rules | `.cursor/rules/` | `.mdc` with `alwaysApply` / `globs` |
-| MCP config | `.cursor/mcp.json` | `mcpServers` entries (includes `cursorTools` when installed) |
+| MCP config | `.cursor/mcp.json` | Layered: `cursorTools` + optional extensions + pack servers ([MCP_LAYOUT](docs/MCP_LAYOUT.md)) |
 | MCP scripts | `.cursor/mcp/scripts/` | stdio Python servers (`cursorTools` wraps lifecycle CLI) |
 
 ## Requirements
@@ -66,7 +66,7 @@ python3 cursorAssistant.py plan-setup --workspace /path/to/your-project --packag
 
 1. Open the consumer workspace in Cursor.
 2. Ensure **project rules** load from `.cursor/rules/` and **`AGENTS.md`** is in context (Cursor reads it automatically).
-3. Invoke subagents via **Task** or `/name` (e.g. `/explore`, `/cursorLifecycle`).
+3. Invoke subagents via **Task** or `/name` (e.g. `/inventory`, `/cursorLifecycle`). Use Cursor's built-in **Explore** for broad codebase search — do not add a custom agent named `explore`.
 4. Enable MCP servers in **Cursor Settings → MCP** (or trust the project `.cursor/mcp.json`).
 
 Ask the main Agent: **Set up cursorAssistant in this workspace** — it should run `cursorAssistant.py setup` with the correct `--package-root`.

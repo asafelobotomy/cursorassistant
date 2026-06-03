@@ -2,7 +2,7 @@
   "name": "cursor-assistant",
   "displayName": "cursorAssistant",
   "description": "Lifecycle-managed Cursor agents, skills, rules, and MCP tools inspired by xanadAssistant.",
-  "version": "0.7.0",
+  "version": "0.9.0",
   "author": {
     "name": "cursorAssistant contributors"
   },
@@ -12,5 +12,5 @@
   "agents": "agents",
   "skills": ["skills", "packs/lean/skills", "packs/secure/skills", "packs/tdd/skills"],
   "rules": "template/rules",
-  "mcpServers": "template/cursor/mcp-bundle.json"
+  "mcpServers": "template/cursor/mcp-core.json"
 }

@@ -1,0 +1,8 @@
+id: positive-trigger-1
+description: "Verify inventory vs built-in Explore routing"
+prompt: |
+  We need a structured read-only map of callers and file paths before a refactor, not a wide parallel codebase search. Which subagent should handle that in a cursorAssistant workspace?
+expected:
+  - "inventory"
+tags:
+  - smoke

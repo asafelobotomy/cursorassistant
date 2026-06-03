@@ -84,6 +84,6 @@ def answers_to_lockfile_fields(
     return {
         "profile": profile,
         "selectedPacks": selected_packs,
-        "mcpEnabled": bool(answers.get("mcp.enabled", True)),
+        "mcpEnabled": bool(answers.get("mcp.enabled", False)),
         "setupAnswers": setup_answers,
     }

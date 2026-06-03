@@ -34,4 +34,4 @@ These files are **cursorAssistant-owned** and installed with every workspace (no
 | `_cursor_mcp_util.py` | Tool result formatting |
 | `cursorToolsMcp.py` | Lifecycle CLI wrapper |
 
-When syncing from xanad, `sync_mcp_from_xanad.py` skips `cursorToolsMcp.py` and `_cursor_*.py`. A single pip package shared with xanadAssistant is still planned for later.
+When syncing from xanad, `sync_mcp_from_xanad.py` skips `cursorToolsMcp.py`, `_cursor_*.py`, and deprecated `webMcp.py` / `fsMcp.py` / `timeMcp.py`. Install layout: [MCP_LAYOUT.md](MCP_LAYOUT.md).

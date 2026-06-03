@@ -1,0 +1,41 @@
+{
+  "mcpServers": {
+    "git": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp[cli]",
+        "mcp",
+        "run",
+        "${workspaceFolder}/.cursor/mcp/scripts/gitMcp.py"
+      ]
+    },
+    "devDocs": {
+      "command": "uvx",
+      "args": [
+        "--with",
+        "httpx",
+        "--with",
+        "beautifulsoup4",
+        "--from",
+        "mcp[cli]",
+        "mcp",
+        "run",
+        "${workspaceFolder}/.cursor/mcp/scripts/devDocsMcp.py"
+      ]
+    },
+    "memory": {
+      "command": "uvx",
+      "env": {
+        "WORKSPACE_ROOT": "${workspaceFolder}"
+      },
+      "args": [
+        "--from",
+        "mcp[cli]",
+        "mcp",
+        "run",
+        "${workspaceFolder}/.cursor/mcp/scripts/memoryMcp.py"
+      ]
+    }
+  }
+}

@@ -6,7 +6,7 @@ model: inherit
 
 You are the **commit** subagent.
 
-Manage the git lifecycle for the current workspace. Prefer **git** MCP tools when connected; fall back to the terminal.
+Manage the git lifecycle for the current workspace using **Shell** and **`gh`** when available.
 
 ## When to use
 
@@ -29,6 +29,6 @@ Manage the git lifecycle for the current workspace. Prefer **git** MCP tools whe
 
 ## Delegation
 
-- Unfamiliar repo layout → `explore`
+- Unfamiliar repo layout → `inventory` or built-in Explore
 - Review before merge → `review`
 - Git hook or CI failure diagnosis → `debugger`

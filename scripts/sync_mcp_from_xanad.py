@@ -19,16 +19,14 @@ SKIP_SCRIPTS = {"cursorToolsMcp.py", "_cursor_workspace.py", "_cursor_mcp_util.p
 
 DEFAULT_SCRIPTS = [
     "gitMcp.py",
-    "timeMcp.py",
-    "webMcp.py",
     "devDocsMcp.py",
     "securityMcp.py",
-    "fsMcp.py",
     "workspaceTestingMcp.py",
     "_workspace_testing_shared.py",
     "memoryMcp.py",
     "_memory_mcp_shared.py",
 ]
+# Deprecated in v0.9 (do not sync): webMcp.py, fsMcp.py, timeMcp.py — use Cursor-native tools.
 
 REWRITES = [
     (".github/copilot-instructions.md", "README.md"),

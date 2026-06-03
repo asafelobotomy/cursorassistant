@@ -29,6 +29,6 @@ Create and update documentation that matches the repository. Verify commands, pa
 
 ## Delegation
 
-- Broad repo mapping → `explore`
+- Broad repo mapping → built-in Explore; structured maps → `inventory`
 - Quality or accuracy review → `review`
 - Large multi-area rollout → `planner`

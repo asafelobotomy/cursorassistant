@@ -38,6 +38,8 @@ class CursorEvalTests(unittest.TestCase):
         self.assertIn("lifecycleAudit", ids)
         self.assertIn("leanOutput", ids)
         self.assertIn("commit", ids)
+        self.assertIn("inventory", ids)
+        self.assertNotIn("explore", ids)
 
     def test_validate_all_passes(self) -> None:
         result = run_cursor_eval("validate", fmt="json")
@@ -51,7 +53,7 @@ class CursorEvalTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
     def test_check_agent_passes(self) -> None:
-        agent = REPO_ROOT / "agents/explore.md"
+        agent = REPO_ROOT / "agents/inventory.md"
         result = run_cursor_eval("check", str(agent))
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 

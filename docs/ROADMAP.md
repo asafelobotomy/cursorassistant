@@ -42,14 +42,30 @@
 - [x] Eval workflow (validate + dry-run; optional Models run)
 - [x] Marketplace publish guide (`docs/PUBLISH.md`, `scripts/validate_plugin.py`)
 
-## v0.7 (current)
+## v0.7
 
 - [x] `cursor-mcp-shared` pip package (`packages/cursor-mcp-shared/`, `scripts/vendor_mcp_shared.py`)
 - [x] Core agents: researcher, triage, organise, cleaner
 - [x] Dogfooded `.cursor/` in package repo (`scripts/dogfood.sh`, committed install snapshot)
 - [x] Eval scaffolds for new agents
 
-## v0.8+
+## v0.8 — Cursor Canonical Phase A
+
+- [x] Rename `explore` → `inventory`; document built-in Explore in `AGENTS.md`
+- [x] Rewrite core skills for Cursor tools (`workspaceSearch`, `ciPreflight`, `depSearch`)
+- [x] Rules: built-in subagents + Agent tools before MCP
+- [x] Interview default `mcp.enabled: false`; conditions aligned
+- [x] Catalog lists all 12 agents; scrub xanad strings in `webMcp.py`
+
+## v0.9 (current) — Cursor Canonical Phase B
+
+- [x] Layered MCP manifests (`mcp-core`, `mcp-extensions`, `mcp-packs/*`)
+- [x] Deprecate `web`, `filesystem`, `time` servers; move scripts to `_deprecated/`
+- [x] Pack-scoped MCP install (secure, tdd, lean) + prune on deselect
+- [x] `inspect` `mcpWarnings` for legacy servers/scripts
+- [x] Agents/skills: Shell-first; MCP only when lockfile/pack enables it
+
+## v1.0+
 
 - [ ] xanadAssistant consumes `cursor-mcp-shared` as a dependency
-- [ ] Additional skills from xanad (issueResolution, agenticReview) as optional packs
+- [ ] Additional skills from xanad as optional packs

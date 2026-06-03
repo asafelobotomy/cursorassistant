@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.7.0",
+  "packageVersion": "0.9.0",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -17,7 +17,7 @@
       "target": ".cursor/agents/commit.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:e016cace566a033f8809d2f10fcdb830233a6ebd87e4a4796919e9fbc68bbb8c"
+      "hash": "sha256:d8aa38098c6e00b4d240901d850e6d786bedef3950161465049b84bdb5716758"
     },
     {
       "id": "agents.cursorLifecycle",
@@ -25,7 +25,7 @@
       "target": ".cursor/agents/cursorLifecycle.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:250e2b374380800610caeca7411d1a65e1a6f89965f63c83e9a5973dd5ac4819"
+      "hash": "sha256:a46e152ed0057a155a66cb051563b5497f399230bbbe8edc6c59f9de27e5d63b"
     },
     {
       "id": "agents.debugger",
@@ -41,7 +41,7 @@
       "target": ".cursor/agents/deps.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:f66ec20f0302c7a4ad01ab6c517b0fcd76e777c79395740b27b3dc2a05d7f1df"
+      "hash": "sha256:0955cdf8c5d9eb4460b544ee90d4f6287869ececb5e4feacd9f60334d7936aa6"
     },
     {
       "id": "agents.docs",
@@ -49,15 +49,15 @@
       "target": ".cursor/agents/docs.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:dca28fb903c30757ec0fbb9a1ce05b7f5ec472fcb566bc88479a97e289fca718"
+      "hash": "sha256:d57c07c065045e9ed5261680bef68edb39ebb2d619f69bcacb5f17aa4a1b9663"
     },
     {
-      "id": "agents.explore",
-      "source": "agents/explore.md",
-      "target": ".cursor/agents/explore.md",
+      "id": "agents.inventory",
+      "source": "agents/inventory.md",
+      "target": ".cursor/agents/inventory.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:e21fef5cc0791734d7a7832fc31807cd0674a1133432213f7d68c5adb75874e7"
+      "hash": "sha256:e8214b7450fc5ec47fed3cb99a352daaccb3fe5fb85c556e4866f863280bc192"
     },
     {
       "id": "agents.organise",
@@ -65,7 +65,7 @@
       "target": ".cursor/agents/organise.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:fc0afc3857077e28ffd9c90d7ca00e4b052437a23a849e7cba6e71a2db62bfa1"
+      "hash": "sha256:3ca18fd35c45962787a339dc255cca33848dbf7c2270964b2bdd6291b8528a7f"
     },
     {
       "id": "agents.planner",
@@ -81,7 +81,7 @@
       "target": ".cursor/agents/researcher.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:bd975d40cd8508bb191a89ca9f41da56e5a4d10cbe7358e6363910f322453fbe"
+      "hash": "sha256:6468bcbbf71c4555be5078039ff8177581d3a8f1fcef239f5cd76d8b8b75685b"
     },
     {
       "id": "agents.review",
@@ -101,7 +101,7 @@
     },
     {
       "id": "mcp.config",
-      "source": "template/cursor/mcp-minimal.json",
+      "source": "template/cursor/mcp-core.json",
       "target": ".cursor/mcp.json",
       "layer": "core",
       "strategy": "merge-json-object",
@@ -113,8 +113,8 @@
       "target": ".cursor/mcp/scripts/_cursor_mcp_util.py",
       "layer": "core",
       "strategy": "replace",
-      "requiredWhen": [],
-      "hash": "sha256:e3d0357fc14e2d2f4a0352eb8d92485c672b295cdae2cdbeff0f77ed39fd4208"
+      "hash": "sha256:1de2065f66362bd9f8597225735c9b5826fe6eaf1980e35508b2e838408ac30a",
+      "requiredWhen": []
     },
     {
       "id": "mcp.shared._cursor_workspace",
@@ -122,8 +122,8 @@
       "target": ".cursor/mcp/scripts/_cursor_workspace.py",
       "layer": "core",
       "strategy": "replace",
-      "requiredWhen": [],
-      "hash": "sha256:e3d0357fc14e2d2f4a0352eb8d92485c672b295cdae2cdbeff0f77ed39fd4208"
+      "hash": "sha256:92b3fdf6b027364923bbd54e0135f9f794cf7c06c508a880b3d08d8b19d94874",
+      "requiredWhen": []
     },
     {
       "id": "mcp.shared._memory_mcp_shared",
@@ -131,10 +131,10 @@
       "target": ".cursor/mcp/scripts/_memory_mcp_shared.py",
       "layer": "core",
       "strategy": "replace",
+      "hash": "sha256:24537a3420114b51988f7d598b78f3a705843a3e6aad6075075b91c0e1cb1732",
       "requiredWhen": [
         "mcp.enabled=true"
-      ],
-      "hash": "sha256:24537a3420114b51988f7d598b78f3a705843a3e6aad6075075b91c0e1cb1732"
+      ]
     },
     {
       "id": "mcp.shared._workspace_testing_shared",
@@ -142,10 +142,10 @@
       "target": ".cursor/mcp/scripts/_workspace_testing_shared.py",
       "layer": "core",
       "strategy": "replace",
+      "hash": "sha256:4dc0fa49161e9cdd792d319833bee9e97fe45a1fc403b2f3f160b6c6a27ddbbb",
       "requiredWhen": [
         "mcp.enabled=true"
-      ],
-      "hash": "sha256:4dc0fa49161e9cdd792d319833bee9e97fe45a1fc403b2f3f160b6c6a27ddbbb"
+      ]
     },
     {
       "id": "mcp.cursorToolsMcp",
@@ -153,8 +153,8 @@
       "target": ".cursor/mcp/scripts/cursorToolsMcp.py",
       "layer": "core",
       "strategy": "replace",
-      "requiredWhen": [],
-      "hash": "sha256:3552630932105add2bd637c370e26b5c80a8b609118fd9a6dbb1dc1d8b0977af"
+      "hash": "sha256:3552630932105add2bd637c370e26b5c80a8b609118fd9a6dbb1dc1d8b0977af",
+      "requiredWhen": []
     },
     {
       "id": "mcp.devDocsMcp",
@@ -162,21 +162,10 @@
       "target": ".cursor/mcp/scripts/devDocsMcp.py",
       "layer": "core",
       "strategy": "replace",
+      "hash": "sha256:e0229a2186af17f74a65becf61d74dbff944ea699c40093e4c5f1273e3ec6b0d",
       "requiredWhen": [
         "mcp.enabled=true"
-      ],
-      "hash": "sha256:e0229a2186af17f74a65becf61d74dbff944ea699c40093e4c5f1273e3ec6b0d"
-    },
-    {
-      "id": "mcp.fsMcp",
-      "source": "mcp/scripts/fsMcp.py",
-      "target": ".cursor/mcp/scripts/fsMcp.py",
-      "layer": "core",
-      "strategy": "replace",
-      "requiredWhen": [
-        "mcp.enabled=true"
-      ],
-      "hash": "sha256:e31b756b16cc3d573d6018882e2f8c3662589fd8a80020f422aa6fc97a5d46c6"
+      ]
     },
     {
       "id": "mcp.gitMcp",
@@ -184,10 +173,30 @@
       "target": ".cursor/mcp/scripts/gitMcp.py",
       "layer": "core",
       "strategy": "replace",
+      "hash": "sha256:bb9996883a73ea333f578686e36427e081ee64e44e8590531c65f944cc903a1c",
       "requiredWhen": [
         "mcp.enabled=true"
-      ],
-      "hash": "sha256:bb9996883a73ea333f578686e36427e081ee64e44e8590531c65f944cc903a1c"
+      ]
+    },
+    {
+      "id": "packs.lean.mcp.leanContextBudget",
+      "source": "packs/lean/mcp/leanContextBudget.py",
+      "target": ".cursor/mcp/scripts/leanContextBudget.py",
+      "layer": "pack",
+      "strategy": "replace",
+      "hash": "sha256:083ad74792fd7a17d239494126bd05e40737aca103f9ecd19ae922cc437113e8",
+      "pack": "lean",
+      "requiredWhen": []
+    },
+    {
+      "id": "packs.lean.mcp.leanTestReporter",
+      "source": "packs/lean/mcp/leanTestReporter.py",
+      "target": ".cursor/mcp/scripts/leanTestReporter.py",
+      "layer": "pack",
+      "strategy": "replace",
+      "hash": "sha256:81cf45d9c6b8243b4a8a68be9af7c8eab9e98b22539cceb61e164bc2b4b16700",
+      "pack": "lean",
+      "requiredWhen": []
     },
     {
       "id": "mcp.memoryMcp",
@@ -195,54 +204,50 @@
       "target": ".cursor/mcp/scripts/memoryMcp.py",
       "layer": "core",
       "strategy": "replace",
+      "hash": "sha256:797778cd27a9b1c5882c99930e990722743b54b2526d2701cbb951fe2811f86c",
       "requiredWhen": [
         "mcp.enabled=true"
-      ],
-      "hash": "sha256:797778cd27a9b1c5882c99930e990722743b54b2526d2701cbb951fe2811f86c"
+      ]
     },
     {
-      "id": "mcp.securityMcp",
+      "id": "packs.secure.mcp.secureOsv",
+      "source": "packs/secure/mcp/secureOsv.py",
+      "target": ".cursor/mcp/scripts/secureOsv.py",
+      "layer": "pack",
+      "strategy": "replace",
+      "hash": "sha256:cef23b09ccea8dabbd167100aea29f6274e78379bf4f5a1f958a50755191574b",
+      "pack": "secure",
+      "requiredWhen": []
+    },
+    {
+      "id": "packs.secure.mcp.securityMcp",
       "source": "mcp/scripts/securityMcp.py",
       "target": ".cursor/mcp/scripts/securityMcp.py",
-      "layer": "core",
+      "layer": "pack",
       "strategy": "replace",
-      "requiredWhen": [
-        "mcp.enabled=true"
-      ],
-      "hash": "sha256:3e09cacc572bdedf036c1e54202499a6d4d1e2000089171c759f4414ed98773a"
+      "hash": "sha256:3e09cacc572bdedf036c1e54202499a6d4d1e2000089171c759f4414ed98773a",
+      "pack": "secure",
+      "requiredWhen": []
     },
     {
-      "id": "mcp.timeMcp",
-      "source": "mcp/scripts/timeMcp.py",
-      "target": ".cursor/mcp/scripts/timeMcp.py",
-      "layer": "core",
+      "id": "packs.tdd.mcp.tddTestRunner",
+      "source": "packs/tdd/mcp/tddTestRunner.py",
+      "target": ".cursor/mcp/scripts/tddTestRunner.py",
+      "layer": "pack",
       "strategy": "replace",
-      "requiredWhen": [
-        "mcp.enabled=true"
-      ],
-      "hash": "sha256:14de5df5a73182cf6ec1ec0ab92b63d2c9675e30611e47bc76edc975c9167df8"
+      "hash": "sha256:9a20136073185fa6e820a715d959411c9efce3cc0572f2bb8a49f8647fefaf17",
+      "pack": "tdd",
+      "requiredWhen": []
     },
     {
-      "id": "mcp.webMcp",
-      "source": "mcp/scripts/webMcp.py",
-      "target": ".cursor/mcp/scripts/webMcp.py",
-      "layer": "core",
-      "strategy": "replace",
-      "requiredWhen": [
-        "mcp.enabled=true"
-      ],
-      "hash": "sha256:52881675d8ec99c3a6273eb5212a5836d4090bae30bcd12dbae5cc3072ee2666"
-    },
-    {
-      "id": "mcp.workspaceTestingMcp",
+      "id": "packs.tdd.mcp.workspaceTestingMcp",
       "source": "mcp/scripts/workspaceTestingMcp.py",
       "target": ".cursor/mcp/scripts/workspaceTestingMcp.py",
-      "layer": "core",
+      "layer": "pack",
       "strategy": "replace",
-      "requiredWhen": [
-        "mcp.enabled=true"
-      ],
-      "hash": "sha256:942bdaf4c8fda6ef0f0644ee5296700d14a2fadebb07660e3b7c4274f752df79"
+      "hash": "sha256:942bdaf4c8fda6ef0f0644ee5296700d14a2fadebb07660e3b7c4274f752df79",
+      "pack": "tdd",
+      "requiredWhen": []
     },
     {
       "id": "rules.core",
@@ -250,7 +255,7 @@
       "target": ".cursor/rules/core.mdc",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:c87008a6d1c1e2190461eb3fe0745d86bd8c1b98765ccd704bee8eedba70af0f"
+      "hash": "sha256:847547ad23c8f0d8f90d47a317cdbd62dd299af4f18f9ad647cbbf744d2bf079"
     },
     {
       "id": "rules.lifecycle",
@@ -266,7 +271,7 @@
       "target": ".cursor/skills/ciPreflight/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:0e54b00d2db321d09509f6ec61f05e1874534c84c1b0f2d1af288765358a23e6"
+      "hash": "sha256:145703731478633cd4afc70a803c05cd64c0d1631d31f7b21a96df16c46de24e"
     },
     {
       "id": "skills.depSearch",
@@ -274,7 +279,7 @@
       "target": ".cursor/skills/depSearch/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:ee9e8b3324101d7db0f3de7c15e76b8c6b3815138d0804eba5639c5e0573c816"
+      "hash": "sha256:ed9256a0f1863b0b88b01b99be0ae306d806f6307c42a3b4e97724507025d263"
     },
     {
       "id": "packs.secure.dependencyAudit",
@@ -422,7 +427,7 @@
       "target": ".cursor/skills/testing/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:fa21f15264c7ff8541ad9fb898c6b81547973c0f5195801433fabd5bff663d08"
+      "hash": "sha256:f2a7e2b503638ff2615cf5edf26fb2a6dac8a9c8879dd39394d0de0fb1dabcd9"
     },
     {
       "id": "packs.secure.threatModel",
@@ -442,7 +447,7 @@
       "target": ".cursor/skills/workspaceSearch/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:a2348bf6ef3a7074fbe6d603cdfd06b17c0cdefbacda7c65c8f6b4ca41caf25f"
+      "hash": "sha256:f201eb58fec0820703b4b172d08c5e8395ec1618d0209fe0334920fdf01b3995"
     },
     {
       "id": "routing.agents-md",
@@ -450,7 +455,7 @@
       "target": "AGENTS.md",
       "layer": "core",
       "strategy": "preserve-marked-markdown-blocks",
-      "hash": "sha256:60e6ff5a7b9169ef5ee3b0400001e0834ea144a675a4637955ec04669941914e"
+      "hash": "sha256:bd7e3ea9584718b3cf92e93413a99acb798afa950efdb4b4e958f62afdd66eb1"
     }
   ]
 }

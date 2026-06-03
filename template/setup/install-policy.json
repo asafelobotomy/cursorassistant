@@ -32,9 +32,9 @@
       "layer": "core"
     },
     {
-      "id": "agents.explore",
-      "source": "agents/explore.md",
-      "target": ".cursor/agents/explore.md",
+      "id": "agents.inventory",
+      "source": "agents/inventory.md",
+      "target": ".cursor/agents/inventory.md",
       "layer": "core"
     },
     {
@@ -129,7 +129,7 @@
     },
     {
       "id": "mcp.config",
-      "source": "template/cursor/mcp-minimal.json",
+      "source": "template/cursor/mcp-core.json",
       "target": ".cursor/mcp.json",
       "layer": "core",
       "strategy": "merge-json-object"

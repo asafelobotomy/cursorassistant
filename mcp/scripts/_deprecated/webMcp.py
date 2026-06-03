@@ -81,7 +81,7 @@ def _guard_ssrf(url: str) -> None:
     host = parsed.hostname
     if not host:
         raise ValueError(f"Cannot parse hostname from URL: {url!r}")
-    ex = concurrent.futures.ThreadPoolExecutor(max_workers=1, thread_name_prefix="xanad-dns")
+    ex = concurrent.futures.ThreadPoolExecutor(max_workers=1, thread_name_prefix="cursor-dns")
     future = ex.submit(socket.getaddrinfo, host, None)
     try:
         infos = future.result(timeout=_DNS_TIMEOUT)
@@ -243,7 +243,7 @@ def web_search(
 # ---------------------------------------------------------------------------
 
 _FETCH_HEADERS = {
-    "User-Agent": "xanadWeb/1.0 (developer workspace fetch; +https://github.com/asafelobotomy/xanadassistant)",
+    "User-Agent": "cursorWeb/1.0 (developer workspace fetch; +https://github.com/asafelobotomy/cursorassistant)",
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
 }
 _MAX_DOWNLOAD_BYTES = 10_000_000  # 10 MB hard cap — body is capped before decode/conversion
@@ -290,7 +290,7 @@ def _append_truncation_hint(chunk: str, remaining: int, next_index: int) -> str:
     return (
         f"{chunk}\n\n"
         f"Continue with start_index={next_index} to read the next {remaining} character(s).\n"
-        f"<!-- xanad:truncation remaining={remaining} next_start_index={next_index} -->"
+        f"<!-- cursor:truncation remaining={remaining} next_start_index={next_index} -->"
     )
 
 

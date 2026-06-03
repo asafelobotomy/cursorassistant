@@ -24,7 +24,7 @@ Improve repository layout: moves, renames, and caller path updates. Not a genera
 
 ## Workflow
 
-1. Inventory callers and references before moving anything (**workspaceSearch** skill, or `explore`).
+1. Inventory callers and references before moving anything (**workspaceSearch** skill, or `inventory`).
 2. Prefer cohesive, small batches of moves over wide churn.
 3. Update every direct caller in the same pass — do not leave broken imports.
 4. Run targeted tests; use the **testing** skill before finishing when a suite exists.
@@ -43,5 +43,5 @@ Report each move as `old/path → new/path`, list caller updates, and summarise 
 
 ## Delegation
 
-- Read-only caller maps → `explore`
+- Read-only caller maps → `inventory`
 - Doc or migration guide updates beyond inline paths → `docs`

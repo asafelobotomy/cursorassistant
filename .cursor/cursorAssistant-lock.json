@@ -2,7 +2,7 @@
   "schemaVersion": "0.4.0",
   "package": {
     "name": "cursorAssistant",
-    "version": "0.7.0",
+    "version": "0.9.0",
     "packageRoot": "/home/solon/Documents/git/repos/cursorassistant"
   },
   "profile": "balanced",
@@ -10,33 +10,33 @@
   "mcpEnabled": false,
   "setupAnswers": {},
   "fileHashes": {
-    "routing.agents-md": "sha256:60e6ff5a7b9169ef5ee3b0400001e0834ea144a675a4637955ec04669941914e",
-    "rules.core": "sha256:df65fc91f28d2ffc25b29c4f269692aa44e68cf19e3e6ee31a24a1b91aedc7c2",
+    "routing.agents-md": "sha256:bd7e3ea9584718b3cf92e93413a99acb798afa950efdb4b4e958f62afdd66eb1",
+    "rules.core": "sha256:f7cb141ad5a869a78e3473d9a458f95c9544a9934a0002a3eae0fffaa9b46e97",
     "rules.lifecycle": "sha256:a7b60f7ef70d79652b469b91e8d7f473bb33afb5f94654d47c6087b2df2a5b55",
-    "agents.cursorLifecycle": "sha256:250e2b374380800610caeca7411d1a65e1a6f89965f63c83e9a5973dd5ac4819",
-    "agents.explore": "sha256:e21fef5cc0791734d7a7832fc31807cd0674a1133432213f7d68c5adb75874e7",
+    "agents.cursorLifecycle": "sha256:a46e152ed0057a155a66cb051563b5497f399230bbbe8edc6c59f9de27e5d63b",
+    "agents.inventory": "sha256:e8214b7450fc5ec47fed3cb99a352daaccb3fe5fb85c556e4866f863280bc192",
     "agents.review": "sha256:0e1d09e134cfadcfda664e11c14f0fbd6ed926c7d6e1f0f934cae6e70c170029",
-    "agents.commit": "sha256:e016cace566a033f8809d2f10fcdb830233a6ebd87e4a4796919e9fbc68bbb8c",
-    "agents.deps": "sha256:f66ec20f0302c7a4ad01ab6c517b0fcd76e777c79395740b27b3dc2a05d7f1df",
-    "agents.docs": "sha256:dca28fb903c30757ec0fbb9a1ce05b7f5ec472fcb566bc88479a97e289fca718",
+    "agents.commit": "sha256:d8aa38098c6e00b4d240901d850e6d786bedef3950161465049b84bdb5716758",
+    "agents.deps": "sha256:0955cdf8c5d9eb4460b544ee90d4f6287869ececb5e4feacd9f60334d7936aa6",
+    "agents.docs": "sha256:d57c07c065045e9ed5261680bef68edb39ebb2d619f69bcacb5f17aa4a1b9663",
     "agents.debugger": "sha256:ec4b7753de3cdd512d9b6e29e48728da8502685f4f29fd5b976836e56506ecbf",
     "agents.planner": "sha256:cb7def105b750d0bfe6f6458a93caaa710cb733f77743f2599e79fcc6bb6ec89",
-    "agents.researcher": "sha256:bd975d40cd8508bb191a89ca9f41da56e5a4d10cbe7358e6363910f322453fbe",
+    "agents.researcher": "sha256:6468bcbbf71c4555be5078039ff8177581d3a8f1fcef239f5cd76d8b8b75685b",
     "agents.triage": "sha256:ceafffe29508e52ca6f432fe81c53434487ea762dfb1a05b075353e1b85d8e8e",
-    "agents.organise": "sha256:fc0afc3857077e28ffd9c90d7ca00e4b052437a23a849e7cba6e71a2db62bfa1",
+    "agents.organise": "sha256:3ca18fd35c45962787a339dc255cca33848dbf7c2270964b2bdd6291b8528a7f",
     "agents.cleaner": "sha256:d81780653ee8fae162abd0f59d87b375957db69e2cc952fc5f36f952fad8e33d",
-    "skills.testing": "sha256:fa21f15264c7ff8541ad9fb898c6b81547973c0f5195801433fabd5bff663d08",
+    "skills.testing": "sha256:f2a7e2b503638ff2615cf5edf26fb2a6dac8a9c8879dd39394d0de0fb1dabcd9",
     "skills.lifecycleAudit": "sha256:1a9e94f71786bbdf66107015cb655ef17137fc2e5359c6d5d185793a1060cea7",
-    "skills.workspaceSearch": "sha256:a2348bf6ef3a7074fbe6d603cdfd06b17c0cdefbacda7c65c8f6b4ca41caf25f",
-    "skills.ciPreflight": "sha256:0e54b00d2db321d09509f6ec61f05e1874534c84c1b0f2d1af288765358a23e6",
-    "skills.depSearch": "sha256:ee9e8b3324101d7db0f3de7c15e76b8c6b3815138d0804eba5639c5e0573c816",
+    "skills.workspaceSearch": "sha256:f201eb58fec0820703b4b172d08c5e8395ec1618d0209fe0334920fdf01b3995",
+    "skills.ciPreflight": "sha256:145703731478633cd4afc70a803c05cd64c0d1631d31f7b21a96df16c46de24e",
+    "skills.depSearch": "sha256:ed9256a0f1863b0b88b01b99be0ae306d806f6307c42a3b4e97724507025d263",
     "mcp.config": "sha256:972ea8c551b3dfe27678bc4f49b1255df38a220730e7f85c293340c41d1113b5",
-    "mcp.shared._cursor_workspace": "sha256:e3d0357fc14e2d2f4a0352eb8d92485c672b295cdae2cdbeff0f77ed39fd4208",
-    "mcp.shared._cursor_mcp_util": "sha256:e3d0357fc14e2d2f4a0352eb8d92485c672b295cdae2cdbeff0f77ed39fd4208",
+    "mcp.shared._cursor_workspace": "sha256:92b3fdf6b027364923bbd54e0135f9f794cf7c06c508a880b3d08d8b19d94874",
+    "mcp.shared._cursor_mcp_util": "sha256:1de2065f66362bd9f8597225735c9b5826fe6eaf1980e35508b2e838408ac30a",
     "mcp.cursorToolsMcp": "sha256:3552630932105add2bd637c370e26b5c80a8b609118fd9a6dbb1dc1d8b0977af"
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-03T22:25:19Z"
+    "updatedAt": "2026-06-03T23:09:48Z"
   }
 }

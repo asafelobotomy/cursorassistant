@@ -10,7 +10,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from scripts.lifecycle import conditions, interview, merge, mcp_scripts, packs
+from scripts.lifecycle import conditions, interview, merge, mcp_config, mcp_scripts, packs
 from scripts.lifecycle.models import ManagedEntry
 
 LOCKFILE_REL = Path(".cursor") / "cursorAssistant-lock.json"
@@ -57,7 +57,13 @@ def managed_entries(
 ) -> list[ManagedEntry]:
     entries = core_entries(policy)
     mcp_enabled = conditions.mcp_enabled(answers)
-    entries.extend(mcp_scripts.mcp_script_entries(package_root, include_bundle=mcp_enabled))
+    entries.extend(
+        mcp_scripts.mcp_script_entries(
+            package_root,
+            mcp_enabled=mcp_enabled,
+            selected_packs=selected_packs,
+        )
+    )
     for pack_id in selected_packs:
         entries.extend(packs.pack_skill_entries(package_root, pack_id))
     return [entry for entry in entries if conditions.conditions_match(entry.required_when, answers)]
@@ -110,12 +116,7 @@ def resolve_entry_source(
     answers: dict[str, Any],
 ) -> Path:
     if entry.entry_id == "mcp.config":
-        rel = (
-            "template/cursor/mcp-bundle.json"
-            if conditions.mcp_enabled(answers)
-            else "template/cursor/mcp-minimal.json"
-        )
-        return package_root / rel
+        return package_root / mcp_config.CORE_REL
     return package_root / entry.source_rel
 
 
@@ -125,6 +126,10 @@ def materialize_source(
     tokens: dict[str, str],
     answers: dict[str, Any],
 ) -> bytes:
+    if entry.entry_id == "mcp.config":
+        selected_packs = packs.resolve_selected_packs(package_root, answers, None)
+        payload = mcp_config.build_mcp_config(package_root, answers, selected_packs, tokens)
+        return merge.serialize_json_object(payload)
     source = resolve_entry_source(package_root, entry, answers)
     if not source.is_file():
         raise FileNotFoundError(f"Missing package source: {source.relative_to(package_root)}")
@@ -256,6 +261,18 @@ def inspect(
     )
     if repair_reasons and install_state == "installed":
         install_state = "needs-repair"
+    mcp_path = workspace / ".cursor" / "mcp.json"
+    mcp_payload = None
+    if mcp_path.is_file():
+        try:
+            mcp_payload = json.loads(mcp_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            mcp_payload = None
+    scripts_dir = workspace / ".cursor" / "mcp" / "scripts"
+    warnings = mcp_config.mcp_warnings(mcp_payload)
+    for name in mcp_config.deprecated_scripts_on_disk(scripts_dir):
+        warnings.append(f"deprecated-mcp-script:{name} — run update to remove")
+
     return {
         "packageName": policy.get("packageName", "cursorAssistant"),
         "packageVersion": package_version(package_root),
@@ -266,6 +283,7 @@ def inspect(
         "profile": resolved_answers.get("profile.selected", "balanced"),
         "selectedPacks": selected_packs,
         "mcpEnabled": conditions.mcp_enabled(resolved_answers),
+        "mcpWarnings": warnings,
         "summary": {"managed": len(entries), "stale": stale, "missing": missing},
         "files": file_rows,
     }
@@ -337,22 +355,44 @@ def _prune_deselected_pack_skills(
     return pruned
 
 
-def _prune_disabled_mcp_scripts(
+def _prune_deselected_pack_mcp(
+    workspace: Path,
+    package_root: Path,
+    previous_packs: list[str],
+    new_packs: list[str],
+) -> list[str]:
+    removed = sorted(set(previous_packs) - set(new_packs))
+    pruned: list[str] = []
+    for pack_id in removed:
+        for name in mcp_scripts.PACK_SCRIPTS.get(pack_id, frozenset()):
+            target = workspace / ".cursor/mcp/scripts" / name
+            if target.is_file():
+                _backup_file(workspace, target)
+                target.unlink()
+                pruned.append(f"packs.{pack_id}.mcp.{Path(name).stem}")
+    return pruned
+
+
+def _prune_orphan_mcp_scripts(
     workspace: Path,
     package_root: Path,
     answers: dict[str, Any],
+    selected_packs: list[str],
 ) -> list[str]:
-    if conditions.mcp_enabled(answers):
+    scripts_dir = workspace / ".cursor/mcp/scripts"
+    if not scripts_dir.is_dir():
         return []
+    expected = mcp_scripts.expected_script_names(
+        package_root,
+        mcp_enabled=conditions.mcp_enabled(answers),
+        selected_packs=selected_packs,
+    )
     pruned: list[str] = []
-    for entry in mcp_scripts.mcp_script_entries(package_root, include_bundle=True):
-        if entry.entry_id == "mcp.cursorToolsMcp":
-            continue
-        target = workspace / entry.target_rel
-        if target.is_file():
-            _backup_file(workspace, target)
-            target.unlink()
-            pruned.append(entry.entry_id)
+    for path in sorted(scripts_dir.glob("*.py")):
+        if path.name not in expected:
+            _backup_file(workspace, path)
+            path.unlink()
+            pruned.append(f"mcp.orphan.{path.stem}")
     return pruned
 
 
@@ -410,7 +450,8 @@ def apply_entries(
         else []
     )
     pruned = _prune_deselected_pack_skills(workspace, package_root, previous_packs, selected_packs)
-    pruned.extend(_prune_disabled_mcp_scripts(workspace, package_root, resolved_answers))
+    pruned.extend(_prune_deselected_pack_mcp(workspace, package_root, previous_packs, selected_packs))
+    pruned.extend(_prune_orphan_mcp_scripts(workspace, package_root, resolved_answers, selected_packs))
     entries = managed_entries(policy, package_root, selected_packs, resolved_answers)
     tokens = _inspect_tokens(workspace, package_root, resolved_answers)
     report = inspect(workspace, package_root, answers=resolved_answers)

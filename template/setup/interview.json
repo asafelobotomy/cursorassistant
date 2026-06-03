@@ -17,9 +17,9 @@
     },
     {
       "id": "mcp.enabled",
-      "prompt": "Install shared MCP script bundle (git, web, testing, memory, etc.)",
+      "prompt": "Install optional MCP extensions (git, devDocs, memory) — not web/filesystem/time",
       "type": "boolean",
-      "default": true
+      "default": false
     }
   ]
 }

@@ -5,7 +5,7 @@ description: Use when running workspace tests, choosing a test command, or summa
 
 # Testing (Cursor)
 
-Run tests through the workspace's declared command or MCP test tools when available.
+Run tests through the project's declared command. Prefer **Shell**; use pack MCP tools only when installed.
 
 ## When to use
 
@@ -15,13 +15,15 @@ Run tests through the workspace's declared command or MCP test tools when availa
 ## When not to use
 
 - Root-cause analysis of failures → `debugger`
-- Full CI pre-merge gate → run the repo's CI script locally if present
-- Strict TDD coaching when a TDD pack is installed (future)
+- Full CI pre-merge gate → **ciPreflight** skill
+- Strict TDD coaching when the **tdd** pack is installed → pack skills (`tddCycle`, etc.)
 
 ## Process
 
-1. Find `package.json`, `pyproject.toml`, `Makefile`, or README for the canonical test command.
-2. Run the smallest command that covers the changed area.
+1. **Glob** / **Read** `package.json`, `pyproject.toml`, `Makefile`, or README for the canonical test command.
+2. Run the smallest **Shell** command that covers the changed area.
 3. Summarize pass/fail; on failure, hand off to `debugger` with logs.
 
-Prefer **workspaceTesting** MCP tools when connected; otherwise use the terminal.
+## Pack MCP (optional)
+
+When the **tdd** pack is installed, `workspaceTesting` or `tddTestRunner` may appear in `.cursor/mcp.json`. Use them for structured runner discovery; otherwise stay on **Shell**.

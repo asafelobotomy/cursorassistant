@@ -54,54 +54,40 @@ def discover_pack_entries(package_root: Path) -> list[dict]:
 
 
 def discover_mcp_entries(package_root: Path) -> list[dict]:
-    scripts_dir = package_root / "mcp" / "scripts"
-    if not scripts_dir.is_dir():
-        return []
+    import sys
+
+    root = str(package_root)
+    if root not in sys.path:
+        sys.path.insert(0, root)
+    from scripts.lifecycle import mcp_scripts
+
     rows: list[dict] = []
-    for path in sorted(scripts_dir.glob("*.py")):
-        if path.name.startswith("_"):
+    for entry in mcp_scripts.mcp_script_entries(
+        package_root,
+        mcp_enabled=True,
+        selected_packs=["lean", "secure", "tdd"],
+    ):
+        source = package_root / entry.source_rel
+        if not source.is_file():
             continue
-        required_when = None if path.name == "cursorToolsMcp.py" else ["mcp.enabled=true"]
-        rows.append(
-            {
-                "id": f"mcp.{path.stem}",
-                "source": f"mcp/scripts/{path.name}",
-                "target": f".cursor/mcp/scripts/{path.name}",
-                "layer": "core",
-                "strategy": "replace",
-                "requiredWhen": required_when or [],
-                "hash": sha256_file(path),
-            }
-        )
-    always_shared = {"_cursor_workspace.py", "_cursor_mcp_util.py"}
-    for name in sorted(always_shared):
-        path = scripts_dir / name
-        if path.is_file():
-            rows.append(
-                {
-                    "id": f"mcp.shared.{path.stem}",
-                    "source": f"mcp/scripts/{name}",
-                    "target": f".cursor/mcp/scripts/{name}",
-                    "layer": "core",
-                    "strategy": "replace",
-                    "requiredWhen": [],
-                    "hash": sha256_file(path),
-                }
-            )
-    for path in sorted(scripts_dir.glob("_*.py")):
-        if path.name in always_shared:
-            continue
-        rows.append(
-            {
-                "id": f"mcp.shared.{path.stem}",
-                "source": f"mcp/scripts/{path.name}",
-                "target": f".cursor/mcp/scripts/{path.name}",
-                "layer": "core",
-                "strategy": "replace",
-                "requiredWhen": ["mcp.enabled=true"],
-                "hash": sha256_file(path),
-            }
-        )
+        row = {
+            "id": entry.entry_id,
+            "source": entry.source_rel,
+            "target": entry.target_rel,
+            "layer": entry.layer,
+            "strategy": entry.strategy,
+            "hash": sha256_file(source),
+        }
+        if entry.pack:
+            row["pack"] = entry.pack
+        if entry.required_when:
+            row["requiredWhen"] = [
+                f"{key}={str(value).lower()}" if isinstance(value, bool) else f"{key}={value}"
+                for key, value in entry.required_when.items()
+            ]
+        else:
+            row["requiredWhen"] = []
+        rows.append(row)
     return rows
 
 
@@ -154,25 +140,28 @@ def generate_catalog(package_root: Path) -> dict:
         "packs": [pack["id"] for pack in pack_registry.get("packs", []) if pack.get("status") == "active"],
         "agents": [
             "cursorLifecycle",
-            "explore",
+            "inventory",
             "review",
             "commit",
             "deps",
             "docs",
             "debugger",
             "planner",
+            "researcher",
+            "triage",
+            "organise",
+            "cleaner",
         ],
-        "mcpServers": [
-            "cursorTools",
-            "workspaceTesting",
-            "git",
-            "web",
-            "devDocs",
-            "time",
-            "memory",
-            "security",
-            "filesystem",
-        ],
+        "mcpServers": {
+            "core": ["cursorTools"],
+            "extensions": ["git", "devDocs", "memory"],
+            "packs": {
+                "secure": ["security", "secureOsv"],
+                "tdd": ["workspaceTesting", "tddTestRunner"],
+                "lean": ["leanContextBudget", "leanTestReporter"],
+            },
+            "deprecated": ["web", "filesystem", "time"],
+        },
         "profiles": [
             profile["id"]
             for profile in profile_registry.get("profiles", [])

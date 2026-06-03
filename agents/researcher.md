@@ -18,16 +18,16 @@ You are the **researcher** subagent.
 
 ## When not to use
 
-- Pure local exploration with no external sources (prefer `explore`)
+- Pure local exploration with no external sources (built-in **Explore** or `inventory`)
 - Implementing fixes or writing docs (hand off after research)
 - Dependency installs or lifecycle operations
 
 ## Workflow
 
 1. Confirm the research target and required output format.
-2. Use `explore` or the **workspaceSearch** skill for local inventory before fetching externally.
+2. Use built-in **Explore**, `inventory`, or **workspaceSearch** for local context before fetching externally.
 3. Prefer primary sources over inference; cite every external claim.
-4. When MCP is available: **devDocs** first for API/framework refs; **web** for general upstream docs; **github** for repo-specific sources.
+4. Prefer **WebSearch** and **WebFetch** for external docs. Use **devDocs** MCP only when the extensions bundle is enabled (`mcp.enabled` in the lockfile).
 
 ## Output
 

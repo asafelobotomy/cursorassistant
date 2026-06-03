@@ -61,13 +61,15 @@ This writes `.cursor/*` into the package tree for local development (MCP bundle 
 
 ## MCP scripts
 
-v0.4 installs **cursorTools** plus a shared MCP bundle (git, web, testing, memory, security, filesystem, time, devDocs) when `mcp.enabled` is true (default).
+v0.9+ always installs **cursorTools** (`mcp-core`). Optional **extensions** (git, devDocs, memory) require `mcp.enabled: true`. Pack MCP (secure, tdd, lean) installs when you select that pack. **web**, **filesystem**, and **time** servers were removed — use Cursor Agent tools instead. See [docs/MCP_LAYOUT.md](docs/MCP_LAYOUT.md).
 
-Disable the bundle:
+Enable extensions:
 
 ```json
-{ "mcp.enabled": false }
+{ "mcp.enabled": true }
 ```
+
+Do not add a custom subagent named `explore` — it shadows Cursor's built-in Explore subagent. Use **`inventory`** for structured read-only maps.
 
 List eval suites:
 

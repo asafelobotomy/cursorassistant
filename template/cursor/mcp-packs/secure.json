@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "security": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp[cli]",
+        "mcp",
+        "run",
+        "${workspaceFolder}/.cursor/mcp/scripts/securityMcp.py"
+      ]
+    },
+    "secureOsv": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp[cli]",
+        "mcp",
+        "run",
+        "${workspaceFolder}/.cursor/mcp/scripts/secureOsv.py"
+      ]
+    }
+  }
+}

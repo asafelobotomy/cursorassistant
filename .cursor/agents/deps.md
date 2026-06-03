@@ -27,11 +27,11 @@ Discover and act on dependencies declared in the workspace. Use the **depSearch*
 - Flag Critical/High CVEs before other findings.
 - Cite registry or OSV sources for version recommendations.
 
-## MCP
+## Tools
 
-Prefer **security** MCP (`query_osv`, `query_deps`) when connected.
+Prefer **Shell** (`npm audit`, `pip-audit`, `cargo audit`, etc.) and **depSearch** skill. Use **security** MCP (`query_osv`, `query_deps`) only when the **secure** pack is installed and the server appears in `.cursor/mcp.json`.
 
 ## Delegation
 
-- External replacement research → main Agent or web tools
+- External replacement research → `researcher` or WebSearch
 - Test failures after dependency change → `debugger`
