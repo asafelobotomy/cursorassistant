@@ -12,8 +12,20 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 | Verbose shell output isolated | Cursor built-in **Bash** |
 | Browser / DOM work | Cursor built-in **Browser** |
 | Structured repo inventory + handoff | **`inventory`** (`/inventory` or Task) |
+| Unclear complexity before acting | **`/task-triage`** skill (not a subagent) |
 
-## Roster
+## Core skills (invoke with `/name`)
+
+| Skill | Use when |
+| --- | --- |
+| `task-triage` | Classify tier (Trivial→Blocked) and minimal path before subagents |
+| `workspaceSearch` | Pick Grep vs SemanticSearch vs Glob |
+| `ciPreflight` | Local CI before commit/push |
+| `depSearch` | Dependency discovery and audit research |
+| `testing` | Run project tests via Shell |
+| `lifecycleAudit` | Before mutating managed `.cursor/` surfaces |
+
+## Roster (11 subagents)
 
 | Subagent | Invoke | Use when |
 | --- | --- | --- |
@@ -21,30 +33,29 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 | `inventory` | `/inventory` or Task | structured read-only maps, caller lists, architecture notes |
 | `review` | `/review` or Task | code review, PR review, architecture review |
 | `commit` | `/commit` or Task | git staging, commits, push, PRs, branches |
-| `deps` | `/deps` or Task | dependency scan, audit, install, update |
+| `deps` | `/deps` | dependency scan, audit, install, update |
 | `docs` | `/docs` or Task | documentation authoring and doc quality checks |
 | `debugger` | `/debugger` or Task | failing tests, broken commands, root-cause isolation |
 | `planner` | `/planner` or Task | multi-step plans before large changes |
 | `researcher` | `/researcher` or Task | external docs, upstream behavior, cited research |
-| `triage` | `/triage` or Task | complexity classification before choosing a path |
 | `organise` | `/organise` or Task | file moves, folder layout, path fixes after moves |
 | `cleaner` | `/cleaner` or Task | prune caches, debris, stale artefacts (with approval) |
 
 ## Routing table
 
-| Work type | Subagent |
+| Work type | Route |
 | --- | --- |
 | Install or update cursorAssistant surfaces | `cursorLifecycle` |
 | Wide codebase search (parallel) | Cursor built-in **Explore** |
 | Structured inventory before a change | `inventory` |
+| Choose minimal execution path | `/task-triage` skill |
 | Review diffs or architecture | `review` |
-| Git commits, push, PRs, branches | `commit` |
+| Git commits, push, PRs, branches | `commit` (Shell / `gh`) |
 | Dependency audit or package changes | `deps` |
 | README, guides, migration docs | `docs` |
 | Diagnose failures with evidence | `debugger` |
 | Phased implementation planning | `planner` |
 | Source-backed external research | `researcher` |
-| Choose minimal execution path | `triage` |
 | Structural moves and path repair | `organise` |
 | Hygiene, caches, approved deletions | `cleaner` |
 
@@ -57,7 +68,6 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 - `debugger` stays read-only; hand off implementation to the main Agent after diagnosis.
 - `planner` stays read-only; returns an executable plan with file list and verification steps.
 - `review` may delegate to `debugger` when a finding needs reproduction.
-- `triage` hands Compound/Complex work to `planner`; does not replace specialists.
 - `researcher` stays read-only; hand off implementation to the main Agent or `planner`.
 - `organise` may delegate to `inventory` for caller maps and `docs` for migration docs.
 - `cleaner` may delegate to `review`, `organise`, `docs`, and `commit` per scope.

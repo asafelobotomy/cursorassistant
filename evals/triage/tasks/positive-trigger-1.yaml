@@ -1,6 +1,0 @@
-id: positive-trigger-1
-description: "Verify triage subagent is suggested for complexity classification"
-prompt: |
-  Before starting work, which subagent should classify whether this is trivial, simple, or needs a planner?
-tags:
-  - smoke

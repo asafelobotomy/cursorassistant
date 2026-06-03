@@ -17,7 +17,7 @@
     },
     {
       "id": "mcp.enabled",
-      "prompt": "Install optional MCP extensions (git, devDocs, memory) — not web/filesystem/time",
+      "prompt": "Install optional MCP extensions (devDocs, memory) — not git/web/filesystem/time",
       "type": "boolean",
       "default": false
     }

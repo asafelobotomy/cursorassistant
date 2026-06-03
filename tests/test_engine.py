@@ -139,7 +139,7 @@ class EngineTests(unittest.TestCase):
             payload = json.loads(mcp_path.read_text(encoding="utf-8"))
             self.assertIn("custom", payload["mcpServers"])
             self.assertIn("cursorTools", payload["mcpServers"])
-            self.assertIn("git", payload["mcpServers"])
+            self.assertNotIn("git", payload["mcpServers"])
             self.assertNotIn("web", payload["mcpServers"])
 
     def test_repair_fixes_missing_managed_file(self) -> None:
@@ -175,7 +175,7 @@ class EngineTests(unittest.TestCase):
         active = packs.active_pack_ids(registry)
         self.assertEqual(active, {"lean", "secure", "tdd"})
 
-    def test_core_policy_includes_twelve_agents(self) -> None:
+    def test_core_policy_includes_eleven_agents(self) -> None:
         policy_path = REPO_ROOT / "template/setup/install-policy.json"
         policy = json.loads(policy_path.read_text(encoding="utf-8"))
         agent_ids = [
@@ -183,11 +183,17 @@ class EngineTests(unittest.TestCase):
             for entry in policy["entries"]
             if entry["id"].startswith("agents.")
         ]
-        self.assertEqual(len(agent_ids), 12)
+        skill_ids = [
+            entry["id"]
+            for entry in policy["entries"]
+            if entry["id"].startswith("skills.")
+        ]
+        self.assertEqual(len(agent_ids), 11)
+        self.assertIn("skills.task-triage", skill_ids)
+        self.assertNotIn("agents.triage", agent_ids)
         for name in (
             "inventory",
             "researcher",
-            "triage",
             "organise",
             "cleaner",
         ):

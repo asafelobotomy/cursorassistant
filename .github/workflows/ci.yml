@@ -36,6 +36,9 @@ jobs:
       - name: cursorEval coverage
         run: python3 tools/cursorEval/cursorEval.py --repo-root . coverage
 
+      - name: cursorEval policy (skills)
+        run: python3 tools/cursorEval/cursorEval.py --repo-root . policy
+
       - name: cursorEval check (sample surfaces)
         run: |
           python3 tools/cursorEval/cursorEval.py --repo-root . check skills/lifecycleAudit/SKILL.md

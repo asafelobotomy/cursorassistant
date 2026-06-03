@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.9.0",
+  "packageVersion": "0.10.0",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -92,14 +92,6 @@
       "hash": "sha256:0e1d09e134cfadcfda664e11c14f0fbd6ed926c7d6e1f0f934cae6e70c170029"
     },
     {
-      "id": "agents.triage",
-      "source": "agents/triage.md",
-      "target": ".cursor/agents/triage.md",
-      "layer": "core",
-      "strategy": "replace",
-      "hash": "sha256:ceafffe29508e52ca6f432fe81c53434487ea762dfb1a05b075353e1b85d8e8e"
-    },
-    {
       "id": "mcp.config",
       "source": "template/cursor/mcp-core.json",
       "target": ".cursor/mcp.json",
@@ -163,17 +155,6 @@
       "layer": "core",
       "strategy": "replace",
       "hash": "sha256:e0229a2186af17f74a65becf61d74dbff944ea699c40093e4c5f1273e3ec6b0d",
-      "requiredWhen": [
-        "mcp.enabled=true"
-      ]
-    },
-    {
-      "id": "mcp.gitMcp",
-      "source": "mcp/scripts/gitMcp.py",
-      "target": ".cursor/mcp/scripts/gitMcp.py",
-      "layer": "core",
-      "strategy": "replace",
-      "hash": "sha256:bb9996883a73ea333f578686e36427e081ee64e44e8590531c65f944cc903a1c",
       "requiredWhen": [
         "mcp.enabled=true"
       ]
@@ -255,7 +236,7 @@
       "target": ".cursor/rules/core.mdc",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:847547ad23c8f0d8f90d47a317cdbd62dd299af4f18f9ad647cbbf744d2bf079"
+      "hash": "sha256:515386139b2aaa25ed5d22736bbd8b469ee1f5bd49c8ef06c43fea7fb7365de2"
     },
     {
       "id": "rules.lifecycle",
@@ -374,6 +355,14 @@
       "hash": "sha256:e6bb4686d90554950b6f8ae8a3609012d43555c37bc442d260bfb42f0c50c8df"
     },
     {
+      "id": "skills.task-triage",
+      "source": "skills/task-triage/SKILL.md",
+      "target": ".cursor/skills/task-triage/SKILL.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:2c9f7ecc0db318534d2e1ad7e97c48ae91f528604ebf988b85b6b9fc800c9045"
+    },
+    {
       "id": "packs.tdd.tddCycle",
       "source": "packs/tdd/skills/tddCycle/SKILL.md",
       "target": ".cursor/skills/tddCycle/SKILL.md",
@@ -455,7 +444,7 @@
       "target": "AGENTS.md",
       "layer": "core",
       "strategy": "preserve-marked-markdown-blocks",
-      "hash": "sha256:bd7e3ea9584718b3cf92e93413a99acb798afa950efdb4b4e958f62afdd66eb1"
+      "hash": "sha256:1cb1ee7bc32bb426a939b6b265cbca351ca9105a3bad603d21554429d86eced9"
     }
   ]
 }

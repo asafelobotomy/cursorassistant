@@ -18,8 +18,10 @@ def _render_tokens(text: str, tokens: dict[str, str]) -> str:
 
     return _TOKEN_PATTERN.sub(repl, text)
 
-DEPRECATED_SERVER_KEYS = frozenset({"web", "filesystem", "time"})
-DEPRECATED_SCRIPT_NAMES = frozenset({"webMcp.py", "fsMcp.py", "timeMcp.py"})
+DEPRECATED_SERVER_KEYS = frozenset({"web", "filesystem", "time", "git"})
+DEPRECATED_SCRIPT_NAMES = frozenset(
+    {"webMcp.py", "fsMcp.py", "timeMcp.py", "gitMcp.py"}
+)
 
 CORE_REL = "template/cursor/mcp-core.json"
 EXTENSIONS_REL = "template/cursor/mcp-extensions.json"
@@ -37,6 +39,15 @@ def _load_fragment(package_root: Path, rel: str) -> dict[str, Any]:
     return merge.parse_json_object(path.read_text(encoding="utf-8"))
 
 
+def sanitize_mcp_config(config: dict[str, Any]) -> dict[str, Any]:
+    servers = config.get("mcpServers")
+    if isinstance(servers, dict):
+        for key in list(servers.keys()):
+            if key in DEPRECATED_SERVER_KEYS:
+                del servers[key]
+    return config
+
+
 def build_mcp_config(
     package_root: Path,
     answers: dict[str, Any],
@@ -50,6 +61,7 @@ def build_mcp_config(
         rel = PACK_MANIFEST_RELS.get(pack_id)
         if rel:
             merged = merge.merge_json_objects(merged, _load_fragment(package_root, rel))
+    merged = sanitize_mcp_config(merged)
     text = _render_tokens(json.dumps(merged, indent=2) + "\n", tokens)
     return merge.parse_json_object(text)
 
@@ -63,9 +75,12 @@ def mcp_warnings(workspace_mcp: dict[str, Any] | None) -> list[str]:
     warnings: list[str] = []
     for key in sorted(servers.keys()):
         if key in DEPRECATED_SERVER_KEYS:
-            warnings.append(
-                f"deprecated-mcp-server:{key} — removed in v0.9; use Cursor WebSearch/WebFetch or Agent file tools"
+            hint = (
+                "use Shell/gh for git"
+                if key == "git"
+                else "use Cursor WebSearch/WebFetch or Agent file tools"
             )
+            warnings.append(f"deprecated-mcp-server:{key} — removed in v0.9+; {hint}")
     return warnings
 
 

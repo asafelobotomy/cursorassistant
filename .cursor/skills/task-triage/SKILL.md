@@ -1,0 +1,40 @@
+---
+name: task-triage
+description: Use when task complexity is unclear — classify as Trivial, Simple, Compound, Complex, or Blocked and recommend the minimal path before spawning subagents.
+---
+
+# Task triage (Cursor)
+
+Classify work before choosing subagents or a large implementation pass. Prefer this skill over a dedicated triage subagent.
+
+## When to use
+
+- The user asks what approach to take, or scope feels ambiguous
+- Before invoking `planner` or multiple specialists
+- When unsure if built-in **Explore** vs `inventory` vs main Agent is enough
+
+## When NOT to use
+
+- User already chose a path ("just fix the test", "open a PR")
+- Single obvious tool call (one Grep, one file edit)
+
+## Tiers
+
+| Tier | Description | Path |
+| --- | --- | --- |
+| **Trivial** | One lookup or trivial edit | Answer in-chat |
+| **Simple** | Few files, one approach | Main Agent |
+| **Compound** | Multiple files or approaches | `planner` then implement |
+| **Complex** | Migration, subsystem, unclear reqs | `planner` + specialists |
+| **Blocked** | Missing info or unconfirmed destructive work | Stop; list blockers |
+
+## Output
+
+```text
+Tier: <tier>
+Scope: <one line>
+Approach: <path>
+Blockers: <none | details>
+```
+
+Do not over-classify: three related files with one pattern is **Simple**, not **Complex**.

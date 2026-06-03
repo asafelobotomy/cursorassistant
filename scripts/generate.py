@@ -148,13 +148,12 @@ def generate_catalog(package_root: Path) -> dict:
             "debugger",
             "planner",
             "researcher",
-            "triage",
             "organise",
             "cleaner",
         ],
         "mcpServers": {
             "core": ["cursorTools"],
-            "extensions": ["git", "devDocs", "memory"],
+            "extensions": ["devDocs", "memory"],
             "packs": {
                 "secure": ["security", "secureOsv"],
                 "tdd": ["workspaceTesting", "tddTestRunner"],

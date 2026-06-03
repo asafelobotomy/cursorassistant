@@ -1,0 +1,6 @@
+id: positive-trigger-1
+description: "Verify planner subagent for multi-step work"
+prompt: |
+  We need a phased plan before refactoring three modules and updating tests. Which subagent should plan first?
+tags:
+  - smoke

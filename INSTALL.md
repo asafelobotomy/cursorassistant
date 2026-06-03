@@ -61,7 +61,7 @@ This writes `.cursor/*` into the package tree for local development (MCP bundle 
 
 ## MCP scripts
 
-v0.9+ always installs **cursorTools** (`mcp-core`). Optional **extensions** (git, devDocs, memory) require `mcp.enabled: true`. Pack MCP (secure, tdd, lean) installs when you select that pack. **web**, **filesystem**, and **time** servers were removed — use Cursor Agent tools instead. See [docs/MCP_LAYOUT.md](docs/MCP_LAYOUT.md).
+v0.10+ always installs **cursorTools** (`mcp-core`). Optional **extensions** (devDocs, memory) require `mcp.enabled: true`. Pack MCP (secure, tdd, lean) installs when you select that pack. **git**, **web**, **filesystem**, and **time** servers are deprecated — use Shell/`gh`, the **commit** subagent, and Cursor Agent tools. See [docs/MCP_LAYOUT.md](docs/MCP_LAYOUT.md).
 
 Enable extensions:
 

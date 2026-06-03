@@ -1,0 +1,11 @@
+name: "review-eval"
+description: "Evaluates review subagent routing"
+
+graders:
+  - type: text
+    name: references_agent
+    config:
+      pattern: "(?i)(review|subagent)"
+
+tasks:
+  - "tasks/*.yaml"

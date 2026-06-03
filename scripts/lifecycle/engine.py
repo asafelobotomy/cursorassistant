@@ -155,7 +155,12 @@ def apply_write_strategy(
     if entry.strategy == "merge-json-object":
         existing_data = merge.parse_json_object(existing_text)
         source_data = merge.parse_json_object(source_text)
+        if entry.entry_id == "mcp.config":
+            existing_data = mcp_config.sanitize_mcp_config(existing_data)
+            source_data = mcp_config.sanitize_mcp_config(source_data)
         merged = merge.merge_json_objects(existing_data, source_data)
+        if entry.entry_id == "mcp.config":
+            merged = mcp_config.sanitize_mcp_config(merged)
         return merge.serialize_json_object(merged)
 
     raise ValueError(f"Unsupported write strategy for {entry.entry_id}: {entry.strategy}")

@@ -57,13 +57,23 @@
 - [x] Interview default `mcp.enabled: false`; conditions aligned
 - [x] Catalog lists all 12 agents; scrub xanad strings in `webMcp.py`
 
-## v0.9 (current) — Cursor Canonical Phase B
+## v0.9 — Cursor Canonical Phase B
 
 - [x] Layered MCP manifests (`mcp-core`, `mcp-extensions`, `mcp-packs/*`)
 - [x] Deprecate `web`, `filesystem`, `time` servers; move scripts to `_deprecated/`
 - [x] Pack-scoped MCP install (secure, tdd, lean) + prune on deselect
 - [x] `inspect` `mcpWarnings` for legacy servers/scripts
 - [x] Agents/skills: Shell-first; MCP only when lockfile/pack enables it
+
+## v0.10 (current) — Cursor Canonical Phase C
+
+- [x] Drop `git` MCP; use `commit` subagent + Shell/`gh`
+- [x] `triage` subagent → **task-triage** skill; 11 core agents
+- [x] `sanitize_mcp_config` on merge/update/repair for deprecated servers
+- [x] Eval suites for `review`, `debugger`, `planner`
+- [x] `cursorEval policy` — forbid VS Code tool names in skills
+- [x] `scripts/dogfood-full.sh` (extensions + all packs)
+- [x] `docs/HOOKS.md` (optional user-owned hooks)
 
 ## v1.0+
 

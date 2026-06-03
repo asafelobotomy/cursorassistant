@@ -80,12 +80,6 @@
       "layer": "core"
     },
     {
-      "id": "agents.triage",
-      "source": "agents/triage.md",
-      "target": ".cursor/agents/triage.md",
-      "layer": "core"
-    },
-    {
       "id": "agents.organise",
       "source": "agents/organise.md",
       "target": ".cursor/agents/organise.md",
@@ -125,6 +119,12 @@
       "id": "skills.depSearch",
       "source": "skills/depSearch/SKILL.md",
       "target": ".cursor/skills/depSearch/SKILL.md",
+      "layer": "core"
+    },
+    {
+      "id": "skills.task-triage",
+      "source": "skills/task-triage/SKILL.md",
+      "target": ".cursor/skills/task-triage/SKILL.md",
       "layer": "core"
     },
     {

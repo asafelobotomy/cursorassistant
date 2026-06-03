@@ -11,4 +11,5 @@ This workspace uses **cursorAssistant** for managed Cursor surfaces under `.curs
 - **Lifecycle:** run `cursorAssistant.py inspect|setup|update` — do not hand-edit managed files under `.cursor/agents`, `.cursor/skills`, or `.cursor/rules` when the lifecycle engine can apply the change.
 - **Built-in subagents:** for broad codebase search, parallel lookups, shell-heavy work, or browser automation, prefer Cursor's built-in **Explore**, **Bash**, and **Browser** subagents—not a custom agent named `explore`.
 - **Tools:** prefer Cursor Agent tools (**Read**, **Write**, **Grep**, **Glob**, **SemanticSearch**, **Shell**, **WebSearch**, **WebFetch**) unless `AGENTS.md` lists an approved MCP for that task.
-- **MCP:** use **cursorTools** for lifecycle operations; enable other MCP servers only when present in `.cursor/cursorAssistant-lock.json`.
+- **MCP:** use **cursorTools** for lifecycle operations; enable other MCP servers only when present in `.cursor/cursorAssistant-lock.json`. Deprecated servers (`web`, `filesystem`, `time`, `git`) are stripped on `update`/`repair`.
+- **Triage:** when task complexity is unclear, use the **task-triage** skill (`/task-triage`) before spawning subagents — there is no `triage` subagent.

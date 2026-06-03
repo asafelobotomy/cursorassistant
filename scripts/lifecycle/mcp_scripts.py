@@ -9,7 +9,7 @@ from scripts.lifecycle.models import ManagedEntry
 
 SHARED_MODULES = ("_cursor_workspace.py", "_cursor_mcp_util.py")
 ALWAYS_INSTALL = frozenset({"cursorToolsMcp.py"})
-EXTENSION_SCRIPTS = frozenset({"gitMcp.py", "devDocsMcp.py", "memoryMcp.py"})
+EXTENSION_SCRIPTS = frozenset({"devDocsMcp.py", "memoryMcp.py"})
 BUNDLE_HELPERS = frozenset({"_memory_mcp_shared.py", "_workspace_testing_shared.py"})
 PACK_SCRIPTS: dict[str, frozenset[str]] = {
     "secure": frozenset({"securityMcp.py", "secureOsv.py"}),

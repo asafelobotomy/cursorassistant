@@ -1,15 +1,5 @@
 {
   "mcpServers": {
-    "git": {
-      "command": "uvx",
-      "args": [
-        "--from",
-        "mcp[cli]",
-        "mcp",
-        "run",
-        "${workspaceFolder}/.cursor/mcp/scripts/gitMcp.py"
-      ]
-    },
     "devDocs": {
       "command": "uvx",
       "args": [

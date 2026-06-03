@@ -18,7 +18,6 @@ from pathlib import Path
 SKIP_SCRIPTS = {"cursorToolsMcp.py", "_cursor_workspace.py", "_cursor_mcp_util.py"}
 
 DEFAULT_SCRIPTS = [
-    "gitMcp.py",
     "devDocsMcp.py",
     "securityMcp.py",
     "workspaceTestingMcp.py",
@@ -26,7 +25,7 @@ DEFAULT_SCRIPTS = [
     "memoryMcp.py",
     "_memory_mcp_shared.py",
 ]
-# Deprecated in v0.9 (do not sync): webMcp.py, fsMcp.py, timeMcp.py — use Cursor-native tools.
+# Deprecated (do not sync): gitMcp.py, webMcp.py, fsMcp.py, timeMcp.py — use Shell/gh and Agent tools.
 
 REWRITES = [
     (".github/copilot-instructions.md", "README.md"),

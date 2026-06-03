@@ -7,6 +7,7 @@ Static (no API key):
   check <path>             Spec checks on SKILL.md or agent .md
   tokens <path>            Token estimate for a surface file
   coverage [root]          Skill/agent eval coverage report
+  policy [root]            Forbid VS Code tool names in skills
 
 Dynamic (GITHUB_MODELS_TOKEN or GITHUB_TOKEN for run):
   run <eval.yaml>          Execute tasks via GitHub Models
@@ -27,6 +28,7 @@ if str(_REPO_ROOT) not in sys.path:
 from tools.cursorEval._common import discover_eval_files, read_text  # noqa: E402
 from tools.cursorEval._run import cmd_grade, cmd_run  # noqa: E402
 from tools.cursorEval._static import cmd_check, cmd_coverage, cmd_tokens  # noqa: E402
+from tools.cursorEval._policy import cmd_policy  # noqa: E402
 from tools.cursorEval._validate import cmd_validate  # noqa: E402
 
 
@@ -74,6 +76,7 @@ def main() -> int:
     p_tok = sub.add_parser("tokens", help="Token metrics for a surface file")
     p_tok.add_argument("path")
     sub.add_parser("coverage", help="Eval coverage for skills and agents")
+    sub.add_parser("policy", help="Scan skills for forbidden VS Code tool names")
     p_run = sub.add_parser("run", help="Run eval via GitHub Models")
     p_run.add_argument("eval_path")
     p_run.add_argument("--model", default="gpt-4o-mini")
@@ -96,6 +99,8 @@ def main() -> int:
         return cmd_tokens(args.path, args.fmt)
     if args.command == "coverage":
         return cmd_coverage(repo_root, args.fmt)
+    if args.command == "policy":
+        return cmd_policy(repo_root, args.fmt)
     if args.command == "run":
         return cmd_run(args.eval_path, args.model, args.fmt, args.dry_run)
     if args.command == "grade":

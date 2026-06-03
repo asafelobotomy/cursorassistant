@@ -22,7 +22,8 @@ class McpConfigTests(unittest.TestCase):
     def test_extensions_when_enabled(self) -> None:
         payload = mcp_config.build_mcp_config(REPO_ROOT, {"mcp.enabled": True}, [], {})
         servers = set(payload["mcpServers"].keys())
-        self.assertTrue({"cursorTools", "git", "devDocs", "memory"}.issubset(servers))
+        self.assertTrue({"cursorTools", "devDocs", "memory"}.issubset(servers))
+        self.assertNotIn("git", servers)
         self.assertFalse(mcp_config.DEPRECATED_SERVER_KEYS & servers)
 
     def test_secure_pack_adds_security(self) -> None:
@@ -65,6 +66,35 @@ class McpConfigTests(unittest.TestCase):
             self.assertTrue(
                 any("deprecated-mcp-script:webMcp.py" in w for w in report.get("mcpWarnings", []))
             )
+
+
+    def test_sanitize_mcp_config_strips_git(self) -> None:
+        raw = {
+            "mcpServers": {
+                "cursorTools": {"command": "echo"},
+                "git": {"command": "echo"},
+                "web": {"command": "echo"},
+            }
+        }
+        cleaned = mcp_config.sanitize_mcp_config(raw)
+        keys = set(cleaned["mcpServers"].keys())
+        self.assertEqual(keys, {"cursorTools"})
+
+    def test_update_strips_legacy_git_server_from_mcp_json(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            workspace = Path(tmp)
+            engine.setup(
+                workspace,
+                REPO_ROOT,
+                answers={"mcp.enabled": True},
+            )
+            mcp_path = workspace / ".cursor/mcp.json"
+            payload = json.loads(mcp_path.read_text(encoding="utf-8"))
+            payload["mcpServers"]["git"] = {"command": "legacy"}
+            mcp_path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+            engine.update(workspace, REPO_ROOT)
+            after = json.loads(mcp_path.read_text(encoding="utf-8"))
+            self.assertNotIn("git", after["mcpServers"])
 
 
 if __name__ == "__main__":

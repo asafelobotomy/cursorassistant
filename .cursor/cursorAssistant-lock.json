@@ -2,7 +2,7 @@
   "schemaVersion": "0.4.0",
   "package": {
     "name": "cursorAssistant",
-    "version": "0.9.0",
+    "version": "0.10.0",
     "packageRoot": "/home/solon/Documents/git/repos/cursorassistant"
   },
   "profile": "balanced",
@@ -10,8 +10,8 @@
   "mcpEnabled": false,
   "setupAnswers": {},
   "fileHashes": {
-    "routing.agents-md": "sha256:bd7e3ea9584718b3cf92e93413a99acb798afa950efdb4b4e958f62afdd66eb1",
-    "rules.core": "sha256:f7cb141ad5a869a78e3473d9a458f95c9544a9934a0002a3eae0fffaa9b46e97",
+    "routing.agents-md": "sha256:1cb1ee7bc32bb426a939b6b265cbca351ca9105a3bad603d21554429d86eced9",
+    "rules.core": "sha256:4be251acf1bf90d80207c7f819c5d5db992ef77fdfe73afa7a2e75beff162cd7",
     "rules.lifecycle": "sha256:a7b60f7ef70d79652b469b91e8d7f473bb33afb5f94654d47c6087b2df2a5b55",
     "agents.cursorLifecycle": "sha256:a46e152ed0057a155a66cb051563b5497f399230bbbe8edc6c59f9de27e5d63b",
     "agents.inventory": "sha256:e8214b7450fc5ec47fed3cb99a352daaccb3fe5fb85c556e4866f863280bc192",
@@ -22,7 +22,6 @@
     "agents.debugger": "sha256:ec4b7753de3cdd512d9b6e29e48728da8502685f4f29fd5b976836e56506ecbf",
     "agents.planner": "sha256:cb7def105b750d0bfe6f6458a93caaa710cb733f77743f2599e79fcc6bb6ec89",
     "agents.researcher": "sha256:6468bcbbf71c4555be5078039ff8177581d3a8f1fcef239f5cd76d8b8b75685b",
-    "agents.triage": "sha256:ceafffe29508e52ca6f432fe81c53434487ea762dfb1a05b075353e1b85d8e8e",
     "agents.organise": "sha256:3ca18fd35c45962787a339dc255cca33848dbf7c2270964b2bdd6291b8528a7f",
     "agents.cleaner": "sha256:d81780653ee8fae162abd0f59d87b375957db69e2cc952fc5f36f952fad8e33d",
     "skills.testing": "sha256:f2a7e2b503638ff2615cf5edf26fb2a6dac8a9c8879dd39394d0de0fb1dabcd9",
@@ -30,6 +29,7 @@
     "skills.workspaceSearch": "sha256:f201eb58fec0820703b4b172d08c5e8395ec1618d0209fe0334920fdf01b3995",
     "skills.ciPreflight": "sha256:145703731478633cd4afc70a803c05cd64c0d1631d31f7b21a96df16c46de24e",
     "skills.depSearch": "sha256:ed9256a0f1863b0b88b01b99be0ae306d806f6307c42a3b4e97724507025d263",
+    "skills.task-triage": "sha256:2c9f7ecc0db318534d2e1ad7e97c48ae91f528604ebf988b85b6b9fc800c9045",
     "mcp.config": "sha256:972ea8c551b3dfe27678bc4f49b1255df38a220730e7f85c293340c41d1113b5",
     "mcp.shared._cursor_workspace": "sha256:92b3fdf6b027364923bbd54e0135f9f794cf7c06c508a880b3d08d8b19d94874",
     "mcp.shared._cursor_mcp_util": "sha256:1de2065f66362bd9f8597225735c9b5826fe6eaf1980e35508b2e838408ac30a",
@@ -37,6 +37,6 @@
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-03T23:09:48Z"
+    "updatedAt": "2026-06-03T23:16:01Z"
   }
 }
