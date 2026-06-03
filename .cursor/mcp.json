@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "cursorTools": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp[cli]",
+        "mcp",
+        "run",
+        "${workspaceFolder}/.cursor/mcp/scripts/cursorToolsMcp.py"
+      ]
+    }
+  }
+}

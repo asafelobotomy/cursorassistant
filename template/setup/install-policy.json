@@ -74,6 +74,30 @@
       "layer": "core"
     },
     {
+      "id": "agents.researcher",
+      "source": "agents/researcher.md",
+      "target": ".cursor/agents/researcher.md",
+      "layer": "core"
+    },
+    {
+      "id": "agents.triage",
+      "source": "agents/triage.md",
+      "target": ".cursor/agents/triage.md",
+      "layer": "core"
+    },
+    {
+      "id": "agents.organise",
+      "source": "agents/organise.md",
+      "target": ".cursor/agents/organise.md",
+      "layer": "core"
+    },
+    {
+      "id": "agents.cleaner",
+      "source": "agents/cleaner.md",
+      "target": ".cursor/agents/cleaner.md",
+      "layer": "core"
+    },
+    {
       "id": "skills.testing",
       "source": "skills/testing/SKILL.md",
       "target": ".cursor/skills/testing/SKILL.md",

@@ -1,0 +1,6 @@
+id: positive-trigger-1
+description: "Verify organise subagent is suggested for structural moves"
+prompt: |
+  We need to move scripts into subfolders and fix all import paths. Which subagent owns that?
+tags:
+  - smoke

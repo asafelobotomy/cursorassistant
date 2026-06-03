@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "0.4.0",
+  "package": {
+    "name": "cursorAssistant",
+    "version": "0.7.0",
+    "packageRoot": "/home/solon/Documents/git/repos/cursorassistant"
+  },
+  "profile": "balanced",
+  "selectedPacks": [],
+  "mcpEnabled": false,
+  "setupAnswers": {},
+  "fileHashes": {
+    "routing.agents-md": "sha256:60e6ff5a7b9169ef5ee3b0400001e0834ea144a675a4637955ec04669941914e",
+    "rules.core": "sha256:df65fc91f28d2ffc25b29c4f269692aa44e68cf19e3e6ee31a24a1b91aedc7c2",
+    "rules.lifecycle": "sha256:a7b60f7ef70d79652b469b91e8d7f473bb33afb5f94654d47c6087b2df2a5b55",
+    "agents.cursorLifecycle": "sha256:250e2b374380800610caeca7411d1a65e1a6f89965f63c83e9a5973dd5ac4819",
+    "agents.explore": "sha256:e21fef5cc0791734d7a7832fc31807cd0674a1133432213f7d68c5adb75874e7",
+    "agents.review": "sha256:0e1d09e134cfadcfda664e11c14f0fbd6ed926c7d6e1f0f934cae6e70c170029",
+    "agents.commit": "sha256:e016cace566a033f8809d2f10fcdb830233a6ebd87e4a4796919e9fbc68bbb8c",
+    "agents.deps": "sha256:f66ec20f0302c7a4ad01ab6c517b0fcd76e777c79395740b27b3dc2a05d7f1df",
+    "agents.docs": "sha256:dca28fb903c30757ec0fbb9a1ce05b7f5ec472fcb566bc88479a97e289fca718",
+    "agents.debugger": "sha256:ec4b7753de3cdd512d9b6e29e48728da8502685f4f29fd5b976836e56506ecbf",
+    "agents.planner": "sha256:cb7def105b750d0bfe6f6458a93caaa710cb733f77743f2599e79fcc6bb6ec89",
+    "agents.researcher": "sha256:bd975d40cd8508bb191a89ca9f41da56e5a4d10cbe7358e6363910f322453fbe",
+    "agents.triage": "sha256:ceafffe29508e52ca6f432fe81c53434487ea762dfb1a05b075353e1b85d8e8e",
+    "agents.organise": "sha256:fc0afc3857077e28ffd9c90d7ca00e4b052437a23a849e7cba6e71a2db62bfa1",
+    "agents.cleaner": "sha256:d81780653ee8fae162abd0f59d87b375957db69e2cc952fc5f36f952fad8e33d",
+    "skills.testing": "sha256:fa21f15264c7ff8541ad9fb898c6b81547973c0f5195801433fabd5bff663d08",
+    "skills.lifecycleAudit": "sha256:1a9e94f71786bbdf66107015cb655ef17137fc2e5359c6d5d185793a1060cea7",
+    "skills.workspaceSearch": "sha256:a2348bf6ef3a7074fbe6d603cdfd06b17c0cdefbacda7c65c8f6b4ca41caf25f",
+    "skills.ciPreflight": "sha256:0e54b00d2db321d09509f6ec61f05e1874534c84c1b0f2d1af288765358a23e6",
+    "skills.depSearch": "sha256:ee9e8b3324101d7db0f3de7c15e76b8c6b3815138d0804eba5639c5e0573c816",
+    "mcp.config": "sha256:972ea8c551b3dfe27678bc4f49b1255df38a220730e7f85c293340c41d1113b5",
+    "mcp.shared._cursor_workspace": "sha256:e3d0357fc14e2d2f4a0352eb8d92485c672b295cdae2cdbeff0f77ed39fd4208",
+    "mcp.shared._cursor_mcp_util": "sha256:e3d0357fc14e2d2f4a0352eb8d92485c672b295cdae2cdbeff0f77ed39fd4208",
+    "mcp.cursorToolsMcp": "sha256:3552630932105add2bd637c370e26b5c80a8b609118fd9a6dbb1dc1d8b0977af"
+  },
+  "timestamps": {
+    "appliedAt": "2026-06-03T22:25:19Z",
+    "updatedAt": "2026-06-03T22:25:19Z"
+  }
+}

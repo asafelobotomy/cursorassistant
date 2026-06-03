@@ -1,8 +1,16 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.4.0",
+  "packageVersion": "0.7.0",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
+    {
+      "id": "agents.cleaner",
+      "source": "agents/cleaner.md",
+      "target": ".cursor/agents/cleaner.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:d81780653ee8fae162abd0f59d87b375957db69e2cc952fc5f36f952fad8e33d"
+    },
     {
       "id": "agents.commit",
       "source": "agents/commit.md",
@@ -52,12 +60,28 @@
       "hash": "sha256:e21fef5cc0791734d7a7832fc31807cd0674a1133432213f7d68c5adb75874e7"
     },
     {
+      "id": "agents.organise",
+      "source": "agents/organise.md",
+      "target": ".cursor/agents/organise.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:fc0afc3857077e28ffd9c90d7ca00e4b052437a23a849e7cba6e71a2db62bfa1"
+    },
+    {
       "id": "agents.planner",
       "source": "agents/planner.md",
       "target": ".cursor/agents/planner.md",
       "layer": "core",
       "strategy": "replace",
       "hash": "sha256:cb7def105b750d0bfe6f6458a93caaa710cb733f77743f2599e79fcc6bb6ec89"
+    },
+    {
+      "id": "agents.researcher",
+      "source": "agents/researcher.md",
+      "target": ".cursor/agents/researcher.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:bd975d40cd8508bb191a89ca9f41da56e5a4d10cbe7358e6363910f322453fbe"
     },
     {
       "id": "agents.review",
@@ -68,12 +92,38 @@
       "hash": "sha256:0e1d09e134cfadcfda664e11c14f0fbd6ed926c7d6e1f0f934cae6e70c170029"
     },
     {
+      "id": "agents.triage",
+      "source": "agents/triage.md",
+      "target": ".cursor/agents/triage.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:ceafffe29508e52ca6f432fe81c53434487ea762dfb1a05b075353e1b85d8e8e"
+    },
+    {
       "id": "mcp.config",
       "source": "template/cursor/mcp-minimal.json",
       "target": ".cursor/mcp.json",
       "layer": "core",
       "strategy": "merge-json-object",
       "hash": "sha256:972ea8c551b3dfe27678bc4f49b1255df38a220730e7f85c293340c41d1113b5"
+    },
+    {
+      "id": "mcp.shared._cursor_mcp_util",
+      "source": "mcp/scripts/_cursor_mcp_util.py",
+      "target": ".cursor/mcp/scripts/_cursor_mcp_util.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [],
+      "hash": "sha256:e3d0357fc14e2d2f4a0352eb8d92485c672b295cdae2cdbeff0f77ed39fd4208"
+    },
+    {
+      "id": "mcp.shared._cursor_workspace",
+      "source": "mcp/scripts/_cursor_workspace.py",
+      "target": ".cursor/mcp/scripts/_cursor_workspace.py",
+      "layer": "core",
+      "strategy": "replace",
+      "requiredWhen": [],
+      "hash": "sha256:e3d0357fc14e2d2f4a0352eb8d92485c672b295cdae2cdbeff0f77ed39fd4208"
     },
     {
       "id": "mcp.shared._memory_mcp_shared",
@@ -104,7 +154,7 @@
       "layer": "core",
       "strategy": "replace",
       "requiredWhen": [],
-      "hash": "sha256:24f7d7099c0fc7a363e51b269a44acca87af33017d3f7b55aa3a1f2b4608602b"
+      "hash": "sha256:3552630932105add2bd637c370e26b5c80a8b609118fd9a6dbb1dc1d8b0977af"
     },
     {
       "id": "mcp.devDocsMcp",
@@ -192,7 +242,7 @@
       "requiredWhen": [
         "mcp.enabled=true"
       ],
-      "hash": "sha256:b09d95e9248b8bbfcff099b92a2e4224a7f2a360c01ffde6c0215c642119ebdb"
+      "hash": "sha256:942bdaf4c8fda6ef0f0644ee5296700d14a2fadebb07660e3b7c4274f752df79"
     },
     {
       "id": "rules.core",
@@ -292,7 +342,7 @@
       "target": ".cursor/skills/lifecycleAudit/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:1f0656e9dc3d09ca95a3741b6a6786d792900fecfd9a200f0863a78714bdc65a"
+      "hash": "sha256:1a9e94f71786bbdf66107015cb655ef17137fc2e5359c6d5d185793a1060cea7"
     },
     {
       "id": "packs.secure.secretScanning",
@@ -400,7 +450,7 @@
       "target": "AGENTS.md",
       "layer": "core",
       "strategy": "preserve-marked-markdown-blocks",
-      "hash": "sha256:a8ce2aaedaee68f2522a2e91ec6651452c1c720a88ee1f403f9f824dc75f2909"
+      "hash": "sha256:60e6ff5a7b9169ef5ee3b0400001e0834ea144a675a4637955ec04669941914e"
     }
   ]
 }

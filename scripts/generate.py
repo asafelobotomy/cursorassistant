@@ -73,7 +73,24 @@ def discover_mcp_entries(package_root: Path) -> list[dict]:
                 "hash": sha256_file(path),
             }
         )
+    always_shared = {"_cursor_workspace.py", "_cursor_mcp_util.py"}
+    for name in sorted(always_shared):
+        path = scripts_dir / name
+        if path.is_file():
+            rows.append(
+                {
+                    "id": f"mcp.shared.{path.stem}",
+                    "source": f"mcp/scripts/{name}",
+                    "target": f".cursor/mcp/scripts/{name}",
+                    "layer": "core",
+                    "strategy": "replace",
+                    "requiredWhen": [],
+                    "hash": sha256_file(path),
+                }
+            )
     for path in sorted(scripts_dir.glob("_*.py")):
+        if path.name in always_shared:
+            continue
         rows.append(
             {
                 "id": f"mcp.shared.{path.stem}",

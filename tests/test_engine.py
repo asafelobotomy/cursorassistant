@@ -169,6 +169,23 @@ class EngineTests(unittest.TestCase):
         active = packs.active_pack_ids(registry)
         self.assertEqual(active, {"lean", "secure", "tdd"})
 
+    def test_core_policy_includes_twelve_agents(self) -> None:
+        policy_path = REPO_ROOT / "template/setup/install-policy.json"
+        policy = json.loads(policy_path.read_text(encoding="utf-8"))
+        agent_ids = [
+            entry["id"]
+            for entry in policy["entries"]
+            if entry["id"].startswith("agents.")
+        ]
+        self.assertEqual(len(agent_ids), 12)
+        for name in (
+            "researcher",
+            "triage",
+            "organise",
+            "cleaner",
+        ):
+            self.assertIn(f"agents.{name}", agent_ids)
+
 
 if __name__ == "__main__":
     unittest.main()

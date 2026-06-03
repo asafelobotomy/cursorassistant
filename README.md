@@ -57,6 +57,8 @@ python3 cursorAssistant.py plan-setup --workspace /path/to/your-project --packag
 | Task | Command |
 | --- | --- |
 | Run tests | `python3 -m unittest discover -s tests` |
+| Dogfood this repo | `bash scripts/dogfood.sh` |
+| Vendor MCP shared | `python3 scripts/vendor_mcp_shared.py` |
 | Generate manifest | `python3 scripts/generate.py --package-root .` |
 | Lifecycle inspect | `python3 cursorAssistant.py inspect --workspace . --package-root . --json` |
 
@@ -79,7 +81,7 @@ Ask the main Agent: **Set up cursorAssistant in this workspace** — it should r
 | **MCP config** | `.vscode/mcp.json` | `.cursor/mcp.json` |
 | **Lockfile** | `.github/xanadAssistant-lock.json` | `.cursor/cursorAssistant-lock.json` |
 
-The two packages are **siblings**, not forks. MCP scripts sync from xanad via `scripts/sync_mcp_from_xanad.py`; a shared library is planned for v0.6+.
+The two packages are **siblings**, not forks. MCP scripts sync from xanad via `scripts/sync_mcp_from_xanad.py`; shared helpers live in `packages/cursor-mcp-shared/` (see [docs/SHARED_MCP.md](docs/SHARED_MCP.md)).
 
 ## Plugin / marketplace
 

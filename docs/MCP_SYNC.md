@@ -24,6 +24,14 @@ python3 scripts/sync_mcp_from_xanad.py \
 | Memory DB under `.github/xanadAssistant/` | `.cursor/cursorAssistant/` |
 | `FastMCP("xanad…")` | `FastMCP("cursor…")` |
 
-## Future: shared library
+## Shared modules (v0.6+)
 
-v0.5 documents the sync workflow. A single shared Python package for both installers is planned to remove duplicate script bodies.
+These files are **cursorAssistant-owned** and installed with every workspace (not overwritten by xanad sync):
+
+| Module | Role |
+| --- | --- |
+| `_cursor_workspace.py` | Workspace root discovery, lockfile read |
+| `_cursor_mcp_util.py` | Tool result formatting |
+| `cursorToolsMcp.py` | Lifecycle CLI wrapper |
+
+When syncing from xanad, `sync_mcp_from_xanad.py` skips `cursorToolsMcp.py` and `_cursor_*.py`. A single pip package shared with xanadAssistant is still planned for later.

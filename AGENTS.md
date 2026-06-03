@@ -14,6 +14,10 @@ Canonical routing for Cursor subagents in this package and in consumer workspace
 | `docs` | `/docs` or Task | documentation authoring and doc quality checks |
 | `debugger` | `/debugger` or Task | failing tests, broken commands, root-cause isolation |
 | `planner` | `/planner` or Task | multi-step plans before large changes |
+| `researcher` | `/researcher` or Task | external docs, upstream behavior, cited research |
+| `triage` | `/triage` or Task | complexity classification before choosing a path |
+| `organise` | `/organise` or Task | file moves, folder layout, path fixes after moves |
+| `cleaner` | `/cleaner` or Task | prune caches, debris, stale artefacts (with approval) |
 
 ## Routing table
 
@@ -27,6 +31,10 @@ Canonical routing for Cursor subagents in this package and in consumer workspace
 | README, guides, migration docs | `docs` |
 | Diagnose failures with evidence | `debugger` |
 | Phased implementation planning | `planner` |
+| Source-backed external research | `researcher` |
+| Choose minimal execution path | `triage` |
+| Structural moves and path repair | `organise` |
+| Hygiene, caches, approved deletions | `cleaner` |
 
 ## Handoff rules
 
@@ -37,6 +45,10 @@ Canonical routing for Cursor subagents in this package and in consumer workspace
 - `debugger` stays read-only; hand off implementation to the main Agent after diagnosis.
 - `planner` stays read-only; returns an executable plan with file list and verification steps.
 - `review` may delegate to `debugger` when a finding needs reproduction.
+- `triage` hands Compound/Complex work to `planner`; does not replace specialists.
+- `researcher` stays read-only; hand off implementation to the main Agent or `planner`.
+- `organise` may delegate to `explore` for inventories and `docs` for migration docs.
+- `cleaner` may delegate to `review`, `organise`, `docs`, and `commit` per scope.
 
 ## Lifecycle trigger phrases
 

@@ -1,0 +1,43 @@
+name: Evals
+
+on:
+  pull_request:
+    branches: [master, main]
+  workflow_dispatch:
+
+jobs:
+  eval-static:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml
+
+      - name: Validate all eval suites
+        run: python3 tools/cursorEval/cursorEval.py --repo-root . validate
+
+      - name: Dry-run core eval suites
+        run: |
+          python3 tools/cursorEval/cursorEval.py --repo-root . run evals/lifecycleAudit/eval.yaml --dry-run
+          python3 tools/cursorEval/cursorEval.py --repo-root . run evals/testing/eval.yaml --dry-run
+
+  eval-models:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml
+
+      - name: Run lifecycleAudit eval (GitHub Models)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/cursorEval/cursorEval.py --repo-root . run evals/lifecycleAudit/eval.yaml

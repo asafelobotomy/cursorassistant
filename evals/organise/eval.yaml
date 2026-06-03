@@ -1,0 +1,11 @@
+name: "organise-eval"
+description: "Evaluates organise subagent routing"
+
+graders:
+  - type: text
+    name: references_agent
+    config:
+      pattern: "(?i)(organise|subagent)"
+
+tasks:
+  - "tasks/*.yaml"

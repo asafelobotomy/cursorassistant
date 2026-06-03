@@ -29,14 +29,27 @@
 - [x] Core skills: workspaceSearch, ciPreflight, depSearch
 - [x] Eval scaffold (`evals/`, `tools/cursorEval/`)
 
-## v0.5 (current)
+## v0.5
 
 - [x] Full eval runner (`validate`, `check`, `coverage`, `grade`, `run`)
 - [x] Cursor plugin manifest (`.cursor-plugin/plugin.json`)
 - [x] MCP sync script (`scripts/sync_mcp_from_xanad.py`)
 
-## v0.6+
+## v0.6
 
-- [ ] Shared MCP Python library with xanadAssistant
-- [ ] Marketplace publication workflow
-- [ ] GitHub Models CI for eval suites
+- [x] Shared MCP modules (`_cursor_workspace`, `_cursor_mcp_util`)
+- [x] GitHub Actions CI (tests, manifest drift, cursorEval)
+- [x] Eval workflow (validate + dry-run; optional Models run)
+- [x] Marketplace publish guide (`docs/PUBLISH.md`, `scripts/validate_plugin.py`)
+
+## v0.7 (current)
+
+- [x] `cursor-mcp-shared` pip package (`packages/cursor-mcp-shared/`, `scripts/vendor_mcp_shared.py`)
+- [x] Core agents: researcher, triage, organise, cleaner
+- [x] Dogfooded `.cursor/` in package repo (`scripts/dogfood.sh`, committed install snapshot)
+- [x] Eval scaffolds for new agents
+
+## v0.8+
+
+- [ ] xanadAssistant consumes `cursor-mcp-shared` as a dependency
+- [ ] Additional skills from xanad (issueResolution, agenticReview) as optional packs

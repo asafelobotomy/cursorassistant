@@ -14,6 +14,20 @@ def mcp_script_entries(package_root: Path, *, include_bundle: bool) -> list[Mana
 
     entries: list[ManagedEntry] = []
     always_install = {"cursorToolsMcp.py"}
+    shared_modules = ("_cursor_workspace.py", "_cursor_mcp_util.py")
+    for name in shared_modules:
+        path = scripts_dir / name
+        if path.is_file():
+            entries.append(
+                ManagedEntry(
+                    entry_id=f"mcp.shared.{path.stem}",
+                    source_rel=f"mcp/scripts/{name}",
+                    target_rel=f".cursor/mcp/scripts/{name}",
+                    layer="core",
+                    strategy="replace",
+                    required_when=None,
+                )
+            )
     for path in sorted(scripts_dir.glob("*.py")):
         if path.name.startswith("_"):
             continue

@@ -1,0 +1,6 @@
+id: positive-trigger-1
+description: "Verify cleaner subagent is suggested for hygiene work"
+prompt: |
+  Review docs/ and prune stale caches after an inventory. Which subagent should handle this?
+tags:
+  - smoke

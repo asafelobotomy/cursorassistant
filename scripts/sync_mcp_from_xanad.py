@@ -6,7 +6,7 @@ Usage (from cursorAssistant repo root):
     python3 scripts/sync_mcp_from_xanad.py --xanad-root /path/to/xanadassistant
 
 Copies selected scripts into mcp/scripts/ and applies path rewrites. Does not
-overwrite cursorToolsMcp.py.
+overwrite cursorToolsMcp.py or `_cursor_*.py` shared modules.
 """
 
 from __future__ import annotations
@@ -14,6 +14,8 @@ from __future__ import annotations
 import argparse
 import shutil
 from pathlib import Path
+
+SKIP_SCRIPTS = {"cursorToolsMcp.py", "_cursor_workspace.py", "_cursor_mcp_util.py"}
 
 DEFAULT_SCRIPTS = [
     "gitMcp.py",
@@ -65,6 +67,8 @@ def main() -> int:
 
     copied = 0
     for name in DEFAULT_SCRIPTS:
+        if name in SKIP_SCRIPTS:
+            continue
         source = src_dir / name
         if not source.is_file():
             print(f"skip (missing): {name}")

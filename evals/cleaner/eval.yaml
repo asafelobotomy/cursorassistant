@@ -1,0 +1,11 @@
+name: "cleaner-eval"
+description: "Evaluates cleaner subagent routing"
+
+graders:
+  - type: text
+    name: references_agent
+    config:
+      pattern: "(?i)(cleaner|subagent)"
+
+tasks:
+  - "tasks/*.yaml"

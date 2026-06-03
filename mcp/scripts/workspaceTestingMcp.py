@@ -7,6 +7,7 @@ from pathlib import Path
 from pydantic import BaseModel, ConfigDict
 sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).parent))
+from _cursor_workspace import discover_workspace_root, workspace_is_valid
 from _workspace_testing_shared import classify_test_run, detect_test_runner, parse_coverage_xml_file, parse_discovered_test_ids, parse_test_summary, supports_test_discovery, supports_typed_targets
 from mcp.server.fastmcp import FastMCP
 WORKSPACE_ROOT_UNAVAILABLE = "The MCP server is not installed in a workspace root."
@@ -19,20 +20,12 @@ _ALLOWED_RUNNER_EXECUTABLES = frozenset({
 })
 
 
-def discover_workspace_root(script_path: Path) -> Path:
-    resolved = script_path.resolve()
-    for candidate in resolved.parents:
-        if (candidate / ".cursor").is_dir():
-            return candidate
-    fallback_index = min(3, len(resolved.parents) - 1)
-    return resolved.parents[fallback_index]
-
-
 WORKSPACE_ROOT = discover_workspace_root(Path(__file__))
-WORKSPACE_INSTRUCTIONS_PATH = WORKSPACE_ROOT / ".cursor" / "copilot-instructions.md"
+WORKSPACE_INSTRUCTIONS_PATH = WORKSPACE_ROOT / "README.md"
 
 
-def workspace_root_valid() -> bool: return (WORKSPACE_ROOT / ".cursor").is_dir()
+def workspace_root_valid() -> bool:
+    return workspace_is_valid(WORKSPACE_ROOT)
 def _check_executable_allowed(command: str) -> str | None:
     try:
         argv = shlex.split(command)

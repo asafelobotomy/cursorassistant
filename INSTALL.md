@@ -54,10 +54,10 @@ python3 /path/to/cursorassistant/cursorAssistant.py setup \
 
 ```sh
 cd /path/to/cursorassistant
-python3 cursorAssistant.py setup --workspace . --package-root . --json
+bash scripts/dogfood.sh
 ```
 
-This writes `.cursor/*` into the package tree for local development.
+This writes `.cursor/*` into the package tree for local development (MCP bundle off; `cursorTools` only). Commit the resulting snapshot so the package repo uses the same surfaces as consumers.
 
 ## MCP scripts
 

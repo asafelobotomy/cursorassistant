@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependencies
+        run: pip install pyyaml
+
+      - name: Validate plugin manifest
+        run: python3 scripts/validate_plugin.py
+
+      - name: Regenerate manifest (drift check)
+        run: |
+          python3 scripts/generate.py --package-root .
+          git diff --exit-code template/setup/install-manifest.json template/setup/catalog.json
+
+      - name: Unit tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: cursorEval validate
+        run: python3 tools/cursorEval/cursorEval.py --repo-root . validate
+
+      - name: cursorEval coverage
+        run: python3 tools/cursorEval/cursorEval.py --repo-root . coverage
+
+      - name: cursorEval check (sample surfaces)
+        run: |
+          python3 tools/cursorEval/cursorEval.py --repo-root . check skills/lifecycleAudit/SKILL.md
+          python3 tools/cursorEval/cursorEval.py --repo-root . check agents/explore.md

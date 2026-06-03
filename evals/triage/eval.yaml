@@ -1,0 +1,11 @@
+name: "triage-eval"
+description: "Evaluates triage subagent routing"
+
+graders:
+  - type: text
+    name: references_agent
+    config:
+      pattern: "(?i)(triage|subagent|tier)"
+
+tasks:
+  - "tasks/*.yaml"

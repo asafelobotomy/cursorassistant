@@ -1,0 +1,12 @@
+---
+description: Core workspace conventions installed by cursorAssistant
+alwaysApply: true
+---
+
+# cursorassistant
+
+This workspace uses **cursorAssistant** for managed Cursor surfaces under `.cursor/`.
+
+- **Routing:** follow `AGENTS.md` for specialist delegation before wide implementation.
+- **Lifecycle:** run `cursorAssistant.py inspect|setup|update` — do not hand-edit managed files under `.cursor/agents`, `.cursor/skills`, or `.cursor/rules` when the lifecycle engine can apply the change.
+- **MCP:** prefer connected MCP tools over ad-hoc shell when a server matches the task.
