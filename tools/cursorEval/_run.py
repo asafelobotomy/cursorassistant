@@ -34,7 +34,11 @@ _RESULTS_DIR = ".cursorEval"
 
 
 def _get_token() -> str | None:
-    return os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    return (
+        os.environ.get("GITHUB_MODELS_TOKEN")
+        or os.environ.get("GITHUB_TOKEN")
+        or os.environ.get("GH_TOKEN")
+    )
 
 
 def _call_model(messages: list[dict], model: str, token: str) -> str:
@@ -105,7 +109,10 @@ def cmd_run(eval_path: str, model: str, fmt: str, dry_run: bool) -> int:
 
     token = _get_token()
     if not token:
-        print("cursorEval run: set GITHUB_TOKEN or GH_TOKEN", file=sys.stderr)
+        print(
+            "cursorEval run: set GITHUB_MODELS_TOKEN, GITHUB_TOKEN, or GH_TOKEN",
+            file=sys.stderr,
+        )
         return 2
 
     surface = _resolve_surface(repo_root, eval_dir)

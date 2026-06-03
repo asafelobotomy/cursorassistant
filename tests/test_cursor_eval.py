@@ -3,10 +3,12 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 import sys
 import unittest
 from pathlib import Path
+from unittest import mock
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 CURSOR_EVAL = REPO_ROOT / "tools" / "cursorEval" / "cursorEval.py"
@@ -65,6 +67,19 @@ class CursorEvalTests(unittest.TestCase):
         self.assertEqual(result.returncode, 0, result.stderr)
         payload = json.loads(result.stdout)
         self.assertTrue(payload["dryRun"])
+
+
+class CursorEvalTokenTests(unittest.TestCase):
+    def test_get_token_prefers_models_env(self) -> None:
+        from tools.cursorEval._run import _get_token
+
+        env = {
+            "GITHUB_MODELS_TOKEN": "models-token",
+            "GITHUB_TOKEN": "legacy-token",
+            "GH_TOKEN": "gh-token",
+        }
+        with mock.patch.dict(os.environ, env, clear=True):
+            self.assertEqual(_get_token(), "models-token")
 
 
 if __name__ == "__main__":

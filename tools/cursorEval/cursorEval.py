@@ -8,7 +8,7 @@ Static (no API key):
   tokens <path>            Token estimate for a surface file
   coverage [root]          Skill/agent eval coverage report
 
-Dynamic (GITHUB_TOKEN for run):
+Dynamic (GITHUB_MODELS_TOKEN or GITHUB_TOKEN for run):
   run <eval.yaml>          Execute tasks via GitHub Models
   grade <eval.yaml>        Grade a response (--text or --response-file)
 """

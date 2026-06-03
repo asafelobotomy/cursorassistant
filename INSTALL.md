@@ -77,11 +77,13 @@ python3 tools/cursorEval/cursorEval.py validate --repo-root .
 python3 tools/cursorEval/cursorEval.py coverage --repo-root .
 ```
 
-Run evals (requires `GITHUB_TOKEN`):
+Run evals (requires a Models API token):
 
 ```sh
 python3 tools/cursorEval/cursorEval.py run evals/lifecycleAudit/eval.yaml --repo-root .
 ```
+
+Use **`GITHUB_MODELS_TOKEN`** in your shell (not `GITHUB_TOKEN`). Exporting `GITHUB_TOKEN` overrides `gh` and `git push` with that value. Store the Models token in GNOME Keyring as `service=github-models` and load it in `~/.bashrc` as `GITHUB_MODELS_TOKEN` (see this repo’s INSTALL notes or your local shell config).
 
 ## Packs and profiles
 
