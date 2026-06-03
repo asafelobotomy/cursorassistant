@@ -1,0 +1,15 @@
+---
+description: cursorAssistant lifecycle operations and lockfile discipline
+globs:
+  - .cursor/**
+  - AGENTS.md
+alwaysApply: false
+---
+
+When changing cursorAssistant-managed content:
+
+1. Run `python3 cursorAssistant.py inspect --workspace . --package-root <cursorAssistant-root> --json`.
+2. Apply changes via `setup` or `update`, not direct edits to managed targets.
+3. Lockfile: `.cursor/cursorAssistant-lock.json` — treat as authoritative for drift detection.
+
+Invoke the **cursorLifecycle** subagent (or `/cursorLifecycle`) for install, update, and repair workflows.

@@ -1,0 +1,72 @@
+{
+  "schemaVersion": "0.1.0",
+  "packageName": "cursorAssistant",
+  "entries": [
+    {
+      "id": "routing.agents-md",
+      "source": "AGENTS.md",
+      "target": "AGENTS.md",
+      "layer": "core"
+    },
+    {
+      "id": "rules.core",
+      "source": "template/rules/core.mdc",
+      "target": ".cursor/rules/core.mdc",
+      "layer": "core"
+    },
+    {
+      "id": "rules.lifecycle",
+      "source": "template/rules/lifecycle.mdc",
+      "target": ".cursor/rules/lifecycle.mdc",
+      "layer": "core"
+    },
+    {
+      "id": "agents.cursorLifecycle",
+      "source": "agents/cursorLifecycle.md",
+      "target": ".cursor/agents/cursorLifecycle.md",
+      "layer": "core"
+    },
+    {
+      "id": "agents.explore",
+      "source": "agents/explore.md",
+      "target": ".cursor/agents/explore.md",
+      "layer": "core"
+    },
+    {
+      "id": "agents.review",
+      "source": "agents/review.md",
+      "target": ".cursor/agents/review.md",
+      "layer": "core"
+    },
+    {
+      "id": "agents.debugger",
+      "source": "agents/debugger.md",
+      "target": ".cursor/agents/debugger.md",
+      "layer": "core"
+    },
+    {
+      "id": "agents.planner",
+      "source": "agents/planner.md",
+      "target": ".cursor/agents/planner.md",
+      "layer": "core"
+    },
+    {
+      "id": "skills.testing",
+      "source": "skills/testing/SKILL.md",
+      "target": ".cursor/skills/testing/SKILL.md",
+      "layer": "core"
+    },
+    {
+      "id": "skills.lifecycleAudit",
+      "source": "skills/lifecycleAudit/SKILL.md",
+      "target": ".cursor/skills/lifecycleAudit/SKILL.md",
+      "layer": "core"
+    },
+    {
+      "id": "mcp.config",
+      "source": "template/cursor/mcp.json",
+      "target": ".cursor/mcp.json",
+      "layer": "core"
+    }
+  ]
+}
