@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Code review is not secretScanning"
+prompt: |
+  Review this PR for maintainability only. Use secretScanning.
+expected_absent:
+  - "(?i)\\bsecretScanning\\b"
+tags:
+  - negative

@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Git commit is not leanContext"
+prompt: |
+  Stage all changes and open a PR. Use the leanContext skill.
+expected_absent:
+  - "(?i)\\bleanContext\\b"
+tags:
+  - negative

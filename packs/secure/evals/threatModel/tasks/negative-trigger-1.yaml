@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Lint fix is not threatModel"
+prompt: |
+  Fix ESLint warnings in src/components only.
+expected_absent:
+  - "(?i)\\bthreatModel\\b"
+tags:
+  - negative

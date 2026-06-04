@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "TDD cycle is not dependencyAudit"
+prompt: |
+  Run a red-green-refactor TDD cycle on the parser module. Start with dependencyAudit.
+expected_absent:
+  - "(?i)\\bdependencyAudit\\b"
+tags:
+  - negative

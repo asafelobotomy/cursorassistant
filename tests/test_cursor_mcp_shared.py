@@ -53,5 +53,20 @@ class CursorMcpSharedTests(unittest.TestCase):
             self.assertFalse(is_workspace_root(root))
 
 
+    def test_verify_xanad_profile_script(self) -> None:
+        import subprocess
+        import sys
+
+        script = REPO_ROOT / "scripts" / "verify_xanad_profile.py"
+        result = subprocess.run(
+            [sys.executable, str(script)],
+            cwd=REPO_ROOT,
+            capture_output=True,
+            text=True,
+            check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr + result.stdout)
+
+
 if __name__ == "__main__":
     unittest.main()

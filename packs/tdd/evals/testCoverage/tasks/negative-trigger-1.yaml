@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Inventory map is not testCoverage"
+prompt: |
+  Build a structured caller map of the payment module. Use testCoverage.
+expected_absent:
+  - "(?i)\\btestCoverage\\b"
+tags:
+  - negative

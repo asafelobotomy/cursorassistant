@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Unrelated doc edit should not invoke secureReview"
+prompt: |
+  Update the changelog date for the release. Use secureReview.
+expected_absent:
+  - "(?i)\\bsecureReview\\b"
+tags:
+  - negative

@@ -1,5 +1,7 @@
 # Roadmap
 
+> **Note:** Older sections below record historical names and counts (e.g. `explore`, `triage`, 12 agents). See **v0.10+** for the current roster.
+
 ## v0.1
 
 - [x] Minimal lifecycle: `inspect`, `setup`, `update`
@@ -84,12 +86,19 @@
 - [x] CI: policy + surface checks; evals workflow uses `GITHUB_MODELS_TOKEN`
 - [x] Archive obsolete `mcp-bundle.json` / `mcp-minimal.json`
 
-## v0.10.2 (current) — open issues closed
+## v0.10.2 — open issues closed
 
 - [x] `cursor-mcp-shared` **XANAD** profile + [XANAD_INTEGRATION.md](XANAD_INTEGRATION.md)
 - [x] Negative/routing eval tasks for core agents and skills; per-task grading in `cursorEval run`
 - [x] PR **eval-models-pr** job (`evals/models-smoke`, 3 tasks; skips without token)
 - [x] `cursorEval policy` scans `template/rules` and `.cursor/rules` (`.mdc`)
+
+## v0.10.3 (current) — audit remediation
+
+- [x] Dogfood installs `_cursor_profiles.py`; CI `check_dogfood_install.py`
+- [x] Pack eval negative tasks (2 tasks per pack skill suite)
+- [x] `ci_check_surfaces` includes pack skills; `verify_xanad_profile.py`
+- [x] `.gitignore` `.cursorEval/`; README doc table; `cursorLifecycle` delegation deduped
 
 ## v1.0+
 

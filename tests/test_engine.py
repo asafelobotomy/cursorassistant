@@ -210,6 +210,19 @@ class EngineTests(unittest.TestCase):
         self.assertFalse((REPO_ROOT / "agents/explore.md").exists())
         self.assertTrue((REPO_ROOT / "agents/inventory.md").is_file())
 
+    def test_dogfood_install_complete(self) -> None:
+        lock = REPO_ROOT / ".cursor/cursorAssistant-lock.json"
+        if not lock.is_file():
+            self.skipTest("dogfood lockfile not present")
+        report = engine.inspect(REPO_ROOT, REPO_ROOT)
+        missing = [f["id"] for f in report.get("files", []) if f.get("status") == "missing"]
+        stale = [f["id"] for f in report.get("files", []) if f.get("status") == "stale"]
+        self.assertEqual(report.get("installState"), "installed", report)
+        self.assertEqual(missing, [], f"missing managed files: {missing}")
+        self.assertEqual(stale, [], f"stale managed files: {stale}")
+        profiles = REPO_ROOT / ".cursor/mcp/scripts/_cursor_profiles.py"
+        self.assertTrue(profiles.is_file(), "dogfood must install _cursor_profiles.py")
+
 
 if __name__ == "__main__":
     unittest.main()

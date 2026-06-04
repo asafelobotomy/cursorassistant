@@ -36,8 +36,14 @@ jobs:
       - name: cursorEval coverage
         run: python3 tools/cursorEval/cursorEval.py --repo-root . coverage
 
-      - name: cursorEval policy (skills)
+      - name: Verify XANAD MCP profile
+        run: python3 scripts/verify_xanad_profile.py
+
+      - name: cursorEval policy (skills, agents, rules)
         run: python3 tools/cursorEval/cursorEval.py --repo-root . policy
 
-      - name: cursorEval check (all core surfaces)
+      - name: cursorEval check (core and pack surfaces)
         run: bash scripts/ci_check_surfaces.sh
+
+      - name: Dogfood install complete
+        run: python3 scripts/check_dogfood_install.py

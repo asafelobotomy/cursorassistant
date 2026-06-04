@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Docs authoring is not testDoubles"
+prompt: |
+  Write API migration notes in README. Invoke testDoubles.
+expected_absent:
+  - "(?i)\\btestDoubles\\b"
+tags:
+  - negative

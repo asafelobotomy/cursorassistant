@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Commit workflow is not testArchitecture"
+prompt: |
+  Create a git commit and push to main. Use testArchitecture.
+expected_absent:
+  - "(?i)\\btestArchitecture\\b"
+tags:
+  - negative

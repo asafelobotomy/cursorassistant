@@ -39,7 +39,7 @@ Prefer **cursorTools** MCP (`lifecycle_*` tools) when MCP is enabled; fall back 
 
 - Before mutating `.cursor/` surfaces → **`lifecycleAudit`** skill checklist when appropriate.
 - Repo layout or managed-file inventory → **`inventory`**.
-- Multi-step remediation plan → **`planner`** (read-only).
+- Multi-file remediation plan → **`planner`** (read-only).
 - Unclear task scope → main Agent **`/task-triage`** before spawning subagents.
 
 ## Trigger phrases
@@ -69,8 +69,3 @@ python3 cursorAssistant.py setup --workspace . --package-root /path/to/cursorass
 ```
 
 After install, `.cursor/agents/cursorLifecycle.md` is available for Task delegation.
-
-## Delegation
-
-- Inventory unfamiliar trees → `inventory`
-- Multi-file remediation plan → `planner`

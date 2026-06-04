@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Run cursorEval check on every core skill and agent source file.
+# Run cursorEval check on every core and pack skill and agent source file.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
@@ -9,7 +9,10 @@ run_check() {
 for skill in skills/*/SKILL.md; do
   run_check "$skill"
 done
+for skill in packs/*/skills/*/SKILL.md; do
+  run_check "$skill"
+done
 for agent in agents/*.md; do
   run_check "$agent"
 done
-echo "ci_check_surfaces: all core skills and agents passed check"
+echo "ci_check_surfaces: all core and pack skills and agents passed check"

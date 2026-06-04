@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Unrelated work should not invoke leanOutput"
+prompt: |
+  Run a full security OWASP review on the API layer using leanOutput.
+expected_absent:
+  - "(?i)\\bleanOutput\\b"
+tags:
+  - negative

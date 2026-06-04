@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Dependency audit is not leanVerification"
+prompt: |
+  Scan npm lockfile for CVEs with OSV. Which lean pack skill applies?
+expected_absent:
+  - "(?i)\\bleanVerification\\b"
+tags:
+  - negative

@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Feature implementation is not leanAndon"
+prompt: |
+  Implement OAuth2 login endpoints across the service. Invoke leanAndon first.
+expected_absent:
+  - "(?i)\\bleanAndon\\b"
+tags:
+  - negative

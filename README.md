@@ -59,6 +59,8 @@ python3 cursorAssistant.py plan-setup --workspace /path/to/your-project --packag
 | Run tests | `python3 -m unittest discover -s tests` |
 | Dogfood this repo | `bash scripts/dogfood.sh` (lean) or `bash scripts/dogfood-full.sh` (extensions + packs) |
 | Check all surfaces | `bash scripts/ci_check_surfaces.sh` |
+| Verify dogfood install | `python3 scripts/check_dogfood_install.py` |
+| Verify XANAD MCP profile | `python3 scripts/verify_xanad_profile.py` |
 | Vendor MCP shared | `python3 scripts/vendor_mcp_shared.py` |
 | Generate manifest | `python3 scripts/generate.py --package-root .` |
 | Lifecycle inspect | `python3 cursorAssistant.py inspect --workspace . --package-root . --json` |
@@ -71,6 +73,17 @@ python3 cursorAssistant.py plan-setup --workspace /path/to/your-project --packag
 4. Enable MCP servers in **Cursor Settings → MCP** (or trust the project `.cursor/mcp.json`).
 
 Ask the main Agent: **Set up cursorAssistant in this workspace** — it should run `cursorAssistant.py setup` with the correct `--package-root`.
+
+## Documentation
+
+| Doc | Topic |
+| --- | --- |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Policy, engine, install flow |
+| [docs/MIGRATION.md](docs/MIGRATION.md) | v0.9 → v0.10 upgrades |
+| [SECURITY.md](SECURITY.md) | MCP and secrets guidance |
+| [docs/MCP_LAYOUT.md](docs/MCP_LAYOUT.md) | Layered MCP manifests |
+| [docs/HOOKS.md](docs/HOOKS.md) | Optional user-owned hooks |
+| [docs/PUBLISH.md](docs/PUBLISH.md) | Cursor Marketplace |
 
 ## Shared MCP library
 
@@ -120,7 +133,7 @@ packs/                      # optional packs (lean, secure, tdd)
 mcp/scripts/                # MCP servers (cursorTools + shared bundle)
 tools/cursorEval/           # eval validate, check, coverage, run, grade
 .cursor-plugin/             # Cursor Marketplace plugin manifest
-docs/                       # MCP layout, migration, architecture, hooks, publish
+docs/                       # see ARCHITECTURE, MIGRATION, SECURITY, MCP_LAYOUT, HOOKS, PUBLISH
 tests/
 ```
 

@@ -53,6 +53,14 @@ Then `discover_workspace_root(script_path)` without an explicit profile resolves
 - Refresh vendored shims: `python3 scripts/vendor_mcp_shared.py`
 - Port script changes from xanad: `scripts/sync_mcp_from_xanad.py`
 
+## Verify locally (cursorAssistant repo)
+
+```sh
+python3 scripts/verify_xanad_profile.py
+```
+
+CI runs this on every push. It does not modify the xanadAssistant repository — apply the checklist above there.
+
 ## Versioning
 
 Package version lives in `packages/cursor-mcp-shared/pyproject.toml`. Bump when changing `WorkspaceProfile` fields or discovery semantics.

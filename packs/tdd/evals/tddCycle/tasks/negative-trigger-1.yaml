@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Security scan is not tddCycle"
+prompt: |
+  Run OWASP-oriented threat modeling on the auth module with tddCycle.
+expected_absent:
+  - "(?i)\\btddCycle\\b"
+tags:
+  - negative
