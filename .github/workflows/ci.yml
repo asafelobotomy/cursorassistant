@@ -28,6 +28,9 @@ jobs:
       - name: Package sync (manifest + dogfood)
         run: python3 scripts/check_package_sync.py
 
+      - name: Install page matches VERSION
+        run: python3 scripts/check_install_page.py
+
       - name: Unit tests
         run: python3 -m unittest discover -s tests -v
 

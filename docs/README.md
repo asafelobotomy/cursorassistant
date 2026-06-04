@@ -7,6 +7,7 @@ cursorAssistant docs are grouped by purpose. **Supported install path:** [INSTAL
 | Doc | Topic |
 | --- | --- |
 | [guides/CURSOR_INSTALL_UX.md](guides/CURSOR_INSTALL_UX.md) | Install flow inside Cursor |
+| [guides/INSTALL_WEBSITE.md](guides/INSTALL_WEBSITE.md) | GitHub Pages setup UX and deploy |
 | [guides/MIGRATION.md](guides/MIGRATION.md) | Upgrading from v0.9 → v0.10+ |
 | [guides/HOOKS.md](guides/HOOKS.md) | Optional user-owned hooks (not lifecycle-managed) |
 | [guides/PUBLISH.md](guides/PUBLISH.md) | GitHub distribution, plugin manifest, releases |
