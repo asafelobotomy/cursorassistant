@@ -2,7 +2,7 @@
   "schemaVersion": "0.4.0",
   "package": {
     "name": "cursorAssistant",
-    "version": "0.13.0",
+    "version": "0.13.1",
     "packageRoot": "."
   },
   "profile": "balanced",
@@ -28,7 +28,7 @@
     "skills.lifecycleAudit": "sha256:8d436d36f37b5d77149705eaa88ef22ed191b1e8a8aec95bd2f1bdfaae760f4f",
     "skills.surfaceReview": "sha256:deb9e169468bbe16b2a7853af7f38e0bf58aa3ac9919cc564f0b12f13f0bf2f8",
     "skills.surfaceReview.references.modules": "sha256:0605d149fe8d5ffd225ff7271d58420ae8aaaea14bc25200e51142f310762738",
-    "skills.cursorAssistantSetup": "sha256:43777738c904a7e26d3191cb7c44d71e6c7afd02a347a188d34ab7ba9881fac7",
+    "skills.cursorAssistantSetup": "sha256:5b514714395c43d7d31155f960eab4cfa116a8bdc06d25f6748da1b5a5d14ca3",
     "skills.workspaceSearch": "sha256:f201eb58fec0820703b4b172d08c5e8395ec1618d0209fe0334920fdf01b3995",
     "skills.ciPreflight": "sha256:92783d8ac6b33bacc16c8ad2d56158b66fa0a480427467a4c00c2f7550e3b489",
     "skills.depSearch": "sha256:a7fabf5d3de0d1826d1ab502f4191f29e317e3c61da4a681da3c3b70225ad783",
@@ -42,6 +42,6 @@
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-04T11:41:23Z"
+    "updatedAt": "2026-06-04T13:28:01Z"
   }
 }

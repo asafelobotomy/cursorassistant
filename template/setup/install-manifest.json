@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.13.0",
+  "packageVersion": "0.13.1",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -269,7 +269,7 @@
       "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:43777738c904a7e26d3191cb7c44d71e6c7afd02a347a188d34ab7ba9881fac7"
+      "hash": "sha256:5b514714395c43d7d31155f960eab4cfa116a8bdc06d25f6748da1b5a5d14ca3"
     },
     {
       "id": "skills.depSearch",
