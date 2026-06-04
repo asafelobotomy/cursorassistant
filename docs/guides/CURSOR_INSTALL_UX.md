@@ -26,13 +26,22 @@ flowchart LR
 - No project interview on the web page
 - No `curl | bash` required if MCP bootstrap succeeds (optional manual bootstrap in page footer)
 
-## Regenerate setup artifacts
+## Install website (canonical)
+
+The public setup page is maintained in **[asafelobotomy.github.io](https://github.com/asafelobotomy/asafelobotomy.github.io)** under `cursorassistant/install/`.
+
+```sh
+# In the github.io repo:
+bash scripts/sync-cursorassistant-install.sh
+```
+
+That clones this package for [VERSION](../../VERSION) and regenerates the MCP deeplink. Edit `index.template.html` in the **github.io** repo, not here.
+
+Optional local preview in this repo:
 
 ```sh
 python3 scripts/generate_install_page.py
 ```
-
-Updates `install/index.html` and `install/deeplinks.json` for the current [VERSION](../VERSION).
 
 ## Terminal-first alternative
 

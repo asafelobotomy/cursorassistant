@@ -10,7 +10,7 @@ cursorAssistant installs and maintains **managed installs**, **lockfile drift de
 
 **Recommended:** click the badge above → **Install in Cursor** on the setup page → approve the MCP prompt → open your project → **Reload Window** → in chat, **Set up cursorAssistant in this workspace** (or `/cursor-assistant:setup-workspace`). That runs the **interview** and writes `.cursor/` + lockfile. No full install runs from the README button itself.
 
-Setup page (HTTPS, opens `cursor://` for bootstrap + cursorTools): [install/index.html](install/index.html) — enable [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) from the `/install` folder if the badge URL 404s.
+Setup page (HTTPS): hosted on [asafelobotomy.github.io](https://asafelobotomy.github.io/cursorassistant/install/) ([asafelobotomy.github.io](https://github.com/asafelobotomy/asafelobotomy.github.io) repo — multi-project Pages). Optional mirror: [install/index.html](install/index.html) in this repo (not deployed from here).
 
 **Terminal (bootstrap + interview in one step):**
 

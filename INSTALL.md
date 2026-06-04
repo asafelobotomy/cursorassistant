@@ -9,10 +9,10 @@
 
 The setup page only bootstraps the global package (`~/.local/share/cursorassistant/current`) and **cursorTools** MCP. It does **not** run the interview until step 4 inside Cursor.
 
-Regenerate the setup page after version bumps:
+Regenerate the public setup page after version bumps (in the [github.io](https://github.com/asafelobotomy/asafelobotomy.github.io) repo):
 
 ```sh
-python3 scripts/generate_install_page.py
+bash scripts/sync-cursorassistant-install.sh
 ```
 
 ## Terminal: full install (bootstrap + interview)
