@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "hooks": [
+    {
+      "event": "beforeSubmitPrompt",
+      "command": "bash template/hooks/scripts/echo-event.sh"
+    }
+  ]
+}

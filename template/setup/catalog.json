@@ -14,17 +14,17 @@
     "tdd"
   ],
   "agents": [
-    "cursorLifecycle",
-    "inventory",
-    "review",
+    "cleaner",
     "commit",
+    "cursorLifecycle",
+    "debugger",
     "deps",
     "docs",
-    "debugger",
+    "inventory",
+    "organise",
     "planner",
     "researcher",
-    "organise",
-    "cleaner"
+    "review"
   ],
   "mcpServers": {
     "core": [

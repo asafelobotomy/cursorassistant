@@ -27,6 +27,17 @@ When staged paths include **cursorAssistant-managed instruction files** (`agents
 
 Do not skip surface review for routing-only tweaks to `description` or `AGENTS.md` handoffs — those affect delegation.
 
+## Package repo (cursorAssistant source tree)
+
+When committing changes to **this** package (not a consumer project):
+
+1. Run `bash scripts/sync_managed_surfaces.sh` after edits to `AGENTS.md`, `agents/`, `skills/`, `template/rules/`, or `install-policy.json`.
+2. Run `python3 scripts/check_package_sync.py` (manifest + dogfood lockfile).
+3. Stage regenerated `template/setup/install-manifest.json`, `template/setup/catalog.json`, and `.cursor/` copies when the script updates them.
+4. Bump `VERSION` and note the release in `docs/ROADMAP.md` only when shipping a tagged release (user request).
+
+Optional: `python3 scripts/generate.py` if policy changed without sync script coverage.
+
 ## Rules
 
 - Never push unless the user asks.

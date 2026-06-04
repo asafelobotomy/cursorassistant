@@ -1,6 +1,12 @@
 ---
 name: lifecycleAudit
 description: Use before proposing cursorAssistant setup, update, or repair — inspect lockfile and managed file drift.
+disable-model-invocation: true
+paths:
+  - ".cursor/**"
+  - "AGENTS.md"
+  - "cursorAssistant.py"
+  - "template/setup/**"
 ---
 
 # Lifecycle audit

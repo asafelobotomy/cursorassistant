@@ -13,3 +13,4 @@ This workspace uses **cursorAssistant** for managed Cursor surfaces under `.curs
 - **Tools:** prefer Cursor Agent tools (**Read**, **Write**, **Grep**, **Glob**, **SemanticSearch**, **Shell**, **WebSearch**, **WebFetch**) unless `AGENTS.md` lists an approved MCP for that task.
 - **MCP:** use **cursorTools** for lifecycle operations; enable other MCP servers only when present in `.cursor/cursorAssistant-lock.json`. Deprecated servers (`web`, `filesystem`, `time`, `git`) are stripped on `update`/`repair`.
 - **Triage:** when task complexity is unclear, use the **task-triage** skill (`/task-triage`) before spawning subagents — there is no `triage` subagent.
+- **Hooks / automations (optional):** see `docs/guides/CURSOR_AUTOMATIONS.md` in the package repo; enable hooks only via copied `template/hooks/` examples (zero tokens until configured).

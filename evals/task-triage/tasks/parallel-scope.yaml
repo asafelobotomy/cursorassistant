@@ -1,0 +1,11 @@
+id: parallel-scope
+description: "Compound work with two agents should mention scope ledger before Task"
+prompt: |
+  Classify this as Compound: refactor auth in src/auth/ and add tests in tests/auth/.
+  Before spawning two Task subagents, what must you write down?
+expected:
+  - "(?i)scope ledger|disjoint|forbidden|proof"
+  - "(?i)parallel"
+tags:
+  - routing
+  - performance

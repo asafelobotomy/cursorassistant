@@ -1,0 +1,9 @@
+id: slash-only-negative
+description: "Generic app bug fix should not auto-invoke surfaceReview"
+prompt: |
+  Fix the null pointer in src/api/handlers.py — run the tests after.
+expected_absent:
+  - "(?i)\\bsurfaceReview\\b"
+tags:
+  - routing
+  - performance

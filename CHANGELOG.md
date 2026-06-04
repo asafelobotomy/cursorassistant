@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.13.0] - 2026-06-04
+
+### Added
+
+- Skill scoping (`disable-model-invocation`, `paths`) on slash-only and CI skills; `PERFORMANCE.md` and phased plan docs.
+- `surfaceReview` reference modules; `task-triage` parallel scope reference; routing eval guardrails.
+- Optional hooks template (`template/hooks/`) and [CURSOR_AUTOMATIONS.md](docs/guides/CURSOR_AUTOMATIONS.md).
+- Install-policy entries for skill `references/` files.
+
+### Changed
+
+- `surfaceReview` SKILL compressed (~600 tokens); handoffs moved from `AGENTS.md` to routing doc.
+- `generate.py` derives `catalog.agents` from `install-policy.json`.
+- `cursorEval` allows `paths`, `globs`, and `disable-model-invocation` in skill frontmatter.
+- Package maintainer sync checklist in `commit` agent.
+
 ## [0.12.1] - 2026-06-03
 
 ### Added
@@ -83,5 +99,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.10.1]: https://github.com/asafelobotomy/cursorassistant/compare/v0.10.0...v0.10.1
 [0.10.0]: https://github.com/asafelobotomy/cursorassistant/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/asafelobotomy/cursorassistant/releases/tag/v0.9.0
+[0.13.0]: https://github.com/asafelobotomy/cursorassistant/compare/v0.12.1...v0.13.0
 [0.12.1]: https://github.com/asafelobotomy/cursorassistant/compare/v0.12.0...v0.12.1
 [0.12.0]: https://github.com/asafelobotomy/cursorassistant/compare/v0.11.0...v0.12.0

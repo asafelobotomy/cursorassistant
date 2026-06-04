@@ -120,13 +120,29 @@ def generate_manifest(package_root: Path, policy: dict) -> dict:
     }
 
 
-def generate_catalog(package_root: Path) -> dict:
+def agents_from_policy(policy: dict) -> list[str]:
+    names: list[str] = []
+    for entry in policy.get("entries", []):
+        source = entry.get("source", "")
+        if not source.startswith("agents/") or not source.endswith(".md"):
+            continue
+        names.append(Path(source).stem)
+    return sorted(set(names))
+
+
+def generate_catalog(package_root: Path, policy: dict | None = None) -> dict:
     pack_registry = json.loads(
         (package_root / "template/setup/pack-registry.json").read_text(encoding="utf-8")
     )
     profile_registry = json.loads(
         (package_root / "template/setup/profile-registry.json").read_text(encoding="utf-8")
     )
+    if policy is None:
+        policy_path = package_root / "template/setup/install-policy.json"
+        policy = json.loads(policy_path.read_text(encoding="utf-8"))
+    agent_ids = agents_from_policy(policy)
+    if not agent_ids:
+        raise ValueError("install-policy.json has no agents/*.md entries for catalog.agents")
     return {
         "schemaVersion": "0.1.0",
         "commands": [
@@ -138,19 +154,7 @@ def generate_catalog(package_root: Path) -> dict:
             "factory-restore",
         ],
         "packs": [pack["id"] for pack in pack_registry.get("packs", []) if pack.get("status") == "active"],
-        "agents": [
-            "cursorLifecycle",
-            "inventory",
-            "review",
-            "commit",
-            "deps",
-            "docs",
-            "debugger",
-            "planner",
-            "researcher",
-            "organise",
-            "cleaner",
-        ],
+        "agents": agent_ids,
         "mcpServers": {
             "core": ["cursorTools"],
             "extensions": ["devDocs", "memory"],
@@ -201,7 +205,10 @@ def main() -> int:
     print(f"manifest → {output_path.relative_to(package_root)}")
 
     catalog_path = package_root / "template/setup/catalog.json"
-    catalog_path.write_text(json.dumps(generate_catalog(package_root), indent=2) + "\n", encoding="utf-8")
+    catalog_path.write_text(
+        json.dumps(generate_catalog(package_root, policy), indent=2) + "\n",
+        encoding="utf-8",
+    )
     print(f"catalog  → {catalog_path.relative_to(package_root)}")
     return 0
 

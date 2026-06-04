@@ -1,0 +1,10 @@
+id: paths-scope-negative
+description: "Runtime bug in src/ should not route to surfaceReview skill"
+prompt: |
+  The login endpoint returns 500 when email is empty. Debug handlers.py only.
+expected_absent:
+  - "(?i)\\bsurfaceReview\\b"
+  - "(?i)six modules"
+tags:
+  - routing
+  - performance

@@ -1,6 +1,12 @@
 ---
 name: cursorAssistantSetup
 description: Use when the user wants to install or customize cursorAssistant in the current project (GitHub install or configure).
+disable-model-invocation: true
+paths:
+  - ".cursor/**"
+  - "AGENTS.md"
+  - "cursorAssistant.py"
+  - "template/setup/**"
 ---
 
 # cursorAssistant project setup
@@ -43,7 +49,7 @@ Guides **individual developers** after the README setup page (MCP bootstrap) thr
 3. If bootstrap missing, user runs setup page again or:
 
    ```sh
-   curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.1/scripts/bootstrap-from-github.sh | bash
+   curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.0/scripts/bootstrap-from-github.sh | bash
    ```
 
 ## Agent-driven interview

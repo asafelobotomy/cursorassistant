@@ -1,6 +1,7 @@
 ---
 name: task-triage
 description: Use when task complexity is unclear — classify as Trivial, Simple, Compound, Complex, or Blocked and recommend the minimal path before spawning subagents.
+disable-model-invocation: true
 ---
 
 # Task triage (Cursor)
@@ -38,6 +39,16 @@ Blockers: <none | details>
 ```
 
 Do not over-classify: three related files with one pattern is **Simple**, not **Complex**.
+
+## Parallel work (Compound or Complex only)
+
+Before **two or more** Task subagents:
+
+1. Write a **scope ledger**: parent goal, paths each agent may touch, paths forbidden, proof command (test/lint).
+2. **Disjoint paths** — never parallel-edit the same file.
+3. After merge, review **interfaces** between scopes (imports, shared types, AGENTS routing).
+
+See [references/parallel-scope.md](references/parallel-scope.md) for a template.
 
 ## Route to (after tier is set)
 

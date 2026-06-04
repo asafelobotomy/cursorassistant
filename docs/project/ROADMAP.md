@@ -114,6 +114,15 @@
 - [x] `cursor-mcp-shared` Cursor-only workspace discovery
 - [x] [../operations/MCP_MAINTENANCE.md](../operations/MCP_MAINTENANCE.md) replaces external sync guide
 
+## v0.13 — performance-first (context ROI)
+
+- [x] Skill scoping: `disable-model-invocation` + `paths` on slash-only and CI skills ([PERFORMANCE_PHASED_PLAN.md](PERFORMANCE_PHASED_PLAN.md))
+- [x] `surfaceReview` compressed (~600 tokens) with `references/modules.md`
+- [x] `AGENTS.md` handoffs moved to [ROUTING_AND_SUBAGENTS.md](../architecture/ROUTING_AND_SUBAGENTS.md)
+- [x] Parallel scope folded into `task-triage`; package sync checklist in `commit` agent
+- [x] Optional hooks template + [CURSOR_AUTOMATIONS.md](../guides/CURSOR_AUTOMATIONS.md); [PERFORMANCE.md](../architecture/PERFORMANCE.md)
+- [x] Routing eval guardrails; `generate.py` derives `catalog.agents` from install-policy
+
 ## v1.0+
 
 - [ ] Stable 1.0 API for policy and lockfile schema

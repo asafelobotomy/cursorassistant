@@ -18,13 +18,13 @@ python3 scripts/generate_install_page.py
 ## Terminal: full install (bootstrap + interview)
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.1/scripts/install-from-github.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.0/scripts/install-from-github.sh | bash -s -- .
 ```
 
 ## Terminal: bootstrap only
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.1/scripts/bootstrap-from-github.sh | bash
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.0/scripts/bootstrap-from-github.sh | bash
 ```
 
 Then complete setup in Cursor (step 4 above).
@@ -38,7 +38,7 @@ python3 cursorAssistant.py update --workspace .
 Refresh bootstrap:
 
 ```sh
-CURSOR_ASSISTANT_VERSION=0.12.1 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.1/scripts/bootstrap-from-github.sh | bash
+CURSOR_ASSISTANT_VERSION=0.13.0 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.0/scripts/bootstrap-from-github.sh | bash
 ```
 
 ## Requirements

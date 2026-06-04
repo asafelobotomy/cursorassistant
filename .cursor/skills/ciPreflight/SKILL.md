@@ -1,8 +1,13 @@
 ---
 name: ciPreflight
 description: "Use when: running pre-commit or pre-push CI-equivalent checks in any workspace — discovers workflow commands with Cursor tools, filters for local executability, scopes to staged changes, and runs checks cheapest-first."
-version: "1.3"
+version: "1.4"
 license: MIT
+paths:
+  - ".github/workflows/**"
+  - "**/package.json"
+  - "**/pyproject.toml"
+  - "Makefile"
 ---
 
 # CI Preflight (Cursor)

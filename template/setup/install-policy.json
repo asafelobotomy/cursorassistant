@@ -110,6 +110,12 @@
       "layer": "core"
     },
     {
+      "id": "skills.surfaceReview.references.modules",
+      "source": "skills/surfaceReview/references/modules.md",
+      "target": ".cursor/skills/surfaceReview/references/modules.md",
+      "layer": "core"
+    },
+    {
       "id": "skills.cursorAssistantSetup",
       "source": "skills/cursorAssistantSetup/SKILL.md",
       "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",
@@ -137,6 +143,12 @@
       "id": "skills.task-triage",
       "source": "skills/task-triage/SKILL.md",
       "target": ".cursor/skills/task-triage/SKILL.md",
+      "layer": "core"
+    },
+    {
+      "id": "skills.task-triage.references.parallel-scope",
+      "source": "skills/task-triage/references/parallel-scope.md",
+      "target": ".cursor/skills/task-triage/references/parallel-scope.md",
       "layer": "core"
     },
     {

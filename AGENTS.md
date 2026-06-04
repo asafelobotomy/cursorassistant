@@ -93,18 +93,11 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 | Git commit / push / PR | `commit` | main Agent |
 | Managed `.cursor/` / lockfile | `cursorLifecycle` | feature agents |
 
-## Handoff rules
+## Handoffs
 
-- `cursorLifecycle` may delegate to `inventory` for layout maps and `planner` for phased remediation.
-- `commit` may delegate to `review` before merge and `debugger` when hooks fail.
-- `deps` confirms before mutating installed packages; hand off test failures to `debugger`.
-- `docs` may delegate to `inventory` for accuracy and `review` for quality passes.
-- `debugger` stays read-only; hand off implementation to the main Agent after diagnosis.
-- `planner` stays read-only; returns an executable plan with file list and verification steps.
-- `review` may delegate to `debugger` when a finding needs reproduction.
-- `researcher` stays read-only; hand off implementation to the main Agent or `planner`.
-- `organise` may delegate to `inventory` for caller maps and `docs` for migration docs.
-- `cleaner` may delegate to `review`, `organise`, `docs`, and `commit` per scope.
+Per-agent delegation chains live in [docs/architecture/ROUTING_AND_SUBAGENTS.md#handoff-rules](docs/architecture/ROUTING_AND_SUBAGENTS.md#handoff-rules) (not duplicated here).
+
+**Slash-only skills** (use `/name`; not auto-invoked): `task-triage`, `lifecycleAudit`, `surfaceReview`, `cursorAssistantSetup`.
 
 ## Lifecycle trigger phrases
 

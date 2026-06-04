@@ -29,6 +29,9 @@ ALLOWED_SKILL_FIELDS = frozenset(
         "tags",
         "compatibility",
         "authors",
+        "paths",
+        "globs",
+        "disable-model-invocation",
     }
 )
 ALLOWED_AGENT_FIELDS = frozenset({"name", "description", "model", "readonly", "is_background"})

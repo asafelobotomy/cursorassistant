@@ -15,13 +15,13 @@ Setup page (HTTPS, opens `cursor://` for bootstrap + cursorTools): [install/inde
 **Terminal (bootstrap + interview in one step):**
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.1/scripts/install-from-github.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.0/scripts/install-from-github.sh | bash -s -- .
 ```
 
 Bootstrap only (interview later via MCP/Agent):
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.1/scripts/bootstrap-from-github.sh | bash
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.0/scripts/bootstrap-from-github.sh | bash
 ```
 
 Details: [INSTALL.md](INSTALL.md) · [docs/guides/CURSOR_INSTALL_UX.md](docs/guides/CURSOR_INSTALL_UX.md) · [docs/research/DEEPLINK_INSTALL_RESEARCH.md](docs/research/DEEPLINK_INSTALL_RESEARCH.md)
