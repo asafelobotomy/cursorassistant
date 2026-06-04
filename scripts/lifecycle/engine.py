@@ -290,6 +290,7 @@ def inspect(
     for name in mcp_config.deprecated_scripts_on_disk(scripts_dir):
         warnings.append(f"deprecated-mcp-script:{name} — run update to remove")
 
+    mcp_enabled = conditions.mcp_enabled(resolved_answers)
     return {
         "packageName": policy.get("packageName", "cursorAssistant"),
         "packageVersion": package_version(package_root),
@@ -299,11 +300,32 @@ def inspect(
         "repairReasons": repair_reasons,
         "profile": resolved_answers.get("profile.selected", "balanced"),
         "selectedPacks": selected_packs,
-        "mcpEnabled": conditions.mcp_enabled(resolved_answers),
+        "mcpEnabled": mcp_enabled,
         "mcpWarnings": warnings,
         "summary": {"managed": len(entries), "stale": stale, "missing": missing},
         "files": file_rows,
+        "nextSteps": _install_next_steps(install_state, mcp_enabled),
     }
+
+
+def _install_next_steps(install_state: str, mcp_enabled: bool) -> list[str]:
+    steps: list[str] = []
+    if install_state == "not-installed":
+        steps.append(
+            "Run: python3 cursorAssistant.py configure --workspace . "
+            "(or /cursor-assistant:setup-workspace in chat after installing the plugin)"
+        )
+        steps.append("Reload the Cursor window after setup (Developer: Reload Window).")
+    elif install_state in {"needs-update", "needs-repair"}:
+        steps.append("Run: python3 cursorAssistant.py update --workspace .")
+        steps.append("Or ask the Agent to update cursorAssistant (cursorLifecycle / cursorTools MCP).")
+    if mcp_enabled:
+        steps.append("Enable MCP servers in Cursor Settings → Features → MCP (cursorTools first).")
+    else:
+        steps.append(
+            "Optional: enable cursorTools in Settings → MCP after setup, or re-run configure with MCP enabled."
+        )
+    return steps
 
 
 def determine_repair_reasons(

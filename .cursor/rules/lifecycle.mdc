@@ -8,7 +8,7 @@ alwaysApply: false
 
 When changing cursorAssistant-managed content:
 
-1. Run `python3 cursorAssistant.py inspect --workspace . --package-root <cursorAssistant-root> --json`.
+1. Run `python3 cursorAssistant.py inspect --workspace . --json` (package root auto-detected).
 2. Apply changes via `setup`, `update`, or `repair` — not direct edits to managed targets.
 3. Use `plan-setup` for read-only previews; use `factory-restore` only with explicit user confirmation.
 4. Lockfile: `.cursor/cursorAssistant-lock.json` — treat as authoritative for drift detection.

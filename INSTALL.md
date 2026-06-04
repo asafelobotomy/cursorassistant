@@ -1,24 +1,62 @@
 # Installing cursorAssistant
 
-## Into another project (Cursor)
+**Individual setup (recommended):** [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md)
 
-1. Clone or copy this repository anywhere on disk.
-2. From the consumer project root:
+## Quick start (Cursor Marketplace)
+
+1. **Add to Cursor** — install **cursor-assistant** from [Cursor Marketplace](https://cursor.com/marketplace). This downloads the full plugin (agents, skills, rules, commands, lifecycle CLI source under `~/.cursor/plugins/…`).
+2. Open **your project** in Cursor.
+3. Customize and install into the repo:
+
+   ```sh
+   python3 cursorAssistant.py configure --workspace .
+   ```
+
+   Or in chat: **`/cursor-assistant:setup-workspace`**.
+
+4. **Developer: Reload Window** once.
+5. If you enabled MCP extensions in the interview: **Settings → Features → MCP** → enable **cursorTools**.
+
+Saved choices live in `.cursor/cursor-assistant-answers.json`. Managed surfaces and `.cursor/cursorAssistant-lock.json` are written into the project.
+
+## Update this project
 
 ```sh
-python3 /path/to/cursorassistant/cursorAssistant.py setup \
-  --workspace . \
-  --package-root /path/to/cursorassistant \
-  --json
+python3 cursorAssistant.py update --workspace .
 ```
 
-3. Open the project in **Cursor**. Reload the window if rules or MCP do not appear.
-4. Confirm:
-   - `AGENTS.md` at the repo root
-   - `.cursor/agents/`, `.cursor/skills/`, `.cursor/rules/`
-   - `.cursor/cursorAssistant-lock.json`
+Or ask the Agent to **update cursorAssistant** (**cursorLifecycle** / cursorTools MCP when enabled).
 
-To preserve custom routing in `AGENTS.md` across updates, wrap additions in:
+`--package-root` is optional after the first install (lockfile and plugin discovery).
+
+## Clone instead of Marketplace
+
+```sh
+git clone https://github.com/asafelobotomy/cursorassistant.git
+cd your-project
+bash /path/to/cursorassistant/scripts/cursor-assistant-init.sh .
+```
+
+## Non-interactive setup
+
+```sh
+python3 cursorAssistant.py configure --workspace . \
+  --answers .cursor/cursor-assistant-answers.json --yes --json
+```
+
+Example answers file:
+
+```json
+{
+  "profile.selected": "balanced",
+  "packs.selected": [],
+  "mcp.enabled": false
+}
+```
+
+## Preserve custom routing
+
+Wrap custom sections in `AGENTS.md`:
 
 ```markdown
 <!-- user-added -->
@@ -27,92 +65,38 @@ To preserve custom routing in `AGENTS.md` across updates, wrap additions in:
 <!-- /user-added -->
 ```
 
-Custom MCP servers in `.cursor/mcp.json` are merged with the package template on update.
+Custom MCP servers in `.cursor/mcp.json` are merged on update.
 
-## Update after pulling a new cursorAssistant release
+## Repair and reset
 
-```sh
-python3 /path/to/cursorassistant/cursorAssistant.py update \
-  --workspace . \
-  --package-root /path/to/cursorassistant \
-  --json
-```
+| Situation | Command |
+| --- | --- |
+| Drift / incomplete install | `python3 cursorAssistant.py repair --workspace . --json` |
+| Full managed-surface reset | `factory-restore` (destructive; confirm first) |
 
-If the lockfile is malformed or files are missing, use `repair`. For a full reset of managed surfaces, use `factory-restore` (destructive).
-
-Non-interactive setup with interview answers:
-
-```sh
-python3 /path/to/cursorassistant/cursorAssistant.py setup \
-  --workspace . \
-  --package-root /path/to/cursorassistant \
-  --answers /path/to/answers.json \
-  --json
-```
-
-## Install into this package repo (dogfooding)
+## Dogfood (this repository)
 
 ```sh
 cd /path/to/cursorassistant
 bash scripts/dogfood.sh
 ```
 
-This writes `.cursor/*` into the package tree for local development (MCP bundle off; `cursorTools` only). Commit the resulting snapshot so the package repo uses the same surfaces as consumers.
+Full stack (extensions + all packs): `bash scripts/dogfood-full.sh`
 
-Full stack locally (extensions + all packs):
+## Interview fields
 
-```sh
-bash scripts/dogfood-full.sh
-```
+| Field | Meaning |
+| --- | --- |
+| `profile.selected` | `balanced` or `lean` |
+| `packs.selected` | `lean`, `secure`, `tdd` (optional) |
+| `mcp.enabled` | Optional devDocs + memory MCP (default `false`) |
 
-See [docs/HOOKS.md](docs/HOOKS.md) for optional user-owned Cursor hooks (not installed by lifecycle).
+## Team / git (optional)
 
-## MCP scripts
+Teams may commit `.cursor/`, `AGENTS.md`, and the lockfile so everyone shares the same install. That is optional; the primary path is Marketplace + per-developer **configure**.
 
-v0.10+ always installs **cursorTools** (`mcp-core`). Optional **extensions** (devDocs, memory) require `mcp.enabled: true`. Pack MCP (secure, tdd, lean) installs when you select that pack. **git**, **web**, **filesystem**, and **time** servers are deprecated — use Shell/`gh`, the **commit** subagent, and Cursor Agent tools. See [docs/MCP_LAYOUT.md](docs/MCP_LAYOUT.md).
+## See also
 
-Enable extensions:
-
-```json
-{ "mcp.enabled": true }
-```
-
-Do not add a custom subagent named `explore` — it shadows Cursor's built-in Explore subagent. Use **`inventory`** for structured read-only maps.
-
-List eval suites:
-
-```sh
-python3 tools/cursorEval/cursorEval.py list --repo-root .
-python3 tools/cursorEval/cursorEval.py validate --repo-root .
-python3 tools/cursorEval/cursorEval.py coverage --repo-root .
-```
-
-Run evals (requires a Models API token):
-
-```sh
-python3 tools/cursorEval/cursorEval.py run evals/lifecycleAudit/eval.yaml --repo-root .
-```
-
-Use **`GITHUB_MODELS_TOKEN`** in your shell (not `GITHUB_TOKEN`). For CI, add **`GITHUB_MODELS_TOKEN`** as a repository secret to enable the **eval-models-pr** job (3-task routing smoke on pull requests). Negative routing tasks in full eval suites may occasionally fail on live Models runs — re-run or use `workflow_dispatch` **eval-models** for a deeper check.
-
-Optional manual verification:
-
-```sh
-python3 scripts/check_dogfood_install.py
-``` Exporting `GITHUB_TOKEN` overrides `gh` and `git push` with that value. Store the Models token in GNOME Keyring as `service=github-models` and load it in `~/.bashrc` as `GITHUB_MODELS_TOKEN` (see this repo’s INSTALL notes or your local shell config).
-
-## Packs and profiles
-
-Setup interview supports:
-
-- **Profiles:** `balanced` (default), `lean` (auto-selects lean pack)
-- **Packs:** `lean`, `secure`, `tdd` (multi-select via `--answers`)
-
-Example answers file:
-
-```json
-{
-  "profile.selected": "balanced",
-  "packs.selected": ["secure", "tdd"]
-}
-```
+- [README.md](README.md)
+- [docs/PUBLISH.md](docs/PUBLISH.md)
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)

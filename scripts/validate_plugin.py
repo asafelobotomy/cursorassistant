@@ -31,7 +31,7 @@ def main() -> int:
     if plugin.get("version") != version:
         errors.append(f"plugin version {plugin.get('version')!r} != VERSION {version!r}")
 
-    for key in ("agents", "skills", "rules"):
+    for key in ("agents", "skills", "rules", "commands"):
         value = plugin.get(key)
         if value is None:
             continue

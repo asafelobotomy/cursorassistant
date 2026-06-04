@@ -23,15 +23,18 @@ Coordinate **cursorAssistant** lifecycle operations. Do not edit managed files u
 Use `cursorAssistant.py` as the single entrypoint:
 
 ```sh
-python3 cursorAssistant.py inspect --workspace <workspace> --package-root <package-root> --json
-python3 cursorAssistant.py plan-setup --workspace <workspace> --package-root <package-root> --json
-python3 cursorAssistant.py setup --workspace <workspace> --package-root <package-root> --json
-python3 cursorAssistant.py update --workspace <workspace> --package-root <package-root> --json
-python3 cursorAssistant.py repair --workspace <workspace> --package-root <package-root> --json
-python3 cursorAssistant.py factory-restore --workspace <workspace> --package-root <package-root> --json
+python3 cursorAssistant.py inspect --workspace <workspace> --json
+python3 cursorAssistant.py configure --workspace <workspace> --json
+python3 cursorAssistant.py plan-setup --workspace <workspace> --json
+python3 cursorAssistant.py setup --workspace <workspace> --json
+python3 cursorAssistant.py update --workspace <workspace> --json
+python3 cursorAssistant.py repair --workspace <workspace> --json
+python3 cursorAssistant.py factory-restore --workspace <workspace> --json
 ```
 
-Resolve `<package-root>` to the cursorAssistant git checkout or release extract. Resolve `<workspace>` to the consumer project root.
+Omit `--package-root` when possible (plugin install under `~/.cursor/plugins`, lockfile, or `CURSOR_ASSISTANT_PACKAGE_ROOT`). Resolve `<workspace>` to the consumer project root.
+
+For first-time **individual** setup, prefer **`configure`** (interview + install) or the **cursorAssistantSetup** skill / `/cursor-assistant:setup-workspace` command.
 
 Prefer **cursorTools** MCP (`lifecycle_*` tools) when MCP is enabled; fall back to the CLI above.
 
@@ -62,10 +65,15 @@ Prefer **cursorTools** MCP (`lifecycle_*` tools) when MCP is enabled; fall back 
 
 ## Cold start
 
-If this subagent is not yet installed, the user needs a one-time install from the cursorAssistant package:
+If this subagent is not yet installed in the project:
+
+1. User adds **cursor-assistant** from Cursor Marketplace (downloads the full plugin bundle).
+2. Run once in the project:
 
 ```sh
-python3 cursorAssistant.py setup --workspace . --package-root /path/to/cursorassistant
+python3 cursorAssistant.py configure --workspace .
 ```
+
+Or: `/cursor-assistant:setup-workspace` in chat (see **cursorAssistantSetup** skill).
 
 After install, `.cursor/agents/cursorLifecycle.md` is available for Task delegation.

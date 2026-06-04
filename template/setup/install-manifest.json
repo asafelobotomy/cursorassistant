@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.11.0",
+  "packageVersion": "0.12.0",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -25,7 +25,7 @@
       "target": ".cursor/agents/cursorLifecycle.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:58b233ebcf7c5702addbfcfcb8bca3f30ee6d82371e04c11f7e0705cd7b47dec"
+      "hash": "sha256:5b8170f07e4fdc27c299eeda4f2f4ae2b634eb77b130f465cc616918c0318cfe"
     },
     {
       "id": "agents.debugger",
@@ -105,7 +105,16 @@
       "target": ".cursor/mcp/scripts/_cursor_mcp_util.py",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:1de2065f66362bd9f8597225735c9b5826fe6eaf1980e35508b2e838408ac30a",
+      "hash": "sha256:87cccac996ef2743370bf1b80152bb7ddb00be56170bb8938876719cce03a05b",
+      "requiredWhen": []
+    },
+    {
+      "id": "mcp.shared._cursor_package_root",
+      "source": "mcp/scripts/_cursor_package_root.py",
+      "target": ".cursor/mcp/scripts/_cursor_package_root.py",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:b83ba9c2e05737675e5b6f6127882c28c4de99fb98336a71db441d28b3e733b1",
       "requiredWhen": []
     },
     {
@@ -114,7 +123,7 @@
       "target": ".cursor/mcp/scripts/_cursor_workspace.py",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:92b3fdf6b027364923bbd54e0135f9f794cf7c06c508a880b3d08d8b19d94874",
+      "hash": "sha256:45413ed98c7a17da96c6fbd755e083bd97e0462bb4ec6e9ce3ab5cd0191d6952",
       "requiredWhen": []
     },
     {
@@ -145,7 +154,7 @@
       "target": ".cursor/mcp/scripts/cursorToolsMcp.py",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:cdceddb0817dbe7e6d5de78f0920c7d2f74c4dff3c462d527d4067bcfb7cc03d",
+      "hash": "sha256:7eec91f0a457d4b28a6828039151692e9caf7febe518810fe61f4639d26a11e6",
       "requiredWhen": []
     },
     {
@@ -244,7 +253,7 @@
       "target": ".cursor/rules/lifecycle.mdc",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:a7b60f7ef70d79652b469b91e8d7f473bb33afb5f94654d47c6087b2df2a5b55"
+      "hash": "sha256:e10a8393e1ebec730727d9d779a1f793f108d6f6fcd5b3335ef78addd4d0e477"
     },
     {
       "id": "skills.ciPreflight",
@@ -328,7 +337,7 @@
       "target": ".cursor/skills/lifecycleAudit/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:1a9e94f71786bbdf66107015cb655ef17137fc2e5359c6d5d185793a1060cea7"
+      "hash": "sha256:b16dd91fd3626b28a270dbd71aec25aed30d38db6d9634aee744df773079498a"
     },
     {
       "id": "packs.secure.secretScanning",

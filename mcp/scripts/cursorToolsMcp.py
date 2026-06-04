@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from mcp.server.fastmcp import FastMCP
 
 from _cursor_mcp_util import build_tool_result, tail_text
+from _cursor_package_root import find_package_root as discover_package_root
 from _cursor_workspace import discover_workspace_root, read_lockfile
 
 WORKSPACE_ROOT = discover_workspace_root(Path(__file__))
@@ -26,6 +27,9 @@ def resolve_package_root(package_root: str | None) -> tuple[Path | None, str | N
         if not root.is_dir():
             return None, f"packageRoot is not a directory: {package_root}"
         return root, None
+    discovered = discover_package_root(WORKSPACE_ROOT)
+    if discovered is not None:
+        return discovered, None
     lock = read_lockfile(WORKSPACE_ROOT)
     package_block = lock.get("package") if isinstance(lock, dict) else None
     if isinstance(package_block, dict):
@@ -35,7 +39,11 @@ def resolve_package_root(package_root: str | None) -> tuple[Path | None, str | N
             root = (WORKSPACE_ROOT / raw).resolve() if not raw.is_absolute() else raw.resolve()
             if root.is_dir():
                 return root, None
-    return None, "Provide packageRoot or install cursorAssistant so the lockfile records package.packageRoot."
+    return (
+        None,
+        "Install the cursor-assistant plugin, clone cursorAssistant, or pass packageRoot. "
+        "After the first project setup, packageRoot is stored in the lockfile.",
+    )
 
 
 def resolve_answers_path(answers_path: str | None) -> tuple[Path | None, dict | None]:

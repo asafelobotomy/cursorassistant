@@ -1,16 +1,19 @@
 {
   "name": "cursor-assistant",
   "displayName": "cursorAssistant",
-  "description": "Lifecycle-managed Cursor agents, skills, rules, and MCP tools for any workspace.",
-  "version": "0.11.0",
+  "description": "One-click Cursor agents and skills; run setup-workspace to customize and install into your project.",
+  "version": "0.12.0",
   "author": {
     "name": "cursorAssistant contributors"
   },
   "license": "MIT",
-  "keywords": ["cursor", "agents", "skills", "mcp", "lifecycle"],
+  "keywords": ["cursor", "agents", "skills", "mcp", "lifecycle", "setup"],
   "category": "developer-tools",
+  "homepage": "https://github.com/asafelobotomy/cursorassistant#individual-setup",
+  "repository": "https://github.com/asafelobotomy/cursorassistant",
   "agents": "agents",
   "skills": ["skills", "packs/lean/skills", "packs/secure/skills", "packs/tdd/skills"],
+  "commands": "commands",
   "rules": "template/rules",
   "mcpServers": "template/cursor/mcp-core.json"
 }

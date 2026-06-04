@@ -20,8 +20,8 @@ Read-only check of cursorAssistant install state before mutating managed surface
 ## Command
 
 ```sh
-python3 cursorAssistant.py inspect --workspace . --package-root <cursorAssistant-root> --json
-python3 cursorAssistant.py plan-setup --workspace . --package-root <cursorAssistant-root> --json
+python3 cursorAssistant.py inspect --workspace . --json
+python3 cursorAssistant.py plan-setup --workspace . --json
 ```
 
 ## Interpretation

@@ -7,7 +7,11 @@ from pathlib import Path
 from scripts.lifecycle.mcp_config import DEPRECATED_SCRIPT_NAMES
 from scripts.lifecycle.models import ManagedEntry
 
-SHARED_MODULES = ("_cursor_workspace.py", "_cursor_mcp_util.py")
+SHARED_MODULES = (
+    "_cursor_workspace.py",
+    "_cursor_mcp_util.py",
+    "_cursor_package_root.py",
+)
 ALWAYS_INSTALL = frozenset({"cursorToolsMcp.py"})
 EXTENSION_SCRIPTS = frozenset({"devDocsMcp.py", "memoryMcp.py"})
 BUNDLE_HELPERS = frozenset({"_memory_mcp_shared.py", "_workspace_testing_shared.py"})

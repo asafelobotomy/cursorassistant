@@ -20,36 +20,23 @@ cursorAssistant installs and maintains **managed installs**, **lockfile drift de
 - Python 3.10+
 - [Cursor](https://cursor.com/) (stdlib-only lifecycle core; MCP scripts need `uvx` + `mcp[cli]` when enabled)
 
-## Quick install
+## Quick install (individual)
 
-From the **cursorAssistant** package root, install into a consumer workspace:
+1. **Add to Cursor** — install the **cursor-assistant** plugin from [Cursor Marketplace](https://cursor.com/marketplace).
+2. Open your project and run:
 
 ```sh
-python3 cursorAssistant.py setup --workspace /path/to/your-project --package-root .
+python3 cursorAssistant.py configure --workspace .
 ```
 
-Inspect state:
+Or in chat: **`/cursor-assistant:setup-workspace`**. See [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md).
+
+`--package-root` is optional (plugin install, lockfile, or clone). After setup:
 
 ```sh
-python3 cursorAssistant.py inspect --workspace /path/to/your-project --package-root . --json
-```
-
-Update stale managed files:
-
-```sh
-python3 cursorAssistant.py update --workspace /path/to/your-project --package-root . --json
-```
-
-Repair lockfile drift or incomplete installs:
-
-```sh
-python3 cursorAssistant.py repair --workspace /path/to/your-project --package-root . --json
-```
-
-Plan without writing:
-
-```sh
-python3 cursorAssistant.py plan-setup --workspace /path/to/your-project --package-root . --json
+python3 cursorAssistant.py inspect --workspace . --json
+python3 cursorAssistant.py update --workspace . --json
+python3 cursorAssistant.py repair --workspace . --json
 ```
 
 ## Key Commands
@@ -71,7 +58,7 @@ python3 cursorAssistant.py plan-setup --workspace /path/to/your-project --packag
 3. Invoke subagents via **Task** or `/name` (e.g. `/inventory`, `/cursorLifecycle`). Use Cursor's built-in **Explore** for broad codebase search — do not add a custom agent named `explore`.
 4. Enable MCP servers in **Cursor Settings → MCP** (or trust the project `.cursor/mcp.json`).
 
-Ask the main Agent: **Set up cursorAssistant in this workspace** — it should run `cursorAssistant.py setup` with the correct `--package-root`.
+Ask the main Agent: **Set up cursorAssistant in this workspace** — it should run `cursorAssistant.py configure` (or use **cursorAssistantSetup** / **cursorLifecycle**).
 
 ## Documentation
 
@@ -84,6 +71,7 @@ Ask the main Agent: **Set up cursorAssistant in this workspace** — it should r
 | [docs/MCP_MAINTENANCE.md](docs/MCP_MAINTENANCE.md) | MCP scripts and vendoring |
 | [docs/HOOKS.md](docs/HOOKS.md) | Optional user-owned hooks |
 | [docs/PUBLISH.md](docs/PUBLISH.md) | Cursor Marketplace |
+| [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md) | Install/update UX for Cursor app |
 
 ## Shared MCP library
 

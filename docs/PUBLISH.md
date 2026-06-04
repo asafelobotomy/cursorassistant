@@ -22,11 +22,10 @@ python3 tools/cursorEval/cursorEval.py --repo-root . coverage
 - `name` is kebab-case (`cursor-assistant`)
 - Component paths (`agents`, `skills`, `rules`, `mcpServers`) must exist in this repo
 
-The marketplace manifest lists **core** `agents/`, `skills/`, `template/rules/`, and `mcp-core.json` only. **Packs** (lean, secure, tdd) and **MCP extensions** (devDocs, memory) are installed via the lifecycle CLI:
+The marketplace plugin ships the **full repository** as the plugin bundle (agents, skills, commands, rules, lifecycle CLI). **Selective packs and MCP extensions** are chosen at **project setup**:
 
 ```sh
-python3 cursorAssistant.py setup --workspace . --package-root . \
-  --answers '{"mcp.enabled": true, "packs.selected": ["secure"]}'
+python3 cursorAssistant.py configure --workspace .
 ```
 
 Dogfood in this repo: `scripts/dogfood.sh` (lean) vs `scripts/dogfood-full.sh` (extensions + all packs).
@@ -38,12 +37,6 @@ Dogfood in this repo: `scripts/dogfood.sh` (lean) vs `scripts/dogfood-full.sh` (
 3. Provide description, category, and keywords from `plugin.json`
 4. Respond to reviewer feedback on agent/skill frontmatter and MCP safety
 
-## Consumer install (non-marketplace)
+## Consumer install
 
-Users can still install via lifecycle CLI:
-
-```sh
-python3 cursorAssistant.py setup --workspace . --package-root /path/to/cursorassistant
-```
-
-Marketplace distribution is optional; the lifecycle engine remains the source of truth for versioned installs.
+Primary path: Marketplace plugin + `configure` in each project. Clone path: `scripts/cursor-assistant-init.sh`. The lifecycle engine writes the project lockfile and managed `.cursor/` surfaces.

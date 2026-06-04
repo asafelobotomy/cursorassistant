@@ -101,7 +101,7 @@
 
 ## v0.11 (current) — Cursor-only product
 
-- [x] Remove xanadAssistant coupling (docs, sync script, XANAD profile, comparison doc)
+- [x] Remove legacy external-tool coupling (comparison doc, sync script, dual IDE profiles)
 - [x] `cursor-mcp-shared` Cursor-only workspace discovery
 - [x] [MCP_MAINTENANCE.md](MCP_MAINTENANCE.md) replaces external sync guide
 
