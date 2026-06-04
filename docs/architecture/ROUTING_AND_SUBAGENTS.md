@@ -131,8 +131,7 @@ Task `model` can override per invocation; roster agents default to `inherit`.
 | Skill | Auto-invoke | Scope |
 | --- | --- | --- |
 | `workspaceSearch`, `ciPreflight`, `testing` | yes (default) | `paths` where listed |
-| `depSearch` | optional | broad |
-| `task-triage`, `lifecycleAudit`, `surfaceReview`, `cursorAssistantSetup` | **no** (`disable-model-invocation`) | slash `/name` |
+| `depSearch`, `task-triage`, `lifecycleAudit`, `surfaceReview`, `cursorAssistantSetup` | **no** (`disable-model-invocation`) | slash `/name`; `paths` where listed |
 
 ## Verification
 

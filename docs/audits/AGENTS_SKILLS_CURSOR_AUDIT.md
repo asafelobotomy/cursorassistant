@@ -1,104 +1,70 @@
 # Agents & skills audit (Cursor optimization)
 
-> **Snapshot (2026-06-03).** Several follow-ups are done since this audit (e.g. `cursorAssistantSetup` eval, **`surfaceReview`** skill, 8 core skills). For **current** routing and roster, use [ROUTING_AND_SUBAGENTS.md](../architecture/ROUTING_AND_SUBAGENTS.md).
+> **Updated 2026-06-04 (v0.13.0).** For live roster and delegation, use [ROUTING_AND_SUBAGENTS.md](../architecture/ROUTING_AND_SUBAGENTS.md) and root `AGENTS.md`.
 
-Audit date: 2026-06-03. Scope: core `agents/`, `skills/`, `AGENTS.md`, install policy, plugin bundle, evals.
-
-**Routing deep-dive:** [ROUTING_AND_SUBAGENTS.md](../architecture/ROUTING_AND_SUBAGENTS.md) (description-driven delegation, conflict matrix, eval hardening).
+Audit scope: core `agents/`, `skills/`, `AGENTS.md`, install policy, plugin bundle, evals.
 
 ## Summary
 
 | Area | Status |
 | --- | --- |
-| Built-in vs custom subagents | **Good** — no custom `explore`; built-in Explore/Bash/Browser documented |
-| Cursor-native tools in agents/skills | **Good** — Read, Grep, Glob, SemanticSearch, Shell, WebSearch |
-| Deprecated MCP (`filesystem`, `web`, `git`, `time`) | **Fixed** — `docs` agent no longer recommends filesystem |
-| First-time setup routing | **Fixed** — `cursorAssistantSetup` in install policy + `AGENTS.md`; lifecycle triggers use `configure` |
-| Read-only specialists | **Good** — `inventory`, `review`, `debugger`, `planner`, `researcher` use `readonly: true` |
-| Eval coverage | **Good** — 11 agents + 6 core skills; no eval for `cursorAssistantSetup` (optional) |
+| Built-in vs custom subagents | **Good** — no custom `explore`; Explore/Bash/Browser documented |
+| Cursor-native tools | **Good** — Read, Grep, Glob, SemanticSearch, Shell, WebSearch |
+| Deprecated MCP | **Good** — `web`, `filesystem`, `time`, `git` stripped on update |
+| First-time setup | **Good** — `cursorAssistantSetup` in policy + evals |
+| Read-only specialists | **Good** — `inventory`, `review`, `debugger`, `planner`, `researcher` |
+| Eval coverage | **Good** — 11 agents + 8 core skills; `coverage --strict` 31/31 full |
+| Performance scoping | **Good** — 3 auto-invoke skills; 5 slash-only (incl. `depSearch`) |
 
-## Built-in Cursor surfaces (do not shadow)
+## Core skills (8)
 
-| Cursor provides | Use for |
-| --- | --- |
-| **Explore** | Broad parallel codebase search |
-| **Bash** | Long/noisy shell isolated from main context |
-| **Browser** | DOM / web automation |
-| **Task** | Invoke roster subagents by name |
+| Skill | Installed | Scoping |
+| --- | --- | --- |
+| `task-triage` | Yes | slash-only |
+| `workspaceSearch` | Yes | auto-invoke |
+| `ciPreflight` | Yes | auto-invoke + `paths` |
+| `depSearch` | Yes | slash-only (v0.13.0+) |
+| `testing` | Yes | auto-invoke |
+| `lifecycleAudit` | Yes | slash-only + `paths` |
+| `surfaceReview` | Yes | slash-only + `paths`; `references/modules.md` |
+| `cursorAssistantSetup` | Yes | slash-only + `paths` |
 
-cursorAssistant intentionally does **not** ship a custom `explore` agent (would shadow the built-in).
+User-scope: `/cursor-assistant:setup-workspace` (plugin command).
 
 ## Core subagents (11)
 
-| Agent | Cursor fit | Notes |
-| --- | --- | --- |
-| `cursorLifecycle` | Strong | CLI + cursorTools MCP; `configure` for cold start; delegates to lifecycleAudit |
-| `inventory` | Strong | Read-only; explicit Explore vs inventory split; workspaceSearch |
-| `review` | Strong | `readonly: true`; task-triage gate; **Tools** section added |
-| `commit` | Strong | Shell / `gh`; user git-safety rules apply in main Agent |
-| `deps` | Strong | Shell audits; secure pack MCP gated on lockfile |
-| `docs` | Fixed | Was filesystem MCP → Read/Grep/Glob |
-| `debugger` | Strong | `readonly: true`; **Tools** + **Delegation** sections added |
-| `planner` | Strong | Read-only plans with verification steps |
-| `researcher` | Strong | WebSearch/WebFetch; read-only |
-| `organise` | Strong | Mutating by design; inventory/docs delegation |
-| `cleaner` | Strong | Approval gates; delegates commit/docs |
-
-**Invoke consistency:** All roster entries should list `/name` **or Task** — `deps` row in `AGENTS.md` was aligned.
-
-## Core skills (7)
-
-| Skill | Cursor fit | Installed to project via policy |
-| --- | --- | --- |
-| `task-triage` | Strong | Yes |
-| `workspaceSearch` | Strong | Yes |
-| `ciPreflight` | Strong | Yes |
-| `depSearch` | Yes | Yes |
-| `testing` | Strong | Yes |
-| `lifecycleAudit` | Strong | Yes — now mentions `configure` |
-| `cursorAssistantSetup` | Strong | **Yes (added)** — was in catalog only |
-
-**User-scope only:** `/cursor-assistant:setup-workspace` from `.cursor-plugin/plugin.json` (`commands/setup-workspace.md`). Requires plugin symlink or marketplace install; complements project skill after bootstrap.
-
-## Pack skills (optional)
-
-Installed when user selects `lean`, `secure`, or `tdd` in interview. Patterns:
-
-- Reference-type skills with OWASP/TDD content — appropriate for `/skill` invocation
-- Cross-references (e.g. `secureReview` → `devopsReview`) assume pack presence — OK when pack selected
-- Pack MCP tools (`security`, `workspaceTesting`) correctly gated in agent text
-
-No pack skill changes required for this audit.
-
-## Install & routing gaps fixed
-
-1. **`cursorAssistantSetup`** added to `template/setup/install-policy.json` so `setup`/`configure` copies it to `.cursor/skills/`.
-2. **`AGENTS.md`** — skill table, first-time routing row, lifecycle phrase → setup skill / `configure`.
-3. **`cursorLifecycle`** trigger: not-installed → `configure` not bare `setup`.
-4. **`docs.md`** — deprecated filesystem MCP removed.
-
-## Evals (`evals/`)
-
-| Covered | Missing (low priority) |
+| Agent | Notes |
 | --- | --- |
-| All 11 agents (positive/negative triggers) | `cursorAssistantSetup` skill |
-| Core skills except setup skill | Pack-only skills (by design) |
-| `models-smoke` routing smoke | |
+| `cursorLifecycle` | CLI + cursorTools MCP; `configure` for cold start |
+| `inventory` | Read-only; Explore vs inventory split |
+| `review` | `readonly`, `is_background` |
+| `commit` | Shell/`gh`; surfaceReview before managed commits |
+| `deps` | Mutating packages with confirmation |
+| `docs` | Repo documentation |
+| `debugger` | Read-only RCA |
+| `planner` | Read-only plans |
+| `researcher` | Read-only, `is_background` |
+| `organise` | Moves and import repair |
+| `cleaner` | Hygiene with approval |
 
-Evals validate **routing phrases**, not runtime tool execution — appropriate for static CI.
+## Evals
 
-## Recommendations (not implemented)
-
-| Item | Rationale |
+| Covered | Detail |
 | --- | --- |
-| ~~Add `evals/cursorAssistantSetup/`~~ | Done — positive/negative setup routing tasks |
-| `cursorAssistantSetup` — prefer bootstrap script over `curl\|bash` in skill | Align with INSTALL_SECURITY_AUDIT (doc-only) |
-| Periodic sync check: `agents/` vs `.cursor/agents/` | Dogfood drift; run `update` after package edits |
+| All 11 agents | positive-trigger-1/2, negative-trigger-1 |
+| All 8 core skills | incl. `cursorAssistantSetup`, `surfaceReview` guardrails |
+| Conflict routing | `evals/models-smoke` |
+| Pack skills | 12 skills, 3 tasks each (strict coverage) |
+
+Evals test **routing phrases**, not runtime tool execution — appropriate for CI.
 
 ## Verification
 
 ```sh
-python3 scripts/generate.py
-python3 -m pytest tests/test_engine.py tests/test_cursor_eval.py -q
-python3 scripts/validate_plugin.py
+python3 scripts/check_package_sync.py
+python3 tools/cursorEval/cursorEval.py validate
+python3 tools/cursorEval/cursorEval.py coverage --strict
+bash scripts/ci_check_surfaces.sh
 ```
+
+See [FULL_AUDIT_2026-06-04.md](FULL_AUDIT_2026-06-04.md) for the complete v0.13 audit snapshot.

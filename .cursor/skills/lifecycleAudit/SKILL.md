@@ -44,3 +44,9 @@ python3 cursorAssistant.py plan-setup --workspace . --json
 - Do not edit `.cursor/agents`, `.cursor/skills`, `.cursor/rules`, or `.cursor/mcp.json` directly when `setup`/`update`/`repair` can apply the change.
 - After audit, route install work to **cursorLifecycle** or run lifecycle commands with user confirmation.
 - Use `factory-restore` only when the user explicitly wants a full managed-surface reset.
+
+## Verify
+
+- [ ] `inspect` JSON reviewed (`installState`, stale/missing managed files)
+- [ ] `plan-setup` run when proposing install or pack changes
+- [ ] No hand-edits to managed `.cursor/` when lifecycle can apply the change

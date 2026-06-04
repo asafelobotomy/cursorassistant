@@ -1,8 +1,9 @@
 ---
 name: depSearch
 description: "Use when: discovering package manifests, assessing dependency health, finding replacements, or confirming import usage before removal — discovery only; mutating installs are handled by the deps agent."
-version: "1.1"
+version: "1.2"
 license: MIT
+disable-model-invocation: true
 ---
 
 # Dep Search (Cursor)

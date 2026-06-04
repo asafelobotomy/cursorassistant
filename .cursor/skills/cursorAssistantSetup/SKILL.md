@@ -72,3 +72,10 @@ Omit `--package-root` when possible (lockfile, `~/.local/share/cursorassistant`,
 
 - Do not hand-edit managed `.cursor/` files when lifecycle can apply the change.
 - Global install alone does not replace **configure** for the project lockfile and selective packs.
+
+## Verify
+
+- [ ] `inspect` shows expected `installState` after setup
+- [ ] Interview answers captured (`configure` or `--answers` file)
+- [ ] Managed `.cursor/` files present; lockfile written
+- [ ] User confirmed pack/MCP choices before `setup`

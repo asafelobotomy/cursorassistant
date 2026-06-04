@@ -9,7 +9,7 @@ Efficiency priorities: minimize auto-loaded context, freeze roster size, measure
 | `core.mdc` | ≤ 400 tokens, always-on |
 | `AGENTS.md` | ≤ 1,400 tokens |
 | Core skill body | ≤ 800 tokens (or `references/` + slash-only) |
-| Auto-invokable core skills | ≤ 3 (`workspaceSearch`, `ciPreflight`, `testing`; optional `depSearch`) |
+| Auto-invokable core skills | ≤ 3 (`workspaceSearch`, `ciPreflight`, `testing` only; `depSearch` slash-only) |
 | Core agents | 11 (frozen) |
 
 ## Phases (highest ROI first)

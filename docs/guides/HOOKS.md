@@ -2,6 +2,8 @@
 
 cursorAssistant does not install hooks by default. Use Cursor **hooks** when you want deterministic automation around agent events (for example format-on-save after an edit, or a pre-commit reminder).
 
+See also: [CURSOR_AUTOMATIONS.md](CURSOR_AUTOMATIONS.md) (automations vs hooks, package template path).
+
 ## When to add hooks
 
 - Repeatable guardrails that should run without relying on the model (lint, secret scan, test smoke)
@@ -14,7 +16,7 @@ cursorAssistant does not install hooks by default. Use Cursor **hooks** when you
 
 ## Template
 
-Create `.cursor/hooks.json` in the consumer workspace (not managed by cursorAssistant core install):
+Package example: `template/hooks/hooks.json.example` (copy into the consumer workspace). Or create `.cursor/hooks.json` manually (not managed by core install):
 
 ```json
 {

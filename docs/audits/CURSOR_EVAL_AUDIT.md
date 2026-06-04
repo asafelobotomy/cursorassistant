@@ -1,6 +1,6 @@
 # cursorEval audit — lineage, gaps, and improvements
 
-Audit date: 2026-06-04. Compares **cursorAssistant** `tools/cursorEval/` with **xanadAssistant** `tools/xanadEval/`, **microsoft/waza**, and the **Chat Customizations Evaluations** VS Code extension.
+Audit date: 2026-06-04 (refreshed post–v0.13.0). Post-remediation snapshot: [FULL_AUDIT_2026-06-04.md](FULL_AUDIT_2026-06-04.md). Compares **cursorAssistant** `tools/cursorEval/` with **xanadAssistant** `tools/xanadEval/`, **microsoft/waza**, and the **Chat Customizations Evaluations** VS Code extension.
 
 Local xanad sources: `/home/solon/Documents/git/repos/old.git/xanadassistant/` (including `docs/plans/xanadeval-waza-gap-review.md`).
 
@@ -87,7 +87,7 @@ flowchart LR
 | --- | --- |
 | **CI static gate** | `validate`, `coverage`, `policy`, `check` on all core/pack skills and agents (`scripts/ci_check_surfaces.sh`, `.github/workflows/ci.yml`). |
 | **Cursor alignment** | `policy` bans legacy VS Code/Copilot tool identifiers; steers authors to Read/Grep/SemanticSearch/Shell. |
-| **Routing evals** | Per-agent `evals/<name>/` with positive/negative tasks; `models-smoke` conflict cases; `cursorAssistantSetup` suite (v0.12.1+). |
+| **Routing evals** | Per-agent `evals/<name>/` with positive/negative + `positive-trigger-2` on all 11 agents; `models-smoke` conflicts; 8 core skill suites (v0.13.0+). |
 | **Live smoke** | `scripts/eval_models_pr_smoke.sh`, `scripts/eval_routing_live.sh`; skips on missing token or 401. |
 | **Dogfood layout** | Discovers `evals/*` and `packs/*/evals/*`; resolves skill vs agent surface for `run` system prompt. |
 | **Tests** | `tests/test_cursor_eval.py` — list, validate, check, policy, coverage, dry-run, token env preference. |

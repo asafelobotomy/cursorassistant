@@ -70,3 +70,9 @@ See [references/parallel-scope.md](references/parallel-scope.md) for a template.
 | CI before push | **ciPreflight** skill |
 
 If two rows seem to fit, use the **Conflict resolution** table in `AGENTS.md`.
+
+## Verify
+
+- [ ] Output includes Tier, Scope, Approach, and Blockers
+- [ ] Compound/Complex parallel work has a scope ledger before multiple Task calls
+- [ ] Trivial/Simple work did not spawn unnecessary subagents

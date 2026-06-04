@@ -269,7 +269,7 @@
       "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:060825df02c5c68ce8d984b9abf6c7a536ad4e99634e863091f28e4a3c226a99"
+      "hash": "sha256:43777738c904a7e26d3191cb7c44d71e6c7afd02a347a188d34ab7ba9881fac7"
     },
     {
       "id": "skills.depSearch",
@@ -277,7 +277,7 @@
       "target": ".cursor/skills/depSearch/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:ed9256a0f1863b0b88b01b99be0ae306d806f6307c42a3b4e97724507025d263"
+      "hash": "sha256:a7fabf5d3de0d1826d1ab502f4191f29e317e3c61da4a681da3c3b70225ad783"
     },
     {
       "id": "packs.secure.dependencyAudit",
@@ -345,7 +345,7 @@
       "target": ".cursor/skills/lifecycleAudit/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:5234c0039cc0d6bf6c7d0fc288b6b62875bff7e94acce70a30517c02f553dd9a"
+      "hash": "sha256:8d436d36f37b5d77149705eaa88ef22ed191b1e8a8aec95bd2f1bdfaae760f4f"
     },
     {
       "id": "packs.secure.secretScanning",
@@ -393,7 +393,7 @@
       "target": ".cursor/skills/task-triage/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:aaf7607723a1b06bb475881d4a23891b10330092d41cfdb3f5639c8dc658a9ae"
+      "hash": "sha256:0236172a1baf170e3aab87aeecad5d119c77ced30c718dc7d4895ffe169486b9"
     },
     {
       "id": "skills.task-triage.references.parallel-scope",
@@ -457,7 +457,7 @@
       "target": ".cursor/skills/testing/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:f2a7e2b503638ff2615cf5edf26fb2a6dac8a9c8879dd39394d0de0fb1dabcd9"
+      "hash": "sha256:03b8baf7f9ac923102962002e333195edef4db1285a523a5813dfb2394128e2c"
     },
     {
       "id": "packs.secure.threatModel",
@@ -485,7 +485,7 @@
       "target": "AGENTS.md",
       "layer": "core",
       "strategy": "preserve-marked-markdown-blocks",
-      "hash": "sha256:00a87ab898e9a7df065ae8aec41f95b91b7f04380acd92718c8d8a197097824e"
+      "hash": "sha256:0a7302e9348c34e8fa171045d74afda80e84f3e74eec58b5e7286f57a37e9b92"
     }
   ]
 }

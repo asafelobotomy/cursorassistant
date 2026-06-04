@@ -1,0 +1,10 @@
+id: slash-only-negative
+description: "Generic feature work should not auto-invoke depSearch"
+prompt: |
+  Add a unit test for the login form validator in tests/test_login.py.
+expected_absent:
+  - "(?i)\\bdepSearch\\b"
+  - "(?i)query_osv"
+tags:
+  - routing
+  - performance

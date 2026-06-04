@@ -41,7 +41,8 @@ Dated reviews; cross-check against current tree before treating as authoritative
 
 | Doc | Date / scope |
 | --- | --- |
-| [audits/AGENTS_SKILLS_CURSOR_AUDIT.md](audits/AGENTS_SKILLS_CURSOR_AUDIT.md) | 2026-06-03 — agents/skills Cursor fit |
+| [audits/FULL_AUDIT_2026-06-04.md](audits/FULL_AUDIT_2026-06-04.md) | 2026-06-04 — v0.13.0 full audit + remediation |
+| [audits/AGENTS_SKILLS_CURSOR_AUDIT.md](audits/AGENTS_SKILLS_CURSOR_AUDIT.md) | 2026-06-04 — agents/skills Cursor fit (v0.13) |
 | [audits/CURSOR_EVAL_AUDIT.md](audits/CURSOR_EVAL_AUDIT.md) | cursorEval vs xanadEval / waza |
 | [audits/INSTALL_SECURITY_AUDIT.md](audits/INSTALL_SECURITY_AUDIT.md) | Install / deeplink / bootstrap threats |
 

@@ -1,111 +1,102 @@
 # Agent Routing (cursorAssistant)
 
-Canonical routing for Cursor subagents in this package and in consumer workspaces after install.
+Canonical routing for Cursor subagents. Design detail: [docs/architecture/ROUTING_AND_SUBAGENTS.md](docs/architecture/ROUTING_AND_SUBAGENTS.md).
 
-Full design notes: [docs/architecture/ROUTING_AND_SUBAGENTS.md](docs/architecture/ROUTING_AND_SUBAGENTS.md).
+**Layers:** agent `description` (auto Task) → this file → `core.mdc` → skills (`/name`). Use explicit `/name` or **Task** when mis-routing wastes context; skip subagents when `/task-triage` is Trivial or Simple.
 
-## How routing works in Cursor
+## Built-ins
 
-1. **`description` in each `.cursor/agents/*.md` file** — primary signal for automatic Task delegation.
-2. **This file (`AGENTS.md`)** — parent-agent orchestration, built-ins, and handoffs.
-3. **`.cursor/rules/core.mdc`** — always-on reinforcement (triage, Explore, tools).
-4. **Skills** (`/name`) — procedures in parent context; not separate subagents.
-
-Prefer **explicit** `/name` or **Task** when the wrong specialist would waste context. Prefer **no subagent** when `/task-triage` says Trivial or Simple.
-
-## Built-in Cursor subagents
-
-Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser** (web automation) automatically. Do not define a custom subagent named `explore` — it shadows the built-in.
+Never add a custom `explore` agent (shadows the built-in).
 
 | Need | Use |
 | --- | --- |
-| Broad parallel codebase search | Cursor built-in **Explore** |
-| Verbose shell output isolated | Cursor built-in **Bash** |
-| Browser / DOM work | Cursor built-in **Browser** |
-| Structured repo inventory + handoff | **`inventory`** (`/inventory` or Task) |
-| Unclear complexity before acting | **`/task-triage`** skill (not a subagent) |
+| Parallel codebase search | **Explore** |
+| Noisy shell | **Bash** |
+| Browser / DOM | **Browser** |
+| Structured inventory | `inventory` |
+| Unclear complexity | `/task-triage` |
 
-## Core skills (invoke with `/name`)
+## Core skills (`/name`)
 
 | Skill | Use when |
 | --- | --- |
-| `task-triage` | Classify tier (Trivial→Blocked) and minimal path before subagents |
-| `workspaceSearch` | Pick Grep vs SemanticSearch vs Glob |
+| `task-triage` | Tier + path before subagents |
+| `workspaceSearch` | Grep vs SemanticSearch vs Glob |
 | `ciPreflight` | Local CI before commit/push |
-| `depSearch` | Dependency discovery and audit research |
-| `testing` | Run project tests via Shell |
-| `lifecycleAudit` | Before mutating managed `.cursor/` surfaces |
-| `surfaceReview` | Before merging changes to agents, skills, or `.mdc` rules |
-| `cursorAssistantSetup` | First project install after MCP bootstrap (interview → `configure` / `setup`) |
+| `depSearch` | Dep discovery/CVE research (slash-only) |
+| `testing` | Run project tests |
+| `lifecycleAudit` | Before `.cursor/` mutations |
+| `surfaceReview` | Agents/skills/rules before merge |
+| `cursorAssistantSetup` | First project install |
 
-**Plugin command (user scope):** `/cursor-assistant:setup-workspace` — same flow as `cursorAssistantSetup`; requires plugin install or symlink from `install-from-github.sh`.
+Plugin `/cursor-assistant:setup-workspace` = setup skill (requires plugin install).
+
+**Slash-only:** `task-triage`, `lifecycleAudit`, `surfaceReview`, `cursorAssistantSetup`, `depSearch`. **Auto-invoke:** `workspaceSearch`, `ciPreflight`, `testing` only.
 
 ## Roster (11 subagents)
 
 | Subagent | Invoke | Use when |
 | --- | --- | --- |
-| `cursorLifecycle` | `/cursorLifecycle` or Task | setup, inspect, update, repair managed Cursor surfaces |
-| `inventory` | `/inventory` or Task | structured read-only maps, caller lists, architecture notes |
-| `review` | `/review` or Task | code review, PR review, architecture review (background-capable) |
-| `commit` | `/commit` or Task | git staging, commits, push, PRs, branches |
-| `deps` | `/deps` or Task | dependency scan, audit, install, update |
-| `docs` | `/docs` or Task | documentation authoring and doc quality checks |
-| `debugger` | `/debugger` or Task | failing tests, broken commands, root-cause isolation |
-| `planner` | `/planner` or Task | multi-step plans before large changes |
-| `researcher` | `/researcher` or Task | external docs, upstream behavior, cited research (background-capable) |
-| `organise` | `/organise` or Task | file moves, folder layout, path fixes after moves |
-| `cleaner` | `/cleaner` or Task | prune caches, debris, stale artefacts (with approval) |
+| `cursorLifecycle` | `/cursorLifecycle` or Task | setup, inspect, update, repair `.cursor/` |
+| `inventory` | `/inventory` or Task | read-only maps, callers, architecture notes |
+| `review` | `/review` or Task | code/PR/architecture review (background) |
+| `commit` | `/commit` or Task | git, push, PRs (`gh`) |
+| `deps` | `/deps` or Task | package install/audit/update |
+| `docs` | `/docs` or Task | repo documentation |
+| `debugger` | `/debugger` or Task | failing tests, broken commands |
+| `planner` | `/planner` or Task | multi-step plans |
+| `researcher` | `/researcher` or Task | external cited research (background) |
+| `organise` | `/organise` or Task | moves, layout, import paths |
+| `cleaner` | `/cleaner` or Task | caches, debris (with approval) |
 
 ## Routing table
 
 | Work type | Route |
 | --- | --- |
-| First-time project setup (after bootstrap) | `cursorAssistantSetup` skill, `/cursor-assistant:setup-workspace`, or `cursorLifecycle` (`configure`) |
-| Install or update cursorAssistant surfaces | `cursorLifecycle` |
-| Wide codebase search (parallel) | Cursor built-in **Explore** |
-| Structured inventory before a change | `inventory` |
-| Choose minimal execution path | `/task-triage` skill |
-| Review diffs or architecture | `review` |
-| Git commits, push, PRs, branches | `commit` (Shell / `gh`) |
-| Dependency audit or package changes | `deps` |
-| README, guides, migration docs | `docs` |
-| Quality audit of agents/skills/rules before merge | `surfaceReview` skill |
-| Diagnose failures with evidence | `debugger` |
-| Phased implementation planning | `planner` |
-| Source-backed external research | `researcher` |
-| Structural moves and path repair | `organise` |
-| Hygiene, caches, approved deletions | `cleaner` |
+| First-time setup | `cursorAssistantSetup`, `/cursor-assistant:setup-workspace`, or `cursorLifecycle` |
+| Install/update surfaces | `cursorLifecycle` |
+| Wide search | **Explore** |
+| Caller map before refactor | `inventory` |
+| Minimal path | `/task-triage` |
+| Diff/PR review | `review` |
+| Git / PR | `commit` |
+| Package changes | `deps` |
+| Repo docs | `docs` |
+| Instruction-surface QA | `surfaceReview` |
+| Root-cause failures | `debugger` |
+| Phased planning | `planner` |
+| External research | `researcher` |
+| Moves / paths | `organise` |
+| Hygiene | `cleaner` |
 
-## Conflict resolution (pick one)
+## Conflict resolution
 
 | Situation | Choose | Not |
 | --- | --- | --- |
-| Wide parallel “find anything about X” | Built-in **Explore** | `inventory` |
-| Structured caller map before refactor | `inventory` | Explore |
-| Write or update repo docs | `docs` | `researcher` |
-| External docs with citations | `researcher` | `docs` |
-| Install / audit / remove packages | `deps` | `researcher` |
-| Prune caches / dead artifacts | `cleaner` | `organise` |
-| Moves, renames, import path repair | `organise` | `cleaner` |
-| Multi-file plan before coding | `planner` | main Agent only |
-| Failing test or command (root cause) | `debugger` | `review`, `planner` |
-| PR or diff review (no fixes) | `review` | `debugger` |
-| Git commit / push / PR | `commit` | main Agent |
-| Managed `.cursor/` / lockfile | `cursorLifecycle` | feature agents |
+| Wide “find X” | **Explore** | `inventory` |
+| Caller map | `inventory` | Explore |
+| Repo docs | `docs` | `researcher` |
+| External citations | `researcher` | `docs` |
+| Package mutate | `deps` | `researcher` |
+| Prune artifacts | `cleaner` | `organise` |
+| Moves / imports | `organise` | `cleaner` |
+| Plan before code | `planner` | main Agent only |
+| Test failure RCA | `debugger` | `review`, `planner` |
+| PR review only | `review` | `debugger` |
+| Git operations | `commit` | main Agent |
+| `.cursor/` / lockfile | `cursorLifecycle` | feature agents |
 
 ## Handoffs
 
-Per-agent delegation chains live in [docs/architecture/ROUTING_AND_SUBAGENTS.md#handoff-rules](docs/architecture/ROUTING_AND_SUBAGENTS.md#handoff-rules) (not duplicated here).
+See [handoff rules](docs/architecture/ROUTING_AND_SUBAGENTS.md#handoff-rules) (not duplicated here).
 
-**Slash-only skills** (use `/name`; not auto-invoked): `task-triage`, `lifecycleAudit`, `surfaceReview`, `cursorAssistantSetup`.
-
-## Lifecycle trigger phrases
+## Lifecycle phrases
 
 | Phrase | Route |
 | --- | --- |
 | `inspect workspace` | `cursorLifecycle` |
-| `set up cursorAssistant` | `cursorAssistantSetup` or `cursorLifecycle` (`configure` / `setup`) |
+| `set up cursorAssistant` | `cursorAssistantSetup` or `cursorLifecycle` |
 | `update cursorAssistant` | `cursorLifecycle` |
-| `health check` (install state) | `cursorLifecycle` |
+| `health check` (install) | `cursorLifecycle` |
 
-Natural-language requests to add preferences to instructions are **not** lifecycle operations — use Cursor **User Rules** or project rules instead.
+Preference changes → Cursor **User Rules**, not lifecycle.

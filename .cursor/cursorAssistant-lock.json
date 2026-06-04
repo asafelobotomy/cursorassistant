@@ -10,7 +10,7 @@
   "mcpEnabled": false,
   "setupAnswers": {},
   "fileHashes": {
-    "routing.agents-md": "sha256:00a87ab898e9a7df065ae8aec41f95b91b7f04380acd92718c8d8a197097824e",
+    "routing.agents-md": "sha256:0a7302e9348c34e8fa171045d74afda80e84f3e74eec58b5e7286f57a37e9b92",
     "rules.core": "sha256:cc1045992eef9445dcafd19394f855f4615a57fd4d6af89c438ef8418a0980ae",
     "rules.lifecycle": "sha256:e10a8393e1ebec730727d9d779a1f793f108d6f6fcd5b3335ef78addd4d0e477",
     "agents.cursorLifecycle": "sha256:a25d9991b5e62dc3e6c846e404817d137ad3ec9b10fb10338edd91be08951810",
@@ -24,15 +24,15 @@
     "agents.researcher": "sha256:ef8b56dd0238a216c560708722790d54ee82d1b1e4c14eab186abf8355a39076",
     "agents.organise": "sha256:ce2a043b4bbe5d896b8e6c80ea901ea7cba00d208a66f2c2499cbe74d8249267",
     "agents.cleaner": "sha256:1f5210f41e9e5948f6a6a5b1bb46b0aacf6961b498240798117197330eb47d6c",
-    "skills.testing": "sha256:f2a7e2b503638ff2615cf5edf26fb2a6dac8a9c8879dd39394d0de0fb1dabcd9",
-    "skills.lifecycleAudit": "sha256:5234c0039cc0d6bf6c7d0fc288b6b62875bff7e94acce70a30517c02f553dd9a",
+    "skills.testing": "sha256:03b8baf7f9ac923102962002e333195edef4db1285a523a5813dfb2394128e2c",
+    "skills.lifecycleAudit": "sha256:8d436d36f37b5d77149705eaa88ef22ed191b1e8a8aec95bd2f1bdfaae760f4f",
     "skills.surfaceReview": "sha256:deb9e169468bbe16b2a7853af7f38e0bf58aa3ac9919cc564f0b12f13f0bf2f8",
     "skills.surfaceReview.references.modules": "sha256:0605d149fe8d5ffd225ff7271d58420ae8aaaea14bc25200e51142f310762738",
-    "skills.cursorAssistantSetup": "sha256:060825df02c5c68ce8d984b9abf6c7a536ad4e99634e863091f28e4a3c226a99",
+    "skills.cursorAssistantSetup": "sha256:43777738c904a7e26d3191cb7c44d71e6c7afd02a347a188d34ab7ba9881fac7",
     "skills.workspaceSearch": "sha256:f201eb58fec0820703b4b172d08c5e8395ec1618d0209fe0334920fdf01b3995",
     "skills.ciPreflight": "sha256:92783d8ac6b33bacc16c8ad2d56158b66fa0a480427467a4c00c2f7550e3b489",
-    "skills.depSearch": "sha256:ed9256a0f1863b0b88b01b99be0ae306d806f6307c42a3b4e97724507025d263",
-    "skills.task-triage": "sha256:aaf7607723a1b06bb475881d4a23891b10330092d41cfdb3f5639c8dc658a9ae",
+    "skills.depSearch": "sha256:a7fabf5d3de0d1826d1ab502f4191f29e317e3c61da4a681da3c3b70225ad783",
+    "skills.task-triage": "sha256:0236172a1baf170e3aab87aeecad5d119c77ced30c718dc7d4895ffe169486b9",
     "skills.task-triage.references.parallel-scope": "sha256:15ca1a6cb4f89bb4e2f1f058a55e46216297d11460a0354c6746aaf37790c5e2",
     "mcp.config": "sha256:972ea8c551b3dfe27678bc4f49b1255df38a220730e7f85c293340c41d1113b5",
     "mcp.shared._cursor_workspace": "sha256:45413ed98c7a17da96c6fbd755e083bd97e0462bb4ec6e9ce3ab5cd0191d6952",
@@ -42,6 +42,6 @@
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-04T11:26:57Z"
+    "updatedAt": "2026-06-04T11:41:23Z"
   }
 }

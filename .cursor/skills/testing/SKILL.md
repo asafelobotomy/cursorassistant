@@ -27,3 +27,9 @@ Run tests through the project's declared command. Prefer **Shell**; use pack MCP
 ## Pack MCP (optional)
 
 When the **tdd** pack is installed, `workspaceTesting` or `tddTestRunner` may appear in `.cursor/mcp.json`. Use them for structured runner discovery; otherwise stay on **Shell**.
+
+## Verify
+
+- [ ] Test command taken from project manifests or README (not guessed)
+- [ ] Smallest relevant test scope run first
+- [ ] Pass/fail summarized; failures handed to `debugger` with logs
