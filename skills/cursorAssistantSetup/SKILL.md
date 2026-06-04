@@ -1,17 +1,17 @@
 ---
 name: cursorAssistantSetup
-description: Use when the user wants to customize and install cursorAssistant into the current project after adding the marketplace plugin.
+description: Use when the user wants to install or customize cursorAssistant in the current project (GitHub install or configure).
 ---
 
 # cursorAssistant project setup
 
-Guides **individual developers** from marketplace plugin → customized **project** install (lockfile, selective packs, MCP choice).
+Guides **individual developers** from GitHub install → customized **project** install (lockfile, selective packs, MCP choice).
 
 ## When to use
 
-- User installed **cursor-assistant** from Cursor Marketplace and wants it **in this repo**
-- User asks to **set up**, **configure**, or **customize** cursorAssistant
+- User wants to **install** or **set up** cursorAssistant in this repo
 - `inspect` shows `installState: not-installed`
+- User pasted the README `curl … install-from-github.sh` command and needs help finishing
 
 ## When not to use
 
@@ -20,34 +20,31 @@ Guides **individual developers** from marketplace plugin → customized **projec
 
 ## Prerequisites
 
-- **cursor-assistant** plugin installed (Marketplace → Add to Cursor), **or** a local clone of this repository
+- Python 3.10+ and `git` for the one-liner install
 - Consumer workspace open in Cursor
-- Python 3.10+ available in the environment running shell commands
+- Global package at `~/.local/share/cursorassistant/` or local plugin at `~/.cursor/plugins/local/cursor-assistant` (created by install script)
 
-## Preferred flow (in chat)
+## Preferred flow
 
-1. Run inspect (auto-detects package root when omitted):
+1. If not installed globally, run (user terminal):
+
+   ```sh
+   curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- .
+   ```
+
+2. Otherwise inspect:
 
    ```sh
    python3 cursorAssistant.py inspect --workspace . --json
    ```
 
-2. If `not-installed`, run **configure** (interview + setup). In a terminal the user can answer prompts; in Agent-only sessions, ask the interview questions below, write answers, then run setup.
+3. Configure:
 
    ```sh
    python3 cursorAssistant.py configure --workspace . --json
    ```
 
-   Non-interactive (after collecting answers):
-
-   ```sh
-   python3 cursorAssistant.py configure --workspace . \
-     --answers .cursor/cursor-assistant-answers.json --yes --json
-   ```
-
-3. Tell the user to **Developer: Reload Window** and, if they enabled MCP in the interview, enable **cursorTools** under **Settings → Features → MCP**.
-
-4. Route ongoing maintenance to **cursorLifecycle** or `update` / `repair`.
+4. **Reload Window**; enable **cursorTools** under **Settings → MCP** if MCP was enabled in the interview.
 
 ## Agent-driven interview
 
@@ -56,29 +53,16 @@ When stdin is not available, ask these questions and write `.cursor/cursor-assis
 | Key | Question | Options / default |
 | --- | --- | --- |
 | `profile.selected` | Behavior profile | `balanced` (default) or `lean` |
-| `packs.selected` | Optional packs | `lean`, `secure`, `tdd` — default `[]`; lean profile defaults to `["lean"]` |
-| `mcp.enabled` | Install devDocs + memory MCP extensions | default `false` (cursorTools still installed) |
+| `packs.selected` | Optional packs | `lean`, `secure`, `tdd` — default `[]` |
+| `mcp.enabled` | Install devDocs + memory MCP extensions | default `false` |
 
-Then:
-
-```sh
-python3 cursorAssistant.py plan-setup --workspace . \
-  --answers .cursor/cursor-assistant-answers.json --json
-```
-
-Show `wouldWrite` summary; on confirmation:
-
-```sh
-python3 cursorAssistant.py setup --workspace . \
-  --answers .cursor/cursor-assistant-answers.json --json
-```
+Then `plan-setup` → confirm → `setup` with `--answers`.
 
 ## Package root
 
-Omit `--package-root` when possible. Resolution order: `CURSOR_ASSISTANT_PACKAGE_ROOT` → lockfile → parent walk → `~/.cursor/plugins/**` → installed CLI anchor.
+Omit `--package-root` when possible (lockfile, `~/.local/share/cursorassistant`, local plugin symlink).
 
 ## Rules
 
 - Do not hand-edit managed `.cursor/` files when lifecycle can apply the change.
-- Marketplace plugin alone does not write the project lockfile; **configure** / **setup** does.
-- Do not enable `mcp.enabled` unless the user wants extra MCP servers (requires `uvx`).
+- Global install alone does not replace **configure** for the project lockfile and selective packs.

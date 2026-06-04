@@ -42,7 +42,8 @@
 - [x] Shared MCP modules (`_cursor_workspace`, `_cursor_mcp_util`)
 - [x] GitHub Actions CI (tests, manifest drift, cursorEval)
 - [x] Eval workflow (validate + dry-run; optional Models run)
-- [x] Marketplace publish guide (`docs/PUBLISH.md`, `scripts/validate_plugin.py`)
+- [x] Plugin manifest validation (`scripts/validate_plugin.py`); marketplace guide archived under `docs/archive/`
+- [x] Primary GitHub install (`scripts/install-from-github.sh`, README badge)
 
 ## v0.7
 

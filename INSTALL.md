@@ -1,23 +1,37 @@
 # Installing cursorAssistant
 
-**Individual setup (recommended):** [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md)
+Full UX notes: [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md)
 
-## Quick start (Cursor Marketplace)
+## Quick start (one command)
 
-1. **Add to Cursor** — install **cursor-assistant** from [Cursor Marketplace](https://cursor.com/marketplace). This downloads the full plugin (agents, skills, rules, commands, lifecycle CLI source under `~/.cursor/plugins/…`).
-2. Open **your project** in Cursor.
-3. Customize and install into the repo:
+From your **project root** (read the script before piping to `bash`):
 
-   ```sh
-   python3 cursorAssistant.py configure --workspace .
-   ```
+```sh
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- .
+```
 
-   Or in chat: **`/cursor-assistant:setup-workspace`**.
+Or open the repo README and use the green **Install from GitHub** badge (same command).
 
-4. **Developer: Reload Window** once.
-5. If you enabled MCP extensions in the interview: **Settings → Features → MCP** → enable **cursorTools**.
+The script:
 
-Saved choices live in `.cursor/cursor-assistant-answers.json`. Managed surfaces and `.cursor/cursorAssistant-lock.json` are written into the project.
+1. Clones cursorAssistant to `~/.local/share/cursorassistant/<version>`
+2. Symlinks `~/.cursor/plugins/local/cursor-assistant` (Cursor local plugin)
+3. Runs the setup **interview** and **`configure`** into your workspace
+4. You **Developer: Reload Window** in Cursor
+
+## Already have this repo cloned
+
+```sh
+bash scripts/install-from-github.sh /path/to/your-project
+# or, from the clone only:
+bash scripts/cursor-assistant-init.sh /path/to/your-project
+```
+
+## In Cursor (after install)
+
+- Chat: **`/cursor-assistant:setup-workspace`** or ask to **set up cursorAssistant**
+- Skill: **cursorAssistantSetup**
+- Subagent: **cursorLifecycle** for inspect / update / repair
 
 ## Update this project
 
@@ -25,17 +39,15 @@ Saved choices live in `.cursor/cursor-assistant-answers.json`. Managed surfaces 
 python3 cursorAssistant.py update --workspace .
 ```
 
-Or ask the Agent to **update cursorAssistant** (**cursorLifecycle** / cursorTools MCP when enabled).
-
-`--package-root` is optional after the first install (lockfile and plugin discovery).
-
-## Clone instead of Marketplace
+Re-run the GitHub installer to refresh the global package copy:
 
 ```sh
-git clone https://github.com/asafelobotomy/cursorassistant.git
-cd your-project
-bash /path/to/cursorassistant/scripts/cursor-assistant-init.sh .
+CURSOR_ASSISTANT_VERSION=0.12.0 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- .
 ```
+
+Or ask the Agent to **update cursorAssistant**.
+
+`--package-root` is optional (lockfile, `~/.local/share/cursorassistant`, or local plugin path).
 
 ## Non-interactive setup
 
@@ -44,7 +56,7 @@ python3 cursorAssistant.py configure --workspace . \
   --answers .cursor/cursor-assistant-answers.json --yes --json
 ```
 
-Example answers file:
+Example answers:
 
 ```json
 {
@@ -65,8 +77,6 @@ Wrap custom sections in `AGENTS.md`:
 <!-- /user-added -->
 ```
 
-Custom MCP servers in `.cursor/mcp.json` are merged on update.
-
 ## Repair and reset
 
 | Situation | Command |
@@ -74,14 +84,11 @@ Custom MCP servers in `.cursor/mcp.json` are merged on update.
 | Drift / incomplete install | `python3 cursorAssistant.py repair --workspace . --json` |
 | Full managed-surface reset | `factory-restore` (destructive; confirm first) |
 
-## Dogfood (this repository)
+## Requirements
 
-```sh
-cd /path/to/cursorassistant
-bash scripts/dogfood.sh
-```
-
-Full stack (extensions + all packs): `bash scripts/dogfood-full.sh`
+- Python 3.10+
+- [Cursor](https://cursor.com/)
+- `git` (for the one-liner download)
 
 ## Interview fields
 
@@ -91,12 +98,12 @@ Full stack (extensions + all packs): `bash scripts/dogfood-full.sh`
 | `packs.selected` | `lean`, `secure`, `tdd` (optional) |
 | `mcp.enabled` | Optional devDocs + memory MCP (default `false`) |
 
-## Team / git (optional)
+## Optional: commit install to git
 
-Teams may commit `.cursor/`, `AGENTS.md`, and the lockfile so everyone shares the same install. That is optional; the primary path is Marketplace + per-developer **configure**.
+Teams may commit `.cursor/`, `AGENTS.md`, and the lockfile so everyone shares the same surfaces. Each developer still needs the global package (install script) for `update` unless `packageRoot` in the lockfile points at a shared path.
 
 ## See also
 
 - [README.md](README.md)
-- [docs/PUBLISH.md](docs/PUBLISH.md)
+- [docs/PUBLISH.md](docs/PUBLISH.md) — distribution (not marketplace)
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)

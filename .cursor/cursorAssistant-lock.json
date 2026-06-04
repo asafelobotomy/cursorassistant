@@ -13,7 +13,7 @@
     "routing.agents-md": "sha256:1cb1ee7bc32bb426a939b6b265cbca351ca9105a3bad603d21554429d86eced9",
     "rules.core": "sha256:4be251acf1bf90d80207c7f819c5d5db992ef77fdfe73afa7a2e75beff162cd7",
     "rules.lifecycle": "sha256:e10a8393e1ebec730727d9d779a1f793f108d6f6fcd5b3335ef78addd4d0e477",
-    "agents.cursorLifecycle": "sha256:5b8170f07e4fdc27c299eeda4f2f4ae2b634eb77b130f465cc616918c0318cfe",
+    "agents.cursorLifecycle": "sha256:7ba3a6ff998017112c5240e5f5446a7fa4176adc6a3da59b6d0f83b94a69a966",
     "agents.inventory": "sha256:e8214b7450fc5ec47fed3cb99a352daaccb3fe5fb85c556e4866f863280bc192",
     "agents.review": "sha256:e17776fbe61548b46a34b6f132997a5ebd60d8fe9dd0f8f80909ff0803e814ba",
     "agents.commit": "sha256:98e31a6827f132c2d3feea159db8daaa34b26494a392cd00bace2fe0c35413e4",
@@ -38,6 +38,6 @@
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-04T07:17:36Z"
+    "updatedAt": "2026-06-04T07:32:57Z"
   }
 }

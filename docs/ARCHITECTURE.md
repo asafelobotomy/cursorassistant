@@ -41,6 +41,6 @@ Shared helpers live in `packages/cursor-mcp-shared/`, vendored to `mcp/scripts/_
 - `tests/` — lifecycle and MCP composition
 - `tools/cursorEval/` — eval suite validate, surface `check`, `policy`, optional GitHub Models `run`
 
-## Plugin vs lifecycle
+## Local plugin vs project lifecycle
 
-The Cursor Marketplace plugin (`.cursor-plugin/plugin.json`) points at **source trees** for agents/skills/rules and **core MCP only**. Full installs with packs and extensions use `cursorAssistant.py setup` — see [PUBLISH.md](PUBLISH.md).
+`.cursor-plugin/plugin.json` describes the bundle symlinked to `~/.cursor/plugins/local/cursor-assistant` by `install-from-github.sh`. Cursor loads agents/skills/commands at user scope. **Project** installs (packs, extensions, lockfile) use `configure` / `setup` — see [INSTALL.md](../INSTALL.md).

@@ -114,6 +114,6 @@ def find_package_root(
 
     raise FileNotFoundError(
         "Could not find cursorAssistant package root. Install the cursor-assistant "
-        "plugin from Cursor Marketplace, clone this repository, or set "
+        "install-from-github.sh, a clone of this repository, or set "
         "CURSOR_ASSISTANT_PACKAGE_ROOT."
     )

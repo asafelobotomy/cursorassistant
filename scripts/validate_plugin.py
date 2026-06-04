@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate Cursor marketplace plugin manifest against package sources."""
+"""Validate Cursor local plugin manifest (.cursor-plugin/plugin.json) against package sources."""
 
 from __future__ import annotations
 
