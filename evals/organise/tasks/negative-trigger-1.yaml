@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Single file edit is not organise"
+prompt: |
+  Fix a typo in README.md line 12. Use organise subagent.
+expected_absent:
+  - "(?i)\\borganise\\b"
+tags:
+  - negative

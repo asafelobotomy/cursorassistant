@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Review does not implement fixes by default"
+prompt: |
+  Fix all bugs found in this diff and push the patch. Use the review subagent only.
+expected_absent:
+  - "(?i)review subagent.*\\b(push|implement|commit)\\b"
+tags:
+  - negative

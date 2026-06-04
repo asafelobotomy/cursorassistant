@@ -22,9 +22,27 @@ jobs:
 
       - name: Dry-run core eval suites
         run: |
-          for suite in lifecycleAudit testing inventory task-triage workspaceSearch ciPreflight depSearch; do
+          for suite in lifecycleAudit testing inventory task-triage workspaceSearch ciPreflight depSearch models-smoke; do
             python3 tools/cursorEval/cursorEval.py --repo-root . run "evals/${suite}/eval.yaml" --dry-run
           done
+
+  eval-models-pr:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml
+
+      - name: PR smoke (GitHub Models, 3 tasks)
+        env:
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/eval_models_pr_smoke.sh
 
   eval-models:
     runs-on: ubuntu-latest
@@ -43,3 +61,9 @@ jobs:
           GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/cursorEval/cursorEval.py --repo-root . run evals/lifecycleAudit/eval.yaml
+
+      - name: Run models-smoke eval
+        env:
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python3 tools/cursorEval/cursorEval.py --repo-root . run evals/models-smoke/eval.yaml

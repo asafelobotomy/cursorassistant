@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Unrelated formatting should not invoke testing skill"
+prompt: |
+  Reformat all Markdown files with prettier.
+expected_absent:
+  - "(?i)\\btesting\\b.*\\bskill\\b"
+tags:
+  - negative

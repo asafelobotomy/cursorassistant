@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Git commit is not depSearch"
+prompt: |
+  Create a git commit for the lockfile update. Use depSearch.
+expected_absent:
+  - "(?i)\\bdepSearch\\b"
+tags:
+  - negative

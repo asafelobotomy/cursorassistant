@@ -10,6 +10,7 @@ PKG_ROOT = Path(__file__).resolve().parents[1] / "packages" / "cursor-mcp-shared
 sys.path.insert(0, str(PKG_ROOT))
 
 from cursor_mcp_shared.mcp_util import build_tool_result, tail_text  # noqa: E402
+from cursor_mcp_shared.profiles import XANAD  # noqa: E402
 from cursor_mcp_shared.workspace import discover_workspace_root, is_workspace_root  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -40,6 +41,16 @@ class CursorMcpSharedTests(unittest.TestCase):
         self.assertIsNotNone(tail)
         assert tail is not None
         self.assertLessEqual(len(tail), 100)
+
+    def test_xanad_profile_lockfile_marker(self) -> None:
+        import tempfile
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / ".github").mkdir()
+            (root / ".github" / "xanadAssistant-lock.json").write_text("{}", encoding="utf-8")
+            self.assertTrue(is_workspace_root(root, profile=XANAD))
+            self.assertFalse(is_workspace_root(root))
 
 
 if __name__ == "__main__":

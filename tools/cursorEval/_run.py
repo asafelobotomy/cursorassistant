@@ -11,6 +11,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from tools.cursorEval._common import (
+    grade_task_expectations,
     load_tasks,
     load_yaml,
     read_text,
@@ -128,6 +129,7 @@ def cmd_run(eval_path: str, model: str, fmt: str, dry_run: bool) -> int:
             results.append({"id": task.get("id"), "error": str(exc), "passed": False})
             continue
         grader_rows = run_graders(response, graders)
+        grader_rows.extend(grade_task_expectations(response, task))
         task_passed = all(r.get("passed") for r in grader_rows if r.get("passed") is not None)
         results.append(
             {

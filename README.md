@@ -72,6 +72,10 @@ python3 cursorAssistant.py plan-setup --workspace /path/to/your-project --packag
 
 Ask the main Agent: **Set up cursorAssistant in this workspace** — it should run `cursorAssistant.py setup` with the correct `--package-root`.
 
+## Shared MCP library
+
+`packages/cursor-mcp-shared/` provides workspace discovery for Cursor and xanad profiles. See [docs/SHARED_MCP.md](docs/SHARED_MCP.md) and [docs/XANAD_INTEGRATION.md](docs/XANAD_INTEGRATION.md).
+
 ## Relationship to xanadAssistant
 
 | | xanadAssistant | cursorAssistant |
@@ -96,7 +100,10 @@ Upgrading from v0.9? See [docs/MIGRATION.md](docs/MIGRATION.md).
 python3 tools/cursorEval/cursorEval.py validate --repo-root .
 python3 tools/cursorEval/cursorEval.py coverage --repo-root .
 python3 tools/cursorEval/cursorEval.py run evals/lifecycleAudit/eval.yaml --dry-run
+bash scripts/eval_models_pr_smoke.sh   # GitHub Models (3 tasks; skips without token)
 ```
+
+PRs run **eval-models-pr** when `GITHUB_MODELS_TOKEN` is configured in repo secrets.
 
 ## Repository layout
 

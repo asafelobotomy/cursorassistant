@@ -1,0 +1,8 @@
+id: commit-routing
+description: "Git commit request uses commit subagent"
+prompt: |
+  Stage these changes, write a commit message, and open a PR. Which subagent?
+expected:
+  - "commit"
+tags:
+  - models-smoke

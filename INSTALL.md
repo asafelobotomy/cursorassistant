@@ -93,7 +93,7 @@ Run evals (requires a Models API token):
 python3 tools/cursorEval/cursorEval.py run evals/lifecycleAudit/eval.yaml --repo-root .
 ```
 
-Use **`GITHUB_MODELS_TOKEN`** in your shell (not `GITHUB_TOKEN`). Exporting `GITHUB_TOKEN` overrides `gh` and `git push` with that value. Store the Models token in GNOME Keyring as `service=github-models` and load it in `~/.bashrc` as `GITHUB_MODELS_TOKEN` (see this repo’s INSTALL notes or your local shell config).
+Use **`GITHUB_MODELS_TOKEN`** in your shell (not `GITHUB_TOKEN`). For CI, add **`GITHUB_MODELS_TOKEN`** as a repository secret to enable the **eval-models-pr** job (3-task routing smoke on pull requests). Exporting `GITHUB_TOKEN` overrides `gh` and `git push` with that value. Store the Models token in GNOME Keyring as `service=github-models` and load it in `~/.bashrc` as `GITHUB_MODELS_TOKEN` (see this repo’s INSTALL notes or your local shell config).
 
 ## Packs and profiles
 

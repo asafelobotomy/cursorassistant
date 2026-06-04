@@ -75,7 +75,7 @@
 - [x] `scripts/dogfood-full.sh` (extensions + all packs)
 - [x] `docs/HOOKS.md` (optional user-owned hooks)
 
-## v0.10.1 (current) — review remediation
+## v0.10.1 — review remediation
 
 - [x] Docs: `MIGRATION.md`, `ARCHITECTURE.md`, `SECURITY.md`, updated comparison/README
 - [x] Evals for all 6 core skills; routing tasks for inventory/debugger
@@ -84,7 +84,14 @@
 - [x] CI: policy + surface checks; evals workflow uses `GITHUB_MODELS_TOKEN`
 - [x] Archive obsolete `mcp-bundle.json` / `mcp-minimal.json`
 
+## v0.10.2 (current) — open issues closed
+
+- [x] `cursor-mcp-shared` **XANAD** profile + [XANAD_INTEGRATION.md](XANAD_INTEGRATION.md)
+- [x] Negative/routing eval tasks for core agents and skills; per-task grading in `cursorEval run`
+- [x] PR **eval-models-pr** job (`evals/models-smoke`, 3 tasks; skips without token)
+- [x] `cursorEval policy` scans `template/rules` and `.cursor/rules` (`.mdc`)
+
 ## v1.0+
 
-- [ ] xanadAssistant consumes `cursor-mcp-shared` as a dependency
+- [ ] xanadAssistant repo applies `cursor-mcp-shared` dependency (integration doc ready)
 - [ ] Additional skills from xanad as optional packs

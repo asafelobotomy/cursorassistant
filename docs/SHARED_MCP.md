@@ -27,6 +27,6 @@ pip install ./packages/cursor-mcp-shared
 
 ## xanadAssistant
 
-xanadAssistant can depend on `cursor-mcp-shared` and drop duplicated discovery logic in its MCP scripts. Path markers differ (`.github/` vs `.cursor/`); adapters can wrap `discover_workspace_root` or extend `is_workspace_root` for Copilot lockfiles.
+xanadAssistant can depend on `cursor-mcp-shared` and drop duplicated discovery logic in its MCP scripts. Use the **`XANAD`** profile or `CURSOR_MCP_PROFILE=xanad` — see [XANAD_INTEGRATION.md](XANAD_INTEGRATION.md).
 
 See also [MCP_SYNC.md](MCP_SYNC.md) for script porting from xanad.

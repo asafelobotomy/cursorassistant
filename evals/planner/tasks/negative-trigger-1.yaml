@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Planner does not run git or implement"
+prompt: |
+  Run git commit and deploy to production now. Use the planner subagent.
+expected_absent:
+  - "(?i)planner.*\\b(git commit|deploy)\\b"
+tags:
+  - negative

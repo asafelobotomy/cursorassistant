@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Unrelated request should not invoke workspaceSearch"
+prompt: |
+  Summarize the README in three bullet points for executives.
+expected_absent:
+  - "(?i)\\bworkspaceSearch\\b"
+tags:
+  - negative

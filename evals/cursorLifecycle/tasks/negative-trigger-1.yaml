@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Lifecycle is not for feature implementation"
+prompt: |
+  Add a new REST endpoint and write tests. Invoke cursorLifecycle to code it.
+expected_absent:
+  - "(?i)cursorLifecycle.*\\b(endpoint|implement)\\b"
+tags:
+  - negative

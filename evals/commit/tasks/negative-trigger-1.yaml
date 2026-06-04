@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Implementation work is not commit subagent scope"
+prompt: |
+  Refactor the authentication module and add unit tests. Use the commit subagent to implement it.
+expected_absent:
+  - "(?i)\\bcommit subagent\\b.*\\bimplement"
+tags:
+  - negative

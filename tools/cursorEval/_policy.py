@@ -6,7 +6,7 @@ import json
 import re
 from pathlib import Path
 
-# Legacy VS Code / Copilot tool names that must not appear in skills or agents.
+# Legacy VS Code / Copilot tool names that must not appear in managed instructions.
 FORBIDDEN_TOOL_PATTERNS: tuple[tuple[str, str], ...] = (
     (r"\bvscode_", "VS Code tool prefix — use Cursor Agent tools"),
     (r"\bgrep_search\b", "use Grep or SemanticSearch"),
@@ -54,11 +54,20 @@ def discover_agent_files(repo_root: Path) -> list[Path]:
     return sorted(agents_root.glob("*.md"))
 
 
+def discover_rule_files(repo_root: Path) -> list[Path]:
+    paths: list[Path] = []
+    for base in (repo_root / "template" / "rules", repo_root / ".cursor" / "rules"):
+        if base.is_dir():
+            paths.extend(sorted(base.glob("*.mdc")))
+    return paths
+
+
 def cmd_policy(repo_root: Path, fmt: str) -> int:
     skills = discover_skill_files(repo_root)
     agents = discover_agent_files(repo_root)
+    rules = discover_rule_files(repo_root)
     violations: list[dict[str, str]] = []
-    for path in skills + agents:
+    for path in skills + agents + rules:
         violations.extend(scan_markdown_surface(path))
 
     payload = {
@@ -66,12 +75,13 @@ def cmd_policy(repo_root: Path, fmt: str) -> int:
         "violations": violations,
         "skillsScanned": len(skills),
         "agentsScanned": len(agents),
+        "rulesScanned": len(rules),
     }
     if fmt == "json":
         print(json.dumps(payload, indent=2))
     else:
         print(
-            f"policy: {len(skills)} skills, {len(agents)} agents scanned"
+            f"policy: {len(skills)} skills, {len(agents)} agents, {len(rules)} rules scanned"
         )
         if violations:
             for row in violations:

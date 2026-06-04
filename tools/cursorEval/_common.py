@@ -132,6 +132,32 @@ def grade_behavior(response: str, config: dict) -> tuple[bool, float]:
     return passed, score
 
 
+def grade_task_expectations(response: str, task: dict) -> list[dict]:
+    """Per-task expected / expected_absent checks (used by eval run)."""
+    rows: list[dict] = []
+    for item in task.get("expected", []) or []:
+        ok = str(item).lower() in response.lower()
+        rows.append(
+            {
+                "name": f"task-expected:{item}",
+                "type": "text",
+                "passed": ok,
+                "score": 1.0 if ok else 0.0,
+            }
+        )
+    for pat in task.get("expected_absent", []) or []:
+        ok = not bool(re.search(str(pat), response, re.IGNORECASE))
+        rows.append(
+            {
+                "name": f"task-absent:{pat}",
+                "type": "text",
+                "passed": ok,
+                "score": 1.0 if ok else 0.0,
+            }
+        )
+    return rows
+
+
 def run_graders(response: str, graders: list[dict]) -> list[dict]:
     rows: list[dict] = []
     for grader in graders:

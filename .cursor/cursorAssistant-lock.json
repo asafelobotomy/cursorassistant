@@ -2,7 +2,7 @@
   "schemaVersion": "0.4.0",
   "package": {
     "name": "cursorAssistant",
-    "version": "0.10.1",
+    "version": "0.10.2",
     "packageRoot": "."
   },
   "profile": "balanced",
@@ -31,12 +31,12 @@
     "skills.depSearch": "sha256:ed9256a0f1863b0b88b01b99be0ae306d806f6307c42a3b4e97724507025d263",
     "skills.task-triage": "sha256:2c9f7ecc0db318534d2e1ad7e97c48ae91f528604ebf988b85b6b9fc800c9045",
     "mcp.config": "sha256:972ea8c551b3dfe27678bc4f49b1255df38a220730e7f85c293340c41d1113b5",
-    "mcp.shared._cursor_workspace": "sha256:92b3fdf6b027364923bbd54e0135f9f794cf7c06c508a880b3d08d8b19d94874",
+    "mcp.shared._cursor_workspace": "sha256:33e176cd420739418b478508c8fb46b5c8b2c20584045002c7d8a3ee25999d03",
     "mcp.shared._cursor_mcp_util": "sha256:1de2065f66362bd9f8597225735c9b5826fe6eaf1980e35508b2e838408ac30a",
     "mcp.cursorToolsMcp": "sha256:cdceddb0817dbe7e6d5de78f0920c7d2f74c4dff3c462d527d4067bcfb7cc03d"
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-03T23:37:59Z"
+    "updatedAt": "2026-06-04T06:35:30Z"
   }
 }

@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Trivial lookup should not require triage skill"
+prompt: |
+  What is the value of MAX_RETRIES in config.py? Run /task-triage first.
+expected_absent:
+  - "(?i)task-triage.*\\b(planner|complex)\\b"
+tags:
+  - negative

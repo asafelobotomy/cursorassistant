@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.10.1",
+  "packageVersion": "0.10.2",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -25,7 +25,7 @@
       "target": ".cursor/agents/cursorLifecycle.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:a0821ab94e7bd0a8425d7d97f352b2fb053cb946211c7deb2c72afb81311f9c9"
+      "hash": "sha256:76a3668dc6fa160afa1438d74fe4314f88ce9e057885a03bf4f861157757e93a"
     },
     {
       "id": "agents.debugger",
@@ -33,7 +33,7 @@
       "target": ".cursor/agents/debugger.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:20a6b3ca2e91a0e83c579559fd588bd18f6b3f236c03299820d0c43d7147ddf6"
+      "hash": "sha256:dfc711f751413b1007ff16cdf47c00d37cdf3fd034c10fffb6c10360b99e60dc"
     },
     {
       "id": "agents.deps",
@@ -73,7 +73,7 @@
       "target": ".cursor/agents/planner.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:54856d7df34edb312f8d01ffec76afc72d47b0e4acce711276155eb89982bdc4"
+      "hash": "sha256:37da4626349607245fbfaf9b446a6624aaee071152db7db9da3c990410163b94"
     },
     {
       "id": "agents.researcher",
@@ -89,7 +89,7 @@
       "target": ".cursor/agents/review.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:2dde2bc159ba85b0e712097b1d9bb3829bc6b7f90b7f474cd60d4827249d57e4"
+      "hash": "sha256:e17776fbe61548b46a34b6f132997a5ebd60d8fe9dd0f8f80909ff0803e814ba"
     },
     {
       "id": "mcp.config",
@@ -109,12 +109,21 @@
       "requiredWhen": []
     },
     {
+      "id": "mcp.shared._cursor_profiles",
+      "source": "mcp/scripts/_cursor_profiles.py",
+      "target": ".cursor/mcp/scripts/_cursor_profiles.py",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:0e1f2dc726f2f540bf84b1d41667a89de8d1d8980b8a41a49a2ff21fd0da4445",
+      "requiredWhen": []
+    },
+    {
       "id": "mcp.shared._cursor_workspace",
       "source": "mcp/scripts/_cursor_workspace.py",
       "target": ".cursor/mcp/scripts/_cursor_workspace.py",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:92b3fdf6b027364923bbd54e0135f9f794cf7c06c508a880b3d08d8b19d94874",
+      "hash": "sha256:33e176cd420739418b478508c8fb46b5c8b2c20584045002c7d8a3ee25999d03",
       "requiredWhen": []
     },
     {

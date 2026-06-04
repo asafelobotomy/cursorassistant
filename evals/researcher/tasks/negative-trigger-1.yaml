@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Researcher stays read-only"
+prompt: |
+  Apply the upstream API change across all call sites and commit. Use researcher.
+expected_absent:
+  - "(?i)researcher.*\\b(commit|apply)\\b"
+tags:
+  - negative

@@ -1,0 +1,10 @@
+id: negative-trigger-1
+description: "Debugging is not docs"
+prompt: |
+  pytest fails with ImportError in tests/test_foo.py. Which subagent?
+expected_absent:
+  - "(?i)\\bdocs\\b"
+expected:
+  - "debugger"
+tags:
+  - negative

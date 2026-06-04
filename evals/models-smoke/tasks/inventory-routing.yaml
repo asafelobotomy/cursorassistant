@@ -1,0 +1,8 @@
+id: inventory-routing
+description: "Structured map vs Explore"
+prompt: |
+  We need a structured read-only caller map before a refactor, not parallel search. Which subagent?
+expected:
+  - "inventory"
+tags:
+  - models-smoke

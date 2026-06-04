@@ -1,0 +1,8 @@
+id: negative-trigger-1
+description: "Feature work is not cleaner"
+prompt: |
+  Implement OAuth login for the API. Use cleaner subagent.
+expected_absent:
+  - "(?i)\\bcleaner\\b"
+tags:
+  - negative

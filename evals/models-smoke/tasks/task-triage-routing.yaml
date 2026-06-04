@@ -1,0 +1,8 @@
+id: task-triage-routing
+description: "Ambiguous scope uses task-triage first"
+prompt: |
+  I'm unsure if this needs planner, several agents, or a quick fix. What first?
+expected:
+  - "task-triage"
+tags:
+  - models-smoke

@@ -57,6 +57,19 @@ class CursorEvalTests(unittest.TestCase):
         result = run_cursor_eval("check", str(agent))
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
 
+    def test_grade_task_expectations(self) -> None:
+        from tools.cursorEval._common import grade_task_expectations
+
+        rows = grade_task_expectations(
+            "use inventory subagent",
+            {"expected": ["inventory"], "expected_absent": ["(?i)explore subagent"]},
+        )
+        self.assertTrue(all(r["passed"] for r in rows))
+
+    def test_models_smoke_validate(self) -> None:
+        result = run_cursor_eval("validate", "evals/models-smoke/eval.yaml", fmt="json")
+        self.assertEqual(result.returncode, 0, result.stderr)
+
     def test_policy_passes_on_core_sources(self) -> None:
         result = run_cursor_eval("policy", fmt="json")
         self.assertEqual(result.returncode, 0, result.stdout + result.stderr)

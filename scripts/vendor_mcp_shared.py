@@ -6,6 +6,7 @@ from __future__ import annotations
 from pathlib import Path
 
 VENDOR_MAP = {
+    "profiles.py": "_cursor_profiles.py",
     "workspace.py": "_cursor_workspace.py",
     "mcp_util.py": "_cursor_mcp_util.py",
 }
@@ -37,6 +38,7 @@ def main() -> int:
         source = src_root / src_name
         dest = dest_root / dest_name
         body = strip_module_docstring(source.read_text(encoding="utf-8"))
+        body = body.replace("from cursor_mcp_shared.profiles", "from _cursor_profiles")
         dest.write_text(HEADER + body, encoding="utf-8")
         print(f"vendored → {dest.relative_to(repo_root)}")
     return 0

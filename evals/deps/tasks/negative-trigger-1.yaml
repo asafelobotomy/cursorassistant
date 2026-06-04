@@ -1,0 +1,10 @@
+id: negative-trigger-1
+description: "Code review is not deps"
+prompt: |
+  Review this PR for security issues. Which subagent?
+expected_absent:
+  - "(?i)\\bdeps\\b"
+expected:
+  - "review"
+tags:
+  - negative

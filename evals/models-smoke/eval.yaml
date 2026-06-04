@@ -1,0 +1,7 @@
+name: "models-smoke-eval"
+description: "Small routing smoke suite for PR GitHub Models runs (low cost)"
+
+graders: []
+
+tasks:
+  - "tasks/*.yaml"
