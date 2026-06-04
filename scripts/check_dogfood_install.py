@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Fail if the package repo's dogfood .cursor/ install is incomplete or drifted."""
+"""Fail if the package repo's dogfood .cursor/ install is incomplete or drifted.
+
+Prefer `python3 scripts/check_package_sync.py` (manifest + dogfood). This script
+remains for direct dogfood-only checks.
+"""
 
 from __future__ import annotations
 

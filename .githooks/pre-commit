@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Optional local gate for cursorAssistant package maintainers.
+# Enable once: git config core.hooksPath .githooks
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+cd "$ROOT"
+
+# Only run when this commit touches managed package sources.
+if ! git diff --cached --name-only | grep -qE \
+  '^(AGENTS\.md|agents/|skills/|template/rules/|template/setup/install-policy\.json|packs/[^/]+/skills/)'; then
+  exit 0
+fi
+
+echo "pre-commit: managed surfaces changed — checking package sync"
+python3 scripts/check_package_sync.py

@@ -62,7 +62,9 @@ In chat: **`/cursor-assistant:setup-workspace`**, or ask to **set up cursorAssis
 | Check all surfaces | `bash scripts/ci_check_surfaces.sh` |
 | Verify dogfood install | `python3 scripts/check_dogfood_install.py` |
 | Vendor MCP shared | `python3 scripts/vendor_mcp_shared.py` |
-| Generate manifest | `python3 scripts/generate.py --package-root .` |
+| Sync manifest + dogfood after editing agents/skills | `bash scripts/sync_managed_surfaces.sh` |
+| Verify package sync (CI-equivalent) | `python3 scripts/check_package_sync.py` |
+| Generate manifest only | `python3 scripts/generate.py --package-root .` |
 | Lifecycle inspect | `python3 cursorAssistant.py inspect --workspace . --json` |
 
 ## Use in Cursor
@@ -85,6 +87,7 @@ Full index: [docs/README.md](docs/README.md)
 | [SECURITY.md](SECURITY.md) | MCP and secrets guidance |
 | [docs/architecture/MCP_LAYOUT.md](docs/architecture/MCP_LAYOUT.md) | Layered MCP manifests |
 | [docs/operations/MCP_MAINTENANCE.md](docs/operations/MCP_MAINTENANCE.md) | MCP scripts and vendoring |
+| [docs/operations/PACKAGE_REPO_MAINTENANCE.md](docs/operations/PACKAGE_REPO_MAINTENANCE.md) | Manifest + dogfood sync before commit |
 | [docs/guides/HOOKS.md](docs/guides/HOOKS.md) | Optional user-owned hooks |
 | [docs/guides/PUBLISH.md](docs/guides/PUBLISH.md) | Distribution (GitHub + local plugin) |
 
