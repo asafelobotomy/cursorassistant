@@ -45,13 +45,13 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 | --- | --- | --- |
 | `cursorLifecycle` | `/cursorLifecycle` or Task | setup, inspect, update, repair managed Cursor surfaces |
 | `inventory` | `/inventory` or Task | structured read-only maps, caller lists, architecture notes |
-| `review` | `/review` or Task | code review, PR review, architecture review |
+| `review` | `/review` or Task | code review, PR review, architecture review (background-capable) |
 | `commit` | `/commit` or Task | git staging, commits, push, PRs, branches |
 | `deps` | `/deps` or Task | dependency scan, audit, install, update |
 | `docs` | `/docs` or Task | documentation authoring and doc quality checks |
 | `debugger` | `/debugger` or Task | failing tests, broken commands, root-cause isolation |
 | `planner` | `/planner` or Task | multi-step plans before large changes |
-| `researcher` | `/researcher` or Task | external docs, upstream behavior, cited research |
+| `researcher` | `/researcher` or Task | external docs, upstream behavior, cited research (background-capable) |
 | `organise` | `/organise` or Task | file moves, folder layout, path fixes after moves |
 | `cleaner` | `/cleaner` or Task | prune caches, debris, stale artefacts (with approval) |
 

@@ -93,11 +93,25 @@ When two specialists seem to fit, use this tie-breaker (also in `AGENTS.md`):
 | `cursorEval` policy (no VS Code tool names) | Done |
 | Pack skills only when lockfile lists pack | Documented in agents |
 
-### Optional next steps
+### Live routing evals
 
-- **Live evals** — `cursorEval run` with `GITHUB_TOKEN` to grade model routing against agent files.
-- **Background subagents** — `is_background: true` only for long audits that must not block (use sparingly).
-- **Model overrides** — Task `model` for cheap triage reads; default `inherit` for specialists.
+```sh
+# PR smoke (models-smoke + cursorAssistantSetup):
+bash scripts/eval_models_pr_smoke.sh
+
+# Full routing spot-check (workflow_dispatch or local):
+bash scripts/eval_routing_live.sh
+```
+
+Requires `GITHUB_MODELS_TOKEN`, `GITHUB_TOKEN`, or `GH_TOKEN`. Results land in `.cursorEval/` (gitignored).
+
+### Background subagents
+
+`review` and `researcher` set `is_background: true` so long read-only work need not block the parent. Do not use background mode for `debugger`, `planner`, or `inventory` — the parent needs their output before the next step.
+
+### Model overrides
+
+Task `model` can override per invocation; roster agents default to `inherit`.
 
 ## Verification
 

@@ -1,0 +1,11 @@
+name: "cursorAssistantSetup-eval"
+description: "Evaluates cursorAssistantSetup skill routing for first-time project install"
+
+graders:
+  - type: text
+    name: references_setup
+    config:
+      pattern: "(?i)(cursorAssistantSetup|configure|lifecycle_configure|setup-workspace)"
+
+tasks:
+  - "tasks/*.yaml"

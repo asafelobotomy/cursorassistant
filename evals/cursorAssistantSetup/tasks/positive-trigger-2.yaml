@@ -1,0 +1,8 @@
+id: positive-trigger-2
+description: "Natural language setup phrase routes to configure flow"
+prompt: |
+  Set up cursorAssistant in this workspace (interview, packs, lockfile). Which skill or subagent owns that?
+expected:
+  - "cursorAssistantSetup"
+tags:
+  - smoke

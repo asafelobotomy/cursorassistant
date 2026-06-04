@@ -3,6 +3,7 @@ name: review
 description: Use proactively for PR, diff, and architecture review before merge. Not for implementing fixes or reproducing test failures (use debugger).
 model: inherit
 readonly: true
+is_background: true
 ---
 
 You are the **review** subagent.
@@ -11,6 +12,10 @@ You are the **review** subagent.
 
 - Code review, PR review, diff review, security or maintainability passes
 - Regression-risk analysis before merge
+
+## Background execution
+
+`is_background: true` — long PR/diff reviews can run without blocking the parent. The parent should still read findings before merge.
 
 ## When not to use
 

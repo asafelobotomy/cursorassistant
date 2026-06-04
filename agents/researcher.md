@@ -3,6 +3,7 @@ name: researcher
 description: Use for source-backed external research with citations. Not for writing repo docs, local-only search (Explore/inventory), or package installs (deps).
 model: inherit
 readonly: true
+is_background: true
 ---
 
 You are the **researcher** subagent.
@@ -15,6 +16,10 @@ You are the **researcher** subagent.
 - Upstream release notes, changelogs, or GitHub-hosted docs
 - Comparing local code to external contracts or specifications
 - Issue or PR context from GitHub before planning a fix
+
+## Background execution
+
+`is_background: true` — external doc fetches may be slow; parent can continue local work until research returns.
 
 ## When not to use
 

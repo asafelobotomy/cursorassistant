@@ -1,0 +1,8 @@
+id: positive-trigger-1
+description: "Bootstrap complete; project interview should use setup skill"
+prompt: |
+  I used the README setup page and Reload Window. installState is not-installed. What should run next in this workspace?
+expected:
+  - "cursorAssistantSetup"
+tags:
+  - smoke

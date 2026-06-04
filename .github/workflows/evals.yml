@@ -22,7 +22,7 @@ jobs:
 
       - name: Dry-run core eval suites
         run: |
-          for suite in lifecycleAudit testing inventory task-triage workspaceSearch ciPreflight depSearch models-smoke; do
+          for suite in lifecycleAudit testing inventory task-triage workspaceSearch ciPreflight depSearch models-smoke cursorAssistantSetup; do
             python3 tools/cursorEval/cursorEval.py --repo-root . run "evals/${suite}/eval.yaml" --dry-run
           done
 
@@ -67,3 +67,9 @@ jobs:
           GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python3 tools/cursorEval/cursorEval.py --repo-root . run evals/models-smoke/eval.yaml
+
+      - name: Live routing evals (models-smoke + agents + setup skill)
+        env:
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/eval_routing_live.sh

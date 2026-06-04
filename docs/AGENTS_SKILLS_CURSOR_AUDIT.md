@@ -89,7 +89,7 @@ Evals validate **routing phrases**, not runtime tool execution — appropriate f
 
 | Item | Rationale |
 | --- | --- |
-| Add `evals/cursorAssistantSetup/` | Catch regressions on "set up cursorAssistant" routing |
+| ~~Add `evals/cursorAssistantSetup/`~~ | Done — positive/negative setup routing tasks |
 | `cursorAssistantSetup` — prefer bootstrap script over `curl\|bash` in skill | Align with INSTALL_SECURITY_AUDIT (doc-only) |
 | Periodic sync check: `agents/` vs `.cursor/agents/` | Dogfood drift; run `update` after package edits |
 

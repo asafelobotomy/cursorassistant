@@ -1,0 +1,9 @@
+id: negative-trigger-1
+description: "Feature work is not project setup"
+prompt: |
+  Add a REST endpoint for user profiles and unit tests. Use cursorAssistantSetup.
+expected_absent:
+  - "(?i)cursorAssistantSetup"
+  - "(?i)lifecycle_configure"
+tags:
+  - negative
