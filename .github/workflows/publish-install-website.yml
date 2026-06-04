@@ -25,18 +25,23 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Require INSTALL_WEBSITE_TOKEN
+      - name: Check INSTALL_WEBSITE_TOKEN
+        id: token
         env:
           HAS_TOKEN: ${{ secrets.INSTALL_WEBSITE_TOKEN }}
         run: |
           if [ -z "$HAS_TOKEN" ]; then
-            echo "::error::Add INSTALL_WEBSITE_TOKEN (write access to asafelobotomy.github.io) to publish the install page."
-            exit 1
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+            echo "::warning::INSTALL_WEBSITE_TOKEN not set — skipping publish. Add the secret and re-run this workflow."
+          else
+            echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
 
       - uses: actions/checkout@v4
+        if: steps.token.outputs.skip != 'true'
 
       - uses: actions/checkout@v4
+        if: steps.token.outputs.skip != 'true'
         with:
           repository: asafelobotomy/asafelobotomy.github.io
           ref: ${{ github.event.inputs.pages_ref || 'main' }}
@@ -44,11 +49,13 @@ jobs:
           path: pages
 
       - name: Generate install artifacts into pages repo
+        if: steps.token.outputs.skip != 'true'
         run: |
           python3 pages/scripts/generate_cursorassistant_install.py \
             --package-root "$GITHUB_WORKSPACE"
 
       - name: Push to github.io (auto-publish)
+        if: steps.token.outputs.skip != 'true'
         working-directory: pages
         run: |
           set -euo pipefail
