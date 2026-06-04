@@ -1,6 +1,8 @@
 id: positive-trigger-1
 description: "Verify commit subagent is suggested for its domain"
 prompt: |
-  Which subagent should handle this task in a cursorAssistant workspace?
+  Stage these changes, write a commit message, and open a PR. Which subagent should handle this in a cursorAssistant workspace?
+expected:
+  - "commit"
 tags:
   - smoke

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.12.0",
+  "packageVersion": "0.12.1",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -9,7 +9,7 @@
       "target": ".cursor/agents/cleaner.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:d81780653ee8fae162abd0f59d87b375957db69e2cc952fc5f36f952fad8e33d"
+      "hash": "sha256:1f5210f41e9e5948f6a6a5b1bb46b0aacf6961b498240798117197330eb47d6c"
     },
     {
       "id": "agents.commit",
@@ -17,7 +17,7 @@
       "target": ".cursor/agents/commit.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:98e31a6827f132c2d3feea159db8daaa34b26494a392cd00bace2fe0c35413e4"
+      "hash": "sha256:5b8fa436c7a778fea5507b9c40e81650caa47ef44946862bdf180e42f0ccb355"
     },
     {
       "id": "agents.cursorLifecycle",
@@ -25,7 +25,7 @@
       "target": ".cursor/agents/cursorLifecycle.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:5b8170f07e4fdc27c299eeda4f2f4ae2b634eb77b130f465cc616918c0318cfe"
+      "hash": "sha256:a25d9991b5e62dc3e6c846e404817d137ad3ec9b10fb10338edd91be08951810"
     },
     {
       "id": "agents.debugger",
@@ -33,7 +33,7 @@
       "target": ".cursor/agents/debugger.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:dfc711f751413b1007ff16cdf47c00d37cdf3fd034c10fffb6c10360b99e60dc"
+      "hash": "sha256:4a54ae5917225d83b59d918864ef57e5d2ffb6d72d68aab0003798d52cdd3341"
     },
     {
       "id": "agents.deps",
@@ -41,7 +41,7 @@
       "target": ".cursor/agents/deps.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:0955cdf8c5d9eb4460b544ee90d4f6287869ececb5e4feacd9f60334d7936aa6"
+      "hash": "sha256:1f316ac841f6049e5b97cb6517ab3bcfe3e5e18efcc59b38561883b38b45d9d8"
     },
     {
       "id": "agents.docs",
@@ -49,7 +49,7 @@
       "target": ".cursor/agents/docs.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:d57c07c065045e9ed5261680bef68edb39ebb2d619f69bcacb5f17aa4a1b9663"
+      "hash": "sha256:07df9e705388364d85583f7aa1d675a4b43fa434597e0433833bfd1bc8baf551"
     },
     {
       "id": "agents.inventory",
@@ -65,7 +65,7 @@
       "target": ".cursor/agents/organise.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:3ca18fd35c45962787a339dc255cca33848dbf7c2270964b2bdd6291b8528a7f"
+      "hash": "sha256:ce2a043b4bbe5d896b8e6c80ea901ea7cba00d208a66f2c2499cbe74d8249267"
     },
     {
       "id": "agents.planner",
@@ -73,7 +73,7 @@
       "target": ".cursor/agents/planner.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:37da4626349607245fbfaf9b446a6624aaee071152db7db9da3c990410163b94"
+      "hash": "sha256:6e5a383f1ef48747078ce1f5433a8d9b73db6465ebde3f91404e42cac81260d0"
     },
     {
       "id": "agents.researcher",
@@ -81,7 +81,7 @@
       "target": ".cursor/agents/researcher.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:6468bcbbf71c4555be5078039ff8177581d3a8f1fcef239f5cd76d8b8b75685b"
+      "hash": "sha256:145a9375b6648855270be73f8a12578b93bf37f7623cd655eda783c8ae448dfa"
     },
     {
       "id": "agents.review",
@@ -89,7 +89,7 @@
       "target": ".cursor/agents/review.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:e17776fbe61548b46a34b6f132997a5ebd60d8fe9dd0f8f80909ff0803e814ba"
+      "hash": "sha256:094629a39e0c848a2f15397a70ece20efc74436cc7955474f7acc6d036e98139"
     },
     {
       "id": "mcp.config",
@@ -114,7 +114,7 @@
       "target": ".cursor/mcp/scripts/_cursor_package_root.py",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:b83ba9c2e05737675e5b6f6127882c28c4de99fb98336a71db441d28b3e733b1",
+      "hash": "sha256:06df511dd41dc079206be8b71e9e44574b7ed45b8eaddf9478618c2ceaedafd6",
       "requiredWhen": []
     },
     {
@@ -154,7 +154,7 @@
       "target": ".cursor/mcp/scripts/cursorToolsMcp.py",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:7eec91f0a457d4b28a6828039151692e9caf7febe518810fe61f4639d26a11e6",
+      "hash": "sha256:2451898713f2975c05e21a960c21a6f310b0e6f2cda10755cd68520f5104b2e1",
       "requiredWhen": []
     },
     {
@@ -245,7 +245,7 @@
       "target": ".cursor/rules/core.mdc",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:515386139b2aaa25ed5d22736bbd8b469ee1f5bd49c8ef06c43fea7fb7365de2"
+      "hash": "sha256:621b889d2710dfd13fffdf0391df53e7f7935fa41b4b60068364b4b07b84c48d"
     },
     {
       "id": "rules.lifecycle",
@@ -262,6 +262,14 @@
       "layer": "core",
       "strategy": "replace",
       "hash": "sha256:145703731478633cd4afc70a803c05cd64c0d1631d31f7b21a96df16c46de24e"
+    },
+    {
+      "id": "skills.cursorAssistantSetup",
+      "source": "skills/cursorAssistantSetup/SKILL.md",
+      "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:f6549ef2bbe95bebac0432bf1241fb3ea2d303bde2c300a881eaa643e130d29c"
     },
     {
       "id": "skills.depSearch",
@@ -337,7 +345,7 @@
       "target": ".cursor/skills/lifecycleAudit/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:b16dd91fd3626b28a270dbd71aec25aed30d38db6d9634aee744df773079498a"
+      "hash": "sha256:4642b81e426a3211290fb82cd580c9715c0038f4377544a56fdbdcce995ff8f8"
     },
     {
       "id": "packs.secure.secretScanning",
@@ -369,7 +377,7 @@
       "target": ".cursor/skills/task-triage/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:2c9f7ecc0db318534d2e1ad7e97c48ae91f528604ebf988b85b6b9fc800c9045"
+      "hash": "sha256:d92206a8bea3e07ac1af04b28bdd3295d7d3658dd6af9ee6ccc8d70d7e9e594d"
     },
     {
       "id": "packs.tdd.tddCycle",
@@ -453,7 +461,7 @@
       "target": "AGENTS.md",
       "layer": "core",
       "strategy": "preserve-marked-markdown-blocks",
-      "hash": "sha256:1cb1ee7bc32bb426a939b6b265cbca351ca9105a3bad603d21554429d86eced9"
+      "hash": "sha256:ef7efc4ce883303281e5e1c13da4036c4de44129f74310376dba3735227ae5fb"
     }
   ]
 }

@@ -104,6 +104,12 @@
       "layer": "core"
     },
     {
+      "id": "skills.cursorAssistantSetup",
+      "source": "skills/cursorAssistantSetup/SKILL.md",
+      "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",
+      "layer": "core"
+    },
+    {
       "id": "skills.workspaceSearch",
       "source": "skills/workspaceSearch/SKILL.md",
       "target": ".cursor/skills/workspaceSearch/SKILL.md",

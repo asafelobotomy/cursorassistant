@@ -1,0 +1,10 @@
+id: routing-planner-vs-debugger
+description: "Active failure is debugger not planner"
+prompt: |
+  CI fails on the latest commit with a segfault in the test runner. We need root cause before any refactor plan. Which subagent?
+expected:
+  - "debugger"
+expected_absent:
+  - "(?i)\\bplanner\\b"
+tags:
+  - routing-conflicts

@@ -1,6 +1,6 @@
 ---
 name: commit
-description: Use when staging, committing, pushing, branching, stashing, tagging, opening pull requests, or writing commit messages.
+description: Use when staging, committing, pushing, branches, or opening PRs via git/gh. Not for implementing features or dependency audits.
 model: inherit
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: organise
-description: Use for structural repository work — moving files, regrouping folders, fixing paths after moves, and normalising layout without feature implementation.
+description: Use for moves, renames, and import path repair without feature implementation. Not for cache pruning or single typo fixes (main Agent or docs).
 model: inherit
 ---
 

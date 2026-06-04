@@ -9,7 +9,7 @@ Read-only check of cursorAssistant install state before mutating managed surface
 
 ## When to use
 
-- Before proposing `setup`, `update`, or `repair` on managed Cursor surfaces
+- Before proposing `configure`, `setup`, `update`, or `repair` on managed Cursor surfaces
 - When `installState` or lockfile integrity is unclear
 
 ## When not to use
@@ -28,7 +28,7 @@ python3 cursorAssistant.py plan-setup --workspace . --json
 
 | `installState` | Meaning |
 | --- | --- |
-| `not-installed` | No lockfile — run `setup` |
+| `not-installed` | No lockfile — run `configure` (preferred) or `setup` |
 | `installed` | All managed files match package hashes |
 | `needs-update` | Stale or missing files — run `update` |
 | `needs-repair` | Lockfile or install integrity issue — run `repair` |

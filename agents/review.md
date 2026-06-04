@@ -1,6 +1,6 @@
 ---
 name: review
-description: Use for code review, PR review, diff review, security and maintainability review, and regression-risk analysis.
+description: Use proactively for PR, diff, and architecture review before merge. Not for implementing fixes or reproducing test failures (use debugger).
 model: inherit
 readonly: true
 ---
@@ -27,3 +27,7 @@ Analyze changes for correctness, security, maintainability, and test gaps. **Do 
 4. **Handoff** — `debugger` if reproduction is needed; `planner` if remediation is multi-phase
 
 When review scope is unclear, the main Agent should run **`/task-triage`** before invoking this subagent.
+
+## Tools
+
+Prefer **Read** and **Grep** on changed paths; use **Shell** with `gh` for PR metadata when reviewing GitHub PRs. Use pack skills (e.g. **secureReview**) only when the lockfile lists the pack. Do not use deprecated MCP servers listed in `AGENTS.md` / `core.mdc`.

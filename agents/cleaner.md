@@ -1,6 +1,6 @@
 ---
 name: cleaner
-description: Use for repository hygiene — prune caches, generated debris, stale archives, and dead files without changing intended behaviour or broad restructuring.
+description: Use for hygiene—prune caches, generated debris, and dead files without behaviour changes. Not for feature work or directory moves (use organise).
 model: inherit
 ---
 

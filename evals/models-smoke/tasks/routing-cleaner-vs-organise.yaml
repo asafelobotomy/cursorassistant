@@ -1,0 +1,10 @@
+id: routing-cleaner-vs-organise
+description: "Moves are organise not cleaner"
+prompt: |
+  Move src/utils into src/lib and fix all imports. Which subagent?
+expected:
+  - "organise"
+expected_absent:
+  - "(?i)\\bcleaner\\b"
+tags:
+  - routing-conflicts

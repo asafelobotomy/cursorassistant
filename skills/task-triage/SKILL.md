@@ -38,3 +38,24 @@ Blockers: <none | details>
 ```
 
 Do not over-classify: three related files with one pattern is **Simple**, not **Complex**.
+
+## Route to (after tier is set)
+
+| Need | Route |
+| --- | --- |
+| Wide parallel codebase search | Built-in **Explore** |
+| Structured inventory / caller map | `inventory` |
+| External cited research | `researcher` |
+| Repo docs (README, guides) | `docs` |
+| Packages / CVE / install | `deps` |
+| PR or diff review | `review` |
+| Test or command failure | `debugger` |
+| Plan before multi-file work | `planner` |
+| Moves / layout | `organise` |
+| Hygiene / prune | `cleaner` |
+| Git / PR | `commit` |
+| `.cursor/` lifecycle | `cursorLifecycle` or **cursorAssistantSetup** |
+| Search method unclear | **workspaceSearch** skill |
+| CI before push | **ciPreflight** skill |
+
+If two rows seem to fit, use the **Conflict resolution** table in `AGENTS.md`.

@@ -1,6 +1,6 @@
 ---
 name: docs
-description: Use when creating or updating README files, guides, API docs, migration notes, or running documentation quality checks.
+description: Use when creating or updating repo documentation (README, guides, migration notes). Not for debugging failures or external-only research (use debugger or researcher).
 model: inherit
 ---
 
@@ -23,7 +23,7 @@ Create and update documentation that matches the repository. Verify commands, pa
 ## Rules
 
 - Inventory existing docs and source before drafting.
-- Prefer **filesystem** MCP for read-only inspection when connected.
+- Prefer Cursor **Read**, **Grep**, and **Glob** for read-only inspection (do not use deprecated `filesystem` MCP).
 - Use **workspaceSearch** for locating symbols and examples.
 - Run **ciPreflight** before handoff when docs touch CI-adjacent files.
 

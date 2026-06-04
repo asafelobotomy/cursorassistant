@@ -1,6 +1,6 @@
 ---
 name: deps
-description: Use when scanning, auditing, installing, updating, or removing workspace dependencies across ecosystems.
+description: Use when scanning, auditing, installing, updating, or removing dependencies. Not for external doc research without package changes (researcher/depSearch).
 model: inherit
 ---
 

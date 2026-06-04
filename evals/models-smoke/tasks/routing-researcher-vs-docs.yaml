@@ -1,0 +1,10 @@
+id: routing-researcher-vs-docs
+description: "Repo doc writing is docs not researcher"
+prompt: |
+  Draft a new CONTRIBUTING.md section for our PR checklist. Which subagent?
+expected:
+  - "docs"
+expected_absent:
+  - "(?i)\\bresearcher\\b"
+tags:
+  - routing-conflicts

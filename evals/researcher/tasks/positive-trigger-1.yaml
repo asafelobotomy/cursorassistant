@@ -2,5 +2,7 @@ id: positive-trigger-1
 description: "Verify researcher subagent is suggested for external research"
 prompt: |
   Which subagent should look up upstream API docs and cite sources before we implement?
+expected:
+  - "researcher"
 tags:
   - smoke

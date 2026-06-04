@@ -2,6 +2,17 @@
 
 Canonical routing for Cursor subagents in this package and in consumer workspaces after install.
 
+Full design notes: [docs/ROUTING_AND_SUBAGENTS.md](docs/ROUTING_AND_SUBAGENTS.md).
+
+## How routing works in Cursor
+
+1. **`description` in each `.cursor/agents/*.md` file** — primary signal for automatic Task delegation.
+2. **This file (`AGENTS.md`)** — parent-agent orchestration, built-ins, and handoffs.
+3. **`.cursor/rules/core.mdc`** — always-on reinforcement (triage, Explore, tools).
+4. **Skills** (`/name`) — procedures in parent context; not separate subagents.
+
+Prefer **explicit** `/name` or **Task** when the wrong specialist would waste context. Prefer **no subagent** when `/task-triage` says Trivial or Simple.
+
 ## Built-in Cursor subagents
 
 Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser** (web automation) automatically. Do not define a custom subagent named `explore` — it shadows the built-in.
@@ -24,6 +35,9 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 | `depSearch` | Dependency discovery and audit research |
 | `testing` | Run project tests via Shell |
 | `lifecycleAudit` | Before mutating managed `.cursor/` surfaces |
+| `cursorAssistantSetup` | First project install after MCP bootstrap (interview → `configure` / `setup`) |
+
+**Plugin command (user scope):** `/cursor-assistant:setup-workspace` — same flow as `cursorAssistantSetup`; requires plugin install or symlink from `install-from-github.sh`.
 
 ## Roster (11 subagents)
 
@@ -33,7 +47,7 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 | `inventory` | `/inventory` or Task | structured read-only maps, caller lists, architecture notes |
 | `review` | `/review` or Task | code review, PR review, architecture review |
 | `commit` | `/commit` or Task | git staging, commits, push, PRs, branches |
-| `deps` | `/deps` | dependency scan, audit, install, update |
+| `deps` | `/deps` or Task | dependency scan, audit, install, update |
 | `docs` | `/docs` or Task | documentation authoring and doc quality checks |
 | `debugger` | `/debugger` or Task | failing tests, broken commands, root-cause isolation |
 | `planner` | `/planner` or Task | multi-step plans before large changes |
@@ -45,6 +59,7 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 
 | Work type | Route |
 | --- | --- |
+| First-time project setup (after bootstrap) | `cursorAssistantSetup` skill, `/cursor-assistant:setup-workspace`, or `cursorLifecycle` (`configure`) |
 | Install or update cursorAssistant surfaces | `cursorLifecycle` |
 | Wide codebase search (parallel) | Cursor built-in **Explore** |
 | Structured inventory before a change | `inventory` |
@@ -58,6 +73,23 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 | Source-backed external research | `researcher` |
 | Structural moves and path repair | `organise` |
 | Hygiene, caches, approved deletions | `cleaner` |
+
+## Conflict resolution (pick one)
+
+| Situation | Choose | Not |
+| --- | --- | --- |
+| Wide parallel “find anything about X” | Built-in **Explore** | `inventory` |
+| Structured caller map before refactor | `inventory` | Explore |
+| Write or update repo docs | `docs` | `researcher` |
+| External docs with citations | `researcher` | `docs` |
+| Install / audit / remove packages | `deps` | `researcher` |
+| Prune caches / dead artifacts | `cleaner` | `organise` |
+| Moves, renames, import path repair | `organise` | `cleaner` |
+| Multi-file plan before coding | `planner` | main Agent only |
+| Failing test or command (root cause) | `debugger` | `review`, `planner` |
+| PR or diff review (no fixes) | `review` | `debugger` |
+| Git commit / push / PR | `commit` | main Agent |
+| Managed `.cursor/` / lockfile | `cursorLifecycle` | feature agents |
 
 ## Handoff rules
 
@@ -77,7 +109,7 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 | Phrase | Route |
 | --- | --- |
 | `inspect workspace` | `cursorLifecycle` |
-| `set up cursorAssistant` | `cursorLifecycle` |
+| `set up cursorAssistant` | `cursorAssistantSetup` or `cursorLifecycle` (`configure` / `setup`) |
 | `update cursorAssistant` | `cursorLifecycle` |
 | `health check` (install state) | `cursorLifecycle` |
 

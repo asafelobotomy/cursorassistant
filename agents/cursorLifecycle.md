@@ -1,6 +1,6 @@
 ---
 name: cursorLifecycle
-description: Use when setting up, inspecting, updating, or repairing cursorAssistant-managed surfaces in a consumer workspace.
+description: Use for cursorAssistant setup, inspect, update, repair, or factory-restore of managed .cursor surfaces. Not for application feature coding.
 model: inherit
 ---
 
@@ -47,7 +47,7 @@ Prefer **cursorTools** MCP (`lifecycle_*` tools) when MCP is enabled; fall back 
 
 ## Trigger phrases
 
-- **Set up cursorAssistant** → `setup` if not installed; otherwise `update`
+- **Set up cursorAssistant** → `configure` if not installed; otherwise `update`
 - **Inspect workspace** / **health check** → `inspect`
 - **Update cursorAssistant** → `update`
 - **Repair cursorAssistant** / broken lockfile → `repair`

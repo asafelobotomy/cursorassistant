@@ -1,6 +1,6 @@
 ---
 name: planner
-description: Use for multi-step implementation plans, migrations, and phased rollouts before coding.
+description: Use for multi-step plans, migrations, and phased rollouts before coding. Not for single-file edits, active test debugging, or implementation.
 model: inherit
 readonly: true
 ---
