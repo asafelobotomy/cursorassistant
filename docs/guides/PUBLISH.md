@@ -7,7 +7,7 @@ cursorAssistant is installed from **GitHub**, not the Cursor Marketplace.
 See [INSTALL.md](../INSTALL.md) and the README **Install** section:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.0/scripts/install-from-github.sh | bash -s -- /path/to/your-project
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- /path/to/your-project
 ```
 
 ## Plugin manifest (maintainers)
@@ -33,8 +33,8 @@ On push to `master` / `main`, when **`VERSION`** changes, [.github/workflows/rel
 
 1. Move notes from `## [Unreleased]` into a new `## [X.Y.Z] - YYYY-MM-DD` section at the top of [CHANGELOG.md](../CHANGELOG.md).
 2. Bump [VERSION](../VERSION) to match (and `.cursor-plugin/plugin.json` if needed).
-3. Run `python3 scripts/generate_install_page.py` and `python3 scripts/check_install_page.py` (updates [install/](../../install/) for GitHub Pages).
-4. Push to `master`. CI and the Pages workflow deploy the setup site; the release workflow runs when `VERSION` changes.
+3. Run `python3 scripts/generate_install_page.py` if install URLs embed the version.
+4. Push to `master`. The release workflow runs after CI paths match.
 
 To draft notes locally:
 

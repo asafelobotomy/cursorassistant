@@ -3,191 +3,103 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Install cursorAssistant in Cursor — pinned MCP bootstrap, then project setup interview." />
   <title>Set up cursorAssistant in Cursor</title>
   <style>
-    :root { color-scheme: light dark; font-family: system-ui, sans-serif; --accent: #2ea043; --warn: #9a6700; }
-    body { max-width: 44rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.55; }
-    h1 { font-size: 1.4rem; margin-bottom: 0.25rem; }
-    .lead { font-size: 1.05rem; margin: 0.5rem 0 1rem; }
-    .cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin: 1rem 0; }
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { max-width: 42rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    h1 { font-size: 1.35rem; }
     .cta {
-      display: inline-block; padding: 0.75rem 1.25rem;
-      background: var(--accent); color: #fff; text-decoration: none; border-radius: 6px;
+      display: inline-block; margin: 1rem 0; padding: 0.75rem 1.25rem;
+      background: #2ea043; color: #fff; text-decoration: none; border-radius: 6px;
       font-weight: 600; border: none; cursor: pointer; font-size: 1rem;
     }
     .cta:hover { filter: brightness(1.05); }
-    .cta-secondary {
-      background: transparent; color: inherit; border: 1px solid rgba(127,127,127,0.45);
-    }
     .steps { counter-reset: step; list-style: none; padding: 0; }
-    .steps > li { counter-increment: step; margin: 1rem 0; padding-left: 2.5rem; position: relative; }
-    .steps > li::before {
+    .steps li { counter-increment: step; margin: 1rem 0; padding-left: 2.5rem; position: relative; }
+    .steps li::before {
       content: counter(step); position: absolute; left: 0;
       width: 1.75rem; height: 1.75rem; border-radius: 50%;
-      background: var(--accent); color: #fff; text-align: center; line-height: 1.75rem; font-size: 0.9rem;
+      background: #2ea043; color: #fff; text-align: center; line-height: 1.75rem; font-size: 0.9rem;
     }
-    .checklist { list-style: none; padding: 0; margin: 1rem 0; }
-    .checklist li { margin: 0.5rem 0; display: flex; gap: 0.5rem; align-items: flex-start; }
-    .checklist input { margin-top: 0.35rem; }
     code, pre { font-size: 0.85rem; background: rgba(127,127,127,0.15); border-radius: 4px; }
     pre { padding: 0.75rem; overflow-x: auto; }
-    .muted { opacity: 0.85; font-size: 0.9rem; }
+    .muted { opacity: 0.8; font-size: 0.9rem; }
     .hidden { display: none; }
-    #status { margin: 1rem 0; padding: 0.75rem; border-radius: 6px; background: rgba(46,160,67,0.15); }
-    #status.warn { background: rgba(154,103,0,0.15); }
-    details { margin: 1rem 0; border: 1px solid rgba(127,127,127,0.25); border-radius: 6px; padding: 0.5rem 0.75rem; }
-    summary { cursor: pointer; font-weight: 600; }
-    .pill { display: inline-block; font-size: 0.75rem; padding: 0.15rem 0.5rem; border-radius: 999px; background: rgba(46,160,67,0.2); margin-left: 0.35rem; }
-    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-    th, td { text-align: left; padding: 0.35rem 0.5rem; border-bottom: 1px solid rgba(127,127,127,0.2); }
-    .copy-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.5rem 0; }
-    .copy-row button { font-size: 0.85rem; padding: 0.35rem 0.65rem; border-radius: 4px; border: 1px solid rgba(127,127,127,0.35); background: transparent; cursor: pointer; }
+    #status { margin-top: 1rem; padding: 0.75rem; border-radius: 4px; background: rgba(46,160,67,0.15); }
   </style>
 </head>
 <body>
   <h1>Set up cursorAssistant</h1>
-  <p class="lead">Managed Cursor routing, agents, and skills for your repo — installed in two phases: <strong>bootstrap</strong> (this page) then <strong>project interview</strong> (inside Cursor).</p>
-  <p class="muted">Version <strong>@@VERSION@@</strong> · <span class="pill">pinned tag v@@VERSION@@</span> · no <code>curl | bash</code> in the MCP button</p>
+  <p class="muted">Version @@VERSION@@ — bootstrap only here; project interview runs inside Cursor.</p>
+  <p class="muted">MCP install uses a <strong>pinned git tag</strong> (no network pipe-to-bash). Review the command in Cursor before confirming.</p>
 
-  <div class="cta-row">
+  <p>
     <button type="button" class="cta" id="start">Install in Cursor</button>
-    <button type="button" class="cta cta-secondary" id="copy-phrase">Copy setup phrase</button>
-  </div>
-  <div id="status" class="hidden" role="status" aria-live="polite"></div>
+  </p>
+  <div id="status" class="hidden" role="status"></div>
 
-  <p class="muted">When Cursor opens, review the MCP command — it only runs a <strong>git clone</strong> of the release tag if the package is missing:</p>
-  <pre id="mcp-preview">@@MCP_PREVIEW@@</pre>
-
-  <h2>Your progress</h2>
-  <p class="muted">Check off steps as you go (saved in this browser only).</p>
-  <ul class="checklist" id="progress">
-    <li><label><input type="checkbox" data-step="mcp" /> MCP install approved in Cursor</label></li>
-    <li><label><input type="checkbox" data-step="project" /> Project folder opened in Cursor</label></li>
-    <li><label><input type="checkbox" data-step="reload" /> Reload Window completed</label></li>
-    <li><label><input type="checkbox" data-step="interview" /> Setup interview finished (<code>.cursor/</code> + lockfile)</label></li>
-  </ul>
-
-  <h2>Steps</h2>
   <ol class="steps">
     <li>
       <strong>Confirm in Cursor</strong> when prompted to add the <code>cursorAssistant</code> MCP server.
-      Package installs to <code>~/.local/share/cursorassistant/@@VERSION@@</code> (symlink <code>current</code>).
+      It clones the package to <code>~/.local/share/cursorassistant</code> on first run (no project interview yet).
     </li>
     <li>
-      <strong>Open your project</strong> (File → Open Folder) — not the cursorAssistant repo unless you are developing the package.
+      <strong>Open your project</strong> in Cursor (File → Open Folder).
     </li>
     <li>
-      <strong>Reload Window</strong> (Command Palette → “Developer: Reload Window”) so plugin commands load.
+      <strong>Reload Window</strong> (Developer → Reload Window) so plugin skills and commands load.
     </li>
     <li>
-      <strong>Run setup</strong> in chat — paste the phrase you copied, or use <code>/cursor-assistant:setup-workspace</code>,
-      or MCP tool <code>lifecycle_configure</code>.
+      <strong>Run setup</strong> in chat: say <em>Set up cursorAssistant in this workspace</em>,
+      use <code>/cursor-assistant:setup-workspace</code>, or ask the Agent to call MCP tool <code>lifecycle_configure</code>.
+      That runs the interview and writes <code>.cursor/</code> + lockfile.
     </li>
   </ol>
 
-  <div class="copy-row">
-    <button type="button" id="copy-setup-full">Copy: full setup instruction</button>
-    <button type="button" id="copy-inspect">Copy: verify install (inspect)</button>
-  </div>
-
-  <details open>
-    <summary>What you get after setup</summary>
-    <p class="muted">@@PACKAGE_BLURB@@</p>
-    <table>
-      <thead><tr><th>Surface</th><th>Location</th></tr></thead>
-      <tbody>
-        <tr><td>Routing</td><td><code>AGENTS.md</code></td></tr>
-        <tr><td>Subagents</td><td><code>.cursor/agents/</code></td></tr>
-        <tr><td>Skills</td><td><code>.cursor/skills/</code></td></tr>
-        <tr><td>Rules</td><td><code>.cursor/rules/</code></td></tr>
-        <tr><td>Lockfile</td><td><code>.cursor/cursorAssistant-lock.json</code></td></tr>
-      </tbody>
-    </table>
-  </details>
-
-  <details>
-    <summary>Troubleshooting</summary>
-    <ul>
-      <li><strong>Cursor did not open</strong> — install <a href="https://cursor.com">Cursor</a>, then click Install again. Or use manual bootstrap below.</li>
-      <li><strong>MCP dialog shows unexpected commands</strong> — compare with <a href="https://github.com/@@REPO@@/blob/v@@VERSION@@/install/deeplinks.json"><code>deeplinks.json</code> on GitHub</a> for tag <code>v@@VERSION@@</code>.</li>
-      <li><strong>Setup command not found</strong> — Reload Window; ensure plugin symlink exists under <code>~/.cursor/plugins/local/cursor-assistant</code>.</li>
-      <li><strong>Already installed globally</strong> — skip the button; open your project and run the setup phrase only.</li>
-    </ul>
-  </details>
-
-  <details>
-    <summary>Manual bootstrap (terminal)</summary>
-    <p class="muted">Inspect commands before running. Same pin as the MCP button:</p>
-    <pre id="bootstrap-git">@@BOOTSTRAP_GIT@@
-ln -sfn "$HOME/.local/share/cursorassistant/@@VERSION@@" "$HOME/.local/share/cursorassistant/current"</pre>
-    <div class="copy-row">
-      <button type="button" id="copy-bootstrap-git">Copy git bootstrap</button>
-    </div>
-    <p class="muted">Optional script (review on GitHub first):</p>
-    <pre id="bootstrap-cmd">@@BOOTSTRAP_CURL@@</pre>
-    <div class="copy-row">
-      <button type="button" id="copy-bootstrap">Copy curl bootstrap</button>
-      <a class="cta cta-secondary" id="mcp-tools-link" href="@@MCP_CURSOR_TOOLS@@" style="text-decoration:none;display:inline-block;">cursorTools only (deeplink)</a>
-    </div>
-  </details>
-
   <p class="muted">
     <a href="https://github.com/@@REPO@@">GitHub</a> ·
-    <a href="https://github.com/@@REPO@@/blob/v@@VERSION@@/INSTALL.md">Terminal install</a> ·
-    <a href="https://github.com/@@REPO@@/releases/tag/v@@VERSION@@">Release v@@VERSION@@</a>
+    <a href="https://github.com/@@REPO@@/blob/v@@VERSION@@/INSTALL.md">Full terminal install</a>
   </p>
+
+  <details>
+    <summary>Manual bootstrap (terminal, more control)</summary>
+    <p class="muted">Preferred if you want to inspect commands before running:</p>
+    <pre id="bootstrap-git">@@BOOTSTRAP_GIT@@
+ln -sfn "$HOME/.local/share/cursorassistant/@@VERSION@@" "$HOME/.local/share/cursorassistant/current"</pre>
+    <button type="button" id="copy-bootstrap-git">Copy git bootstrap</button>
+    <p class="muted">Or review then run:</p>
+    <pre id="bootstrap-cmd">@@BOOTSTRAP_CURL@@</pre>
+    <button type="button" id="copy-bootstrap">Copy curl bootstrap</button>
+    <p class="muted">Then MCP only: <a id="mcp-tools-link" href="@@MCP_CURSOR_TOOLS@@">cursorTools deeplink</a> (requires bootstrap first)</p>
+  </details>
 
   <script>
     const MCP_COMBINED = "@@MCP_COMBINED@@";
-    const SETUP_PHRASE = "Set up cursorAssistant in this workspace";
-    const SETUP_FULL = SETUP_PHRASE + " — run the project interview (configure) and install managed .cursor surfaces.";
-    const INSPECT_CMD = "python3 ~/.local/share/cursorassistant/current/cursorAssistant.py inspect --workspace . --json";
     const BOOTSTRAP_GIT = `@@BOOTSTRAP_GIT@@
 ln -sfn "$HOME/.local/share/cursorassistant/@@VERSION@@" "$HOME/.local/share/cursorassistant/current"`;
     const BOOTSTRAP = "@@BOOTSTRAP_CURL@@";
-    const STORAGE_KEY = "cursorassistant-install-progress-v@@VERSION@@";
 
-    function showStatus(msg, warn) {
+    function showStatus(msg) {
       const el = document.getElementById("status");
       el.textContent = msg;
-      el.classList.toggle("warn", !!warn);
       el.classList.remove("hidden");
     }
+
+    document.getElementById("start").addEventListener("click", () => {
+      showStatus("Opening Cursor… Approve the MCP install dialog, then follow the steps below.");
+      window.location.href = MCP_COMBINED;
+    });
 
     async function copyText(text, label) {
       try {
         await navigator.clipboard.writeText(text);
-        showStatus(label + " copied to clipboard.");
+        showStatus(label + " copied.");
       } catch {
-        showStatus("Copy failed — select the text and copy manually.", true);
+        showStatus("Copy failed — select the command in the box and copy manually.");
       }
     }
-
-    document.getElementById("start").addEventListener("click", () => {
-      showStatus("Opening Cursor… Approve the MCP install dialog, then check off steps below.");
-      window.location.href = MCP_COMBINED;
-    });
-
-    document.getElementById("copy-phrase").addEventListener("click", () => copyText(SETUP_PHRASE, "Setup phrase"));
-    document.getElementById("copy-setup-full").addEventListener("click", () => copyText(SETUP_FULL, "Full setup instruction"));
-    document.getElementById("copy-inspect").addEventListener("click", () => copyText(INSPECT_CMD, "Inspect command"));
     document.getElementById("copy-bootstrap-git")?.addEventListener("click", () => copyText(BOOTSTRAP_GIT, "Git bootstrap"));
     document.getElementById("copy-bootstrap")?.addEventListener("click", () => copyText(BOOTSTRAP, "curl bootstrap"));
-
-    (function progressTracker() {
-      const boxes = document.querySelectorAll("#progress input[type=checkbox]");
-      try {
-        const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-        boxes.forEach((b) => { if (saved[b.dataset.step]) b.checked = true; });
-      } catch { /* ignore */ }
-      boxes.forEach((b) => b.addEventListener("change", () => {
-        const state = {};
-        boxes.forEach((x) => { state[x.dataset.step] = x.checked; });
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-        if (state.interview) showStatus("All steps complete — you are ready to use cursorAssistant.");
-      }));
-    })();
   </script>
 </body>
 </html>

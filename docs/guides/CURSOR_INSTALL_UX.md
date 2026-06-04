@@ -26,18 +26,13 @@ flowchart LR
 - No project interview on the web page
 - No `curl | bash` required if MCP bootstrap succeeds (optional manual bootstrap in page footer)
 
-## Install website
-
-Public setup page: [https://asafelobotomy.github.io/cursorassistant/install/](https://asafelobotomy.github.io/cursorassistant/install/). See [INSTALL_WEBSITE.md](INSTALL_WEBSITE.md) for UX features, Pages deploy, and security notes.
-
 ## Regenerate setup artifacts
 
 ```sh
 python3 scripts/generate_install_page.py
-python3 scripts/check_install_page.py
 ```
 
-Updates `install/index.html` and `install/deeplinks.json` from [install/index.template.html](../../install/index.template.html) for the current [VERSION](../../VERSION).
+Updates `install/index.html` and `install/deeplinks.json` for the current [VERSION](../VERSION).
 
 ## Terminal-first alternative
 
