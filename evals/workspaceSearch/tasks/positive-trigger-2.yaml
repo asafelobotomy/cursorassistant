@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Search strategy choice phrase routes to workspaceSearch"
+prompt: |
+  For finding where a symbol is defined, should the Agent use Grep,
+  SemanticSearch, or Glob? Which cursorAssistant skill guides that?
+expected:
+  - "workspaceSearch"
+tags:
+  - smoke
+  - positive

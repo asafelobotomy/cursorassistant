@@ -20,9 +20,12 @@ jobs:
       - name: Validate all eval suites
         run: python3 tools/cursorEval/cursorEval.py --repo-root . validate
 
+      - name: Eval coverage (strict)
+        run: python3 tools/cursorEval/cursorEval.py --repo-root . coverage --strict
+
       - name: Dry-run core eval suites
         run: |
-          for suite in lifecycleAudit testing inventory task-triage workspaceSearch ciPreflight depSearch models-smoke cursorAssistantSetup; do
+          for suite in lifecycleAudit surfaceReview testing inventory task-triage workspaceSearch ciPreflight depSearch models-smoke cursorAssistantSetup; do
             python3 tools/cursorEval/cursorEval.py --repo-root . run "evals/${suite}/eval.yaml" --dry-run
           done
 
@@ -73,3 +76,25 @@ jobs:
           GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash scripts/eval_routing_live.sh
+
+  eval-quality:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml
+
+      - name: LLM quality on changed core skills
+        env:
+          GITHUB_MODELS_TOKEN: ${{ secrets.GITHUB_MODELS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EVAL_QUALITY_BASE: origin/${{ github.event.repository.default_branch }}
+          EVAL_QUALITY_FAIL_UNDER: "0.65"
+        run: bash scripts/eval_quality_changed.sh

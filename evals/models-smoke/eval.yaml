@@ -1,6 +1,11 @@
 name: "models-smoke-eval"
 description: "Small routing smoke suite for PR GitHub Models runs (low cost)"
 
+config:
+  trials_per_task: 1
+  inject_skill_body: true
+  max_attempts: 1
+
 graders: []
 
 tasks:

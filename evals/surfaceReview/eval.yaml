@@ -1,0 +1,16 @@
+name: "surfaceReview-eval"
+description: "Evaluates surfaceReview skill behaviour"
+
+graders:
+  - type: text
+    name: references_skill
+    config:
+      pattern: "(?i)(surfaceReview|skill)"
+
+  - type: behavior
+    name: response_budget
+    config:
+      max_tokens: 900
+
+tasks:
+  - "tasks/*.yaml"

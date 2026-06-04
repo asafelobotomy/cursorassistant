@@ -12,7 +12,8 @@ CE="python3 tools/cursorEval/cursorEval.py --repo-root ."
 
 _run_suite() {
   local suite="$1"
-  if $CE run "$suite" --model "$MODEL"; then
+  shift
+  if $CE run "$suite" --model "$MODEL" "$@"; then
     return 0
   fi
   local latest
@@ -24,6 +25,6 @@ _run_suite() {
   return 1
 }
 
-_run_suite evals/models-smoke/eval.yaml
-_run_suite evals/cursorAssistantSetup/eval.yaml
+_run_suite evals/models-smoke/eval.yaml --tags models-smoke
+_run_suite evals/cursorAssistantSetup/eval.yaml --tags smoke
 echo "eval_models_pr_smoke: passed"

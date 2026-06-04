@@ -14,8 +14,9 @@ CE="python3 tools/cursorEval/cursorEval.py --repo-root ."
 
 _run_suite() {
   local suite="$1"
-  echo "eval_routing_live: run ${suite}"
-  if $CE run "$suite" --model "$MODEL"; then
+  shift
+  echo "eval_routing_live: run ${suite} $*"
+  if $CE run "$suite" --model "$MODEL" "$@"; then
     return 0
   fi
   local latest
@@ -28,14 +29,14 @@ _run_suite() {
 }
 
 # Core routing smoke (models-smoke + setup skill)
-_run_suite evals/models-smoke/eval.yaml
-_run_suite evals/cursorAssistantSetup/eval.yaml
+_run_suite evals/models-smoke/eval.yaml --tags models-smoke
+_run_suite evals/cursorAssistantSetup/eval.yaml --tags smoke
 
 # One positive task per core agent (fast routing check)
 AGENTS=(inventory review commit deps docs debugger planner researcher organise cleaner cursorLifecycle)
 for agent in "${AGENTS[@]}"; do
   if [ -f "evals/${agent}/tasks/positive-trigger-1.yaml" ]; then
-    _run_suite "evals/${agent}/eval.yaml"
+    _run_suite "evals/${agent}/eval.yaml" --tags smoke
   fi
 done
 

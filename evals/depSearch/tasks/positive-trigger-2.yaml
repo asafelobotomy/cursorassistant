@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Manifest discovery without mutating packages routes to depSearch"
+prompt: |
+  List lockfiles and package manifests and check import usage before we
+  remove anything — discovery only, no installs. Which skill?
+expected:
+  - "depSearch"
+tags:
+  - smoke
+  - positive

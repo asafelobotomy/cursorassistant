@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Concise test report phrase routes to leanVerification skill"
+prompt: |
+  Summarize pass/fail from the last test run with minimal bullets for
+  triage. Which lean pack skill?
+expected:
+  - "leanVerification"
+tags:
+  - smoke
+  - positive

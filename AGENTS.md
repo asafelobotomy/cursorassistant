@@ -35,6 +35,7 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 | `depSearch` | Dependency discovery and audit research |
 | `testing` | Run project tests via Shell |
 | `lifecycleAudit` | Before mutating managed `.cursor/` surfaces |
+| `surfaceReview` | Before merging changes to agents, skills, or `.mdc` rules |
 | `cursorAssistantSetup` | First project install after MCP bootstrap (interview → `configure` / `setup`) |
 
 **Plugin command (user scope):** `/cursor-assistant:setup-workspace` — same flow as `cursorAssistantSetup`; requires plugin install or symlink from `install-from-github.sh`.
@@ -68,6 +69,7 @@ Cursor provides **Explore** (codebase search), **Bash** (shell), and **Browser**
 | Git commits, push, PRs, branches | `commit` (Shell / `gh`) |
 | Dependency audit or package changes | `deps` |
 | README, guides, migration docs | `docs` |
+| Quality audit of agents/skills/rules before merge | `surfaceReview` skill |
 | Diagnose failures with evidence | `debugger` |
 | Phased implementation planning | `planner` |
 | Source-backed external research | `researcher` |

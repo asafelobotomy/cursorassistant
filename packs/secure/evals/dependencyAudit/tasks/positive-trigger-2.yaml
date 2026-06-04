@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "OSV lockfile audit phrase routes to dependencyAudit skill"
+prompt: |
+  Query OSV.dev for CVEs in our lockfile packages and triage severity.
+  Which secure pack skill?
+expected:
+  - "dependencyAudit"
+tags:
+  - smoke
+  - positive

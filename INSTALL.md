@@ -46,6 +46,17 @@ CURSOR_ASSISTANT_VERSION=0.12.1 curl -fsSL https://raw.githubusercontent.com/asa
 - Python 3.10+, git, [Cursor](https://cursor.com/)
 - `uvx` when using MCP (`pip` package `mcp[cli]`)
 
+## Optional: GitHub Models token for evals
+
+To run live routing evals locally (`cursorEval run`, `bash scripts/eval_models_pr_smoke.sh`):
+
+```sh
+export GITHUB_MODELS_TOKEN='ghp_...'   # models-capable PAT; do not reuse for gh if you push in the same shell
+python3 tools/cursorEval/cursorEval.py --repo-root . run evals/inventory/eval.yaml --tags smoke
+```
+
+Add the same secret to the GitHub repo for CI. See [README.md](README.md#github-models-token-live-evals) and [SECURITY.md](SECURITY.md).
+
 ## See also
 
 - [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md)

@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "OWASP code review phrase routes to secureReview skill"
+prompt: |
+  Review authentication handlers for OWASP Top 10 issues with severities.
+  Which secure pack skill?
+expected:
+  - "secureReview"
+tags:
+  - smoke
+  - positive

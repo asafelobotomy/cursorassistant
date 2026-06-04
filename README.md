@@ -100,10 +100,25 @@ Upgrading from v0.9? See [docs/MIGRATION.md](docs/MIGRATION.md).
 
 ```sh
 python3 tools/cursorEval/cursorEval.py validate --repo-root .
-python3 tools/cursorEval/cursorEval.py coverage --repo-root .
+python3 tools/cursorEval/cursorEval.py coverage --strict   # CI gate: eval + 2 grader types + negative trigger
+python3 tools/cursorEval/cursorEval.py report agents/review.md -o report.html
+python3 tools/cursorEval/cursorEval.py quality skills/testing/SKILL.md
 python3 tools/cursorEval/cursorEval.py run evals/lifecycleAudit/eval.yaml --dry-run
-bash scripts/eval_models_pr_smoke.sh   # GitHub Models (3 tasks; skips without token)
+bash scripts/eval_models_pr_smoke.sh
+bash scripts/eval_routing_live.sh
 ```
+
+### GitHub Models token (live evals)
+
+Live `run`, `grade`, `quality`, and `dev` call [GitHub Models](https://github.com/marketplace/models). CI and local scripts prefer a **models-only** token so `gh` / `git` auth is unchanged:
+
+1. Create a fine-grained or classic PAT with permission to use GitHub Models (or use a dedicated models token from your org).
+2. Export **`GITHUB_MODELS_TOKEN`** in the shell or add it as a repository secret for Actions.
+3. Optional fallbacks: `GITHUB_TOKEN` or `GH_TOKEN` (avoid overriding these if you use `gh` in the same session — see [SECURITY.md](SECURITY.md)).
+
+Without a token, `eval_models_pr_smoke.sh` and `eval_routing_live.sh` exit 0 with a skip message; PR smoke does not fail the build.
+
+**Manual workflow:** In GitHub → Actions → **Evals** → **Run workflow**, the **eval-quality** job scores changed `skills/*/SKILL.md` files via `scripts/eval_quality_changed.sh` (requires `GITHUB_MODELS_TOKEN`).
 
 ## Repository layout
 

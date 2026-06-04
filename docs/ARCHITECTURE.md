@@ -39,7 +39,7 @@ Shared helpers live in `packages/cursor-mcp-shared/`, vendored to `mcp/scripts/_
 ## Quality gates
 
 - `tests/` — lifecycle and MCP composition
-- `tools/cursorEval/` — eval suite validate, surface `check`, `policy`, optional GitHub Models `run`
+- `tools/cursorEval/` — validate, `check` (compliance tier), `tokens`, `suggest`, `coverage --strict`, `policy`, optional GitHub Models `run` ([audit](CURSOR_EVAL_AUDIT.md))
 
 ## Local plugin vs project lifecycle
 

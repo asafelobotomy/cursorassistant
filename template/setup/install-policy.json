@@ -104,6 +104,12 @@
       "layer": "core"
     },
     {
+      "id": "skills.surfaceReview",
+      "source": "skills/surfaceReview/SKILL.md",
+      "target": ".cursor/skills/surfaceReview/SKILL.md",
+      "layer": "core"
+    },
+    {
       "id": "skills.cursorAssistantSetup",
       "source": "skills/cursorAssistantSetup/SKILL.md",
       "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",

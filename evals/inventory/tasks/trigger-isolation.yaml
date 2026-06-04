@@ -1,0 +1,12 @@
+id: trigger-isolation
+description: "Routing without injecting full agent body (description-only context)"
+prompt: |
+  We need a structured caller map before a refactor. Which subagent should handle that?
+  Answer with the subagent name only.
+config:
+  inject_skill_body: false
+expected:
+  - "inventory"
+tags:
+  - smoke
+  - trigger-isolation

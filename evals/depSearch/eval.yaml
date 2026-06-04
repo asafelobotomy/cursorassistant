@@ -7,5 +7,10 @@ graders:
     config:
       pattern: "(?i)(depSearch|dependency|audit|lockfile|package)"
 
+  - type: behavior
+    name: response_budget
+    config:
+      max_tokens: 800
+
 tasks:
   - "tasks/*.yaml"

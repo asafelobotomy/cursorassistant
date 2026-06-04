@@ -1,11 +1,21 @@
 name: "inventory-eval"
 description: "Evaluates inventory subagent routing and built-in Explore distinction"
 
+config:
+  trials_per_task: 1
+  inject_skill_body: true
+  max_attempts: 1
+
 graders:
   - type: text
     name: references_agent
     config:
       pattern: "(?i)(inventory|built-in.*explore|explore subagent)"
+
+  - type: behavior
+    name: response_budget
+    config:
+      max_tokens: 800
 
 tasks:
   - "tasks/*.yaml"

@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Natural language pre-commit workflow phrase routes to ciPreflight"
+prompt: |
+  I changed several files and want the cheapest local checks mirrored from
+  .github/workflows before I git commit. Which cursorAssistant skill?
+expected:
+  - "ciPreflight"
+tags:
+  - smoke
+  - positive

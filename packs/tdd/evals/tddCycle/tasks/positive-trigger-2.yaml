@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Red-green-refactor phrase routes to tddCycle skill"
+prompt: |
+  Write one failing test, minimal green implementation, optional commit on
+  green. Which tdd pack skill?
+expected:
+  - "tddCycle"
+tags:
+  - smoke
+  - positive

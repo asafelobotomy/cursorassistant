@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Hygiene and cache pruning phrase routes to cleaner subagent"
+prompt: |
+  Prune __pycache__, stale build artifacts, and old .cursorEval JSON with
+  user approval — no feature edits. Which subagent?
+expected:
+  - "cleaner"
+tags:
+  - smoke
+  - positive

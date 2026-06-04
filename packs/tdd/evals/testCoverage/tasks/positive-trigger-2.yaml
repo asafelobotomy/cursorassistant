@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Coverage diagnostic phrase routes to testCoverage skill"
+prompt: |
+  Interpret coverage.xml gaps and weak assertions as diagnostics, not a
+  percent goal. Which skill?
+expected:
+  - "testCoverage"
+tags:
+  - smoke
+  - positive

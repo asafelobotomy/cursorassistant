@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Test boundary phrase routes to testArchitecture skill"
+prompt: |
+  Decide unit vs integration boundaries and what a test must not cross.
+  Which tdd pack skill?
+expected:
+  - "testArchitecture"
+tags:
+  - smoke
+  - positive

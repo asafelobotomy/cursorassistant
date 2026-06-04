@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Pre-update health check phrase routes to lifecycleAudit"
+prompt: |
+  Before cursorAssistant update, which skill inspects installState, repair
+  reasons, and lockfile validity?
+expected:
+  - "lifecycleAudit"
+tags:
+  - smoke
+  - positive

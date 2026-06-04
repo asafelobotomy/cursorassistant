@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "External cited research phrase routes to researcher subagent"
+prompt: |
+  Look up GitHub Models chat completions limits with citations before we
+  wire CI. Which subagent?
+expected:
+  - "researcher"
+tags:
+  - smoke
+  - positive

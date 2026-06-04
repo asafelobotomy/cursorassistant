@@ -87,6 +87,14 @@
 - [x] CI: policy + surface checks; evals workflow uses `GITHUB_MODELS_TOKEN`
 - [x] Archive obsolete `mcp-bundle.json` / `mcp-minimal.json`
 
+## v0.12.2+ — cursorEval depth
+
+- [x] **Phase A** — extended `check`, `tokens`, `suggest`, `coverage --strict` ([CURSOR_EVAL_AUDIT.md](CURSOR_EVAL_AUDIT.md))
+- [x] **Phase B** — `run --tags`, trials, eval `config`, `results list|view|compare`
+- [x] **Phase C** — `quality` / `dev`, `prompt_judge`/`llm` graders, `report` HTML
+- [x] **Phase D** — `surfaceReview` skill, evals, commit/docs wiring
+- [x] **Phase E** — `coverage --strict` in CI, eval-quality workflow_dispatch, token docs
+
 ## v0.10.2 — eval and CI depth
 
 - [x] Negative/routing eval tasks for core agents and skills; per-task grading in `cursorEval run`

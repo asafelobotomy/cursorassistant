@@ -17,7 +17,7 @@
       "target": ".cursor/agents/commit.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:5b8fa436c7a778fea5507b9c40e81650caa47ef44946862bdf180e42f0ccb355"
+      "hash": "sha256:d8a257cf105796f3e336efb1c43bfa621c54cac6f65d472353be950eebc1686e"
     },
     {
       "id": "agents.cursorLifecycle",
@@ -49,7 +49,7 @@
       "target": ".cursor/agents/docs.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:07df9e705388364d85583f7aa1d675a4b43fa434597e0433833bfd1bc8baf551"
+      "hash": "sha256:253ba2caedc9fb4d57739bbc89cd44af5b83c5fd4e59878ffc8feafa4eceb196"
     },
     {
       "id": "agents.inventory",
@@ -81,7 +81,7 @@
       "target": ".cursor/agents/researcher.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:145a9375b6648855270be73f8a12578b93bf37f7623cd655eda783c8ae448dfa"
+      "hash": "sha256:ef8b56dd0238a216c560708722790d54ee82d1b1e4c14eab186abf8355a39076"
     },
     {
       "id": "agents.review",
@@ -89,7 +89,7 @@
       "target": ".cursor/agents/review.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:094629a39e0c848a2f15397a70ece20efc74436cc7955474f7acc6d036e98139"
+      "hash": "sha256:598fd90eb2d2e54cc650c136dfe9e4110ab0790f99f0c73a7f2a24a25cd3d6c0"
     },
     {
       "id": "mcp.config",
@@ -372,6 +372,14 @@
       "hash": "sha256:e6bb4686d90554950b6f8ae8a3609012d43555c37bc442d260bfb42f0c50c8df"
     },
     {
+      "id": "skills.surfaceReview",
+      "source": "skills/surfaceReview/SKILL.md",
+      "target": ".cursor/skills/surfaceReview/SKILL.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:2dabfa867eb47dd5cd1af78b3ad85f792eac8419e4688512587802b324d00461"
+    },
+    {
       "id": "skills.task-triage",
       "source": "skills/task-triage/SKILL.md",
       "target": ".cursor/skills/task-triage/SKILL.md",
@@ -461,7 +469,7 @@
       "target": "AGENTS.md",
       "layer": "core",
       "strategy": "preserve-marked-markdown-blocks",
-      "hash": "sha256:ef7efc4ce883303281e5e1c13da4036c4de44129f74310376dba3735227ae5fb"
+      "hash": "sha256:4c00591b872406ec7b52785be46e9cdfee2973c458520414e5a7d4e08520089d"
     }
   ]
 }

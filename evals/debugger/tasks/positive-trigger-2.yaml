@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Root-cause isolation phrase routes to debugger subagent"
+prompt: |
+  pytest failed on CI — diagnose root cause read-only without implementing
+  fixes yet. Which subagent?
+expected:
+  - "debugger"
+tags:
+  - smoke
+  - positive

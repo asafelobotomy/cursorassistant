@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Pre-commit secret scan phrase routes to secretScanning skill"
+prompt: |
+  Scan staged files for API keys and tokens before this commit lands.
+  Which skill?
+expected:
+  - "secretScanning"
+tags:
+  - smoke
+  - positive

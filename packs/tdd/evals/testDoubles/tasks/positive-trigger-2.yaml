@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Test doubles phrase routes to testDoubles skill"
+prompt: |
+  Pick stubs, mocks, or fakes to isolate a flaky integration test. Which
+  tdd pack skill?
+expected:
+  - "testDoubles"
+tags:
+  - smoke
+  - positive

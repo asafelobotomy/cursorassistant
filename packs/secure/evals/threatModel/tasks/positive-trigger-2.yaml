@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "STRIDE modeling phrase routes to threatModel skill"
+prompt: |
+  Produce a STRIDE threat model with trust boundaries for a new REST
+  endpoint. Which skill?
+expected:
+  - "threatModel"
+tags:
+  - smoke
+  - positive

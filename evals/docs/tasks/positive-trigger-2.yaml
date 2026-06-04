@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Documentation authoring phrase routes to docs subagent"
+prompt: |
+  Draft MIGRATION.md and update INSTALL.md for the new configure flow.
+  Which subagent should write repo docs?
+expected:
+  - "docs"
+tags:
+  - smoke
+  - positive

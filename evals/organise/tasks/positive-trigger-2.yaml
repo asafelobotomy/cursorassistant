@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Moves and import repair phrase routes to organise subagent"
+prompt: |
+  Move scripts/lifecycle into scripts/pkg/lifecycle and fix all import
+  paths. Which subagent owns structural moves?
+expected:
+  - "organise"
+tags:
+  - smoke
+  - positive

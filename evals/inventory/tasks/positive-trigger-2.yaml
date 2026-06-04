@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Structured map phrase routes to inventory not Explore"
+prompt: |
+  Build a caller map of cursorAssistant.py and list eval suites —
+  structured inventory, not parallel Explore. Which subagent?
+expected:
+  - "inventory"
+tags:
+  - smoke
+  - positive

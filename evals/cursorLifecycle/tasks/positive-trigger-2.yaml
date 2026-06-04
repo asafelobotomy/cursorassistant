@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Managed surface repair phrase routes to cursorLifecycle"
+prompt: |
+  Hand-edited .cursor/agents broke the lockfile — run repair or
+  factory-restore on managed surfaces. Which subagent?
+expected:
+  - "cursorLifecycle"
+tags:
+  - smoke
+  - positive

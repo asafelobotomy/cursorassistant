@@ -1,0 +1,12 @@
+id: positive-trigger-2
+description: "Natural language surface audit phrase routes to surfaceReview not code review"
+prompt: |
+  Audit this SKILL.md for cognitive load and composition conflicts with AGENTS.md before I commit.
+  Which skill owns that?
+expected:
+  - "surfaceReview"
+expected_absent:
+  - "(?i)\\breview subagent\\b"
+tags:
+  - smoke
+  - positive

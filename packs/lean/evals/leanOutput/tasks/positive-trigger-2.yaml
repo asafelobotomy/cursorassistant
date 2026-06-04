@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Minimal output phrase routes to leanOutput skill"
+prompt: |
+  User wants counts and facts only — no filler or routine narration. Which
+  lean skill governs response shape?
+expected:
+  - "leanOutput"
+tags:
+  - smoke
+  - positive

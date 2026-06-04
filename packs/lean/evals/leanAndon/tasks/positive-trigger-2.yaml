@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Andon stop-or-proceed phrase routes to leanAndon skill"
+prompt: |
+  The agent is unsure whether to stop for user confirmation or proceed on
+  a destructive step. Which lean pack skill applies?
+expected:
+  - "leanAndon"
+tags:
+  - smoke
+  - positive

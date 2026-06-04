@@ -1,0 +1,10 @@
+id: positive-trigger-1
+description: "Verify skill triggers when asked to review a Cursor surface file before merge"
+prompt: |
+  Which skill should I use when reviewing agents/review.md for contradictions, ambiguity,
+  and coverage gaps before merging a cursorAssistant change?
+expected:
+  - "surfaceReview"
+tags:
+  - smoke
+  - positive

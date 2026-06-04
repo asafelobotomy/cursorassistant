@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Complexity classification phrase routes to task-triage"
+prompt: |
+  This request might be a one-liner or need multiple subagents — what
+  skill classifies tier and minimal path first in cursorAssistant?
+expected:
+  - "task-triage"
+tags:
+  - smoke
+  - positive

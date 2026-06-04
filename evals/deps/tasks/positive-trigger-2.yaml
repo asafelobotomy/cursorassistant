@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Package install and audit phrase routes to deps subagent"
+prompt: |
+  Run npm audit, upgrade vulnerable packages after confirmation, and
+  update the lockfile. Which subagent?
+expected:
+  - "deps"
+tags:
+  - smoke
+  - positive

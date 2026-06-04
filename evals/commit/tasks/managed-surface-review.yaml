@@ -1,0 +1,9 @@
+id: managed-surface-review
+description: "Commit flow should mention surfaceReview before managed surface commits"
+prompt: |
+  I staged changes to agents/planner.md and skills/testing/SKILL.md in a cursorAssistant repo.
+  What should run before writing the commit message besides ciPreflight?
+expected:
+  - "surfaceReview"
+tags:
+  - smoke

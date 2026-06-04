@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Commit and PR phrase routes to commit subagent"
+prompt: |
+  Stage my changes, write a Conventional Commit message, and open a PR
+  with gh. Which subagent in cursorAssistant?
+expected:
+  - "commit"
+tags:
+  - smoke
+  - positive

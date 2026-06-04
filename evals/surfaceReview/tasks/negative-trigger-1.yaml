@@ -1,0 +1,9 @@
+id: negative-trigger-1
+description: "Verify skill does NOT trigger on unrelated code review request"
+prompt: |
+  Review this pull request diff for security issues and suggest fixes.
+expected_absent:
+  - "(?i)\\bsurfaceReview\\b"
+tags:
+  - smoke
+  - negative

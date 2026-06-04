@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Phased rollout phrase routes to planner subagent"
+prompt: |
+  Refactor three modules with migrations, tests, and docs — need a phased
+  plan before coding. Which subagent plans first?
+expected:
+  - "planner"
+tags:
+  - smoke
+  - positive

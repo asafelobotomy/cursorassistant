@@ -7,5 +7,10 @@ graders:
     config:
       pattern: "(?i)(cursorAssistantSetup|configure|lifecycle_configure|setup-workspace)"
 
+  - type: behavior
+    name: response_budget
+    config:
+      max_tokens: 800
+
 tasks:
   - "tasks/*.yaml"

@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Tight context phrase routes to leanContext skill"
+prompt: |
+  Working context is full of stale notes and duplicate summaries. Which
+  lean skill keeps context tight and actionable?
+expected:
+  - "leanContext"
+tags:
+  - smoke
+  - positive

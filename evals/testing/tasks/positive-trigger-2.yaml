@@ -1,0 +1,10 @@
+id: positive-trigger-2
+description: "Run tests and summarize phrase routes to testing skill"
+prompt: |
+  Pick the project's test command, run the suite, and summarize failures
+  for debugger handoff. Which skill?
+expected:
+  - "testing"
+tags:
+  - smoke
+  - positive

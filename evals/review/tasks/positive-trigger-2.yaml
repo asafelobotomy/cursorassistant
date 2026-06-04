@@ -1,0 +1,12 @@
+id: positive-trigger-2
+description: "PR diff review phrase routes to review not surfaceReview"
+prompt: |
+  Review this pull request diff for regressions and design — do not edit
+  source. Which subagent?
+expected:
+  - "review"
+expected_absent:
+  - "(?i)\bsurfaceReview\b"
+tags:
+  - smoke
+  - positive

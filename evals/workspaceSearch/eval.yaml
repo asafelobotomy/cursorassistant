@@ -7,5 +7,10 @@ graders:
     config:
       pattern: "(?i)(workspaceSearch|Grep|SemanticSearch|Glob|Read)"
 
+  - type: behavior
+    name: response_budget
+    config:
+      max_tokens: 800
+
 tasks:
   - "tasks/*.yaml"
