@@ -18,4 +18,12 @@ cursorAssistant installs Python MCP servers under `.cursor/mcp/scripts/`. They r
 
 `setup`, `update`, `repair`, and `factory-restore` write under `.cursor/` and `AGENTS.md`. Run only from trusted `package-root` paths. `factory-restore` overwrites managed files — confirm before use.
 
+## Install workflow (setup page / bootstrap)
+
+- The README **Install** button opens an HTTPS page that triggers a `cursor://` MCP deeplink. Review the command shown in Cursor before approving.
+- Prefer the **git-only** MCP path (`mcp-launch.sh` + pinned tag clone). Avoid untrusted `CURSOR_ASSISTANT_REPO` overrides.
+- `curl | bash` bootstrap is optional; read `scripts/bootstrap-from-github.sh` first.
+- Do not install MCP deeplinks from unofficial mirrors or forked install pages.
+- See [docs/INSTALL_SECURITY_AUDIT.md](docs/INSTALL_SECURITY_AUDIT.md).
+
 Report vulnerabilities via the repository’s GitHub security advisory process.

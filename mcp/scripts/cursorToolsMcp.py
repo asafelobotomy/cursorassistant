@@ -16,6 +16,7 @@ from mcp.server.fastmcp import FastMCP
 
 from _cursor_mcp_util import build_tool_result, tail_text
 from _cursor_package_root import find_package_root as discover_package_root
+from _cursor_package_root import validate_package_root
 from _cursor_workspace import discover_workspace_root, read_lockfile
 
 WORKSPACE_ROOT = discover_workspace_root(Path(__file__))
@@ -23,9 +24,9 @@ WORKSPACE_ROOT = discover_workspace_root(Path(__file__))
 
 def resolve_package_root(package_root: str | None) -> tuple[Path | None, str | None]:
     if package_root:
-        root = Path(package_root).expanduser().resolve()
-        if not root.is_dir():
-            return None, f"packageRoot is not a directory: {package_root}"
+        root = validate_package_root(Path(package_root))
+        if root is None:
+            return None, f"packageRoot is not a cursorAssistant package: {package_root}"
         return root, None
     discovered = discover_package_root(WORKSPACE_ROOT)
     if discovered is not None:
@@ -162,6 +163,15 @@ def lifecycle_plan_setup(packageRoot: str | None = None, answersPath: str | None
 def lifecycle_setup(packageRoot: str | None = None, answersPath: str | None = None) -> dict:
     """Install or refresh all managed cursorAssistant surfaces."""
     return run_lifecycle("setup", package_root=packageRoot, answers_path=answersPath)
+
+
+@mcp.tool()
+def lifecycle_configure(
+    packageRoot: str | None = None,
+    answersPath: str | None = None,
+) -> dict:
+    """Run setup interview and install cursorAssistant into the open workspace (preferred first-time path)."""
+    return run_lifecycle("configure", package_root=packageRoot, answers_path=answersPath)
 
 
 @mcp.tool()

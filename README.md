@@ -4,25 +4,27 @@
 
 cursorAssistant installs and maintains **managed installs**, **lockfile drift detection**, **profiles and packs**, and **specialist routing** using Cursor-native paths (`.cursor/`, `AGENTS.md`).
 
-[![Install cursorAssistant](https://img.shields.io/badge/Install-cursorAssistant-2ea043?style=for-the-badge)](https://github.com/asafelobotomy/cursorassistant#install)
+[![Install cursorAssistant](https://img.shields.io/badge/Install-cursorAssistant-2ea043?style=for-the-badge)](https://asafelobotomy.github.io/cursorassistant/install/)
 
 ## Install
 
-GitHub cannot run setup inside the README; use this **one command** from your project root (review the [install script](scripts/install-from-github.sh) first):
+**Recommended:** click the badge above → **Install in Cursor** on the setup page → approve the MCP prompt → open your project → **Reload Window** → in chat, **Set up cursorAssistant in this workspace** (or `/cursor-assistant:setup-workspace`). That runs the **interview** and writes `.cursor/` + lockfile. No full install runs from the README button itself.
+
+Setup page (HTTPS, opens `cursor://` for bootstrap + cursorTools): [install/index.html](install/index.html) — enable [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) from the `/install` folder if the badge URL 404s.
+
+**Terminal (bootstrap + interview in one step):**
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- .
 ```
 
-Replace `.` with your project path. The script downloads the package to `~/.local/share/cursorassistant/`, links the **local Cursor plugin** at `~/.cursor/plugins/local/cursor-assistant`, runs the setup interview, and writes managed files into your repo. Then **Developer: Reload Window** in Cursor.
-
-From a clone of this repository:
+Bootstrap only (interview later via MCP/Agent):
 
 ```sh
-bash scripts/install-from-github.sh /path/to/your-project
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/bootstrap-from-github.sh | bash
 ```
 
-Details: [INSTALL.md](INSTALL.md) · [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md)
+Details: [INSTALL.md](INSTALL.md) · [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md) · [docs/DEEPLINK_INSTALL_RESEARCH.md](docs/DEEPLINK_INSTALL_RESEARCH.md)
 
 ## What it manages
 

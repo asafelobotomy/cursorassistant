@@ -1,104 +1,46 @@
 # Cursor install UX
 
-cursorAssistant targets **individual developers**: one GitHub install command, then customized surfaces in each project.
+Minimal steps from the README button to the **setup interview**.
 
-## Recommended journey
+## Flow
 
 ```mermaid
 flowchart LR
-  A[curl install-from-github.sh] --> B[Open project in Cursor]
-  B --> C[Reload Window]
-  C --> D["/setup-workspace or configure"]
-  D --> E[Interview: profile / packs / MCP]
-  E --> F[.cursor + AGENTS.md + lockfile]
-  F --> G[Enable MCP if wanted]
+  A[README badge] --> B[HTTPS install page]
+  B --> C[cursor:// MCP install]
+  C --> D[Bootstrap package on first MCP start]
+  D --> E[Open project + Reload]
+  E --> F[Agent / lifecycle_configure interview]
 ```
 
-### Step 1 — Install package (one command)
-
-```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- /path/to/your-project
-```
-
-This downloads the package, registers the **local Cursor plugin** symlink, and runs **configure** (interview + project install).
-
-README badge (links here):
-
-[![Install from GitHub](https://img.shields.io/badge/Install-cursorAssistant-2ea043?style=for-the-badge)](https://github.com/asafelobotomy/cursorassistant#install)
-
-### Step 2 — Reload Cursor
-
-**Developer: Reload Window** so `~/.cursor/plugins/local/cursor-assistant` agents, skills, and commands load.
-
-### Step 3 — Use in the project
-
-- `/cursor-assistant:setup-workspace` — re-run or fix setup
-- `/inventory`, `/task-triage`, `/cursorLifecycle`
-- Agent: **Set up cursorAssistant in this workspace**
-
-### Updates
-
-**Global package** (new release):
-
-```sh
-CURSOR_ASSISTANT_VERSION=0.12.0 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- .
-```
-
-**Project surfaces** (same package version):
-
-```sh
-python3 cursorAssistant.py update --workspace .
-```
-
-`--package-root` is optional after the first install.
-
-## What gets installed where
-
-| Layer | Location | Purpose |
+| Step | User action | What runs |
 | --- | --- | --- |
-| Package copy | `~/.local/share/cursorassistant/<version>` | Lifecycle CLI source |
-| Local plugin | `~/.cursor/plugins/local/cursor-assistant` → package | Cursor loads agents/skills/commands at user scope |
-| Project | Repo `.cursor/`, `AGENTS.md`, lockfile | Your choices; drift detection and `update` |
+| 1 | Click **Install in Cursor** on [setup page](https://asafelobotomy.github.io/cursorassistant/install/) | `cursor://…/mcp/install` (bootstrap + cursorTools) |
+| 2 | Approve MCP in Cursor | `bootstrap-from-github.sh` if package missing |
+| 3 | Open project folder | — |
+| 4 | Reload Window | Local plugin agents/skills/commands |
+| 5 | Chat setup phrase or `lifecycle_configure` | Interview + `configure` → `.cursor/` + lockfile |
 
-## Interview (defaults)
+## What is *not* in the button path
 
-| Question | Default |
-| --- | --- |
-| Profile | `balanced` |
-| Packs | none (`lean` profile adds lean pack) |
-| MCP extensions | off — **cursorTools** still installed for lifecycle |
+- No project interview on the web page
+- No `curl | bash` required if MCP bootstrap succeeds (optional manual bootstrap in page footer)
 
-## GitHub README buttons
+## Regenerate setup artifacts
 
-Badges are **links**, not executors. The install badge points to the `curl` one-liner above.
+```sh
+python3 scripts/generate_install_page.py
+```
 
-Optional after project install: [MCP install deeplink](https://cursor.com/docs/mcp/install-links) for **cursorTools** (user confirms in Cursor).
+Updates `install/index.html` and `install/deeplinks.json` for the current [VERSION](../VERSION).
 
-## Other paths
+## Terminal-first alternative
 
-| Path | When |
-| --- | --- |
-| **Git clone + `install-from-github.sh`** | Developing cursorAssistant itself |
-| **`cursor-assistant-init.sh`** | Clone already on disk |
-| **`configure` / `update` with `--answers`** | CI or automation |
-| **Commit `.cursor/` to git** | Team shares one install snapshot |
-
-## Agent surfaces
-
-| Surface | Role |
-| --- | --- |
-| `commands/setup-workspace.md` | Slash command for project setup |
-| `skills/cursorAssistantSetup/SKILL.md` | Agent interview + install |
-| `cursorLifecycle` | inspect / update / repair |
-
-## Success criteria
-
-1. README one-liner → working project install without marketplace.
-2. One **configure** customizes the current repo.
-3. No `--package-root` memorization.
-4. **Reload Window** and MCP toggle documented once.
+```sh
+curl -fsSL .../install-from-github.sh | bash -s -- .
+```
 
 ## References
 
 - [INSTALL.md](../INSTALL.md)
-- [ARCHITECTURE.md](ARCHITECTURE.md)
+- [DEEPLINK_INSTALL_RESEARCH.md](DEEPLINK_INSTALL_RESEARCH.md)

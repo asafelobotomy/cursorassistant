@@ -96,6 +96,12 @@ def find_package_root(
             )
         return root
 
+    current = Path.home() / ".local" / "share" / "cursorassistant" / "current"
+    if current.is_symlink() or current.is_dir():
+        resolved = current.resolve()
+        if is_package_root(resolved):
+            return resolved
+
     from_lock = _lockfile_package_root(workspace)
     if from_lock is not None:
         return from_lock

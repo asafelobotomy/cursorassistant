@@ -5,7 +5,7 @@ description: Interview and install cursorAssistant into the current project (age
 
 # Set up cursorAssistant in this project
 
-Run after the [GitHub install one-liner](https://github.com/asafelobotomy/cursorassistant#install), or to reconfigure an existing project.
+Run after the [setup page](https://asafelobotomy.github.io/cursorassistant/install/) MCP bootstrap, or to reconfigure an existing project.
 
 ## What this does
 
@@ -16,11 +16,7 @@ Run after the [GitHub install one-liner](https://github.com/asafelobotomy/cursor
 ## Steps
 
 1. Confirm the workspace root is the user's project.
-2. If `inspect` shows `not-installed` and there is no global package, tell the user to run first:
-
-   ```sh
-   curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- .
-   ```
+2. If bootstrap is missing (`~/.local/share/cursorassistant/current`), send the user to the [setup page](https://asafelobotomy.github.io/cursorassistant/install/) or `bootstrap-from-github.sh`.
 
 3. Run:
 

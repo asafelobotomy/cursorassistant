@@ -1,109 +1,53 @@
 # Installing cursorAssistant
 
-Full UX notes: [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md)
+## Recommended (README button → Cursor)
 
-## Quick start (one command)
+1. Open the [setup page](https://asafelobotomy.github.io/cursorassistant/install/) (or [install/index.html](install/index.html) locally).
+2. Click **Install in Cursor** and approve the MCP install dialog.
+3. Open **your project** in Cursor → **Developer: Reload Window**.
+4. In chat: **Set up cursorAssistant in this workspace**, `/cursor-assistant:setup-workspace`, or MCP tool **`lifecycle_configure`** — this runs the **interview** and installs project files.
 
-From your **project root** (read the script before piping to `bash`):
+The setup page only bootstraps the global package (`~/.local/share/cursorassistant/current`) and **cursorTools** MCP. It does **not** run the interview until step 4 inside Cursor.
+
+Regenerate the setup page after version bumps:
+
+```sh
+python3 scripts/generate_install_page.py
+```
+
+## Terminal: full install (bootstrap + interview)
 
 ```sh
 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- .
 ```
 
-Or open the repo README and use the green **Install from GitHub** badge (same command).
-
-The script:
-
-1. Clones cursorAssistant to `~/.local/share/cursorassistant/<version>`
-2. Symlinks `~/.cursor/plugins/local/cursor-assistant` (Cursor local plugin)
-3. Runs the setup **interview** and **`configure`** into your workspace
-4. You **Developer: Reload Window** in Cursor
-
-## Already have this repo cloned
+## Terminal: bootstrap only
 
 ```sh
-bash scripts/install-from-github.sh /path/to/your-project
-# or, from the clone only:
-bash scripts/cursor-assistant-init.sh /path/to/your-project
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/bootstrap-from-github.sh | bash
 ```
 
-## In Cursor (after install)
+Then complete setup in Cursor (step 4 above).
 
-- Chat: **`/cursor-assistant:setup-workspace`** or ask to **set up cursorAssistant**
-- Skill: **cursorAssistantSetup**
-- Subagent: **cursorLifecycle** for inspect / update / repair
-
-## Update this project
+## Update
 
 ```sh
 python3 cursorAssistant.py update --workspace .
 ```
 
-Re-run the GitHub installer to refresh the global package copy:
+Refresh bootstrap:
 
 ```sh
-CURSOR_ASSISTANT_VERSION=0.12.0 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- .
+CURSOR_ASSISTANT_VERSION=0.12.0 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/bootstrap-from-github.sh | bash
 ```
-
-Or ask the Agent to **update cursorAssistant**.
-
-`--package-root` is optional (lockfile, `~/.local/share/cursorassistant`, or local plugin path).
-
-## Non-interactive setup
-
-```sh
-python3 cursorAssistant.py configure --workspace . \
-  --answers .cursor/cursor-assistant-answers.json --yes --json
-```
-
-Example answers:
-
-```json
-{
-  "profile.selected": "balanced",
-  "packs.selected": [],
-  "mcp.enabled": false
-}
-```
-
-## Preserve custom routing
-
-Wrap custom sections in `AGENTS.md`:
-
-```markdown
-<!-- user-added -->
-## Your section
-...
-<!-- /user-added -->
-```
-
-## Repair and reset
-
-| Situation | Command |
-| --- | --- |
-| Drift / incomplete install | `python3 cursorAssistant.py repair --workspace . --json` |
-| Full managed-surface reset | `factory-restore` (destructive; confirm first) |
 
 ## Requirements
 
-- Python 3.10+
-- [Cursor](https://cursor.com/)
-- `git` (for the one-liner download)
-
-## Interview fields
-
-| Field | Meaning |
-| --- | --- |
-| `profile.selected` | `balanced` or `lean` |
-| `packs.selected` | `lean`, `secure`, `tdd` (optional) |
-| `mcp.enabled` | Optional devDocs + memory MCP (default `false`) |
-
-## Optional: commit install to git
-
-Teams may commit `.cursor/`, `AGENTS.md`, and the lockfile so everyone shares the same surfaces. Each developer still needs the global package (install script) for `update` unless `packageRoot` in the lockfile points at a shared path.
+- Python 3.10+, git, [Cursor](https://cursor.com/)
+- `uvx` when using MCP (`pip` package `mcp[cli]`)
 
 ## See also
 
-- [README.md](README.md)
-- [docs/PUBLISH.md](docs/PUBLISH.md) — distribution (not marketplace)
+- [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md)
+- [docs/DEEPLINK_INSTALL_RESEARCH.md](docs/DEEPLINK_INSTALL_RESEARCH.md)
 - [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)

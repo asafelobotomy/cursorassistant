@@ -5,13 +5,13 @@ description: Use when the user wants to install or customize cursorAssistant in 
 
 # cursorAssistant project setup
 
-Guides **individual developers** from GitHub install → customized **project** install (lockfile, selective packs, MCP choice).
+Guides **individual developers** after the README setup page (MCP bootstrap) through the **project interview** (lockfile, packs, MCP).
 
 ## When to use
 
-- User wants to **install** or **set up** cursorAssistant in this repo
+- User clicked **Install in Cursor** on the setup page and opened this project
+- User wants to **set up** cursorAssistant in this repo
 - `inspect` shows `installState: not-installed`
-- User pasted the README `curl … install-from-github.sh` command and needs help finishing
 
 ## When not to use
 
@@ -20,31 +20,31 @@ Guides **individual developers** from GitHub install → customized **project** 
 
 ## Prerequisites
 
-- Python 3.10+ and `git` for the one-liner install
+- Bootstrap complete (`~/.local/share/cursorassistant/current` or MCP **cursorAssistant** server running)
 - Consumer workspace open in Cursor
-- Global package at `~/.local/share/cursorassistant/` or local plugin at `~/.cursor/plugins/local/cursor-assistant` (created by install script)
+- **cursorTools** / **cursorAssistant** MCP enabled after setup-page install
 
 ## Preferred flow
 
-1. If not installed globally, run (user terminal):
-
-   ```sh
-   curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- .
-   ```
-
-2. Otherwise inspect:
+1. Inspect:
 
    ```sh
    python3 cursorAssistant.py inspect --workspace . --json
    ```
 
-3. Configure:
+2. Configure (interview + project install):
 
    ```sh
    python3 cursorAssistant.py configure --workspace . --json
    ```
 
-4. **Reload Window**; enable **cursorTools** under **Settings → MCP** if MCP was enabled in the interview.
+   Or MCP tool **`lifecycle_configure`** (same as configure).
+
+3. If bootstrap missing, user runs setup page again or:
+
+   ```sh
+   curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/bootstrap-from-github.sh | bash
+   ```
 
 ## Agent-driven interview
 

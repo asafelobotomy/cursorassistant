@@ -67,16 +67,10 @@ Prefer **cursorTools** MCP (`lifecycle_*` tools) when MCP is enabled; fall back 
 
 If this subagent is not yet installed in the project:
 
-1. User runs the GitHub installer (see README / INSTALL.md):
+1. User used the README **setup page** (MCP bootstrap) or `bootstrap-from-github.sh`.
+2. In chat: **`lifecycle_configure`**, `/cursor-assistant:setup-workspace`, or `python3 cursorAssistant.py configure --workspace .`.
+3. **Developer: Reload Window** after configure.
 
-   ```sh
-   curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/install-from-github.sh | bash -s -- .
-   ```
-
-   Or: `bash scripts/install-from-github.sh .` from a clone.
-
-2. **Developer: Reload Window** in Cursor.
-
-Or in chat: `/cursor-assistant:setup-workspace` (see **cursorAssistantSetup** skill).
+Full terminal path: `install-from-github.sh` (bootstrap + interview).
 
 After install, `.cursor/agents/cursorLifecycle.md` is available for Task delegation.

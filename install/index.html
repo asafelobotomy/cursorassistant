@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Set up cursorAssistant in Cursor</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { max-width: 42rem; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    h1 { font-size: 1.35rem; }
+    .cta {
+      display: inline-block; margin: 1rem 0; padding: 0.75rem 1.25rem;
+      background: #2ea043; color: #fff; text-decoration: none; border-radius: 6px;
+      font-weight: 600; border: none; cursor: pointer; font-size: 1rem;
+    }
+    .cta:hover { filter: brightness(1.05); }
+    .steps { counter-reset: step; list-style: none; padding: 0; }
+    .steps li { counter-increment: step; margin: 1rem 0; padding-left: 2.5rem; position: relative; }
+    .steps li::before {
+      content: counter(step); position: absolute; left: 0;
+      width: 1.75rem; height: 1.75rem; border-radius: 50%;
+      background: #2ea043; color: #fff; text-align: center; line-height: 1.75rem; font-size: 0.9rem;
+    }
+    code, pre { font-size: 0.85rem; background: rgba(127,127,127,0.15); border-radius: 4px; }
+    pre { padding: 0.75rem; overflow-x: auto; }
+    .muted { opacity: 0.8; font-size: 0.9rem; }
+    .hidden { display: none; }
+    #status { margin-top: 1rem; padding: 0.75rem; border-radius: 4px; background: rgba(46,160,67,0.15); }
+  </style>
+</head>
+<body>
+  <h1>Set up cursorAssistant</h1>
+  <p class="muted">Version 0.12.0 — bootstrap only here; project interview runs inside Cursor.</p>
+  <p class="muted">MCP install uses a <strong>pinned git tag</strong> (no network pipe-to-bash). Review the command in Cursor before confirming.</p>
+
+  <p>
+    <button type="button" class="cta" id="start">Install in Cursor</button>
+  </p>
+  <div id="status" class="hidden" role="status"></div>
+
+  <ol class="steps">
+    <li>
+      <strong>Confirm in Cursor</strong> when prompted to add the <code>cursorAssistant</code> MCP server.
+      It clones the package to <code>~/.local/share/cursorassistant</code> on first run (no project interview yet).
+    </li>
+    <li>
+      <strong>Open your project</strong> in Cursor (File → Open Folder).
+    </li>
+    <li>
+      <strong>Reload Window</strong> (Developer → Reload Window) so plugin skills and commands load.
+    </li>
+    <li>
+      <strong>Run setup</strong> in chat: say <em>Set up cursorAssistant in this workspace</em>,
+      use <code>/cursor-assistant:setup-workspace</code>, or ask the Agent to call MCP tool <code>lifecycle_configure</code>.
+      That runs the interview and writes <code>.cursor/</code> + lockfile.
+    </li>
+  </ol>
+
+  <p class="muted">
+    <a href="https://github.com/asafelobotomy/cursorassistant">GitHub</a> ·
+    <a href="https://github.com/asafelobotomy/cursorassistant/blob/v0.12.0/INSTALL.md">Full terminal install</a>
+  </p>
+
+  <details>
+    <summary>Manual bootstrap (terminal, more control)</summary>
+    <p class="muted">Preferred if you want to inspect commands before running:</p>
+    <pre id="bootstrap-git">git clone --depth 1 --branch "v0.12.0" https://github.com/asafelobotomy/cursorassistant.git "$HOME/.local/share/cursorassistant/0.12.0"
+ln -sfn "$HOME/.local/share/cursorassistant/0.12.0" "$HOME/.local/share/cursorassistant/current"</pre>
+    <button type="button" id="copy-bootstrap-git">Copy git bootstrap</button>
+    <p class="muted">Or review then run:</p>
+    <pre id="bootstrap-cmd">curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/bootstrap-from-github.sh | bash</pre>
+    <button type="button" id="copy-bootstrap">Copy curl bootstrap</button>
+    <p class="muted">Then MCP only: <a id="mcp-tools-link" href="cursor://anysphere.cursor-deeplink/mcp/install?name=cursorTools&config=eyJjb21tYW5kIjoiYmFzaCIsImFyZ3MiOlsiLWxjIiwiZXhlYyBiYXNoIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudC9jdXJyZW50L21jcC9zY3JpcHRzL21jcC1sYXVuY2guc2hcIiJdfQ==">cursorTools deeplink</a> (requires bootstrap first)</p>
+  </details>
+
+  <script>
+    const MCP_COMBINED = "cursor://anysphere.cursor-deeplink/mcp/install?name=cursorAssistant&config=eyJjb21tYW5kIjoiYmFzaCIsImFyZ3MiOlsiLWxjIiwiaWYgWyAhIC1mIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudC9jdXJyZW50L21jcC9zY3JpcHRzL21jcC1sYXVuY2guc2hcIiBdOyB0aGVuIG1rZGlyIC1wIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudFwiICYmIGdpdCBjbG9uZSAtLWRlcHRoIDEgLS1icmFuY2ggXCJ2MC4xMi4wXCIgXCJodHRwczovL2dpdGh1Yi5jb20vYXNhZmVsb2JvdG9teS9jdXJzb3Jhc3Npc3RhbnQuZ2l0XCIgXCIke3VzZXJIb21lfS8ubG9jYWwvc2hhcmUvY3Vyc29yYXNzaXN0YW50L3YwLjEyLjBcIiAmJiBsbiAtc2ZuIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudC92MC4xMi4wXCIgXCIke3VzZXJIb21lfS8ubG9jYWwvc2hhcmUvY3Vyc29yYXNzaXN0YW50L2N1cnJlbnRcIjsgZmk7IGV4ZWMgYmFzaCBcIiR7dXNlckhvbWV9Ly5sb2NhbC9zaGFyZS9jdXJzb3Jhc3Npc3RhbnQvY3VycmVudC9tY3Avc2NyaXB0cy9tY3AtbGF1bmNoLnNoXCIiXX0=";
+    const BOOTSTRAP_GIT = `git clone --depth 1 --branch "v0.12.0" https://github.com/asafelobotomy/cursorassistant.git "$HOME/.local/share/cursorassistant/0.12.0"
+ln -sfn "$HOME/.local/share/cursorassistant/0.12.0" "$HOME/.local/share/cursorassistant/current"`;
+    const BOOTSTRAP = "curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.0/scripts/bootstrap-from-github.sh | bash";
+
+    function showStatus(msg) {
+      const el = document.getElementById("status");
+      el.textContent = msg;
+      el.classList.remove("hidden");
+    }
+
+    document.getElementById("start").addEventListener("click", () => {
+      showStatus("Opening Cursor… Approve the MCP install dialog, then follow the steps below.");
+      window.location.href = MCP_COMBINED;
+    });
+
+    async function copyText(text, label) {
+      try {
+        await navigator.clipboard.writeText(text);
+        showStatus(label + " copied.");
+      } catch {
+        showStatus("Copy failed — select the command in the box and copy manually.");
+      }
+    }
+    document.getElementById("copy-bootstrap-git")?.addEventListener("click", () => copyText(BOOTSTRAP_GIT, "Git bootstrap"));
+    document.getElementById("copy-bootstrap")?.addEventListener("click", () => copyText(BOOTSTRAP, "curl bootstrap"));
+  </script>
+</body>
+</html>

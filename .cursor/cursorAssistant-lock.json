@@ -13,7 +13,7 @@
     "routing.agents-md": "sha256:1cb1ee7bc32bb426a939b6b265cbca351ca9105a3bad603d21554429d86eced9",
     "rules.core": "sha256:4be251acf1bf90d80207c7f819c5d5db992ef77fdfe73afa7a2e75beff162cd7",
     "rules.lifecycle": "sha256:e10a8393e1ebec730727d9d779a1f793f108d6f6fcd5b3335ef78addd4d0e477",
-    "agents.cursorLifecycle": "sha256:7ba3a6ff998017112c5240e5f5446a7fa4176adc6a3da59b6d0f83b94a69a966",
+    "agents.cursorLifecycle": "sha256:4936b7c60e9b4670509a8df83209eea48340a40c0e005729fecca428c376fd74",
     "agents.inventory": "sha256:e8214b7450fc5ec47fed3cb99a352daaccb3fe5fb85c556e4866f863280bc192",
     "agents.review": "sha256:e17776fbe61548b46a34b6f132997a5ebd60d8fe9dd0f8f80909ff0803e814ba",
     "agents.commit": "sha256:98e31a6827f132c2d3feea159db8daaa34b26494a392cd00bace2fe0c35413e4",
@@ -33,11 +33,11 @@
     "mcp.config": "sha256:972ea8c551b3dfe27678bc4f49b1255df38a220730e7f85c293340c41d1113b5",
     "mcp.shared._cursor_workspace": "sha256:45413ed98c7a17da96c6fbd755e083bd97e0462bb4ec6e9ce3ab5cd0191d6952",
     "mcp.shared._cursor_mcp_util": "sha256:87cccac996ef2743370bf1b80152bb7ddb00be56170bb8938876719cce03a05b",
-    "mcp.shared._cursor_package_root": "sha256:b83ba9c2e05737675e5b6f6127882c28c4de99fb98336a71db441d28b3e733b1",
-    "mcp.cursorToolsMcp": "sha256:7eec91f0a457d4b28a6828039151692e9caf7febe518810fe61f4639d26a11e6"
+    "mcp.shared._cursor_package_root": "sha256:06df511dd41dc079206be8b71e9e44574b7ed45b8eaddf9478618c2ceaedafd6",
+    "mcp.cursorToolsMcp": "sha256:2451898713f2975c05e21a960c21a6f310b0e6f2cda10755cd68520f5104b2e1"
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-04T07:32:57Z"
+    "updatedAt": "2026-06-04T08:49:06Z"
   }
 }

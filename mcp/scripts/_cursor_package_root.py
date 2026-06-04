@@ -15,7 +15,12 @@ _MARKERS = (
 
 def is_package_root(path: Path) -> bool:
     root = path.resolve()
-    return root.is_dir() and all((root / m).exists() for m in _MARKERS)
+    return root.is_dir() and all((root / marker).exists() for marker in _MARKERS)
+
+
+def validate_package_root(path: Path) -> Path | None:
+    resolved = path.expanduser().resolve()
+    return resolved if is_package_root(resolved) else None
 
 
 def find_package_root(workspace: Path) -> Path | None:
@@ -43,6 +48,12 @@ def find_package_root(workspace: Path) -> Path | None:
     for directory in (current, *current.parents):
         if is_package_root(directory):
             return directory.resolve()
+
+    current = Path.home() / ".local" / "share" / "cursorassistant" / "current"
+    if current.exists():
+        resolved = current.resolve()
+        if is_package_root(resolved):
+            return resolved
 
     home = Path.home()
     for base in (home / ".cursor" / "plugins", home / ".cursor" / "plugins" / "local"):
