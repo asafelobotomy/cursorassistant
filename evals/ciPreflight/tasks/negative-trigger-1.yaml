@@ -1,7 +1,7 @@
 id: negative-trigger-1
 description: "Doc authoring is not ciPreflight"
 prompt: |
-  Write migration notes for the API rename in docs/MIGRATION.md.
+  Write migration notes for the API rename in docs/guides/MIGRATION.md.
 expected_absent:
   - "(?i)\\bciPreflight\\b"
 tags:

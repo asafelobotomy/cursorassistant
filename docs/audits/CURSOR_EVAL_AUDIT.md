@@ -40,7 +40,7 @@ flowchart LR
 
 3. **xanadEval** — Python tool retained in xanadAssistant after waza moved to Go. Documented as inspired by early waza; adds xanad layout (`.agent.md`, `.github/skills/`), **agenticReview** skill, and extended graders (local copy: `old.git/xanadassistant/docs/plans/xanadeval-waza-gap-review.md`).
 
-4. **cursorEval** — Reimplemented for cursorAssistant at v0.10.x ([ROADMAP](ROADMAP.md)): Cursor surfaces (`agents/*.md`, `.cursor/skills/`), **forbidden VS Code tool names** in `policy`, routing-focused live evals.
+4. **cursorEval** — Reimplemented for cursorAssistant at v0.10.x ([ROADMAP](../project/../project/ROADMAP.md)): Cursor surfaces (`agents/*.md`, `.cursor/skills/`), **forbidden VS Code tool names** in `policy`, routing-focused live evals.
 
 ---
 
@@ -273,6 +273,6 @@ waza run evals/my-skill/eval.yaml --tags smoke   # ≈ cursorEval run --tags smo
 
 ## Related docs
 
-- [ROUTING_AND_SUBAGENTS.md](ROUTING_AND_SUBAGENTS.md) — routing evals (cursorEval consumer)
-- [AGENTS_SKILLS_CURSOR_AUDIT.md](AGENTS_SKILLS_CURSOR_AUDIT.md) — agent/skill Cursor fit
-- [ROADMAP.md](ROADMAP.md) — v0.10.x eval milestones (complete)
+- [../architecture/ROUTING_AND_SUBAGENTS.md](../architecture/ROUTING_AND_SUBAGENTS.md) — routing evals (cursorEval consumer)
+- [../audits/AGENTS_SKILLS_CURSOR_AUDIT.md](../audits/AGENTS_SKILLS_CURSOR_AUDIT.md) — agent/skill Cursor fit
+- [../project/ROADMAP.md](../project/../project/ROADMAP.md) — v0.10.x eval milestones (complete)

@@ -1,4 +1,4 @@
 {
-  "_comment": "OBSOLETE since v0.9 — use mcp-core.json + mcp-extensions.json + mcp-packs/*.json. See docs/MCP_LAYOUT.md.",
+  "_comment": "OBSOLETE since v0.9 — use mcp-core.json + mcp-extensions.json + mcp-packs/*.json. See docs/architecture/MCP_LAYOUT.md.",
   "mcpServers": {}
 }

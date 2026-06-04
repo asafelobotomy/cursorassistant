@@ -24,7 +24,7 @@ Bootstrap only (interview later via MCP/Agent):
 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.12.1/scripts/bootstrap-from-github.sh | bash
 ```
 
-Details: [INSTALL.md](INSTALL.md) · [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md) · [docs/DEEPLINK_INSTALL_RESEARCH.md](docs/DEEPLINK_INSTALL_RESEARCH.md)
+Details: [INSTALL.md](INSTALL.md) · [docs/guides/CURSOR_INSTALL_UX.md](docs/guides/CURSOR_INSTALL_UX.md) · [docs/research/DEEPLINK_INSTALL_RESEARCH.md](docs/research/DEEPLINK_INSTALL_RESEARCH.md)
 
 ## What it manages
 
@@ -34,7 +34,7 @@ Details: [INSTALL.md](INSTALL.md) · [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INS
 | Subagents | `.cursor/agents/` | Cursor subagent format (`*.md`) |
 | Skills | `.cursor/skills/` | `SKILL.md` per skill |
 | Rules | `.cursor/rules/` | `.mdc` with `alwaysApply` / `globs` |
-| MCP config | `.cursor/mcp.json` | Layered: `cursorTools` + optional extensions + pack servers ([MCP_LAYOUT](docs/MCP_LAYOUT.md)) |
+| MCP config | `.cursor/mcp.json` | Layered: `cursorTools` + optional extensions + pack servers ([MCP_LAYOUT](docs/architecture/MCP_LAYOUT.md)) |
 | MCP scripts | `.cursor/mcp/scripts/` | stdio Python servers (`cursorTools` wraps lifecycle CLI) |
 
 ## Requirements
@@ -74,27 +74,29 @@ In chat: **`/cursor-assistant:setup-workspace`**, or ask to **set up cursorAssis
 
 ## Documentation
 
+Full index: [docs/README.md](docs/README.md)
+
 | Doc | Topic |
 | --- | --- |
 | [INSTALL.md](INSTALL.md) | Install and update |
-| [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md) | Install flow in Cursor |
-| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Policy, engine, install flow |
-| [docs/MIGRATION.md](docs/MIGRATION.md) | v0.9 → v0.10 upgrades |
+| [docs/guides/CURSOR_INSTALL_UX.md](docs/guides/CURSOR_INSTALL_UX.md) | Install flow in Cursor |
+| [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) | Policy, engine, install flow |
+| [docs/guides/MIGRATION.md](docs/guides/MIGRATION.md) | v0.9 → v0.10 upgrades |
 | [SECURITY.md](SECURITY.md) | MCP and secrets guidance |
-| [docs/MCP_LAYOUT.md](docs/MCP_LAYOUT.md) | Layered MCP manifests |
-| [docs/MCP_MAINTENANCE.md](docs/MCP_MAINTENANCE.md) | MCP scripts and vendoring |
-| [docs/HOOKS.md](docs/HOOKS.md) | Optional user-owned hooks |
-| [docs/PUBLISH.md](docs/PUBLISH.md) | Distribution (GitHub + local plugin) |
+| [docs/architecture/MCP_LAYOUT.md](docs/architecture/MCP_LAYOUT.md) | Layered MCP manifests |
+| [docs/operations/MCP_MAINTENANCE.md](docs/operations/MCP_MAINTENANCE.md) | MCP scripts and vendoring |
+| [docs/guides/HOOKS.md](docs/guides/HOOKS.md) | Optional user-owned hooks |
+| [docs/guides/PUBLISH.md](docs/guides/PUBLISH.md) | Distribution (GitHub + local plugin) |
 
 ## Shared MCP library
 
-`packages/cursor-mcp-shared/` provides workspace discovery for MCP stdio servers. See [docs/SHARED_MCP.md](docs/SHARED_MCP.md).
+`packages/cursor-mcp-shared/` provides workspace discovery for MCP stdio servers. See [docs/architecture/SHARED_MCP.md](docs/architecture/SHARED_MCP.md).
 
 ## Local plugin manifest
 
-`.cursor-plugin/plugin.json` defines the bundle for Cursor’s **local plugin** path (created by the install script). It is not a public Marketplace listing. See [docs/PUBLISH.md](docs/PUBLISH.md).
+`.cursor-plugin/plugin.json` defines the bundle for Cursor’s **local plugin** path (created by the install script). It is not a public Marketplace listing. See [docs/guides/PUBLISH.md](docs/guides/PUBLISH.md).
 
-Upgrading from v0.9? See [docs/MIGRATION.md](docs/MIGRATION.md).
+Upgrading from v0.9? See [docs/guides/MIGRATION.md](docs/guides/MIGRATION.md).
 
 ## Eval tooling
 

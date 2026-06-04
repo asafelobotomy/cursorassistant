@@ -17,7 +17,7 @@ Consumer installs receive vendored shims under `mcp/scripts/_cursor_*.py`:
 python3 scripts/vendor_mcp_shared.py
 ```
 
-Run this after editing the package sources, before release or CI manifest checks. See [MCP_MAINTENANCE.md](MCP_MAINTENANCE.md).
+Run this after editing the package sources, before release or CI manifest checks. See [../operations/MCP_MAINTENANCE.md](../operations/MCP_MAINTENANCE.md).
 
 ## Install as a library
 

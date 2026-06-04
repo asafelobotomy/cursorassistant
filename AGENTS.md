@@ -2,7 +2,7 @@
 
 Canonical routing for Cursor subagents in this package and in consumer workspaces after install.
 
-Full design notes: [docs/ROUTING_AND_SUBAGENTS.md](docs/ROUTING_AND_SUBAGENTS.md).
+Full design notes: [docs/architecture/ROUTING_AND_SUBAGENTS.md](docs/architecture/ROUTING_AND_SUBAGENTS.md).
 
 ## How routing works in Cursor
 

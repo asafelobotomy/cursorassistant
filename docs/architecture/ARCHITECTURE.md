@@ -30,7 +30,7 @@ interview.json answers → conditions (mcp, packs, profile)
 | `.cursor/rules/*.mdc` | Yes |
 | `.cursor/mcp.json` | Yes (merge + sanitize deprecated servers) |
 | `.cursor/mcp/scripts/*.py` | Yes (prune orphans) |
-| `.cursor/hooks.json` | No — user-owned ([HOOKS.md](HOOKS.md)) |
+| `.cursor/hooks.json` | No — user-owned ([HOOKS.md](../guides/HOOKS.md)) |
 
 ## MCP scripts
 
@@ -39,7 +39,7 @@ Shared helpers live in `packages/cursor-mcp-shared/`, vendored to `mcp/scripts/_
 ## Quality gates
 
 - `tests/` — lifecycle and MCP composition
-- `tools/cursorEval/` — validate, `check` (compliance tier), `tokens`, `suggest`, `coverage --strict`, `policy`, optional GitHub Models `run` ([audit](CURSOR_EVAL_AUDIT.md))
+- `tools/cursorEval/` — validate, `check` (compliance tier), `tokens`, `suggest`, `coverage --strict`, `policy`, optional GitHub Models `run` ([audit](../audits/CURSOR_EVAL_AUDIT.md))
 
 ## Local plugin vs project lifecycle
 

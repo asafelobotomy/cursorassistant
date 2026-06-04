@@ -86,7 +86,7 @@ This **clones/opens the cursorAssistant repo**, not the user’s project, and do
 
 ## Implemented flow (v0.12+)
 
-See [install/index.html](../install/index.html) and [INSTALL_SECURITY_AUDIT.md](INSTALL_SECURITY_AUDIT.md):
+See [install/index.html](../install/index.html) and [../audits/INSTALL_SECURITY_AUDIT.md](../audits/INSTALL_SECURITY_AUDIT.md):
 
 1. README badge → HTTPS setup page.
 2. **Install in Cursor** → MCP deeplink runs **pinned `git clone`** (no `curl|bash`), then `mcp/scripts/mcp-launch.sh` → `cursorToolsMcp.py`.

@@ -43,4 +43,4 @@ curl -fsSL .../install-from-github.sh | bash -s -- .
 ## References
 
 - [INSTALL.md](../INSTALL.md)
-- [DEEPLINK_INSTALL_RESEARCH.md](DEEPLINK_INSTALL_RESEARCH.md)
+- [../research/DEEPLINK_INSTALL_RESEARCH.md](../research/DEEPLINK_INSTALL_RESEARCH.md)

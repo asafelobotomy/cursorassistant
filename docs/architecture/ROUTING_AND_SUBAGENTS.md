@@ -1,6 +1,6 @@
 # Routing and subagent invocation (cursorAssistant)
 
-Research-backed design for getting the **right specialist on every task** in Cursor. Complements [AGENTS_SKILLS_CURSOR_AUDIT.md](AGENTS_SKILLS_CURSOR_AUDIT.md).
+Research-backed design for getting the **right specialist on every task** in Cursor. Complements [../audits/AGENTS_SKILLS_CURSOR_AUDIT.md](../audits/AGENTS_SKILLS_CURSOR_AUDIT.md).
 
 ## How Cursor actually routes
 

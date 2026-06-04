@@ -24,6 +24,6 @@ cursorAssistant installs Python MCP servers under `.cursor/mcp/scripts/`. They r
 - Prefer the **git-only** MCP path (`mcp-launch.sh` + pinned tag clone). Avoid untrusted `CURSOR_ASSISTANT_REPO` overrides.
 - `curl | bash` bootstrap is optional; read `scripts/bootstrap-from-github.sh` first.
 - Do not install MCP deeplinks from unofficial mirrors or forked install pages.
-- See [docs/INSTALL_SECURITY_AUDIT.md](docs/INSTALL_SECURITY_AUDIT.md).
+- See [docs/audits/INSTALL_SECURITY_AUDIT.md](docs/audits/INSTALL_SECURITY_AUDIT.md).
 
 Report vulnerabilities via the repository’s GitHub security advisory process.

@@ -76,7 +76,7 @@
 - [x] Eval suites for `review`, `debugger`, `planner`
 - [x] `cursorEval policy` — forbid VS Code tool names in skills
 - [x] `scripts/dogfood-full.sh` (extensions + all packs)
-- [x] `docs/HOOKS.md` (optional user-owned hooks)
+- [x] `../guides/HOOKS.md` (optional user-owned hooks)
 
 ## v0.10.1 — review remediation
 
@@ -89,7 +89,7 @@
 
 ## v0.12.2+ — cursorEval depth
 
-- [x] **Phase A** — extended `check`, `tokens`, `suggest`, `coverage --strict` ([CURSOR_EVAL_AUDIT.md](CURSOR_EVAL_AUDIT.md))
+- [x] **Phase A** — extended `check`, `tokens`, `suggest`, `coverage --strict` ([../audits/CURSOR_EVAL_AUDIT.md](../audits/CURSOR_EVAL_AUDIT.md))
 - [x] **Phase B** — `run --tags`, trials, eval `config`, `results list|view|compare`
 - [x] **Phase C** — `quality` / `dev`, `prompt_judge`/`llm` graders, `report` HTML
 - [x] **Phase D** — `surfaceReview` skill, evals, commit/docs wiring
@@ -112,7 +112,7 @@
 
 - [x] Remove legacy external-tool coupling (comparison doc, sync script, dual IDE profiles)
 - [x] `cursor-mcp-shared` Cursor-only workspace discovery
-- [x] [MCP_MAINTENANCE.md](MCP_MAINTENANCE.md) replaces external sync guide
+- [x] [../operations/MCP_MAINTENANCE.md](../operations/MCP_MAINTENANCE.md) replaces external sync guide
 
 ## v1.0+
 

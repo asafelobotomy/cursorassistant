@@ -6,4 +6,6 @@ Material kept for reference only. **Not** part of the supported install path.
 | --- | --- |
 | [MARKETPLACE_PUBLISH.md](MARKETPLACE_PUBLISH.md) | Cursor Marketplace submission (deferred; install via GitHub instead) |
 
-Current install guide: [INSTALL.md](../../INSTALL.md) and [CURSOR_INSTALL_UX.md](../CURSOR_INSTALL_UX.md).
+**Current install:** [INSTALL.md](../../INSTALL.md) · [guides/CURSOR_INSTALL_UX.md](../guides/CURSOR_INSTALL_UX.md)
+
+**Full doc map:** [docs/README.md](../README.md)

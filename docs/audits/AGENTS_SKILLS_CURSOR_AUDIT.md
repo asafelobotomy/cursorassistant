@@ -1,8 +1,10 @@
 # Agents & skills audit (Cursor optimization)
 
+> **Snapshot (2026-06-03).** Several follow-ups are done since this audit (e.g. `cursorAssistantSetup` eval, **`surfaceReview`** skill, 8 core skills). For **current** routing and roster, use [ROUTING_AND_SUBAGENTS.md](../architecture/ROUTING_AND_SUBAGENTS.md).
+
 Audit date: 2026-06-03. Scope: core `agents/`, `skills/`, `AGENTS.md`, install policy, plugin bundle, evals.
 
-**Routing deep-dive:** [ROUTING_AND_SUBAGENTS.md](ROUTING_AND_SUBAGENTS.md) (description-driven delegation, conflict matrix, eval hardening).
+**Routing deep-dive:** [ROUTING_AND_SUBAGENTS.md](../architecture/ROUTING_AND_SUBAGENTS.md) (description-driven delegation, conflict matrix, eval hardening).
 
 ## Summary
 

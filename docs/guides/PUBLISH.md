@@ -44,4 +44,4 @@ python3 scripts/changelog_release.py extract -o /tmp/release-notes.md
 
 ## Archived: Marketplace submission
 
-If we pursue a public listing later, see [docs/archive/MARKETPLACE_PUBLISH.md](archive/MARKETPLACE_PUBLISH.md).
+If we pursue a public listing later, see [../archive/MARKETPLACE_PUBLISH.md](../archive/MARKETPLACE_PUBLISH.md).

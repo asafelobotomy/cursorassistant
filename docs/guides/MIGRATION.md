@@ -23,4 +23,4 @@
 python3 cursorAssistant.py update --workspace . --package-root /path/to/cursorassistant --json
 ```
 
-See [MCP_LAYOUT.md](MCP_LAYOUT.md) and [AGENTS.md](../AGENTS.md).
+See [../architecture/MCP_LAYOUT.md](../architecture/MCP_LAYOUT.md) and [AGENTS.md](../AGENTS.md).

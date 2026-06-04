@@ -59,6 +59,7 @@ Add the same secret to the GitHub repo for CI. See [README.md](README.md#github-
 
 ## See also
 
-- [docs/CURSOR_INSTALL_UX.md](docs/CURSOR_INSTALL_UX.md)
-- [docs/DEEPLINK_INSTALL_RESEARCH.md](docs/DEEPLINK_INSTALL_RESEARCH.md)
-- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- [docs/README.md](docs/README.md) — documentation map
+- [docs/guides/CURSOR_INSTALL_UX.md](docs/guides/CURSOR_INSTALL_UX.md)
+- [docs/research/DEEPLINK_INSTALL_RESEARCH.md](docs/research/DEEPLINK_INSTALL_RESEARCH.md)
+- [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md)

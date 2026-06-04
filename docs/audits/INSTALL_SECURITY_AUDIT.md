@@ -84,6 +84,6 @@ git tag -v v$(head -1 VERSION)
 ## References
 
 - [SECURITY.md](../SECURITY.md)
-- [DEEPLINK_INSTALL_RESEARCH.md](DEEPLINK_INSTALL_RESEARCH.md)
+- [../research/DEEPLINK_INSTALL_RESEARCH.md](../research/DEEPLINK_INSTALL_RESEARCH.md)
 - [Cursor MCP install links](https://cursor.com/docs/mcp/install-links)
 - [CursorJack (MCP deeplink abuse)](https://www.proofpoint.com/us/blog/threat-insight/cursorjack-weaponizing-deeplinks-exploit-cursor-ide)

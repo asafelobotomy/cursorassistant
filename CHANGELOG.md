@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- [ROUTING_AND_SUBAGENTS.md](docs/ROUTING_AND_SUBAGENTS.md) and [AGENTS_SKILLS_CURSOR_AUDIT.md](docs/AGENTS_SKILLS_CURSOR_AUDIT.md).
+- [ROUTING_AND_SUBAGENTS.md](docs/architecture/ROUTING_AND_SUBAGENTS.md) and [AGENTS_SKILLS_CURSOR_AUDIT.md](docs/audits/AGENTS_SKILLS_CURSOR_AUDIT.md).
 - Conflict-resolution matrix in `AGENTS.md`; routing table in `task-triage` skill.
 - `cursorAssistantSetup` skill in install policy; models-smoke routing conflict eval tasks.
 

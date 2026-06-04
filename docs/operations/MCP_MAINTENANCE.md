@@ -15,7 +15,7 @@ Do not edit vendored `_cursor_*.py` by hand — run `python3 scripts/vendor_mcp_
 
 ## Deprecated
 
-Sources under `mcp/scripts/_deprecated/` are not installed. See [MCP_LAYOUT.md](MCP_LAYOUT.md).
+Sources under `mcp/scripts/_deprecated/` are not installed. See [../architecture/MCP_LAYOUT.md](../architecture/MCP_LAYOUT.md).
 
 ## Refresh vendored helpers
 
