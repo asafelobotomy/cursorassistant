@@ -17,6 +17,7 @@ cursorAssistant docs are grouped by purpose. **Supported install path:** [INSTAL
 | --- | --- |
 | [architecture/ARCHITECTURE.md](architecture/ARCHITECTURE.md) | Policy, lifecycle engine, install flow |
 | [architecture/ROUTING_AND_SUBAGENTS.md](architecture/ROUTING_AND_SUBAGENTS.md) | Subagent roster, delegation, eval routing |
+| [architecture/MODEL_PINNING.md](architecture/MODEL_PINNING.md) | Agent `model: inherit` audit and optimal pinning policy |
 | [architecture/PERFORMANCE.md](architecture/PERFORMANCE.md) | Token budgets, skill scoping, merge checklist |
 | [guides/CURSOR_AUTOMATIONS.md](guides/CURSOR_AUTOMATIONS.md) | Optional automations and hooks (zero default cost) |
 | [architecture/MCP_LAYOUT.md](architecture/MCP_LAYOUT.md) | Layered `mcp-core` / extensions / packs |

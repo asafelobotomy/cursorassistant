@@ -111,7 +111,7 @@ Requires `GITHUB_MODELS_TOKEN`, `GITHUB_TOKEN`, or `GH_TOKEN`. Results land in `
 
 ### Model overrides
 
-Task `model` can override per invocation; roster agents default to `inherit`.
+Task `model` can override per invocation; roster agents default to `inherit`. See [MODEL_PINNING.md](MODEL_PINNING.md) for the full audit (why the package does not pin `gpt-*` / `claude-*` IDs in agent YAML).
 
 ## Handoff rules
 
