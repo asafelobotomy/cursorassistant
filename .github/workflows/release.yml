@@ -1,0 +1,71 @@
+name: Release
+
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - VERSION
+      - CHANGELOG.md
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect version bump
+        id: bump
+        run: |
+          set -euo pipefail
+          current=$(head -n1 VERSION | tr -d '\r\n')
+          if git rev-parse HEAD^ >/dev/null 2>&1; then
+            previous=$(git show HEAD^:VERSION 2>/dev/null | head -n1 | tr -d '\r\n' || true)
+          else
+            previous=""
+          fi
+          echo "current=${current}" >> "$GITHUB_OUTPUT"
+          echo "previous=${previous}" >> "$GITHUB_OUTPUT"
+          if [ "${current}" = "${previous}" ]; then
+            echo "bumped=false" >> "$GITHUB_OUTPUT"
+            echo "VERSION unchanged (${current}); skipping release."
+          else
+            echo "bumped=true" >> "$GITHUB_OUTPUT"
+            echo "VERSION bumped: ${previous:-∅} → ${current}"
+          fi
+
+      - name: Verify CHANGELOG entry
+        if: steps.bump.outputs.bumped == 'true'
+        run: python3 scripts/changelog_release.py verify --version "${{ steps.bump.outputs.current }}"
+
+      - name: Build release notes
+        if: steps.bump.outputs.bumped == 'true'
+        run: |
+          python3 scripts/changelog_release.py extract \
+            --version "${{ steps.bump.outputs.current }}" \
+            -o release-notes.md
+
+      - name: Create tag and GitHub Release
+        if: steps.bump.outputs.bumped == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.bump.outputs.current }}
+        run: |
+          set -euo pipefail
+          tag="v${VERSION}"
+          if git rev-parse "${tag}^{commit}" >/dev/null 2>&1; then
+            echo "Tag ${tag} already exists; skipping tag and release."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "${tag}" -m "Release ${tag}"
+          git push origin "${tag}"
+          gh release create "${tag}" \
+            --title "cursorAssistant ${tag}" \
+            --notes-file release-notes.md \
+            --verify-tag

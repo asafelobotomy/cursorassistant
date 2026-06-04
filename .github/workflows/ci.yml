@@ -22,6 +22,9 @@ jobs:
       - name: Validate plugin manifest
         run: python3 scripts/validate_plugin.py
 
+      - name: CHANGELOG documents VERSION
+        run: python3 scripts/changelog_release.py verify
+
       - name: Regenerate manifest (drift check)
         run: |
           python3 scripts/generate.py --package-root .
