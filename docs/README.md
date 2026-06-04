@@ -28,6 +28,7 @@ cursorAssistant docs are grouped by purpose. **Supported install path:** [INSTAL
 | --- | --- |
 | [operations/MCP_MAINTENANCE.md](operations/MCP_MAINTENANCE.md) | MCP scripts, deprecation, vendoring workflow |
 | [operations/PACKAGE_REPO_MAINTENANCE.md](operations/PACKAGE_REPO_MAINTENANCE.md) | Regenerate manifest and dogfood `.cursor/` after source edits |
+| [operations/INSTALL_WEBSITE_SYNC.md](operations/INSTALL_WEBSITE_SYNC.md) | Install page template here → PR on github.io |
 
 ## Project history
 

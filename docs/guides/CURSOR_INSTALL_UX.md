@@ -28,19 +28,10 @@ flowchart LR
 
 ## Install website (canonical)
 
-The public setup page is maintained in **[asafelobotomy.github.io](https://github.com/asafelobotomy/asafelobotomy.github.io)** under `cursorassistant/install/`.
+Hosted at [asafelobotomy.github.io/cursorassistant/install/](https://asafelobotomy.github.io/cursorassistant/install/). **Edit** [install/index.template.html](../../install/index.template.html) **in this repo**; CI pushes generated files to [asafelobotomy.github.io](https://github.com/asafelobotomy/asafelobotomy.github.io) automatically. See [../operations/INSTALL_WEBSITE_SYNC.md](../operations/INSTALL_WEBSITE_SYNC.md).
 
 ```sh
-# In the github.io repo:
-bash scripts/sync-cursorassistant-install.sh
-```
-
-That clones this package for [VERSION](../../VERSION) and regenerates the MCP deeplink. Edit `index.template.html` in the **github.io** repo, not here.
-
-Optional local preview in this repo:
-
-```sh
-python3 scripts/generate_install_page.py
+python3 scripts/generate_install_page.py   # local preview
 ```
 
 ## Terminal-first alternative

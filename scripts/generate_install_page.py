@@ -41,6 +41,30 @@ def combined_cursor_assistant_mcp(version: str) -> dict:
     return {"command": "bash", "args": ["-lc", inner]}
 
 
+def package_blurb(package_root: Path, version: str) -> str:
+    catalog_path = package_root / "template/setup/catalog.json"
+    if catalog_path.is_file():
+        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+        agents = len(catalog.get("agents", []))
+        skills = len(catalog.get("skills", []))
+        packs = len(catalog.get("packs", []))
+        return (
+            f"Release v{version} installs {agents} subagents and {skills} core skills "
+            f"(+ {packs} optional packs in the interview)."
+        )
+    return f"Release v{version} installs managed agents, skills, and rules via the project interview."
+
+
+def mcp_preview_text(version: str) -> str:
+    tag = f"v{version}"
+    ver_dir = f"${{userHome}}/.local/share/cursorassistant/{version}"
+    return (
+        f"git clone --depth 1 --branch {tag} {REPO_GIT} → {ver_dir}\n"
+        f"ln -sfn …/cursorassistant/{version} → …/cursorassistant/current\n"
+        f"exec …/current/mcp/scripts/mcp-launch.sh"
+    )
+
+
 def cursor_tools_mcp(version: str) -> dict:
     """cursorTools only — requires bootstrap (see manual path on install page)."""
     launch = "${userHome}/.local/share/cursorassistant/current/mcp/scripts/mcp-launch.sh"
@@ -86,6 +110,8 @@ def main() -> int:
         ("@@BOOTSTRAP_GIT@@", bootstrap_git),
         ("@@MCP_COMBINED@@", deeplinks["mcpCombined"]),
         ("@@MCP_CURSOR_TOOLS@@", deeplinks["mcpCursorTools"]),
+        ("@@MCP_PREVIEW@@", mcp_preview_text(version)),
+        ("@@PACKAGE_BLURB@@", package_blurb(ROOT, version)),
     ):
         html = html.replace(key, value)
     (INSTALL_DIR / "index.html").write_text(html, encoding="utf-8")
