@@ -21,6 +21,12 @@ Manage the git lifecycle for the current workspace using **Shell** and **`gh`** 
 - Dependency installs or audits (prefer `deps`)
 - Root-cause debugging of test failures (prefer `debugger`)
 
+## Before commit (managed surfaces)
+
+When staged paths include **cursorAssistant-managed instruction files** (`agents/*.md`, `skills/*/SKILL.md`, `template/rules/*.mdc`, or their `.cursor/` copies), run **`/surfaceReview`** on each changed surface (or one batched review) **before** staging the final commit message. Pair with **`/ciPreflight`** when CI commands are unknown.
+
+Do not skip surface review for routing-only tweaks to `description` or `AGENTS.md` handoffs — those affect delegation.
+
 ## Rules
 
 - Never push unless the user asks.
@@ -30,6 +36,7 @@ Manage the git lifecycle for the current workspace using **Shell** and **`gh`** 
 
 ## Delegation
 
+- Instruction-surface quality on staged agents/skills/rules → **`/surfaceReview`** skill (not `review`)
 - Unfamiliar repo layout → `inventory` or built-in Explore
-- Review before merge → `review`
+- Code or PR review before merge → `review`
 - Git hook or CI failure diagnosis → `debugger`

@@ -469,7 +469,7 @@
       "target": "AGENTS.md",
       "layer": "core",
       "strategy": "preserve-marked-markdown-blocks",
-      "hash": "sha256:4c00591b872406ec7b52785be46e9cdfee2973c458520414e5a7d4e08520089d"
+      "hash": "sha256:d2d8a5c64c50bacebc9609889759d54d517b9481844344d657677be74db779d5"
     }
   ]
 }

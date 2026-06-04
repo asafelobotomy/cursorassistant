@@ -30,5 +30,6 @@ Create and update documentation that matches the repository. Verify commands, pa
 ## Delegation
 
 - Broad repo mapping → built-in Explore; structured maps → `inventory`
-- Quality or accuracy review → `review`
+- Instruction-surface quality (agents, skills, rules) → **`/surfaceReview`** before merge
+- Code or doc accuracy review in diffs → `review`
 - Large multi-area rollout → `planner`
