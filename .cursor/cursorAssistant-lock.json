@@ -2,7 +2,7 @@
   "schemaVersion": "0.4.0",
   "package": {
     "name": "cursorAssistant",
-    "version": "0.10.3",
+    "version": "0.11.0",
     "packageRoot": "."
   },
   "profile": "balanced",
@@ -31,13 +31,12 @@
     "skills.depSearch": "sha256:ed9256a0f1863b0b88b01b99be0ae306d806f6307c42a3b4e97724507025d263",
     "skills.task-triage": "sha256:2c9f7ecc0db318534d2e1ad7e97c48ae91f528604ebf988b85b6b9fc800c9045",
     "mcp.config": "sha256:972ea8c551b3dfe27678bc4f49b1255df38a220730e7f85c293340c41d1113b5",
-    "mcp.shared._cursor_profiles": "sha256:0e1f2dc726f2f540bf84b1d41667a89de8d1d8980b8a41a49a2ff21fd0da4445",
-    "mcp.shared._cursor_workspace": "sha256:33e176cd420739418b478508c8fb46b5c8b2c20584045002c7d8a3ee25999d03",
-    "mcp.shared._cursor_mcp_util": "sha256:1de2065f66362bd9f8597225735c9b5826fe6eaf1980e35508b2e838408ac30a",
+    "mcp.shared._cursor_workspace": "sha256:45413ed98c7a17da96c6fbd755e083bd97e0462bb4ec6e9ce3ab5cd0191d6952",
+    "mcp.shared._cursor_mcp_util": "sha256:87cccac996ef2743370bf1b80152bb7ddb00be56170bb8938876719cce03a05b",
     "mcp.cursorToolsMcp": "sha256:cdceddb0817dbe7e6d5de78f0920c7d2f74c4dff3c462d527d4067bcfb7cc03d"
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-04T06:49:46Z"
+    "updatedAt": "2026-06-04T06:54:04Z"
   }
 }

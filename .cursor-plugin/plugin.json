@@ -1,8 +1,8 @@
 {
   "name": "cursor-assistant",
   "displayName": "cursorAssistant",
-  "description": "Lifecycle-managed Cursor agents, skills, rules, and MCP tools inspired by xanadAssistant.",
-  "version": "0.10.3",
+  "description": "Lifecycle-managed Cursor agents, skills, rules, and MCP tools for any workspace.",
+  "version": "0.11.0",
   "author": {
     "name": "cursorAssistant contributors"
   },

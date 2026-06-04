@@ -6,7 +6,6 @@ from __future__ import annotations
 from pathlib import Path
 
 VENDOR_MAP = {
-    "profiles.py": "_cursor_profiles.py",
     "workspace.py": "_cursor_workspace.py",
     "mcp_util.py": "_cursor_mcp_util.py",
 }
@@ -30,6 +29,16 @@ def strip_module_docstring(body: str) -> str:
     return rest[close + 3 :].lstrip("\n")
 
 
+def strip_leading_future_import(body: str) -> str:
+    lines = body.splitlines()
+    while lines and lines[0].strip() == "from __future__ import annotations":
+        lines.pop(0)
+    text = "\n".join(lines).lstrip("\n")
+    if text and not text.endswith("\n"):
+        text += "\n"
+    return text
+
+
 def main() -> int:
     repo_root = Path(__file__).resolve().parents[1]
     src_root = repo_root / "packages" / "cursor-mcp-shared" / "cursor_mcp_shared"
@@ -38,7 +47,7 @@ def main() -> int:
         source = src_root / src_name
         dest = dest_root / dest_name
         body = strip_module_docstring(source.read_text(encoding="utf-8"))
-        body = body.replace("from cursor_mcp_shared.profiles", "from _cursor_profiles")
+        body = strip_leading_future_import(body)
         dest.write_text(HEADER + body, encoding="utf-8")
         print(f"vendored → {dest.relative_to(repo_root)}")
     return 0

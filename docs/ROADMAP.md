@@ -25,7 +25,7 @@
 
 ## v0.4
 
-- [x] Shared MCP bundle ported from xanad (git, web, testing, memory, security, fs, time, devDocs)
+- [x] Shared MCP bundle (git, web, testing, memory, security, fs, time, devDocs) — later deprecated
 - [x] `mcp.enabled` interview toggle
 - [x] Core agents: commit, deps, docs
 - [x] Core skills: workspaceSearch, ciPreflight, depSearch
@@ -35,7 +35,7 @@
 
 - [x] Full eval runner (`validate`, `check`, `coverage`, `grade`, `run`)
 - [x] Cursor plugin manifest (`.cursor-plugin/plugin.json`)
-- [x] MCP sync script (`scripts/sync_mcp_from_xanad.py`)
+- [x] External MCP script import workflow (removed in v0.11)
 
 ## v0.6
 
@@ -57,7 +57,7 @@
 - [x] Rewrite core skills for Cursor tools (`workspaceSearch`, `ciPreflight`, `depSearch`)
 - [x] Rules: built-in subagents + Agent tools before MCP
 - [x] Interview default `mcp.enabled: false`; conditions aligned
-- [x] Catalog lists core agents (later: 11 after inventory rename); scrub xanad strings in `webMcp.py`
+- [x] Catalog lists core agents (later: 11 after inventory rename)
 
 ## v0.9 — Cursor Canonical Phase B
 
@@ -79,28 +79,33 @@
 
 ## v0.10.1 — review remediation
 
-- [x] Docs: `MIGRATION.md`, `ARCHITECTURE.md`, `SECURITY.md`, updated comparison/README
+- [x] Docs: `MIGRATION.md`, `ARCHITECTURE.md`, `SECURITY.md`, updated README
 - [x] Evals for all 6 core skills; routing tasks for inventory/debugger
 - [x] Agent delegation sections (`task-triage`, handoffs)
 - [x] Relative lockfile `packageRoot` when package is workspace; catalog `git` deprecated
 - [x] CI: policy + surface checks; evals workflow uses `GITHUB_MODELS_TOKEN`
 - [x] Archive obsolete `mcp-bundle.json` / `mcp-minimal.json`
 
-## v0.10.2 — open issues closed
+## v0.10.2 — eval and CI depth
 
-- [x] `cursor-mcp-shared` **XANAD** profile + [XANAD_INTEGRATION.md](XANAD_INTEGRATION.md)
 - [x] Negative/routing eval tasks for core agents and skills; per-task grading in `cursorEval run`
 - [x] PR **eval-models-pr** job (`evals/models-smoke`, 3 tasks; skips without token)
 - [x] `cursorEval policy` scans `template/rules` and `.cursor/rules` (`.mdc`)
 
-## v0.10.3 (current) — audit remediation
+## v0.10.3 — audit remediation
 
-- [x] Dogfood installs `_cursor_profiles.py`; CI `check_dogfood_install.py`
+- [x] Dogfood MCP complete; CI `check_dogfood_install.py`
 - [x] Pack eval negative tasks (2 tasks per pack skill suite)
-- [x] `ci_check_surfaces` includes pack skills; `verify_xanad_profile.py`
+- [x] `ci_check_surfaces` includes pack skills
 - [x] `.gitignore` `.cursorEval/`; README doc table; `cursorLifecycle` delegation deduped
+
+## v0.11 (current) — Cursor-only product
+
+- [x] Remove xanadAssistant coupling (docs, sync script, XANAD profile, comparison doc)
+- [x] `cursor-mcp-shared` Cursor-only workspace discovery
+- [x] [MCP_MAINTENANCE.md](MCP_MAINTENANCE.md) replaces external sync guide
 
 ## v1.0+
 
-- [ ] xanadAssistant repo applies `cursor-mcp-shared` dependency (integration doc ready)
-- [ ] Additional skills from xanad as optional packs
+- [ ] Stable 1.0 API for policy and lockfile schema
+- [ ] Additional optional capability packs

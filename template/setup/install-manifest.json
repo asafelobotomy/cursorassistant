@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.10.2",
+  "packageVersion": "0.11.0",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -25,7 +25,7 @@
       "target": ".cursor/agents/cursorLifecycle.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:76a3668dc6fa160afa1438d74fe4314f88ce9e057885a03bf4f861157757e93a"
+      "hash": "sha256:58b233ebcf7c5702addbfcfcb8bca3f30ee6d82371e04c11f7e0705cd7b47dec"
     },
     {
       "id": "agents.debugger",
@@ -109,21 +109,12 @@
       "requiredWhen": []
     },
     {
-      "id": "mcp.shared._cursor_profiles",
-      "source": "mcp/scripts/_cursor_profiles.py",
-      "target": ".cursor/mcp/scripts/_cursor_profiles.py",
-      "layer": "core",
-      "strategy": "replace",
-      "hash": "sha256:0e1f2dc726f2f540bf84b1d41667a89de8d1d8980b8a41a49a2ff21fd0da4445",
-      "requiredWhen": []
-    },
-    {
       "id": "mcp.shared._cursor_workspace",
       "source": "mcp/scripts/_cursor_workspace.py",
       "target": ".cursor/mcp/scripts/_cursor_workspace.py",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:33e176cd420739418b478508c8fb46b5c8b2c20584045002c7d8a3ee25999d03",
+      "hash": "sha256:92b3fdf6b027364923bbd54e0135f9f794cf7c06c508a880b3d08d8b19d94874",
       "requiredWhen": []
     },
     {

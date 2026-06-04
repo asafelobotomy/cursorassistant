@@ -98,7 +98,6 @@ Use **`GITHUB_MODELS_TOKEN`** in your shell (not `GITHUB_TOKEN`). For CI, add **
 Optional manual verification:
 
 ```sh
-python3 scripts/verify_xanad_profile.py
 python3 scripts/check_dogfood_install.py
 ``` Exporting `GITHUB_TOKEN` overrides `gh` and `git push` with that value. Store the Models token in GNOME Keyring as `service=github-models` and load it in `~/.bashrc` as `GITHUB_MODELS_TOKEN` (see this repo’s INSTALL notes or your local shell config).
 

@@ -220,8 +220,10 @@ class EngineTests(unittest.TestCase):
         self.assertEqual(report.get("installState"), "installed", report)
         self.assertEqual(missing, [], f"missing managed files: {missing}")
         self.assertEqual(stale, [], f"stale managed files: {stale}")
-        profiles = REPO_ROOT / ".cursor/mcp/scripts/_cursor_profiles.py"
-        self.assertTrue(profiles.is_file(), "dogfood must install _cursor_profiles.py")
+        self.assertTrue(
+            (REPO_ROOT / ".cursor/mcp/scripts/_cursor_workspace.py").is_file(),
+            "dogfood must install vendored workspace helper",
+        )
 
 
 if __name__ == "__main__":

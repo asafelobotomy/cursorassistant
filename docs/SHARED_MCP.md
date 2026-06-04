@@ -17,7 +17,7 @@ Consumer installs receive vendored shims under `mcp/scripts/_cursor_*.py`:
 python3 scripts/vendor_mcp_shared.py
 ```
 
-Run this after editing the package sources, before release or CI manifest checks.
+Run this after editing the package sources, before release or CI manifest checks. See [MCP_MAINTENANCE.md](MCP_MAINTENANCE.md).
 
 ## Install as a library
 
@@ -25,8 +25,10 @@ Run this after editing the package sources, before release or CI manifest checks
 pip install ./packages/cursor-mcp-shared
 ```
 
-## xanadAssistant
+## Markers
 
-xanadAssistant can depend on `cursor-mcp-shared` and drop duplicated discovery logic in its MCP scripts. Use the **`XANAD`** profile or `CURSOR_MCP_PROFILE=xanad` — see [XANAD_INTEGRATION.md](XANAD_INTEGRATION.md).
+Workspace discovery looks for:
 
-See also [MCP_SYNC.md](MCP_SYNC.md) for script porting from xanad.
+- `.cursor/cursorAssistant-lock.json`
+- `.cursor/` directory
+- `cursorAssistant.py` at repo root

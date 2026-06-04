@@ -2,7 +2,7 @@
 
 > Lifecycle management for **Cursor** AI surfaces in any workspace.
 
-cursorAssistant is inspired by [xanadAssistant](https://github.com/asafelobotomy/xanadassistant): the same ideas — **managed installs**, **lockfile drift detection**, **profiles and packs**, **specialist routing** — but targeting Cursor-native paths (`.cursor/`, `AGENTS.md`) instead of GitHub Copilot / VS Code surfaces.
+cursorAssistant installs and maintains **managed installs**, **lockfile drift detection**, **profiles and packs**, and **specialist routing** using Cursor-native paths (`.cursor/`, `AGENTS.md`).
 
 ## What it manages
 
@@ -60,7 +60,6 @@ python3 cursorAssistant.py plan-setup --workspace /path/to/your-project --packag
 | Dogfood this repo | `bash scripts/dogfood.sh` (lean) or `bash scripts/dogfood-full.sh` (extensions + packs) |
 | Check all surfaces | `bash scripts/ci_check_surfaces.sh` |
 | Verify dogfood install | `python3 scripts/check_dogfood_install.py` |
-| Verify XANAD MCP profile | `python3 scripts/verify_xanad_profile.py` |
 | Vendor MCP shared | `python3 scripts/vendor_mcp_shared.py` |
 | Generate manifest | `python3 scripts/generate.py --package-root .` |
 | Lifecycle inspect | `python3 cursorAssistant.py inspect --workspace . --package-root . --json` |
@@ -82,24 +81,13 @@ Ask the main Agent: **Set up cursorAssistant in this workspace** — it should r
 | [docs/MIGRATION.md](docs/MIGRATION.md) | v0.9 → v0.10 upgrades |
 | [SECURITY.md](SECURITY.md) | MCP and secrets guidance |
 | [docs/MCP_LAYOUT.md](docs/MCP_LAYOUT.md) | Layered MCP manifests |
+| [docs/MCP_MAINTENANCE.md](docs/MCP_MAINTENANCE.md) | MCP scripts and vendoring |
 | [docs/HOOKS.md](docs/HOOKS.md) | Optional user-owned hooks |
 | [docs/PUBLISH.md](docs/PUBLISH.md) | Cursor Marketplace |
 
 ## Shared MCP library
 
-`packages/cursor-mcp-shared/` provides workspace discovery for Cursor and xanad profiles. See [docs/SHARED_MCP.md](docs/SHARED_MCP.md) and [docs/XANAD_INTEGRATION.md](docs/XANAD_INTEGRATION.md).
-
-## Relationship to xanadAssistant
-
-| | xanadAssistant | cursorAssistant |
-| --- | --- | --- |
-| **IDE** | VS Code + GitHub Copilot | Cursor |
-| **Agents** | `.github/agents/*.agent.md` | `.cursor/agents/*.md` |
-| **Instructions** | `.github/copilot-instructions.md` | `.cursor/rules/*.mdc` + `AGENTS.md` |
-| **MCP config** | `.vscode/mcp.json` | `.cursor/mcp.json` |
-| **Lockfile** | `.github/xanadAssistant-lock.json` | `.cursor/cursorAssistant-lock.json` |
-
-The two packages are **siblings**, not forks. MCP scripts sync from xanad via `scripts/sync_mcp_from_xanad.py`; shared helpers live in `packages/cursor-mcp-shared/` (see [docs/SHARED_MCP.md](docs/SHARED_MCP.md)).
+`packages/cursor-mcp-shared/` provides workspace discovery for MCP stdio servers. See [docs/SHARED_MCP.md](docs/SHARED_MCP.md).
 
 ## Plugin / marketplace
 
@@ -133,7 +121,7 @@ packs/                      # optional packs (lean, secure, tdd)
 mcp/scripts/                # MCP servers (cursorTools + shared bundle)
 tools/cursorEval/           # eval validate, check, coverage, run, grade
 .cursor-plugin/             # Cursor Marketplace plugin manifest
-docs/                       # see ARCHITECTURE, MIGRATION, SECURITY, MCP_LAYOUT, HOOKS, PUBLISH
+docs/                       # architecture, migration, MCP, hooks, publish
 tests/
 ```
 

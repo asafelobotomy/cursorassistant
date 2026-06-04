@@ -2,9 +2,6 @@
 
 from __future__ import annotations
 
-from __future__ import annotations
-
-
 def tail_text(text: str, *, max_lines: int = 20, max_chars: int = 4000) -> str | None:
     if not text:
         return None
