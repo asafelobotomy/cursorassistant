@@ -18,8 +18,34 @@ class EngineTests(unittest.TestCase):
             workspace = Path(tmp)
             report = engine.inspect(workspace, REPO_ROOT)
             self.assertEqual(report["installState"], "not-installed")
+            self.assertTrue(report["interviewRequired"])
             self.assertFalse(report["lockfilePresent"])
             self.assertEqual(report["selectedPacks"], [])
+
+    def test_inspect_interview_required_without_answers_file(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            workspace = Path(tmp)
+            engine.setup(workspace, REPO_ROOT)
+            answers_path = workspace / ".cursor/cursor-assistant-answers.json"
+            answers_path.unlink()
+            report = engine.inspect(workspace, REPO_ROOT)
+            self.assertTrue(report["interviewRequired"])
+
+    def test_inspect_interview_not_required_after_setup(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            workspace = Path(tmp)
+            engine.setup(workspace, REPO_ROOT)
+            report = engine.inspect(workspace, REPO_ROOT)
+            self.assertFalse(report["interviewRequired"])
+
+    def test_update_requires_answers_when_interview_required(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            workspace = Path(tmp)
+            engine.setup(workspace, REPO_ROOT)
+            (workspace / ".cursor/cursor-assistant-answers.json").unlink()
+            with self.assertRaises(ValueError) as ctx:
+                engine.update(workspace, REPO_ROOT)
+            self.assertIn("interview_required", str(ctx.exception))
 
     def test_setup_writes_lockfile_and_agents(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -32,7 +58,7 @@ class EngineTests(unittest.TestCase):
             self.assertTrue((workspace / ".cursor/mcp/scripts/cursorToolsMcp.py").is_file())
             lock = json.loads((workspace / ".cursor/cursorAssistant-lock.json").read_text())
             self.assertEqual(lock["package"]["name"], "cursorAssistant")
-            self.assertEqual(lock["schemaVersion"], "0.4.0")
+            self.assertEqual(lock["schemaVersion"], "0.5.0")
             self.assertEqual(lock["profile"], "balanced")
             self.assertEqual(lock["selectedPacks"], [])
             self.assertFalse(lock["mcpEnabled"])

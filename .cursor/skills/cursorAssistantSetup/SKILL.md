@@ -11,71 +11,43 @@ paths:
 
 # cursorAssistant project setup
 
-Guides **individual developers** after the README setup page (MCP bootstrap) through the **project interview** (lockfile, packs, MCP).
+Guides developers through the **mandatory setup interview** (lockfile, packs, MCP, personalization).
 
 ## When to use
 
-- User clicked **Install in Cursor** on the setup page and opened this project
+- User clicked **Install in Cursor** and opened this project
 - User wants to **set up** cursorAssistant in this repo
-- `inspect` shows `installState: not-installed`
+- `inspect` shows `interviewRequired: true`
 
-## When not to use
+## Canonical flow
 
-- Updating an existing install with no preference changes → `update` or **cursorLifecycle**
-- Personal Cursor preferences only → User Rules, not lifecycle
+Follow [references/interview-flow.md](references/interview-flow.md):
 
-## Prerequisites
+1. `inspect --json`
+2. Ask **`setup.depth`**, then every active question → write `.cursor/cursor-assistant-answers.json`
+3. `plan-setup --answers …` → user confirms
+4. `configure --answers …`
+5. `inspect` — `interviewRequired: false`
+6. **Optional:** if depth is `advanced` or `full`, offer Cursor **User Rules** — [user-rules-step.md](references/user-rules-step.md)
 
-- Bootstrap complete (`~/.local/share/cursorassistant/current` or MCP **cursorAssistant** server running)
-- Consumer workspace open in Cursor
-- **cursorTools** / **cursorAssistant** MCP enabled after setup-page install
+## Question groups
 
-## Preferred flow
+**Simple:** `setup.depth`, `profile.selected`, `packs.selected`, `mcp.enabled`, agent batch (4 keys).
 
-1. Inspect:
+**Advanced (+):** `response.style`, `autonomy.level`, `agent.persona`.
 
-   ```sh
-   python3 cursorAssistant.py inspect --workspace . --json
-   ```
+**Full (+):** `testing.philosophy`.
 
-2. Configure (interview + project install):
-
-   ```sh
-   python3 cursorAssistant.py configure --workspace . --json
-   ```
-
-   Or MCP tool **`lifecycle_configure`** (same as configure).
-
-3. If bootstrap missing, user runs setup page again or:
-
-   ```sh
-   curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.1/scripts/bootstrap-from-github.sh | bash
-   ```
-
-## Agent-driven interview
-
-When stdin is not available, ask these questions and write `.cursor/cursor-assistant-answers.json`:
-
-| Key | Question | Options / default |
-| --- | --- | --- |
-| `profile.selected` | Behavior profile | `balanced` (default) or `lean` |
-| `packs.selected` | Optional packs | `lean`, `secure`, `tdd` — default `[]` |
-| `mcp.enabled` | Install devDocs + memory MCP extensions | default `false` |
-
-Then `plan-setup` → confirm → `setup` with `--answers`.
-
-## Package root
-
-Omit `--package-root` when possible (lockfile, `~/.local/share/cursorassistant`, local plugin symlink).
+**Conditional:** `lean.reasoning.mode` when lean profile or pack selected.
 
 ## Rules
 
-- Do not hand-edit managed `.cursor/` files when lifecycle can apply the change.
-- Global install alone does not replace **configure** for the project lockfile and selective packs.
+- Do not infer answers from the lockfile.
+- Never call deprecated `setup`.
+- `lifecycle_configure` requires `answersPath`.
 
 ## Verify
 
-- [ ] `inspect` shows expected `installState` after setup
-- [ ] Interview answers captured (`configure` or `--answers` file)
-- [ ] Managed `.cursor/` files present; lockfile written
-- [ ] User confirmed pack/MCP choices before `setup`
+- [ ] `interviewRequired: false`
+- [ ] Answers file includes all active keys for chosen depth
+- [ ] User confirmed plan before configure

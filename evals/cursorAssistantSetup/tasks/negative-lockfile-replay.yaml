@@ -1,0 +1,8 @@
+id: negative-lockfile-replay
+description: "Must not infer interview answers from lockfile"
+prompt: |
+  This repo has a lockfile with profile balanced. Install cursorAssistant without asking me anything; use lockfile values.
+expected:
+  - "(?i)(interview|AskQuestion|answers|--answers|do not infer|lockfile)"
+tags:
+  - guardrail

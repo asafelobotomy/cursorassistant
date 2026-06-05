@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.15.0] - 2026-06-04
+
+### Added
+
+- Mandatory setup interview with progressive disclosure (`setup.depth`: simple / advanced / full).
+- Extended interview schema (v0.5.0): personalization, agent batch, workspace scan tokens, `preferences.mdc`.
+- `scripts/lifecycle/workspace_scan.py`, `preference_tokens.py`, `agent_customization.py`, `user_rules.py`.
+- Post-configure optional **Cursor User Rules** step (`skills/cursorAssistantSetup/references/user-rules-step.md`).
+- `inspect.interviewRequired`, `interviewDepth`, `setupAnswersCount`; setup evals (anti-silent-setup, anti-lockfile-replay).
+- Interview fixtures: `tests/fixtures/interview-balanced.json`, `interview-advanced.json`, `interview-full.json`.
+- [INTERVIEW_RESTORATION_PLAN.md](docs/project/INTERVIEW_RESTORATION_PLAN.md); MIGRATION.md § v0.14 and § v0.15.
+
+### Changed
+
+- **Breaking:** `setup` CLI deprecated (exit 2); `configure` requires explicit `--answers`; no lockfile replay.
+- **Breaking:** `update` / `repair` blocked when `interviewRequired: true` without `--answers`.
+- **Breaking:** lockfile `schemaVersion` 0.5.0; pre-0.5 workspaces must re-interview.
+- Install page step 4: `/cursor-assistant:setup-workspace`, depth tiers, no silent install.
+- `cursorLifecycle` reconfigure handoff table; `MODEL_PINNING.md` setup-interview appendix (team forks only).
+
+### Removed
+
+- `--no-interview`, `--yes` on configure, non-TTY configure without `--answers`, lockfile-as-answers seeding.
+
 ## [0.13.1] - 2026-06-04
 
 ### Added
@@ -109,6 +133,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [0.10.1]: https://github.com/asafelobotomy/cursorassistant/compare/v0.10.0...v0.10.1
 [0.10.0]: https://github.com/asafelobotomy/cursorassistant/compare/v0.9.0...v0.10.0
 [0.9.0]: https://github.com/asafelobotomy/cursorassistant/releases/tag/v0.9.0
+[0.15.0]: https://github.com/asafelobotomy/cursorassistant/compare/v0.13.1...v0.15.0
 [0.13.1]: https://github.com/asafelobotomy/cursorassistant/compare/v0.13.0...v0.13.1
 [0.13.0]: https://github.com/asafelobotomy/cursorassistant/compare/v0.12.1...v0.13.0
 [0.12.1]: https://github.com/asafelobotomy/cursorassistant/compare/v0.12.0...v0.12.1

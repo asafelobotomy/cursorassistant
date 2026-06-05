@@ -9,7 +9,15 @@ def conditions_match(required_when: dict[str, Any] | None, answers: dict[str, An
     if not required_when:
         return True
     answers = answers or {}
+    if "oneOf" in required_when:
+        key = required_when.get("key")
+        values = required_when.get("oneOf")
+        if not isinstance(key, str) or not isinstance(values, list):
+            return False
+        return answers.get(key) in values
     for key, expected in required_when.items():
+        if key == "oneOf":
+            continue
         actual = answers.get(key)
         if isinstance(expected, bool):
             if bool(actual) != expected:

@@ -5,7 +5,7 @@
 1. Open the [setup page](https://asafelobotomy.github.io/cursorassistant/install/) (or [install/index.html](install/index.html) locally).
 2. Click **Install in Cursor** and approve the MCP install dialog.
 3. Open **your project** in Cursor → **Developer: Reload Window**.
-4. In chat: **Set up cursorAssistant in this workspace**, `/cursor-assistant:setup-workspace`, or MCP tool **`lifecycle_configure`** — this runs the **interview** and installs project files.
+4. In chat: **`/cursor-assistant:setup-workspace`** (recommended) — runs the mandatory **interview**, then `configure --answers`. MCP **`lifecycle_configure`** requires `answersPath` from a completed interview.
 
 The setup page only bootstraps the global package (`~/.local/share/cursorassistant/current`) and **cursorTools** MCP. It does **not** run the interview until step 4 inside Cursor.
 
@@ -18,13 +18,13 @@ bash scripts/sync-cursorassistant-install.sh
 ## Terminal: full install (bootstrap + interview)
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.1/scripts/install-from-github.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/install-from-github.sh | bash -s -- .
 ```
 
 ## Terminal: bootstrap only
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.1/scripts/bootstrap-from-github.sh | bash
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/bootstrap-from-github.sh | bash
 ```
 
 Then complete setup in Cursor (step 4 above).
@@ -32,13 +32,17 @@ Then complete setup in Cursor (step 4 above).
 ## Update
 
 ```sh
-python3 cursorAssistant.py update --workspace .
+python3 cursorAssistant.py update --workspace . --answers .cursor/cursor-assistant-answers.json
 ```
+
+If `inspect` reports `interviewRequired: true`, re-run the setup interview first (step 4).
+
+`update` syncs managed **files** only; it does not change interview answers or IDE-wide preferences. To change packs or personalization, re-run the interview. After an **advanced** or **full** interview, optionally add **Cursor User Rules** for IDE-wide tone/autonomy — see `skills/cursorAssistantSetup/references/user-rules-step.md`.
 
 Refresh bootstrap:
 
 ```sh
-CURSOR_ASSISTANT_VERSION=0.13.1 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.1/scripts/bootstrap-from-github.sh | bash
+CURSOR_ASSISTANT_VERSION=0.15.0 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/bootstrap-from-github.sh | bash
 ```
 
 ## Requirements

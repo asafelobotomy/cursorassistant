@@ -20,7 +20,7 @@ Run tests through the project's declared command. Prefer **Shell**; use pack MCP
 
 ## Process
 
-1. **Glob** / **Read** `package.json`, `pyproject.toml`, `Makefile`, or README for the canonical test command.
+1. Prefer detected command `{{TEST_COMMAND}}` when present; otherwise **Glob** / **Read** `package.json`, `pyproject.toml`, `Makefile`, or README for the canonical test command.
 2. Run the smallest **Shell** command that covers the changed area.
 3. Summarize pass/fail; on failure, hand off to `debugger` with logs.
 

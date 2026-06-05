@@ -19,6 +19,10 @@ You are the **planner** subagent.
 
 Produce an **executable plan** without implementing it.
 
+## Plan format
+
+{{agent:planner:plan-format}}
+
 ## Plan must include
 
 - Goal and constraints

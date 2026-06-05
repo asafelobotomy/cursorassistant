@@ -81,8 +81,10 @@
       <strong>Reload Window</strong> (Command Palette → “Developer: Reload Window”) so plugin commands load.
     </li>
     <li>
-      <strong>Run setup</strong> in chat — paste the phrase you copied, or use <code>/cursor-assistant:setup-workspace</code>,
-      or MCP tool <code>lifecycle_configure</code>.
+      <strong>Run the guided interview</strong> — use <code>/cursor-assistant:setup-workspace</code> (recommended).
+      Choose setup depth (<code>simple</code> / <code>advanced</code> / <code>full</code>); there is <strong>no silent install</strong>.
+      MCP <code>lifecycle_configure</code> requires <code>answersPath</code> to <code>.cursor/cursor-assistant-answers.json</code> after the interview.
+      Optional: save IDE-wide prefs as Cursor <strong>User Rules</strong> when depth is advanced or full.
     </li>
   </ol>
 
@@ -141,7 +143,7 @@ ln -sfn "$HOME/.local/share/cursorassistant/@@VERSION@@" "$HOME/.local/share/cur
   <script>
     const MCP_COMBINED = "@@MCP_COMBINED@@";
     const SETUP_PHRASE = "Set up cursorAssistant in this workspace";
-    const SETUP_FULL = SETUP_PHRASE + " — run the project interview (configure) and install managed .cursor surfaces.";
+    const SETUP_FULL = SETUP_PHRASE + " — run the mandatory interview (setup.depth simple/advanced/full), then configure --answers .cursor/cursor-assistant-answers.json. No silent install.";
     const INSPECT_CMD = "python3 ~/.local/share/cursorassistant/current/cursorAssistant.py inspect --workspace . --json";
     const BOOTSTRAP_GIT = `@@BOOTSTRAP_GIT@@
 ln -sfn "$HOME/.local/share/cursorassistant/@@VERSION@@" "$HOME/.local/share/cursorassistant/current"`;

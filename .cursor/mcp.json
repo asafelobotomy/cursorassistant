@@ -9,6 +9,26 @@
         "run",
         "${workspaceFolder}/.cursor/mcp/scripts/cursorToolsMcp.py"
       ]
+    },
+    "workspaceTesting": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp[cli]",
+        "mcp",
+        "run",
+        "${workspaceFolder}/.cursor/mcp/scripts/workspaceTestingMcp.py"
+      ]
+    },
+    "tddTestRunner": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp[cli]",
+        "mcp",
+        "run",
+        "${workspaceFolder}/.cursor/mcp/scripts/tddTestRunner.py"
+      ]
     }
   }
 }

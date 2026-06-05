@@ -26,6 +26,16 @@
       "layer": "core"
     },
     {
+      "id": "rules.preferences",
+      "source": "template/rules/preferences.mdc",
+      "target": ".cursor/rules/preferences.mdc",
+      "layer": "core",
+      "requiredWhen": {
+        "key": "setup.depth",
+        "oneOf": ["advanced", "full"]
+      }
+    },
+    {
       "id": "agents.cursorLifecycle",
       "source": "agents/cursorLifecycle.md",
       "target": ".cursor/agents/cursorLifecycle.md",
@@ -119,6 +129,18 @@
       "id": "skills.cursorAssistantSetup",
       "source": "skills/cursorAssistantSetup/SKILL.md",
       "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",
+      "layer": "core"
+    },
+    {
+      "id": "skills.cursorAssistantSetup.references.interview-flow",
+      "source": "skills/cursorAssistantSetup/references/interview-flow.md",
+      "target": ".cursor/skills/cursorAssistantSetup/references/interview-flow.md",
+      "layer": "core"
+    },
+    {
+      "id": "skills.cursorAssistantSetup.references.user-rules-step",
+      "source": "skills/cursorAssistantSetup/references/user-rules-step.md",
+      "target": ".cursor/skills/cursorAssistantSetup/references/user-rules-step.md",
       "layer": "core"
     },
     {

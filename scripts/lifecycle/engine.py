@@ -10,12 +10,23 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from scripts.lifecycle import conditions, interview, merge, mcp_config, mcp_scripts, packs
+from scripts.lifecycle import (
+    agent_customization,
+    conditions,
+    interview,
+    merge,
+    mcp_config,
+    mcp_scripts,
+    packs,
+    preference_tokens,
+    workspace_scan,
+)
 from scripts.lifecycle.models import ManagedEntry
 
 LOCKFILE_REL = Path(".cursor") / "cursorAssistant-lock.json"
 BACKUP_ROOT_REL = Path(".cursor") / ".cursorAssistant-backup"
-TOKEN_PATTERN = re.compile(r"\{\{([A-Z0-9_]+)\}\}")
+TOKEN_PATTERN = re.compile(r"\{\{([A-Za-z0-9_:.-]+)\}\}")
+MIN_LOCKFILE_SCHEMA = "0.5.0"
 LOCKFILE_REQUIRED_KEYS = ("schemaVersion", "package", "fileHashes")
 
 
@@ -81,14 +92,84 @@ def managed_entries(
     return [entry for entry in entries if conditions.conditions_match(entry.required_when, answers)]
 
 
+def answers_from_lockfile(lockfile: dict[str, Any]) -> dict[str, Any]:
+    """Map lockfile install fields to interview answer keys (operational sync only)."""
+    merged: dict[str, Any] = {
+        "profile.selected": lockfile.get("profile", "balanced"),
+        "packs.selected": list(lockfile.get("selectedPacks", [])),
+        "mcp.enabled": bool(lockfile.get("mcpEnabled", False)),
+    }
+    setup_answers = lockfile.get("setupAnswers", {})
+    if isinstance(setup_answers, dict):
+        merged.update(setup_answers)
+    return merged
+
+
+def compute_interview_required(
+    workspace: Path,
+    package_root: Path,
+    lock: dict[str, Any] | None,
+    install_state: str,
+) -> bool:
+    if install_state == "not-installed" or lock is None:
+        return True
+
+    answers_path = interview.default_answers_path(workspace)
+    if not answers_path.is_file():
+        return True
+
+    try:
+        payload = json.loads(answers_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return True
+    if not isinstance(payload, dict):
+        return True
+
+    schema_version = str(lock.get("schemaVersion", "0.0.0"))
+    if schema_version < MIN_LOCKFILE_SCHEMA:
+        return True
+
+    interview_data = interview.load_interview(package_root)
+    if not interview.answers_complete(interview_data, payload, package_root=package_root):
+        return True
+
+    lock_path = workspace / LOCKFILE_REL
+    if lock_path.is_file() and answers_path.stat().st_mtime < lock_path.stat().st_mtime:
+        return True
+
+    return False
+
+
+def require_answers_for_mutate(
+    workspace: Path,
+    package_root: Path,
+    *,
+    answers: dict[str, Any] | None,
+) -> None:
+    lock = read_lockfile(workspace)
+    installed = lock is not None and not lockfile_is_malformed(lock)
+    install_state = "not-installed" if not installed else "installed"
+    if compute_interview_required(workspace, package_root, lock, install_state) and answers is None:
+        raise ValueError(
+            "interview_required: run interview and pass --answers with "
+            f"{interview.DEFAULT_ANSWERS_REL} before mutating managed surfaces."
+        )
+
+
 def _resolve_context(
     package_root: Path,
     answers: dict[str, Any] | None,
     lockfile: dict[str, Any] | None,
 ) -> tuple[dict[str, Any], list[str]]:
     interview_data = interview.load_interview(package_root)
+    if answers is not None:
+        source_answers = answers
+    elif lockfile is not None:
+        source_answers = answers_from_lockfile(lockfile)
+    else:
+        source_answers = None
     resolved_answers = interview.resolve_answers(
-        interview_data, answers, lockfile, package_root=package_root
+        interview_data, source_answers, package_root=package_root
     )
     selected_packs = packs.resolve_selected_packs(package_root, resolved_answers, lockfile)
     return resolved_answers, selected_packs
@@ -117,7 +198,9 @@ def _default_tokens(workspace: Path, answers: dict[str, Any] | None = None) -> d
 def render_tokens(text: str, tokens: dict[str, str]) -> str:
     def repl(match: re.Match[str]) -> str:
         key = match.group(1)
-        return tokens.get(key, match.group(0))
+        if key in tokens:
+            return tokens[key]
+        return ""
 
     return TOKEN_PATTERN.sub(repl, text)
 
@@ -226,6 +309,9 @@ def write_lockfile(
 def _inspect_tokens(workspace: Path, package_root: Path, answers: dict[str, Any] | None) -> dict[str, str]:
     tokens = _default_tokens(workspace, answers)
     tokens["PACKAGE_VERSION"] = package_version(package_root)
+    tokens.update(preference_tokens.preference_tokens(answers))
+    tokens.update(workspace_scan.scan_workspace_stack(workspace))
+    tokens.update(agent_customization.agent_tokens(package_root, answers))
     return tokens
 
 
@@ -291,10 +377,19 @@ def inspect(
         warnings.append(f"deprecated-mcp-script:{name} — run update to remove")
 
     mcp_enabled = conditions.mcp_enabled(resolved_answers)
+    interview_required = compute_interview_required(
+        workspace, package_root, lock, install_state
+    )
+    setup_answers = lock.get("setupAnswers", {}) if isinstance(lock, dict) else {}
+    if not isinstance(setup_answers, dict):
+        setup_answers = {}
     return {
         "packageName": policy.get("packageName", "cursorAssistant"),
         "packageVersion": package_version(package_root),
         "installState": install_state,
+        "interviewRequired": interview_required,
+        "interviewDepth": resolved_answers.get("setup.depth", "simple"),
+        "setupAnswersCount": len(setup_answers),
         "lockfilePresent": lock is not None,
         "lockfileMalformed": lockfile_is_malformed(lock),
         "repairReasons": repair_reasons,
@@ -304,20 +399,33 @@ def inspect(
         "mcpWarnings": warnings,
         "summary": {"managed": len(entries), "stale": stale, "missing": missing},
         "files": file_rows,
-        "nextSteps": _install_next_steps(install_state, mcp_enabled),
+        "nextSteps": _install_next_steps(install_state, mcp_enabled, interview_required),
     }
 
 
-def _install_next_steps(install_state: str, mcp_enabled: bool) -> list[str]:
+def _install_next_steps(
+    install_state: str,
+    mcp_enabled: bool,
+    interview_required: bool,
+) -> list[str]:
     steps: list[str] = []
-    if install_state == "not-installed":
+    if interview_required:
+        steps.append(
+            "Run: python3 cursorAssistant.py interview --workspace . "
+            "then configure --answers .cursor/cursor-assistant-answers.json "
+            "(or /cursor-assistant:setup-workspace in chat)"
+        )
+    elif install_state == "not-installed":
         steps.append(
             "Run: python3 cursorAssistant.py configure --workspace . "
             "(or /cursor-assistant:setup-workspace in chat after installing the plugin)"
         )
         steps.append("Reload the Cursor window after setup (Developer: Reload Window).")
     elif install_state in {"needs-update", "needs-repair"}:
-        steps.append("Run: python3 cursorAssistant.py update --workspace .")
+        steps.append(
+            "Run: python3 cursorAssistant.py update --workspace . "
+            f"--answers {interview.DEFAULT_ANSWERS_REL}"
+        )
         steps.append("Or ask the Agent to update cursorAssistant (cursorLifecycle / cursorTools MCP).")
     if mcp_enabled:
         steps.append("Enable MCP servers in Cursor Settings → Features → MCP (cursorTools first).")
@@ -456,7 +564,7 @@ def _build_lockfile_payload(
     if existing_lock and not lockfile_is_malformed(existing_lock):
         preserve = existing_lock.get("timestamps")
     payload = {
-        "schemaVersion": "0.4.0",
+        "schemaVersion": MIN_LOCKFILE_SCHEMA,
         "package": {
             "name": policy.get("packageName", "cursorAssistant"),
             "version": package_version(package_root),
@@ -479,7 +587,10 @@ def apply_entries(
     only_stale_or_missing: bool,
     force_all: bool = False,
     answers: dict[str, Any] | None = None,
+    require_interview: bool = True,
 ) -> dict[str, Any]:
+    if require_interview:
+        require_answers_for_mutate(workspace, package_root, answers=answers)
     policy = load_policy(package_root)
     existing_lock = read_lockfile(workspace)
     resolved_answers, selected_packs = _resolve_context(package_root, answers, existing_lock)
@@ -518,6 +629,10 @@ def apply_entries(
         resolved_answers,
         selected_packs,
         existing_lock,
+    )
+    interview.write_answers_file(
+        interview.default_answers_path(workspace),
+        resolved_answers,
     )
     return {
         "written": written,
@@ -564,6 +679,7 @@ def setup(
         package_root,
         only_stale_or_missing=False,
         answers=answers,
+        require_interview=False,
     )
 
 

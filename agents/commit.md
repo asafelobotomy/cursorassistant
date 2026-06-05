@@ -27,6 +27,10 @@ When staged paths include **cursorAssistant-managed instruction files** (`agents
 
 Do not skip surface review for routing-only tweaks to `description` or `AGENTS.md` handoffs — those affect delegation.
 
+## Commit message style
+
+{{agent:commit:message-style}}
+
 ## Package repo (cursorAssistant source tree)
 
 When committing changes to **this** package (not a consumer project):

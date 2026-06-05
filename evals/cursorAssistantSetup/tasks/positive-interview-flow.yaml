@@ -1,0 +1,8 @@
+id: positive-interview-flow
+description: "Cold install should follow inspect → interview → plan → configure --answers"
+prompt: |
+  installState is not-installed and interviewRequired is true. Set up cursorAssistant in this workspace.
+expected:
+  - "(?i)(inspect|interview|plan-setup|configure|--answers|cursor-assistant-answers)"
+tags:
+  - smoke

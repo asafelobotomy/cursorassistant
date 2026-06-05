@@ -9,6 +9,12 @@ from pathlib import Path
 
 from scripts.lifecycle import engine, interview, paths
 
+SETUP_DEPRECATED_HINT = (
+    "The setup command is deprecated. Run: "
+    "python3 cursorAssistant.py interview --workspace . "
+    "then configure --answers .cursor/cursor-assistant-answers.json"
+)
+
 
 def _resolve_path(value: str) -> Path:
     return Path(value).expanduser().resolve()
@@ -44,7 +50,7 @@ def _add_common_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--json", action="store_true", help="Emit JSON on stdout")
     parser.add_argument(
         "--answers",
-        help="Path to JSON file with interview answers (non-interactive setup/update)",
+        help="Path to JSON file with interview answers (required for non-interactive configure)",
     )
 
 
@@ -82,8 +88,8 @@ def build_parser() -> argparse.ArgumentParser:
         ("inspect", "Read-only install state"),
         ("plan-setup", "Plan setup/update without writing files"),
         ("interview", "Run setup interview; save answers JSON in the workspace"),
-        ("configure", "Interview (optional) + plan summary + setup into workspace"),
-        ("setup", "First-time or full refresh install"),
+        ("configure", "Interview (TTY) or --answers + install into workspace"),
+        ("setup", "Deprecated — use interview + configure --answers"),
         ("update", "Write stale or missing managed files only"),
         ("repair", "Fix lockfile drift and incomplete installs"),
         ("factory-restore", "Force reinstall of all managed files"),
@@ -98,22 +104,19 @@ def build_parser() -> argparse.ArgumentParser:
             )
         if name == "configure":
             subparser.add_argument(
-                "--no-interview",
-                action="store_true",
-                help="Skip prompts; use --answers, saved answers file, or defaults",
-            )
-            subparser.add_argument(
-                "--yes",
-                "-y",
-                action="store_true",
-                help="Apply setup without confirmation",
-            )
-            subparser.add_argument(
                 "--dry-run",
                 action="store_true",
                 help="Run interview and plan-setup only; do not write managed files",
             )
     return parser
+
+
+def _interview_required_error() -> ValueError:
+    return ValueError(
+        "interview_required: pass --answers with a completed interview JSON file, "
+        f"or run interview/configure in a terminal (TTY). "
+        f"Expected path: {interview.DEFAULT_ANSWERS_REL}"
+    )
 
 
 def _run_interview(
@@ -124,19 +127,18 @@ def _run_interview(
     save_answers: str | None,
 ) -> dict:
     interview_data = interview.load_interview(package_root)
-    lock = engine.read_lockfile(workspace)
-    if answers is None and sys.stdin.isatty():
+    if answers is not None:
+        resolved = interview.resolve_answers(
+            interview_data, answers, package_root=package_root
+        )
+    elif sys.stdin.isatty():
         resolved = interview.run_terminal_interview(
             interview_data,
             package_root=package_root,
-            initial=interview.resolve_answers(
-                interview_data, None, lock, package_root=package_root
-            ),
         )
     else:
-        resolved = interview.resolve_answers(
-            interview_data, answers, lock, package_root=package_root
-        )
+        raise _interview_required_error()
+
     out_path = (
         _resolve_path(save_answers)
         if save_answers
@@ -156,27 +158,22 @@ def _load_configure_answers(
     args: argparse.Namespace,
 ) -> dict:
     if args.answers:
-        return _load_answers(args.answers) or {}
+        loaded = _load_answers(args.answers) or {}
+        interview_data = interview.load_interview(package_root)
+        if not interview.answers_complete(interview_data, loaded, package_root=package_root):
+            raise ValueError(
+                "interview_required: --answers file is missing required interview keys"
+            )
+        return loaded
 
-    explicit_path = interview.default_answers_path(workspace)
-    if explicit_path.is_file():
-        payload = json.loads(explicit_path.read_text(encoding="utf-8"))
-        if isinstance(payload, dict):
-            return payload
-
-    interview_data = interview.load_interview(package_root)
-    lock = engine.read_lockfile(workspace)
-    if args.no_interview or not sys.stdin.isatty():
-        return interview.resolve_answers(
-            interview_data, None, lock, package_root=package_root
+    if sys.stdin.isatty():
+        interview_data = interview.load_interview(package_root)
+        return interview.run_terminal_interview(
+            interview_data,
+            package_root=package_root,
         )
-    return interview.run_terminal_interview(
-        interview_data,
-        package_root=package_root,
-        initial=interview.resolve_answers(
-            interview_data, None, lock, package_root=package_root
-        ),
-    )
+
+    raise _interview_required_error()
 
 
 def _run_configure(
@@ -201,19 +198,7 @@ def _run_configure(
         result["reason"] = "dry-run"
         return result
 
-    install_state = plan.get("installState", "not-installed")
-    if install_state == "installed" and not args.yes:
-        if not sys.stdin.isatty():
-            result["applied"] = False
-            result["reason"] = "already-installed (pass --yes to refresh)"
-            return result
-        raw = input("Workspace already has cursorAssistant. Re-run setup? [y/N]: ").strip().lower()
-        if raw not in {"y", "yes"}:
-            result["applied"] = False
-            result["reason"] = "user-declined"
-            return result
-
-    if not args.yes and sys.stdin.isatty():
+    if sys.stdin.isatty():
         to_write = plan.get("wouldWrite") or plan.get("filesToWrite") or []
         count = len(to_write) if isinstance(to_write, list) else plan.get("summary", {}).get("toWrite", "?")
         raw = input(f"Apply setup ({count} managed files)? [Y/n]: ").strip().lower()
@@ -228,10 +213,25 @@ def _run_configure(
     return result
 
 
+def _emit_deprecated_setup(*, as_json: bool) -> int:
+    payload = {
+        "ok": False,
+        "error": "deprecated_command",
+        "hint": SETUP_DEPRECATED_HINT,
+    }
+    print(SETUP_DEPRECATED_HINT, file=sys.stderr)
+    if as_json:
+        print(json.dumps(payload, indent=2))
+    return 2
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
     workspace, package_root = _resolve_roots(parser, args)
+
+    if args.command == "setup":
+        return _emit_deprecated_setup(as_json=args.json)
 
     try:
         answers = _load_answers(getattr(args, "answers", None))
@@ -257,8 +257,6 @@ def main(argv: list[str] | None = None) -> int:
             )
         elif args.command == "configure":
             result = _run_configure(workspace, package_root, args)
-        elif args.command == "setup":
-            result = {"command": "setup", **engine.setup(workspace, package_root, answers=answers)}
         elif args.command == "update":
             result = {"command": "update", **engine.update(workspace, package_root, answers=answers)}
         elif args.command == "repair":
@@ -276,11 +274,13 @@ def main(argv: list[str] | None = None) -> int:
             print(payload["error"], file=sys.stderr)
         return 1
     except ValueError as exc:
-        payload = {"ok": False, "error": str(exc)}
+        message = str(exc)
+        code = "interview_required" if message.startswith("interview_required") else "error"
+        payload = {"ok": False, "error": code, "message": message}
         if args.json:
             print(json.dumps(payload, indent=2))
         else:
-            print(payload["error"], file=sys.stderr)
+            print(message, file=sys.stderr)
         return 1
 
     if args.json:
@@ -288,3 +288,7 @@ def main(argv: list[str] | None = None) -> int:
     else:
         print(json.dumps(result, indent=2))
     return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

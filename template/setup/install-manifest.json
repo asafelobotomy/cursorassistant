@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.13.1",
+  "packageVersion": "0.15.0",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -17,7 +17,7 @@
       "target": ".cursor/agents/commit.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:3d964e1d8648ad49a0b4dae2aa396738741fa42b3be118e52089d5b47cd9c3b1"
+      "hash": "sha256:c333da4a77fde80ef3a3b910dc8ab77e34df40b96ffabeb90ee18bd89b03dd6f"
     },
     {
       "id": "agents.cursorLifecycle",
@@ -25,7 +25,7 @@
       "target": ".cursor/agents/cursorLifecycle.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:a25d9991b5e62dc3e6c846e404817d137ad3ec9b10fb10338edd91be08951810"
+      "hash": "sha256:042883b968545f8bd1b42fb953550980c436e0fbdb00dccce67ac1370e10b7b4"
     },
     {
       "id": "agents.debugger",
@@ -49,7 +49,7 @@
       "target": ".cursor/agents/docs.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:253ba2caedc9fb4d57739bbc89cd44af5b83c5fd4e59878ffc8feafa4eceb196"
+      "hash": "sha256:21f9379483988e9f7f7dcec0ddfbbf8c78641753714672593f3a4253b972aba6"
     },
     {
       "id": "agents.inventory",
@@ -73,7 +73,7 @@
       "target": ".cursor/agents/planner.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:6e5a383f1ef48747078ce1f5433a8d9b73db6465ebde3f91404e42cac81260d0"
+      "hash": "sha256:cd1e520ad1061ce979d5c54227e1587953231abd5b89b8b3ee20b11bd4add5d3"
     },
     {
       "id": "agents.researcher",
@@ -89,7 +89,7 @@
       "target": ".cursor/agents/review.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:598fd90eb2d2e54cc650c136dfe9e4110ab0790f99f0c73a7f2a24a25cd3d6c0"
+      "hash": "sha256:777c101e579165c4f46b713592444910a8827fd9d2c9a62c672747be4f00c42e"
     },
     {
       "id": "mcp.config",
@@ -154,7 +154,7 @@
       "target": ".cursor/mcp/scripts/cursorToolsMcp.py",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:2451898713f2975c05e21a960c21a6f310b0e6f2cda10755cd68520f5104b2e1",
+      "hash": "sha256:c13a3dd7aea42d8b1ffe56c54d424334d2c4c2168d6a1ed368082904a8e029ba",
       "requiredWhen": []
     },
     {
@@ -245,7 +245,7 @@
       "target": ".cursor/rules/core.mdc",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:3d190dca565d955d1c86f856a1157cb9de682e6635c0340689a64f801759c602"
+      "hash": "sha256:a748bc842fe17264a71cfec42130d8e6d92ecb47d81d0880bdb16ab62bdfd152"
     },
     {
       "id": "rules.lifecycle",
@@ -254,6 +254,14 @@
       "layer": "core",
       "strategy": "replace",
       "hash": "sha256:e10a8393e1ebec730727d9d779a1f793f108d6f6fcd5b3335ef78addd4d0e477"
+    },
+    {
+      "id": "rules.preferences",
+      "source": "template/rules/preferences.mdc",
+      "target": ".cursor/rules/preferences.mdc",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:9e81bfe424c7baf10670952a901923371af871c26137f3bf39021401016e6256"
     },
     {
       "id": "skills.ciPreflight",
@@ -269,7 +277,23 @@
       "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:5b514714395c43d7d31155f960eab4cfa116a8bdc06d25f6748da1b5a5d14ca3"
+      "hash": "sha256:7e52106ecdc5d4590c163a5b2b0407b5290359ab7cb5298f9b2ea79ddf4b24de"
+    },
+    {
+      "id": "skills.cursorAssistantSetup.references.interview-flow",
+      "source": "skills/cursorAssistantSetup/references/interview-flow.md",
+      "target": ".cursor/skills/cursorAssistantSetup/references/interview-flow.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:0a22088872845054abb9b19f646d9beb4f01bda677907a538f442f42e8e4b98a"
+    },
+    {
+      "id": "skills.cursorAssistantSetup.references.user-rules-step",
+      "source": "skills/cursorAssistantSetup/references/user-rules-step.md",
+      "target": ".cursor/skills/cursorAssistantSetup/references/user-rules-step.md",
+      "layer": "core",
+      "strategy": "replace",
+      "hash": "sha256:3fa72691c2861e6a83d228caa84379e9ac94822444ad5f8dd0b335a915d5291a"
     },
     {
       "id": "skills.depSearch",
@@ -457,7 +481,7 @@
       "target": ".cursor/skills/testing/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:03b8baf7f9ac923102962002e333195edef4db1285a523a5813dfb2394128e2c"
+      "hash": "sha256:7f245b008cf0bf8c53904fcdf713ab6f4e7bfe2e9f97f8299d7f7ee852cbac34"
     },
     {
       "id": "packs.secure.threatModel",

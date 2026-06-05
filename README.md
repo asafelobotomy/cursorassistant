@@ -15,13 +15,13 @@ Setup page (HTTPS): hosted on [asafelobotomy.github.io](https://asafelobotomy.gi
 **Terminal (bootstrap + interview in one step):**
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.1/scripts/install-from-github.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/install-from-github.sh | bash -s -- .
 ```
 
 Bootstrap only (interview later via MCP/Agent):
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.1/scripts/bootstrap-from-github.sh | bash
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/bootstrap-from-github.sh | bash
 ```
 
 Details: [INSTALL.md](INSTALL.md) · [docs/guides/CURSOR_INSTALL_UX.md](docs/guides/CURSOR_INSTALL_UX.md) · [docs/research/DEEPLINK_INSTALL_RESEARCH.md](docs/research/DEEPLINK_INSTALL_RESEARCH.md)
@@ -47,11 +47,11 @@ Details: [INSTALL.md](INSTALL.md) · [docs/guides/CURSOR_INSTALL_UX.md](docs/gui
 
 ```sh
 python3 cursorAssistant.py inspect --workspace . --json
-python3 cursorAssistant.py update --workspace . --json
+python3 cursorAssistant.py update --workspace . --answers .cursor/cursor-assistant-answers.json --json
 python3 cursorAssistant.py repair --workspace . --json
 ```
 
-In chat: **`/cursor-assistant:setup-workspace`**, or ask to **set up cursorAssistant** (**cursorAssistantSetup** / **cursorLifecycle**).
+In chat: **`/cursor-assistant:setup-workspace`** (mandatory interview → `configure --answers`). Plain chat without the slash command may skip questions.
 
 ## Key Commands
 

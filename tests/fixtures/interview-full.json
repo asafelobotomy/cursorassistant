@@ -1,0 +1,14 @@
+{
+  "setup.depth": "full",
+  "profile.selected": "balanced",
+  "packs.selected": ["tdd"],
+  "mcp.enabled": false,
+  "response.style": "balanced",
+  "autonomy.level": "ask-first",
+  "agent.persona": "professional",
+  "testing.philosophy": "always",
+  "agent.commit.messageStyle": "conventional-with-context",
+  "agent.docs.outputStyle": "concise-guides",
+  "agent.planner.planFormat": "full-phased",
+  "agent.review.reportingThreshold": "all-findings"
+}

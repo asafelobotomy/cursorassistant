@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "0.1.0",
+  "agents": [
+    {
+      "id": "commit",
+      "status": "active",
+      "manifestEntryId": "agents.commit",
+      "customization": {
+        "questions": [
+          {
+            "answerKey": "agent.commit.messageStyle",
+            "prompt": "How should the commit agent format commit messages?",
+            "type": "choice",
+            "default": "conventional-subject-first",
+            "options": ["conventional-with-context", "conventional-subject-first"],
+            "token": "agent:commit:message-style",
+            "render": {
+              "conventional-with-context": "Use Conventional Commits with a subject and a body explaining intent when the diff alone is unclear.",
+              "conventional-subject-first": "Use Conventional Commits with a precise subject; add a body only for breaking changes or unclear rationale."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "docs",
+      "status": "active",
+      "manifestEntryId": "agents.docs",
+      "customization": {
+        "questions": [
+          {
+            "answerKey": "agent.docs.outputStyle",
+            "prompt": "What writing style should the docs agent use?",
+            "type": "choice",
+            "default": "corpus-match",
+            "options": ["corpus-match", "concise-guides"],
+            "token": "agent:docs:output-style",
+            "render": {
+              "corpus-match": "Match surrounding doc style: clear headers, numbered steps, minimal runnable examples.",
+              "concise-guides": "Use compact sections with imperative steps and minimal runnable examples."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "planner",
+      "status": "active",
+      "manifestEntryId": "agents.planner",
+      "customization": {
+        "questions": [
+          {
+            "answerKey": "agent.planner.planFormat",
+            "prompt": "How detailed should plans be?",
+            "type": "choice",
+            "default": "tight-phased",
+            "options": ["full-phased", "tight-phased"],
+            "token": "agent:planner:plan-format",
+            "render": {
+              "full-phased": "Numbered phases with name, affected files, steps, stop condition, risks, and a falsifying check.",
+              "tight-phased": "Short numbered phases with goal, affected files, concrete steps, and one verification check."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "review",
+      "status": "active",
+      "manifestEntryId": "agents.review",
+      "customization": {
+        "questions": [
+          {
+            "answerKey": "agent.review.reportingThreshold",
+            "prompt": "What should the review agent report by default?",
+            "type": "choice",
+            "default": "critical-high",
+            "options": ["critical-high", "all-findings"],
+            "token": "agent:review:reporting-threshold",
+            "render": {
+              "critical-high": "Report Critical and High findings only; skip advisory and style notes unless asked.",
+              "all-findings": "Report Critical, High, Advisory, and style notes with clear severity labels."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

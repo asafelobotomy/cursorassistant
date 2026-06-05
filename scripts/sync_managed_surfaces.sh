@@ -10,7 +10,8 @@ echo "sync_managed_surfaces: generate manifest + catalog"
 python3 scripts/generate.py --package-root .
 
 echo "sync_managed_surfaces: update dogfood install (.cursor/)"
-python3 cursorAssistant.py update --workspace . --package-root .
+python3 cursorAssistant.py update --workspace . --package-root . \
+  --answers tests/fixtures/interview-balanced.json
 
 echo "sync_managed_surfaces: verify"
 python3 scripts/check_package_sync.py

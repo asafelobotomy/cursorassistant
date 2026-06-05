@@ -1,5 +1,61 @@
 # Migration guide
 
+## v0.15 — progressive setup interview (breaking)
+
+### Schema and lockfile
+
+- **`interview.json` `schemaVersion` 0.5.0** — adds `setup.depth`, personalization, agent batch, conditional lean question.
+- **Lockfile `schemaVersion` 0.5.0** — pre-0.5 lockfiles report `interviewRequired: true`.
+- New managed rule: `.cursor/rules/preferences.mdc` (advanced/full depths only).
+- Agent instruction tokens: commit, docs, planner, review customization.
+
+### Action
+
+Re-run full interview at desired depth, then `configure --answers`:
+
+```sh
+python3 cursorAssistant.py interview --workspace .
+python3 cursorAssistant.py configure --workspace . --answers .cursor/cursor-assistant-answers.json
+```
+
+Or use fixtures: `tests/fixtures/interview-balanced.json`, `interview-advanced.json`, `interview-full.json`.
+
+### User Rules (Phase C)
+
+- Advanced/full interviews write prefs to `.cursor/rules/preferences.mdc` (project).
+- Optional **Cursor User Rules** for IDE-wide tone/autonomy — not stored in the lockfile.
+- `update` alone does not change personalization; re-interview or edit User Rules.
+
+## v0.14 — mandatory setup interview (breaking)
+
+### Removed silent install paths
+
+- **`setup` CLI command** — deprecated (exit 2). Use `interview` then `configure --answers .cursor/cursor-assistant-answers.json`.
+- **`configure --no-interview`** — removed.
+- **`configure --yes` / `-y`** — removed.
+- **Lockfile answer replay** — `configure` and `interview` no longer infer profile/packs from the lockfile.
+- **`lifecycle_setup` MCP** — deprecated; use `lifecycle_configure` with required `answersPath`.
+- **Non-interactive `configure` without `--answers`** — returns `interview_required`.
+
+### New contract
+
+1. `inspect` — check `interviewRequired`.
+2. Complete interview (chat AskQuestion or `interview` in a TTY).
+3. `plan-setup --answers .cursor/cursor-assistant-answers.json`
+4. `configure --answers .cursor/cursor-assistant-answers.json`
+5. `update` / `repair` / `factory-restore` require `--answers` when `interviewRequired` is true.
+
+### Action
+
+Re-run `/cursor-assistant:setup-workspace` or:
+
+```sh
+python3 cursorAssistant.py interview --workspace .
+python3 cursorAssistant.py configure --workspace . --answers .cursor/cursor-assistant-answers.json
+```
+
+Commit `.cursor/cursor-assistant-answers.json` if your team wants non-interactive `update` in CI.
+
 ## v0.9 → v0.10
 
 ### Removed: `triage` subagent

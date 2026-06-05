@@ -10,7 +10,8 @@ flowchart LR
   B --> C[cursor:// MCP install]
   C --> D[Bootstrap package on first MCP start]
   D --> E[Open project + Reload]
-  E --> F[Agent / lifecycle_configure interview]
+  E --> F[/cursor-assistant:setup-workspace interview]
+  F --> G[Optional User Rules if advanced/full]
 ```
 
 | Step | User action | What runs |
@@ -19,12 +20,15 @@ flowchart LR
 | 2 | Approve MCP in Cursor | `bootstrap-from-github.sh` if package missing |
 | 3 | Open project folder | — |
 | 4 | Reload Window | Local plugin agents/skills/commands |
-| 5 | Chat setup phrase or `lifecycle_configure` | Interview + `configure` → `.cursor/` + lockfile |
+| 5 | `/cursor-assistant:setup-workspace` | Mandatory interview (`setup.depth`) → `configure --answers` → `.cursor/` + lockfile |
+| 6 | (Optional) User Rules | IDE-wide prefs when depth is `advanced` or `full` — not in lockfile |
 
 ## What is *not* in the button path
 
 - No project interview on the web page
+- No silent install (`configure` without `--answers`, lockfile replay, or deprecated `setup`)
 - No `curl | bash` required if MCP bootstrap succeeds (optional manual bootstrap in page footer)
+- `lifecycle_configure` without `answersPath` (interview must complete first)
 
 ## Install website (canonical)
 

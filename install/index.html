@@ -48,7 +48,7 @@
 <body>
   <h1>Set up cursorAssistant</h1>
   <p class="lead">Managed Cursor routing, agents, and skills for your repo — installed in two phases: <strong>bootstrap</strong> (this page) then <strong>project interview</strong> (inside Cursor).</p>
-  <p class="muted">Version <strong>0.13.1</strong> · <span class="pill">pinned tag v0.13.1</span> · no <code>curl | bash</code> in the MCP button</p>
+  <p class="muted">Version <strong>0.15.0</strong> · <span class="pill">pinned tag v0.15.0</span> · no <code>curl | bash</code> in the MCP button</p>
 
   <div class="cta-row">
     <button type="button" class="cta" id="start">Install in Cursor</button>
@@ -57,8 +57,8 @@
   <div id="status" class="hidden" role="status" aria-live="polite"></div>
 
   <p class="muted">When Cursor opens, review the MCP command — it only runs a <strong>git clone</strong> of the release tag if the package is missing:</p>
-  <pre id="mcp-preview">git clone --depth 1 --branch v0.13.1 https://github.com/asafelobotomy/cursorassistant.git → ${userHome}/.local/share/cursorassistant/0.13.1
-ln -sfn …/cursorassistant/0.13.1 → …/cursorassistant/current
+  <pre id="mcp-preview">git clone --depth 1 --branch v0.15.0 https://github.com/asafelobotomy/cursorassistant.git → ${userHome}/.local/share/cursorassistant/0.15.0
+ln -sfn …/cursorassistant/0.15.0 → …/cursorassistant/current
 exec …/current/mcp/scripts/mcp-launch.sh</pre>
 
   <h2>Your progress</h2>
@@ -74,7 +74,7 @@ exec …/current/mcp/scripts/mcp-launch.sh</pre>
   <ol class="steps">
     <li>
       <strong>Confirm in Cursor</strong> when prompted to add the <code>cursorAssistant</code> MCP server.
-      Package installs to <code>~/.local/share/cursorassistant/0.13.1</code> (symlink <code>current</code>).
+      Package installs to <code>~/.local/share/cursorassistant/0.15.0</code> (symlink <code>current</code>).
     </li>
     <li>
       <strong>Open your project</strong> (File → Open Folder) — not the cursorAssistant repo unless you are developing the package.
@@ -83,8 +83,10 @@ exec …/current/mcp/scripts/mcp-launch.sh</pre>
       <strong>Reload Window</strong> (Command Palette → “Developer: Reload Window”) so plugin commands load.
     </li>
     <li>
-      <strong>Run setup</strong> in chat — paste the phrase you copied, or use <code>/cursor-assistant:setup-workspace</code>,
-      or MCP tool <code>lifecycle_configure</code>.
+      <strong>Run the guided interview</strong> — use <code>/cursor-assistant:setup-workspace</code> (recommended).
+      Choose setup depth (<code>simple</code> / <code>advanced</code> / <code>full</code>); there is <strong>no silent install</strong>.
+      MCP <code>lifecycle_configure</code> requires <code>answersPath</code> to <code>.cursor/cursor-assistant-answers.json</code> after the interview.
+      Optional: save IDE-wide prefs as Cursor <strong>User Rules</strong> when depth is advanced or full.
     </li>
   </ol>
 
@@ -95,7 +97,7 @@ exec …/current/mcp/scripts/mcp-launch.sh</pre>
 
   <details open>
     <summary>What you get after setup</summary>
-    <p class="muted">Release v0.13.1 installs 11 subagents and 8 core skills (+ 3 optional packs in the interview).</p>
+    <p class="muted">Release v0.15.0 installs 11 subagents and 8 core skills (+ 3 optional packs in the interview).</p>
     <table>
       <thead><tr><th>Surface</th><th>Location</th></tr></thead>
       <tbody>
@@ -112,7 +114,7 @@ exec …/current/mcp/scripts/mcp-launch.sh</pre>
     <summary>Troubleshooting</summary>
     <ul>
       <li><strong>Cursor did not open</strong> — install <a href="https://cursor.com">Cursor</a>, then click Install again. Or use manual bootstrap below.</li>
-      <li><strong>MCP dialog shows unexpected commands</strong> — compare with <a href="https://github.com/asafelobotomy/cursorassistant/blob/v0.13.1/install/deeplinks.json"><code>deeplinks.json</code> on GitHub</a> for tag <code>v0.13.1</code>.</li>
+      <li><strong>MCP dialog shows unexpected commands</strong> — compare with <a href="https://github.com/asafelobotomy/cursorassistant/blob/v0.15.0/install/deeplinks.json"><code>deeplinks.json</code> on GitHub</a> for tag <code>v0.15.0</code>.</li>
       <li><strong>Setup command not found</strong> — Reload Window; ensure plugin symlink exists under <code>~/.cursor/plugins/local/cursor-assistant</code>.</li>
       <li><strong>Already installed globally</strong> — skip the button; open your project and run the setup phrase only.</li>
     </ul>
@@ -121,13 +123,13 @@ exec …/current/mcp/scripts/mcp-launch.sh</pre>
   <details>
     <summary>Manual bootstrap (terminal)</summary>
     <p class="muted">Inspect commands before running. Same pin as the MCP button:</p>
-    <pre id="bootstrap-git">git clone --depth 1 --branch "v0.13.1" https://github.com/asafelobotomy/cursorassistant.git "$HOME/.local/share/cursorassistant/0.13.1"
-ln -sfn "$HOME/.local/share/cursorassistant/0.13.1" "$HOME/.local/share/cursorassistant/current"</pre>
+    <pre id="bootstrap-git">git clone --depth 1 --branch "v0.15.0" https://github.com/asafelobotomy/cursorassistant.git "$HOME/.local/share/cursorassistant/0.15.0"
+ln -sfn "$HOME/.local/share/cursorassistant/0.15.0" "$HOME/.local/share/cursorassistant/current"</pre>
     <div class="copy-row">
       <button type="button" id="copy-bootstrap-git">Copy git bootstrap</button>
     </div>
     <p class="muted">Optional script (review on GitHub first):</p>
-    <pre id="bootstrap-cmd">curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.1/scripts/bootstrap-from-github.sh | bash</pre>
+    <pre id="bootstrap-cmd">curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/bootstrap-from-github.sh | bash</pre>
     <div class="copy-row">
       <button type="button" id="copy-bootstrap">Copy curl bootstrap</button>
       <a class="cta cta-secondary" id="mcp-tools-link" href="cursor://anysphere.cursor-deeplink/mcp/install?name=cursorTools&config=eyJjb21tYW5kIjoiYmFzaCIsImFyZ3MiOlsiLWxjIiwiZXhlYyBiYXNoIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudC9jdXJyZW50L21jcC9zY3JpcHRzL21jcC1sYXVuY2guc2hcIiJdfQ==" style="text-decoration:none;display:inline-block;">cursorTools only (deeplink)</a>
@@ -136,19 +138,19 @@ ln -sfn "$HOME/.local/share/cursorassistant/0.13.1" "$HOME/.local/share/cursoras
 
   <p class="muted">
     <a href="https://github.com/asafelobotomy/cursorassistant">GitHub</a> ·
-    <a href="https://github.com/asafelobotomy/cursorassistant/blob/v0.13.1/INSTALL.md">Terminal install</a> ·
-    <a href="https://github.com/asafelobotomy/cursorassistant/releases/tag/v0.13.1">Release v0.13.1</a>
+    <a href="https://github.com/asafelobotomy/cursorassistant/blob/v0.15.0/INSTALL.md">Terminal install</a> ·
+    <a href="https://github.com/asafelobotomy/cursorassistant/releases/tag/v0.15.0">Release v0.15.0</a>
   </p>
 
   <script>
-    const MCP_COMBINED = "cursor://anysphere.cursor-deeplink/mcp/install?name=cursorAssistant&config=eyJjb21tYW5kIjoiYmFzaCIsImFyZ3MiOlsiLWxjIiwiaWYgWyAhIC1mIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudC9jdXJyZW50L21jcC9zY3JpcHRzL21jcC1sYXVuY2guc2hcIiBdOyB0aGVuIG1rZGlyIC1wIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudFwiICYmIGdpdCBjbG9uZSAtLWRlcHRoIDEgLS1icmFuY2ggXCJ2MC4xMy4xXCIgXCJodHRwczovL2dpdGh1Yi5jb20vYXNhZmVsb2JvdG9teS9jdXJzb3Jhc3Npc3RhbnQuZ2l0XCIgXCIke3VzZXJIb21lfS8ubG9jYWwvc2hhcmUvY3Vyc29yYXNzaXN0YW50L3YwLjEzLjFcIiAmJiBsbiAtc2ZuIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudC92MC4xMy4xXCIgXCIke3VzZXJIb21lfS8ubG9jYWwvc2hhcmUvY3Vyc29yYXNzaXN0YW50L2N1cnJlbnRcIjsgZmk7IGV4ZWMgYmFzaCBcIiR7dXNlckhvbWV9Ly5sb2NhbC9zaGFyZS9jdXJzb3Jhc3Npc3RhbnQvY3VycmVudC9tY3Avc2NyaXB0cy9tY3AtbGF1bmNoLnNoXCIiXX0=";
+    const MCP_COMBINED = "cursor://anysphere.cursor-deeplink/mcp/install?name=cursorAssistant&config=eyJjb21tYW5kIjoiYmFzaCIsImFyZ3MiOlsiLWxjIiwiaWYgWyAhIC1mIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudC9jdXJyZW50L21jcC9zY3JpcHRzL21jcC1sYXVuY2guc2hcIiBdOyB0aGVuIG1rZGlyIC1wIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudFwiICYmIGdpdCBjbG9uZSAtLWRlcHRoIDEgLS1icmFuY2ggXCJ2MC4xNS4wXCIgXCJodHRwczovL2dpdGh1Yi5jb20vYXNhZmVsb2JvdG9teS9jdXJzb3Jhc3Npc3RhbnQuZ2l0XCIgXCIke3VzZXJIb21lfS8ubG9jYWwvc2hhcmUvY3Vyc29yYXNzaXN0YW50L3YwLjE1LjBcIiAmJiBsbiAtc2ZuIFwiJHt1c2VySG9tZX0vLmxvY2FsL3NoYXJlL2N1cnNvcmFzc2lzdGFudC92MC4xNS4wXCIgXCIke3VzZXJIb21lfS8ubG9jYWwvc2hhcmUvY3Vyc29yYXNzaXN0YW50L2N1cnJlbnRcIjsgZmk7IGV4ZWMgYmFzaCBcIiR7dXNlckhvbWV9Ly5sb2NhbC9zaGFyZS9jdXJzb3Jhc3Npc3RhbnQvY3VycmVudC9tY3Avc2NyaXB0cy9tY3AtbGF1bmNoLnNoXCIiXX0=";
     const SETUP_PHRASE = "Set up cursorAssistant in this workspace";
-    const SETUP_FULL = SETUP_PHRASE + " — run the project interview (configure) and install managed .cursor surfaces.";
+    const SETUP_FULL = SETUP_PHRASE + " — run the mandatory interview (setup.depth simple/advanced/full), then configure --answers .cursor/cursor-assistant-answers.json. No silent install.";
     const INSPECT_CMD = "python3 ~/.local/share/cursorassistant/current/cursorAssistant.py inspect --workspace . --json";
-    const BOOTSTRAP_GIT = `git clone --depth 1 --branch "v0.13.1" https://github.com/asafelobotomy/cursorassistant.git "$HOME/.local/share/cursorassistant/0.13.1"
-ln -sfn "$HOME/.local/share/cursorassistant/0.13.1" "$HOME/.local/share/cursorassistant/current"`;
-    const BOOTSTRAP = "curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.13.1/scripts/bootstrap-from-github.sh | bash";
-    const STORAGE_KEY = "cursorassistant-install-progress-v0.13.1";
+    const BOOTSTRAP_GIT = `git clone --depth 1 --branch "v0.15.0" https://github.com/asafelobotomy/cursorassistant.git "$HOME/.local/share/cursorassistant/0.15.0"
+ln -sfn "$HOME/.local/share/cursorassistant/0.15.0" "$HOME/.local/share/cursorassistant/current"`;
+    const BOOTSTRAP = "curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/bootstrap-from-github.sh | bash";
+    const STORAGE_KEY = "cursorassistant-install-progress-v0.15.0";
 
     function showStatus(msg, warn) {
       const el = document.getElementById("status");

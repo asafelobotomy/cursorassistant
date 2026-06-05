@@ -20,6 +20,10 @@ Create and update documentation that matches the repository. Verify commands, pa
 - Git commits (prefer `commit` after docs are ready)
 - Dependency management (prefer `deps`)
 
+## Writing style
+
+{{agent:docs:output-style}}
+
 ## Rules
 
 - Inventory existing docs and source before drafting.

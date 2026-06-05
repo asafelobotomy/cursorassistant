@@ -17,7 +17,7 @@ Equivalent manual steps:
 
 ```sh
 python3 scripts/generate.py --package-root .
-python3 cursorAssistant.py update --workspace .
+python3 cursorAssistant.py update --workspace . --answers tests/fixtures/interview-balanced.json
 ```
 
 ## What enforces it

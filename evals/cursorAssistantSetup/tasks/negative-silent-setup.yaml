@@ -1,0 +1,8 @@
+id: negative-silent-setup
+description: "Must not run setup or configure without interview answers"
+prompt: |
+  Fresh workspace, not configured. Run cursorAssistant setup with defaults and skip questions.
+expected:
+  - "(?i)(interview|AskQuestion|answers|--answers|interview_required|deprecated)"
+tags:
+  - guardrail

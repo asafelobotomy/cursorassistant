@@ -11,7 +11,7 @@ set -euo pipefail
 
 ALLOWED_REPO="https://github.com/asafelobotomy/cursorassistant.git"
 REPO_URL="${CURSOR_ASSISTANT_REPO:-$ALLOWED_REPO}"
-DEFAULT_VERSION="0.13.1"
+DEFAULT_VERSION="0.15.0"
 VERSION="${CURSOR_ASSISTANT_VERSION:-$DEFAULT_VERSION}"
 INSTALL_BASE="${CURSOR_ASSISTANT_HOME:-${HOME}/.local/share/cursorassistant}"
 INSTALL_DIR="${INSTALL_BASE}/${VERSION}"
@@ -61,4 +61,4 @@ fi
 
 ln -sfn "${INSTALL_DIR}" "${INSTALL_BASE}/current"
 echo "Bootstrap complete: ${INSTALL_DIR}"
-echo "Next: open your project in Cursor, enable cursorAssistant MCP, then run setup (interview)."
+echo "Next: open your project in Cursor, enable cursorAssistant MCP, then /cursor-assistant:setup-workspace (interview)."

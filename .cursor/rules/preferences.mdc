@@ -1,0 +1,14 @@
+---
+description: Workspace preferences from cursorAssistant setup interview
+alwaysApply: true
+---
+
+# Workspace preferences
+
+Provide code with brief explanation of non-obvious choices.
+
+When intent is ambiguous, ask before acting.
+
+Use a concise, neutral, precise tone.
+
+Write or update tests alongside every code change unless explicitly told not to.

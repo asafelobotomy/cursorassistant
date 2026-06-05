@@ -161,8 +161,13 @@ def lifecycle_plan_setup(packageRoot: str | None = None, answersPath: str | None
 
 @mcp.tool()
 def lifecycle_setup(packageRoot: str | None = None, answersPath: str | None = None) -> dict:
-    """Install or refresh all managed cursorAssistant surfaces."""
-    return run_lifecycle("setup", package_root=packageRoot, answers_path=answersPath)
+    """Deprecated. Use lifecycle_configure with a required answersPath from a completed interview."""
+    _ = (packageRoot, answersPath)
+    return tool_result(
+        "unavailable",
+        "lifecycle_setup is deprecated. Run lifecycle_configure with answersPath "
+        f"pointing to {'.cursor/cursor-assistant-answers.json'}.",
+    )
 
 
 @mcp.tool()
@@ -170,7 +175,13 @@ def lifecycle_configure(
     packageRoot: str | None = None,
     answersPath: str | None = None,
 ) -> dict:
-    """Run setup interview and install cursorAssistant into the open workspace (preferred first-time path)."""
+    """Install cursorAssistant using interview answers (answersPath required)."""
+    if not answersPath:
+        return tool_result(
+            "unavailable",
+            "answersPath is required. Complete the setup interview, write "
+            ".cursor/cursor-assistant-answers.json, then pass answersPath.",
+        )
     return run_lifecycle("configure", package_root=packageRoot, answers_path=answersPath)
 
 

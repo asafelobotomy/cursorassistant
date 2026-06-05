@@ -1,4 +1,4 @@
-"""Minimal interview and plan helpers for cursorAssistant setup."""
+"""Interview and plan helpers for cursorAssistant setup."""
 
 from __future__ import annotations
 
@@ -7,9 +7,16 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from scripts.lifecycle import packs
+from scripts.lifecycle import agent_customization, packs
 
 DEFAULT_ANSWERS_REL = ".cursor/cursor-assistant-answers.json"
+LOCKFILE_TOP_KEYS = frozenset({"profile.selected", "packs.selected", "mcp.enabled"})
+
+DEPTH_BATCHES: dict[str, set[str]] = {
+    "simple": {"setup", "simple", "agent"},
+    "advanced": {"setup", "simple", "advanced", "agent"},
+    "full": {"setup", "simple", "advanced", "full", "agent"},
+}
 
 
 def load_interview(package_root: Path) -> dict[str, Any]:
@@ -19,10 +26,73 @@ def load_interview(package_root: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def _predicate_matches(predicate: dict[str, Any], answers: dict[str, Any]) -> bool:
+    key = predicate.get("key")
+    if not isinstance(key, str):
+        return False
+    actual = answers.get(key)
+    if "equals" in predicate:
+        return actual == predicate["equals"]
+    if "contains" in predicate:
+        return isinstance(actual, list) and predicate["contains"] in actual
+    return False
+
+
+def question_active(
+    question: dict[str, Any],
+    answers: dict[str, Any],
+    allowed_batches: set[str],
+) -> bool:
+    batch = question.get("batch", "simple")
+    if batch not in allowed_batches:
+        return False
+    required_when = question.get("requiredWhen")
+    if not required_when:
+        return True
+    if isinstance(required_when.get("any"), list):
+        return any(_predicate_matches(item, answers) for item in required_when["any"])
+    for key, expected in required_when.items():
+        if key == "any":
+            continue
+        actual = answers.get(key)
+        if isinstance(expected, bool):
+            if bool(actual) != expected:
+                return False
+        elif actual != expected:
+            return False
+    return True
+
+
+def active_questions(
+    interview: dict[str, Any],
+    answers: dict[str, Any] | None,
+    *,
+    package_root: Path | None,
+) -> list[dict[str, Any]]:
+    resolved = resolve_answers(interview, answers, package_root=package_root)
+    merged = dict(resolved)
+    if answers:
+        merged.update(answers)
+    depth = str(merged.get("setup.depth", "simple"))
+    allowed = DEPTH_BATCHES.get(depth, DEPTH_BATCHES["simple"])
+    static = [
+        question
+        for question in interview.get("questions", [])
+        if question_active(question, merged, allowed)
+    ]
+    if package_root is None:
+        return static
+    agent_filtered = [
+        question
+        for question in agent_customization.agent_questions(package_root)
+        if question.get("batch", "agent") in allowed
+    ]
+    return static + agent_filtered
+
+
 def resolve_answers(
     interview: dict[str, Any],
     answers: dict[str, Any] | None,
-    lockfile: dict[str, Any] | None,
     *,
     package_root: Path | None = None,
 ) -> dict[str, Any]:
@@ -33,20 +103,6 @@ def resolve_answers(
         if answers and question_id in answers:
             resolved[question_id] = answers[question_id]
             continue
-        if lockfile:
-            if question_id == "profile.selected" and lockfile.get("profile"):
-                resolved[question_id] = lockfile["profile"]
-                continue
-            if question_id == "packs.selected" and isinstance(lockfile.get("selectedPacks"), list):
-                resolved[question_id] = list(lockfile["selectedPacks"])
-                continue
-            if question_id == "mcp.enabled" and lockfile.get("mcpEnabled") is not None:
-                resolved[question_id] = bool(lockfile["mcpEnabled"])
-                continue
-            setup_answers = lockfile.get("setupAnswers", {})
-            if isinstance(setup_answers, dict) and question_id in setup_answers:
-                resolved[question_id] = setup_answers[question_id]
-                continue
         if question_id == "packs.selected":
             continue
         if "default" in question:
@@ -71,6 +127,14 @@ def resolve_answers(
         if profile and profile.get("defaultPacks"):
             resolved["packs.selected"] = list(profile["defaultPacks"])
 
+    if package_root is not None:
+        for question in agent_customization.agent_questions(package_root):
+            question_id = question["id"]
+            if answers and question_id in answers:
+                resolved[question_id] = answers[question_id]
+            elif "default" in question and question_id not in resolved:
+                resolved[question_id] = question["default"]
+
     return resolved
 
 
@@ -82,7 +146,7 @@ def answers_to_lockfile_fields(
     setup_answers = {
         key: value
         for key, value in answers.items()
-        if key not in {"profile.selected", "packs.selected", "mcp.enabled"}
+        if key not in LOCKFILE_TOP_KEYS
     }
     return {
         "profile": profile,
@@ -108,14 +172,18 @@ def run_terminal_interview(
     initial: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Prompt on stdin; return answer map keyed by question id."""
-    resolved = resolve_answers(
-        interview,
-        initial,
-        None,
-        package_root=package_root,
-    )
+    resolved: dict[str, Any] = dict(initial or {})
     print("cursorAssistant setup interview\n", file=sys.stderr)
-    for question in interview.get("questions", []):
+
+    while True:
+        pending = [
+            question
+            for question in active_questions(interview, resolved, package_root=package_root)
+            if question["id"] not in resolved
+        ]
+        if not pending:
+            break
+        question = pending[0]
         question_id = question["id"]
         prompt = question.get("prompt", question_id)
         qtype = question.get("type", "choice")
@@ -191,4 +259,18 @@ def run_terminal_interview(
         if "default" in question and question_id not in resolved:
             resolved[question_id] = question["default"]
 
-    return resolve_answers(interview, resolved, None, package_root=package_root)
+    return resolve_answers(interview, resolved, package_root=package_root)
+
+
+def answers_complete(
+    interview: dict[str, Any],
+    answers: dict[str, Any],
+    *,
+    package_root: Path | None = None,
+) -> bool:
+    merged = dict(resolve_answers(interview, answers, package_root=package_root))
+    merged.update(answers)
+    for question in active_questions(interview, merged, package_root=package_root):
+        if question["id"] not in merged:
+            return False
+    return True

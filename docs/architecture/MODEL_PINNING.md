@@ -158,6 +158,20 @@ Manual: invoke `/review` with parent set to your preferred model; confirm subage
 
 ---
 
+## Appendix: setup interview model (team forks only)
+
+Upstream **does not** pin a model for the setup interview. Use **AskQuestion** + the canonical CLI (`interview` → `configure --answers`) via **cursorAssistantSetup**.
+
+| Approach | Upstream | Team fork |
+| --- | --- | --- |
+| Parent chat model (Auto / Composer) | Default | OK |
+| Dedicated `setupInterviewer` subagent with `model: inherit` | Not shipped | Optional for long multi-batch interviews |
+| Pin `claude-*` / `gpt-*` on setup skill or agents | **Do not** | Only if verified on your Cursor plan |
+
+Pinning does not replace the interview schema — it only affects how reliably an agent follows the skill workflow.
+
+---
+
 ## Related docs
 
 - [ROUTING_AND_SUBAGENTS.md](ROUTING_AND_SUBAGENTS.md) — Task `model`, background subagents

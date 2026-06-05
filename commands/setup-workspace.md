@@ -5,30 +5,28 @@ description: Interview and install cursorAssistant into the current project (age
 
 # Set up cursorAssistant in this project
 
-Run after the [setup page](https://asafelobotomy.github.io/cursorassistant/install/) MCP bootstrap, or to reconfigure an existing project.
+Run after the [setup page](https://asafelobotomy.github.io/cursorassistant/install/) MCP bootstrap.
 
-## What this does
+## Canonical flow
 
-1. Runs the setup **interview** (profile, optional packs, optional MCP extensions).
-2. Writes managed surfaces into the **current workspace**: `AGENTS.md`, `.cursor/agents/`, `.cursor/skills/`, `.cursor/rules/`, `.cursor/mcp.json`, and `.cursor/cursorAssistant-lock.json`.
-3. Saves choices to `.cursor/cursor-assistant-answers.json`.
+See `skills/cursorAssistantSetup/references/interview-flow.md`.
 
-## Steps
+1. `inspect --json` — check `interviewRequired`.
+2. Ask every `interview.json` question (AskQuestion in chat).
+3. Write `.cursor/cursor-assistant-answers.json`.
+4. `plan-setup --answers .cursor/cursor-assistant-answers.json --json` — user confirms.
+5. `configure --answers .cursor/cursor-assistant-answers.json --json`.
+6. **Developer: Reload Window**; enable MCP if interview enabled extensions.
+7. **Optional:** if `setup.depth` is `advanced` or `full`, offer Cursor **User Rules** — `skills/cursorAssistantSetup/references/user-rules-step.md`.
 
-1. Confirm the workspace root is the user's project.
-2. If bootstrap is missing (`~/.local/share/cursorassistant/current`), send the user to the [setup page](https://asafelobotomy.github.io/cursorassistant/install/) or `bootstrap-from-github.sh`.
+## Do not use
 
-3. Run:
-
-   ```sh
-   python3 cursorAssistant.py configure --workspace . --json
-   ```
-
-4. **Developer: Reload Window**; enable MCP servers if the interview enabled them.
-5. Suggest `/inventory` or **cursorLifecycle** for later updates.
+- `python3 cursorAssistant.py setup` (deprecated)
+- `configure` without `--answers` in Agent chat
+- `lifecycle_configure` without `answersPath`
 
 ## Dry run
 
 ```sh
-python3 cursorAssistant.py configure --workspace . --dry-run --json
+python3 cursorAssistant.py plan-setup --workspace . --answers .cursor/cursor-assistant-answers.json --json
 ```

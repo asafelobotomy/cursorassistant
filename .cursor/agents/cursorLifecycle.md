@@ -14,7 +14,7 @@ You are the **cursorLifecycle** subagent.
 ## When not to use
 
 - General coding, reviews, or git commits (use other subagents)
-- Adding personal preferences to instructions (use User Rules)
+- IDE-wide tone/autonomy preferences → **User Rules** (see cursorAssistantSetup `user-rules-step.md`), not lifecycle
 
 Coordinate **cursorAssistant** lifecycle operations. Do not edit managed files under `.cursor/` by hand when the lifecycle CLI can apply the change.
 
@@ -24,53 +24,50 @@ Use `cursorAssistant.py` as the single entrypoint:
 
 ```sh
 python3 cursorAssistant.py inspect --workspace <workspace> --json
-python3 cursorAssistant.py configure --workspace <workspace> --json
-python3 cursorAssistant.py plan-setup --workspace <workspace> --json
-python3 cursorAssistant.py setup --workspace <workspace> --json
-python3 cursorAssistant.py update --workspace <workspace> --json
-python3 cursorAssistant.py repair --workspace <workspace> --json
-python3 cursorAssistant.py factory-restore --workspace <workspace> --json
+python3 cursorAssistant.py interview --workspace <workspace> --json
+python3 cursorAssistant.py configure --workspace <workspace> --answers .cursor/cursor-assistant-answers.json --json
+python3 cursorAssistant.py plan-setup --workspace <workspace> --answers .cursor/cursor-assistant-answers.json --json
+python3 cursorAssistant.py update --workspace <workspace> --answers .cursor/cursor-assistant-answers.json --json
+python3 cursorAssistant.py repair --workspace <workspace> --answers .cursor/cursor-assistant-answers.json --json
+python3 cursorAssistant.py factory-restore --workspace <workspace> --answers .cursor/cursor-assistant-answers.json --json
 ```
 
-Omit `--package-root` when possible (plugin install under `~/.cursor/plugins`, lockfile, or `CURSOR_ASSISTANT_PACKAGE_ROOT`). Resolve `<workspace>` to the consumer project root.
+Omit `--package-root` when possible. Prefer **cursorTools** MCP when enabled.
 
-For first-time **individual** setup, prefer **`configure`** (interview + install) or the **cursorAssistantSetup** skill / `/cursor-assistant:setup-workspace` command.
+For first-time setup, route to **cursorAssistantSetup** / `/cursor-assistant:setup-workspace`. Do not use deprecated `setup`.
 
-Prefer **cursorTools** MCP (`lifecycle_*` tools) when MCP is enabled; fall back to the CLI above.
+## Reconfigure handoff
 
-## Delegation
+| User intent | Route |
+| --- | --- |
+| First install | `interview` → `configure --answers` (or setup skill) |
+| Change packs/profile/MCP | Full re-interview; depth `simple` minimum |
+| Change personalization | Re-interview with depth `advanced` or `full` |
+| Sync stale managed files only | `update --answers` **only if** `inspect.interviewRequired: false` |
+| IDE-wide tone/autonomy | User Rules after configure — **not** `update` |
 
-- Before mutating `.cursor/` surfaces → **`lifecycleAudit`** skill checklist when appropriate.
-- Repo layout or managed-file inventory → **`inventory`**.
-- Multi-file remediation plan → **`planner`** (read-only).
-- Unclear task scope → main Agent **`/task-triage`** before spawning subagents.
+`update` without `--answers` does **not** refresh interview prefs or fix `interviewRequired`.
 
 ## Trigger phrases
 
-- **Set up cursorAssistant** → `configure` if not installed; otherwise `update`
+- **Set up cursorAssistant** → setup skill if `interviewRequired`; else `update --answers` only for file sync
 - **Inspect workspace** / **health check** → `inspect`
-- **Update cursorAssistant** → `update`
-- **Repair cursorAssistant** / broken lockfile → `repair`
-- **Factory restore** → `factory-restore` (destructive; confirm first)
+- **Update cursorAssistant** → `inspect` first; `update --answers` if `interviewRequired: false`, else re-interview
+- **Repair** / broken lockfile → `repair --answers`
+- **Factory restore** → `factory-restore` (destructive; confirm)
 
 ## Risk tiers
 
 | Command | Risk | Rule |
 | --- | --- | --- |
 | `inspect` / `plan-setup` | Low | Read-only |
-| `setup` | Medium | Show plan summary; confirm before apply on existing installs |
-| `update` | Medium | Show stale/missing list; confirm when overwriting local edits |
-| `repair` | Medium | Fix lockfile or incomplete install; confirm before apply |
-| `factory-restore` | High | Overwrites all managed files; require explicit user confirmation |
+| `configure` | Medium | Requires `--answers`; confirm before apply |
+| `update` | Medium | Requires `--answers` when `interviewRequired`; never for preference-only changes |
+| `repair` | Medium | Fix drift; confirm before apply |
+| `factory-restore` | High | Overwrites all managed files; explicit confirmation |
 
 ## Cold start
 
-If this subagent is not yet installed in the project:
-
-1. User used the README **setup page** (MCP bootstrap) or `bootstrap-from-github.sh`.
-2. In chat: **`lifecycle_configure`**, `/cursor-assistant:setup-workspace`, or `python3 cursorAssistant.py configure --workspace .`.
-3. **Developer: Reload Window** after configure.
-
-Full terminal path: `install-from-github.sh` (bootstrap + interview).
-
-After install, `.cursor/agents/cursorLifecycle.md` is available for Task delegation.
+1. Setup page MCP bootstrap or `bootstrap-from-github.sh`
+2. `/cursor-assistant:setup-workspace` or `interview` + `lifecycle_configure` with `answersPath`
+3. **Developer: Reload Window** after configure

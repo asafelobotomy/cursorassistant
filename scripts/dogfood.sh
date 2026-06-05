@@ -5,6 +5,17 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 ANSWERS="$(mktemp)"
 trap 'rm -f "$ANSWERS"' EXIT
-printf '%s\n' '{"mcp.enabled": false}' >"$ANSWERS"
-python3 cursorAssistant.py setup --workspace . --package-root . --answers "$ANSWERS" --json
+cat >"$ANSWERS" <<'EOF'
+{
+  "setup.depth": "simple",
+  "profile.selected": "balanced",
+  "packs.selected": [],
+  "mcp.enabled": false,
+  "agent.commit.messageStyle": "conventional-subject-first",
+  "agent.docs.outputStyle": "corpus-match",
+  "agent.planner.planFormat": "tight-phased",
+  "agent.review.reportingThreshold": "critical-high"
+}
+EOF
+python3 cursorAssistant.py configure --workspace . --package-root . --answers "$ANSWERS" --json
 echo "Dogfood complete: .cursor/ updated (MCP bundle off; cursorTools only)."

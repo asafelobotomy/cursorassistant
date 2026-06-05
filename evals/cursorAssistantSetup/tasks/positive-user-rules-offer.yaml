@@ -1,0 +1,8 @@
+id: positive-user-rules-offer
+description: "After advanced configure, offer optional Cursor User Rules"
+prompt: |
+  configure just finished with setup.depth advanced. What optional step should you offer next for IDE-wide preferences?
+expected:
+  - "(?i)(User Rules|cursor_dialog|IDE-wide|user-rules)"
+tags:
+  - guardrail
