@@ -34,4 +34,6 @@ Prefer **Grep**, **Glob**, **SemanticSearch**, and **Read**. Use the **workspace
 
 ## Output
 
+Include layout summary plus direct callers/callees for symbols under investigation.
+
 Return: concise findings, key paths, and suggested next step (main Agent, `review`, `debugger`, `planner`, or `organise`).

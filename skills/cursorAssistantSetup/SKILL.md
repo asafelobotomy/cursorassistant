@@ -43,9 +43,9 @@ Follow [references/interview-flow.md](references/interview-flow.md):
 
 **Preflight:** `setup.copyFrom.enabled`, `setup.copyFrom.repo` (stripped from committed answers).
 
-**Simple:** `setup.depth`, `profile.selected`, `packs.selected`, `mcp.enabled`, agent batch (4 keys).
+**Simple:** `setup.depth`, `profile.selected`, `packs.selected`, `mcp.enabled`, agent/skill batch (8 keys: commit, docs, planner, review, debugger, ciPreflight, deps, inventory).
 
-**Advanced (+):** `response.style`, `autonomy.level`, `agent.persona`.
+**Advanced (+):** `response.style`, `autonomy.level`, `agent.persona`, `setup.defaults.autoSave` (user defaults only).
 
 **Full (+):** `testing.philosophy`.
 

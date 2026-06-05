@@ -84,6 +84,69 @@
           }
         ]
       }
+    },
+    {
+      "id": "debugger",
+      "status": "active",
+      "manifestEntryId": "agents.debugger",
+      "customization": {
+        "questions": [
+          {
+            "answerKey": "agent.debugger.diagnosisDepth",
+            "prompt": "How deep should the debugger investigate before recommending a fix?",
+            "type": "choice",
+            "default": "minimal-fix-first",
+            "options": ["minimal-fix-first", "full-rca-chain"],
+            "token": "agent:debugger:diagnosis-style",
+            "render": {
+              "minimal-fix-first": "State root cause and the smallest credible fix step; stop after one actionable next step unless asked to continue.",
+              "full-rca-chain": "Trace failure through config, code, and environment layers with evidence at each step before recommending fixes."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "deps",
+      "status": "active",
+      "manifestEntryId": "agents.deps",
+      "customization": {
+        "questions": [
+          {
+            "answerKey": "agent.deps.auditThreshold",
+            "prompt": "What should the deps agent report from audits by default?",
+            "type": "choice",
+            "default": "critical-high",
+            "options": ["critical-high", "all-findings"],
+            "token": "agent:deps:audit-threshold",
+            "render": {
+              "critical-high": "Report Critical and High CVEs before other findings; summarize the rest as counts unless asked.",
+              "all-findings": "Report all audit severities with package names, versions, and recommended bumps."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "inventory",
+      "status": "active",
+      "manifestEntryId": "agents.inventory",
+      "customization": {
+        "questions": [
+          {
+            "answerKey": "agent.inventory.mapDepth",
+            "prompt": "How detailed should inventory maps be?",
+            "type": "choice",
+            "default": "layout-and-callers",
+            "options": ["layout-and-callers", "callers-only"],
+            "token": "agent:inventory:map-format",
+            "render": {
+              "layout-and-callers": "Include layout summary plus direct callers/callees for symbols under investigation.",
+              "callers-only": "Return caller/callee lists and key paths only; omit layout overview unless asked."
+            }
+          }
+        ]
+      }
     }
   ]
 }

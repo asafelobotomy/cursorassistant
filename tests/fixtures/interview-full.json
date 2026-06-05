@@ -7,8 +7,14 @@
   "autonomy.level": "ask-first",
   "agent.persona": "professional",
   "testing.philosophy": "always",
+  "setup.defaults.autoSave": false,
   "agent.commit.messageStyle": "conventional-with-context",
   "agent.docs.outputStyle": "concise-guides",
   "agent.planner.planFormat": "full-phased",
-  "agent.review.reportingThreshold": "all-findings"
+  "agent.review.reportingThreshold": "all-findings",
+  "agent.debugger.diagnosisDepth": "full-rca-chain",
+  "skill.ciPreflight.runPolicy": "full-workflow",
+  "agent.deps.auditThreshold": "all-findings",
+  "agent.inventory.mapDepth": "callers-only",
+  "tdd.cycle.strictness": "guided"
 }

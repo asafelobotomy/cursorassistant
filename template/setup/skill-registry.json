@@ -1,0 +1,26 @@
+{
+  "schemaVersion": "0.1.0",
+  "skills": [
+    {
+      "id": "ciPreflight",
+      "status": "active",
+      "manifestEntryId": "skills.ciPreflight",
+      "customization": {
+        "questions": [
+          {
+            "answerKey": "skill.ciPreflight.runPolicy",
+            "prompt": "How should ciPreflight scope CI checks before commit?",
+            "type": "choice",
+            "default": "staged-only",
+            "options": ["staged-only", "full-workflow"],
+            "token": "skill:ciPreflight:run-policy",
+            "render": {
+              "staged-only": "Scope every discovered CI command to staged files and their ecosystems; skip checks unrelated to the proposed commit.",
+              "full-workflow": "Run applicable workflow steps in full even when staged scope is narrow; note when a check exceeds staged surface area."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

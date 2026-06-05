@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.17.0",
+  "packageVersion": "0.17.1",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -33,7 +33,7 @@
       "target": ".cursor/agents/debugger.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:4a54ae5917225d83b59d918864ef57e5d2ffb6d72d68aab0003798d52cdd3341"
+      "hash": "sha256:b43100af683d99fa2899c7d1a4388839c0e06b2f4cf8d1c279279dba11e0a57e"
     },
     {
       "id": "agents.deps",
@@ -41,7 +41,7 @@
       "target": ".cursor/agents/deps.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:1f316ac841f6049e5b97cb6517ab3bcfe3e5e18efcc59b38561883b38b45d9d8"
+      "hash": "sha256:3d2c088022104017b3e474cffd41ea561fb8adfd3eca32e28636a45119cff6d3"
     },
     {
       "id": "agents.docs",
@@ -57,7 +57,7 @@
       "target": ".cursor/agents/inventory.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:e8214b7450fc5ec47fed3cb99a352daaccb3fe5fb85c556e4866f863280bc192"
+      "hash": "sha256:8f169a8464512092b98fa41f7ba6f6aeb835723f8c95411892b74a30c84cacc7"
     },
     {
       "id": "agents.organise",
@@ -269,7 +269,7 @@
       "target": ".cursor/skills/ciPreflight/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:92783d8ac6b33bacc16c8ad2d56158b66fa0a480427467a4c00c2f7550e3b489"
+      "hash": "sha256:add0e6ee3370deb9ae4262f089897aac7fa1f1ec067abf2fe466efb1c67269e7"
     },
     {
       "id": "skills.cursorAssistantSetup",
@@ -277,7 +277,7 @@
       "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:144cfa32be25ccbd2fc36c1fae95c747baa743766e5ae94d248e4eb5de143414"
+      "hash": "sha256:388279a975888d22ce2f234ea5605cccde0024693bd297220fefa7c8e41cfa6a"
     },
     {
       "id": "skills.cursorAssistantSetup.references.interview-flow",

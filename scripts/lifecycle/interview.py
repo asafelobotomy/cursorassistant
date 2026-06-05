@@ -7,12 +7,13 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from scripts.lifecycle import agent_customization, pack_interview, packs
+from scripts.lifecycle import agent_customization, pack_interview, packs, skill_customization
 
 DEFAULT_ANSWERS_REL = ".cursor/cursor-assistant-answers.json"
 LOCKFILE_TOP_KEYS = frozenset({"profile.selected", "packs.selected", "mcp.enabled"})
 PREFLIGHT_BATCH = "preflight"
 COPY_FROM_KEY_PREFIX = "setup.copyFrom."
+USER_DEFAULTS_KEY_PREFIX = "setup.defaults."
 
 DEPTH_BATCHES: dict[str, set[str]] = {
     "simple": {"setup", "simple", "agent"},
@@ -44,8 +45,32 @@ def is_ephemeral_key(key: str) -> bool:
     return key.startswith(COPY_FROM_KEY_PREFIX)
 
 
+def is_user_defaults_only_key(key: str) -> bool:
+    return key.startswith(USER_DEFAULTS_KEY_PREFIX)
+
+
 def sanitize_answers_for_save(answers: dict[str, Any]) -> dict[str, Any]:
-    return {key: value for key, value in answers.items() if not is_ephemeral_key(key)}
+    return {
+        key: value
+        for key, value in answers.items()
+        if not is_ephemeral_key(key) and not is_user_defaults_only_key(key)
+    }
+
+
+def agent_and_skill_questions(package_root: Path) -> list[dict[str, Any]]:
+    """Agent batch in D4 order: commit → docs → planner → review → debugger → ciPreflight → deps → inventory."""
+    agents = agent_customization.agent_questions(package_root)
+    skills = skill_customization.skill_questions(package_root)
+    ordered: list[dict[str, Any]] = []
+    inserted_skills = False
+    for question in agents:
+        ordered.append(question)
+        if question.get("agentId") == "debugger" and not inserted_skills:
+            ordered.extend(skills)
+            inserted_skills = True
+    if skills and not inserted_skills:
+        ordered.extend(skills)
+    return ordered
 
 
 def question_active(
@@ -100,7 +125,7 @@ def active_questions(
         return preflight + static
     agent_filtered = [
         question
-        for question in agent_customization.agent_questions(package_root)
+        for question in agent_and_skill_questions(package_root)
         if question.get("batch", "agent") in allowed
     ]
     selected_packs = packs.resolve_selected_packs(package_root, merged, None)
@@ -151,7 +176,7 @@ def resolve_answers(
             resolved["packs.selected"] = list(profile["defaultPacks"])
 
     if package_root is not None:
-        for question in agent_customization.agent_questions(package_root):
+        for question in agent_and_skill_questions(package_root):
             question_id = question["id"]
             if answers and question_id in answers:
                 resolved[question_id] = answers[question_id]
@@ -176,7 +201,9 @@ def answers_to_lockfile_fields(
         setup_answers = {
             key: value
             for key, value in answers.items()
-            if key not in LOCKFILE_TOP_KEYS and not is_ephemeral_key(key)
+            if key not in LOCKFILE_TOP_KEYS
+            and not is_ephemeral_key(key)
+            and not is_user_defaults_only_key(key)
         }
         pack_answers: dict[str, dict[str, Any]] = {}
     else:
@@ -186,7 +213,9 @@ def answers_to_lockfile_fields(
         setup_answers = {
             key: value
             for key, value in setup_all.items()
-            if key not in LOCKFILE_TOP_KEYS and not is_ephemeral_key(key)
+            if key not in LOCKFILE_TOP_KEYS
+            and not is_ephemeral_key(key)
+            and not is_user_defaults_only_key(key)
         }
         pack_answers = {pack_id: pack_map for pack_id, pack_map in pack_answers.items() if pack_id in selected_packs}
     payload: dict[str, Any] = {

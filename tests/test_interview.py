@@ -94,6 +94,10 @@ class InterviewTests(unittest.TestCase):
             "agent.docs.outputStyle": "corpus-match",
             "agent.planner.planFormat": "tight-phased",
             "agent.review.reportingThreshold": "critical-high",
+            "agent.debugger.diagnosisDepth": "minimal-fix-first",
+            "skill.ciPreflight.runPolicy": "staged-only",
+            "agent.deps.auditThreshold": "critical-high",
+            "agent.inventory.mapDepth": "layout-and-callers",
         }
         self.assertTrue(
             interview.answers_complete(data, answers, package_root=REPO_ROOT)

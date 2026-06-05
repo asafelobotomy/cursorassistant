@@ -25,6 +25,10 @@ Isolate root cause with evidence. Return diagnosis and the **smallest credible f
 2. Narrow to the failing layer (config, code, environment, managed surfaces)
 3. State root cause and one minimal next action
 
+## Diagnosis style
+
+State root cause and the smallest credible fix step; stop after one actionable next step unless asked to continue.
+
 If the failure is one symptom among unclear scope, ask the main Agent to run **`/task-triage`** before expanding this investigation.
 
 ## Tools

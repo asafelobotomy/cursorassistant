@@ -20,6 +20,7 @@ from scripts.lifecycle import (
     pack_interview,
     packs,
     preference_tokens,
+    skill_customization,
     workspace_scan,
 )
 from scripts.lifecycle.models import ManagedEntry
@@ -135,6 +136,9 @@ def compute_interview_required(
     interview_data = interview.load_interview(package_root)
     selected_packs = packs.resolve_selected_packs(package_root, payload, lock)
     for question_id in pack_interview.pack_question_ids(package_root, selected_packs):
+        if question_id not in payload:
+            return True
+    for question_id in {question["id"] for question in interview.agent_and_skill_questions(package_root)}:
         if question_id not in payload:
             return True
 
@@ -320,6 +324,7 @@ def _inspect_tokens(workspace: Path, package_root: Path, answers: dict[str, Any]
     tokens.update(preference_tokens.preference_tokens(answers))
     tokens.update(workspace_scan.scan_workspace_stack(workspace))
     tokens.update(agent_customization.agent_tokens(package_root, answers))
+    tokens.update(skill_customization.skill_tokens(package_root, answers))
     if answers is not None:
         from scripts.lifecycle import pack_tokens as pack_tokens_mod
 
@@ -346,6 +351,7 @@ def _group_token_summary(tokens: dict[str, str]) -> dict[str, dict[str, str]]:
         "workspace": {},
         "preferences": {},
         "agent": {},
+        "skill": {},
         "pack": {},
         "other": {},
     }
@@ -358,6 +364,8 @@ def _group_token_summary(tokens: dict[str, str]) -> dict[str, dict[str, str]]:
             groups["preferences"][key] = value
         elif key.startswith("agent:"):
             groups["agent"][key] = value
+        elif key.startswith("skill:"):
+            groups["skill"][key] = value
         elif key.startswith("pack:"):
             groups["pack"][key] = value
         else:

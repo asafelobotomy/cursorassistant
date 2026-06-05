@@ -23,16 +23,28 @@ def load_defaults() -> dict[str, Any] | None:
     return payload
 
 
-def save_defaults(answers: dict[str, Any], *, strip_ephemeral: bool = True) -> Path:
+def answers_for_defaults_file(answers: dict[str, Any]) -> dict[str, Any]:
     from scripts.lifecycle import interview
 
+    to_write = interview.sanitize_answers_for_save(answers)
+    for key, value in answers.items():
+        if interview.is_user_defaults_only_key(key):
+            to_write[key] = value
+    return to_write
+
+
+def save_defaults(answers: dict[str, Any], *, strip_ephemeral: bool = True) -> Path:
     path = defaults_path()
     path.parent.mkdir(parents=True, exist_ok=True)
-    to_write = (
-        interview.sanitize_answers_for_save(answers) if strip_ephemeral else dict(answers)
-    )
+    to_write = answers_for_defaults_file(answers) if strip_ephemeral else dict(answers)
     path.write_text(json.dumps(to_write, indent=2) + "\n", encoding="utf-8")
     return path
+
+
+def maybe_auto_save_defaults(answers: dict[str, Any]) -> Path | None:
+    if not answers.get("setup.defaults.autoSave"):
+        return None
+    return save_defaults(answers)
 
 
 def merge_defaults(draft: dict[str, Any], defaults: dict[str, Any] | None) -> dict[str, Any]:

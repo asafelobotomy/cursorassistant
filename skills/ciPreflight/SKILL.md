@@ -41,6 +41,8 @@ Include self-contained local commands (`python3`, `npm test`, `make check`, `go 
 
 ### 2. Scope to staged changes
 
+{{skill:ciPreflight:run-policy}}
+
 **Shell:** `git diff --cached --name-only`. Narrow checks to staged ecosystems (e.g. skip Python lint if no `.py` staged).
 
 ### 3. Fallback

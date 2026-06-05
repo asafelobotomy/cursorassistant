@@ -6,8 +6,13 @@
   "response.style": "balanced",
   "autonomy.level": "ask-first",
   "agent.persona": "professional",
+  "setup.defaults.autoSave": false,
   "agent.commit.messageStyle": "conventional-subject-first",
   "agent.docs.outputStyle": "corpus-match",
   "agent.planner.planFormat": "tight-phased",
-  "agent.review.reportingThreshold": "critical-high"
+  "agent.review.reportingThreshold": "critical-high",
+  "agent.debugger.diagnosisDepth": "minimal-fix-first",
+  "skill.ciPreflight.runPolicy": "staged-only",
+  "agent.deps.auditThreshold": "critical-high",
+  "agent.inventory.mapDepth": "layout-and-callers"
 }

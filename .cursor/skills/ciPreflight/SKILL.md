@@ -41,6 +41,8 @@ Include self-contained local commands (`python3`, `npm test`, `make check`, `go 
 
 ### 2. Scope to staged changes
 
+Scope every discovered CI command to staged files and their ecosystems; skip checks unrelated to the proposed commit.
+
 **Shell:** `git diff --cached --name-only`. Narrow checks to staged ecosystems (e.g. skip Python lint if no `.py` staged).
 
 ### 3. Fallback

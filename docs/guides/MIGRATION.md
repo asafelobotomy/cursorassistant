@@ -1,6 +1,22 @@
 # Migration guide
 
-## v0.17 — pack interview and lockfile packAnswers (breaking for pack users)
+## v0.17.1 — extended agent/skill tokens (breaking for existing answers files)
+
+### Interview expansion (D4)
+
+- **Agent batch** grows from 4 → **8** keys at `simple` depth: adds `debugger`, `deps`, `inventory`, and `skill.ciPreflight.runPolicy`.
+- Tokens render into `.cursor/agents/{debugger,deps,inventory}.md` and `.cursor/skills/ciPreflight/SKILL.md`.
+- **Advanced:** optional `setup.defaults.autoSave` (stored in user defaults file only; auto-updates defaults after configure when true).
+
+### Action
+
+Re-run interview and `configure --answers` with updated fixtures or answer the four new simple-depth keys. Example:
+
+```sh
+python3 cursorAssistant.py configure --workspace . --answers tests/fixtures/interview-balanced.json
+```
+
+## v0.17.0 — pack interview and lockfile packAnswers (breaking for pack users)
 
 ### Schema and lockfile
 

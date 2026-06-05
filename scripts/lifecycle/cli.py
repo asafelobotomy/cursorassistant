@@ -259,6 +259,12 @@ def _run_configure(
     setup_result = engine.setup(workspace, package_root, answers=answers)
     result["applied"] = True
     result["setup"] = setup_result
+    from scripts.lifecycle import user_defaults
+
+    auto_path = user_defaults.maybe_auto_save_defaults(answers)
+    if auto_path is not None:
+        result["defaultsAutoSaved"] = True
+        result["defaultsPath"] = str(auto_path)
     return result
 
 

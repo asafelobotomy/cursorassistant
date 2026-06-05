@@ -10,7 +10,7 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-from scripts.lifecycle import interview, pack_interview, packs
+from scripts.lifecycle import interview, pack_interview, packs  # interview.agent_and_skill_questions
 
 ANSWERS_REL = ".cursor/cursor-assistant-answers.json"
 LOCKFILE_REL = ".cursor/cursorAssistant-lock.json"
@@ -156,7 +156,7 @@ def known_question_ids(package_root: Path) -> set[str]:
     ids = {question["id"] for question in data.get("questions", [])}
     from scripts.lifecycle import agent_customization
 
-    ids.update(question["id"] for question in agent_customization.agent_questions(package_root))
+    ids.update(question["id"] for question in interview.agent_and_skill_questions(package_root))
     registry = packs.load_pack_registry(package_root)
     for pack_id in packs.active_pack_ids(registry):
         ids.update(pack_interview.pack_question_ids(package_root, [pack_id]))

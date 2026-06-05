@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.1] - 2026-06-05
+
+### Added
+
+- D4 agent/skill tokens: `debugger`, `ciPreflight`, `deps`, `inventory` interview keys and `skill-registry.json`.
+- `skill_customization.py`; `plan-setup` `tokenSummary.skill` group.
+- Advanced `setup.defaults.autoSave` — optional auto-update of user defaults after configure.
+
+### Changed
+
+- **Breaking:** simple-depth interview requires 4 additional agent/skill answer keys; re-interview existing workspaces.
+
 ## [0.17.0] - 2026-06-05
 
 ### Added

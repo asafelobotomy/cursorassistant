@@ -74,6 +74,13 @@
       "default": "professional"
     },
     {
+      "id": "setup.defaults.autoSave",
+      "prompt": "Automatically update your user defaults after each successful configure?",
+      "type": "boolean",
+      "batch": "advanced",
+      "default": false
+    },
+    {
       "id": "testing.philosophy",
       "prompt": "What is your testing philosophy?",
       "type": "choice",

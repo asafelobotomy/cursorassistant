@@ -20,6 +20,10 @@ Discover and act on dependencies declared in the workspace. Use the **depSearch*
 - Code review without a dependency change (prefer `review`)
 - Git operations (prefer `commit`)
 
+## Audit reporting
+
+Report Critical and High CVEs before other findings; summarize the rest as counts unless asked.
+
 ## Rules
 
 - Discover manifests and ecosystems first; never assume pip vs npm.

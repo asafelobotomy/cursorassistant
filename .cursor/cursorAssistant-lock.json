@@ -2,7 +2,7 @@
   "schemaVersion": "0.6.0",
   "package": {
     "name": "cursorAssistant",
-    "version": "0.16.1",
+    "version": "0.17.1",
     "packageRoot": "."
   },
   "profile": "balanced",
@@ -18,19 +18,23 @@
     "agent.commit.messageStyle": "conventional-subject-first",
     "agent.docs.outputStyle": "corpus-match",
     "agent.planner.planFormat": "tight-phased",
-    "agent.review.reportingThreshold": "critical-high"
+    "agent.review.reportingThreshold": "critical-high",
+    "agent.debugger.diagnosisDepth": "minimal-fix-first",
+    "skill.ciPreflight.runPolicy": "staged-only",
+    "agent.deps.auditThreshold": "critical-high",
+    "agent.inventory.mapDepth": "layout-and-callers"
   },
   "fileHashes": {
     "routing.agents-md": "sha256:0a7302e9348c34e8fa171045d74afda80e84f3e74eec58b5e7286f57a37e9b92",
     "rules.core": "sha256:8b6927f6a700f975734047b81b3908a34fcc10432d72f82ec3fe71b4e288ddb1",
     "rules.lifecycle": "sha256:e10a8393e1ebec730727d9d779a1f793f108d6f6fcd5b3335ef78addd4d0e477",
     "agents.cursorLifecycle": "sha256:042883b968545f8bd1b42fb953550980c436e0fbdb00dccce67ac1370e10b7b4",
-    "agents.inventory": "sha256:e8214b7450fc5ec47fed3cb99a352daaccb3fe5fb85c556e4866f863280bc192",
+    "agents.inventory": "sha256:c34abe573eb907589669f2e5a29d2ecbe2c31404140f8122e437d1753f61f096",
     "agents.review": "sha256:49592d08847a77008eae6dceabf2505a75aec2b03c114a979c589d2d9d71da5d",
     "agents.commit": "sha256:4773fc5dd0568f10d7161901248fc11665132d362a20b75b18c7fec015df90ba",
-    "agents.deps": "sha256:1f316ac841f6049e5b97cb6517ab3bcfe3e5e18efcc59b38561883b38b45d9d8",
+    "agents.deps": "sha256:5e9a6c397312d9add099f8df04a7d604c360eac05a34e8b4766efe0826806eff",
     "agents.docs": "sha256:d1e7c9371b1637b744ad099312d389801c32216c295f6c56c29bfa800b97bf79",
-    "agents.debugger": "sha256:4a54ae5917225d83b59d918864ef57e5d2ffb6d72d68aab0003798d52cdd3341",
+    "agents.debugger": "sha256:c00342c4d018eb50de38cc16ee582964cde5be3c1e8a615a0516cde90fe4bdad",
     "agents.planner": "sha256:b30762c7519e66d09c40de351301e6a161f4a298cbe681c03e4aeeec7954fdf3",
     "agents.researcher": "sha256:ef8b56dd0238a216c560708722790d54ee82d1b1e4c14eab186abf8355a39076",
     "agents.organise": "sha256:ce2a043b4bbe5d896b8e6c80ea901ea7cba00d208a66f2c2499cbe74d8249267",
@@ -39,11 +43,11 @@
     "skills.lifecycleAudit": "sha256:8d436d36f37b5d77149705eaa88ef22ed191b1e8a8aec95bd2f1bdfaae760f4f",
     "skills.surfaceReview": "sha256:deb9e169468bbe16b2a7853af7f38e0bf58aa3ac9919cc564f0b12f13f0bf2f8",
     "skills.surfaceReview.references.modules": "sha256:0605d149fe8d5ffd225ff7271d58420ae8aaaea14bc25200e51142f310762738",
-    "skills.cursorAssistantSetup": "sha256:144cfa32be25ccbd2fc36c1fae95c747baa743766e5ae94d248e4eb5de143414",
+    "skills.cursorAssistantSetup": "sha256:388279a975888d22ce2f234ea5605cccde0024693bd297220fefa7c8e41cfa6a",
     "skills.cursorAssistantSetup.references.interview-flow": "sha256:c8740480b60dc8396578a70f94772060736c5de576cf5b063fed5c63b417e174",
     "skills.cursorAssistantSetup.references.user-rules-step": "sha256:3fa72691c2861e6a83d228caa84379e9ac94822444ad5f8dd0b335a915d5291a",
     "skills.workspaceSearch": "sha256:f201eb58fec0820703b4b172d08c5e8395ec1618d0209fe0334920fdf01b3995",
-    "skills.ciPreflight": "sha256:92783d8ac6b33bacc16c8ad2d56158b66fa0a480427467a4c00c2f7550e3b489",
+    "skills.ciPreflight": "sha256:a997914012d50f1f20e4459f240dd0ecb6c7dc4b57e56187d3b6d0e841d1491e",
     "skills.depSearch": "sha256:a7fabf5d3de0d1826d1ab502f4191f29e317e3c61da4a681da3c3b70225ad783",
     "skills.task-triage": "sha256:0236172a1baf170e3aab87aeecad5d119c77ced30c718dc7d4895ffe169486b9",
     "skills.task-triage.references.parallel-scope": "sha256:15ca1a6cb4f89bb4e2f1f058a55e46216297d11460a0354c6746aaf37790c5e2",
@@ -55,6 +59,6 @@
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-05T23:29:07Z"
+    "updatedAt": "2026-06-05T23:33:05Z"
   }
 }
