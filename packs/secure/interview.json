@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "0.1.0",
+  "questions": [
+    {
+      "id": "secure.review.default",
+      "prompt": "Default security review reporting for this workspace?",
+      "type": "choice",
+      "batch": "pack",
+      "options": ["owasp-focused", "critical-high-only"],
+      "default": "owasp-focused",
+      "token": "pack:secure:review-depth",
+      "render": {
+        "owasp-focused": "Report Critical and High findings always. Additionally report any OWASP Top 10:2025 finding regardless of severity: A01 Broken Access Control, A02 Security Misconfiguration, A03 Supply Chain Failures, A04 Cryptographic Failures, A05 Injection, A06 Insecure Design, A07 Authentication Failures, A08 Software Integrity Failures, A09 Logging and Monitoring Failures, A10 Exception and Error Handling. For all other severity levels, report only when actionable.",
+        "critical-high-only": "Report Critical and High findings only. Flag OWASP Top 10:2025 entries when they are Critical or High severity; omit lower-severity OWASP items unless explicitly requested."
+      }
+    }
+  ]
+}

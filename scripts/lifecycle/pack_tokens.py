@@ -9,9 +9,6 @@ from typing import Any
 
 from scripts.lifecycle import packs
 
-# Core interview maps lean.reasoning.mode → pack:reasoning-mode via preference_tokens.py.
-RESERVED_LEGACY_ALIASES = frozenset({"pack:reasoning-mode"})
-
 _NAMESPACED_RE = re.compile(r"^pack:([a-z0-9-]+):(.+)$")
 
 
@@ -37,16 +34,6 @@ def normalize_token_key(pack_id: str, raw_key: str) -> str:
     return f"pack:{pack_id}:{key}"
 
 
-def legacy_alias_key(namespaced_key: str, pack_id: str) -> str | None:
-    prefix = f"pack:{pack_id}:"
-    if not namespaced_key.startswith(prefix):
-        return None
-    short = namespaced_key[len(prefix) :]
-    if not short:
-        return None
-    return f"pack:{short}"
-
-
 def load_pack_token_file(package_root: Path, pack_id: str) -> dict[str, str]:
     path = pack_tokens_path(package_root, pack_id)
     if not path.is_file():
@@ -57,22 +44,21 @@ def load_pack_token_file(package_root: Path, pack_id: str) -> dict[str, str]:
     return {str(key): str(value) for key, value in payload.items()}
 
 
-def pack_tokens(package_root: Path, selected_packs: list[str]) -> dict[str, str]:
-    """Merge namespaced pack tokens and one-release legacy aliases (v0.16.1).
-
-    Legacy aliases (`pack:review-depth`, etc.) resolve to the last selected pack
-    in sorted pack-id order that defines the short key. Reserved aliases owned by
-    core interview (e.g. `pack:reasoning-mode`) are never emitted here.
-    """
+def pack_tokens(
+    package_root: Path,
+    selected_packs: list[str],
+    answers: dict[str, Any] | None = None,
+) -> dict[str, str]:
+    """Merge namespaced pack tokens; pack interview answers override static tokens.json."""
     merged: dict[str, str] = {}
-    aliases: dict[str, str] = {}
     for pack_id in sorted(selected_packs):
         raw = load_pack_token_file(package_root, pack_id)
         for raw_key, value in raw.items():
-            namespaced = normalize_token_key(pack_id, raw_key)
-            merged[namespaced] = value
-            alias = legacy_alias_key(namespaced, pack_id)
-            if alias and alias not in RESERVED_LEGACY_ALIASES:
-                aliases[alias] = value
-    merged.update(aliases)
+            merged[normalize_token_key(pack_id, raw_key)] = value
+    if answers:
+        from scripts.lifecycle import pack_interview
+
+        merged.update(
+            pack_interview.pack_interview_tokens(package_root, selected_packs, answers)
+        )
     return merged

@@ -1,4 +1,4 @@
-"""Tests for pack token loading and legacy aliases."""
+"""Tests for pack token loading."""
 
 from __future__ import annotations
 
@@ -16,27 +16,17 @@ class PackTokenTests(unittest.TestCase):
             pack_tokens.normalize_token_key("lean", "pack:review-depth"),
             "pack:lean:review-depth",
         )
-        self.assertEqual(
-            pack_tokens.normalize_token_key("tdd", "pack:tdd:scope-discipline"),
-            "pack:tdd:scope-discipline",
-        )
 
-    def test_pack_tokens_includes_namespaced_and_alias(self) -> None:
+    def test_pack_tokens_namespaced_only_no_legacy_aliases(self) -> None:
         tokens = pack_tokens.pack_tokens(REPO_ROOT, ["lean"])
         self.assertIn("pack:lean:review-depth", tokens)
-        self.assertIn("pack:review-depth", tokens)
-        self.assertEqual(tokens["pack:review-depth"], tokens["pack:lean:review-depth"])
+        self.assertNotIn("pack:review-depth", tokens)
 
-    def test_reserved_reasoning_mode_not_aliased_from_pack(self) -> None:
-        tokens = pack_tokens.pack_tokens(REPO_ROOT, ["lean"])
-        self.assertIn("pack:lean:reasoning-mode", tokens)
-        self.assertNotIn("pack:reasoning-mode", tokens)
-
-    def test_collision_last_pack_wins_alias(self) -> None:
+    def test_collision_keeps_both_namespaced_keys(self) -> None:
         tokens = pack_tokens.pack_tokens(REPO_ROOT, ["lean", "tdd"])
         self.assertIn("pack:lean:review-depth", tokens)
         self.assertIn("pack:tdd:review-depth", tokens)
-        self.assertEqual(tokens["pack:review-depth"], tokens["pack:tdd:review-depth"])
+        self.assertNotIn("pack:review-depth", tokens)
 
     def test_inspect_includes_pack_tokens_when_selected(self) -> None:
         answers = {
@@ -44,6 +34,7 @@ class PackTokenTests(unittest.TestCase):
             "profile.selected": "balanced",
             "packs.selected": ["tdd"],
             "mcp.enabled": False,
+            "tdd.cycle.strictness": "guided",
             "agent.commit.messageStyle": "conventional-subject-first",
             "agent.docs.outputStyle": "corpus-match",
             "agent.planner.planFormat": "tight-phased",
@@ -53,8 +44,6 @@ class PackTokenTests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp:
             workspace = Path(tmp)
-            report = engine.inspect(workspace, REPO_ROOT, answers=answers)
-            self.assertIn("tdd", report["selectedPacks"])
             plan = engine.plan_setup(workspace, REPO_ROOT, answers=answers)
             pack_group = plan["tokenSummary"].get("pack", {})
             self.assertTrue(

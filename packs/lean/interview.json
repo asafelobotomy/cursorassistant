@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "0.1.0",
+  "questions": [
+    {
+      "id": "lean.andon.default",
+      "prompt": "When should the lean pack stop and ask before acting?",
+      "type": "choice",
+      "batch": "pack",
+      "options": ["irreversible-only", "material-ambiguity"],
+      "default": "irreversible-only",
+      "token": "pack:lean:blocker-discipline",
+      "render": {
+        "irreversible-only": "Stop and ask only when: (1) the action is irreversible and unrecoverable without the user's intent confirmed, (2) information is missing that materially changes the approach, or (3) two plausible interpretations lead to substantially different outcomes. Proceed without asking in all other cases.",
+        "material-ambiguity": "Stop and ask when any ambiguity could change the approach or output materially. Proceed only when the next step is obvious from the request and workspace context."
+      }
+    }
+  ]
+}

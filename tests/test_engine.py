@@ -58,7 +58,7 @@ class EngineTests(unittest.TestCase):
             self.assertTrue((workspace / ".cursor/mcp/scripts/cursorToolsMcp.py").is_file())
             lock = json.loads((workspace / ".cursor/cursorAssistant-lock.json").read_text())
             self.assertEqual(lock["package"]["name"], "cursorAssistant")
-            self.assertEqual(lock["schemaVersion"], "0.5.0")
+            self.assertEqual(lock["schemaVersion"], "0.6.0")
             self.assertEqual(lock["profile"], "balanced")
             self.assertEqual(lock["selectedPacks"], [])
             self.assertFalse(lock["mcpEnabled"])

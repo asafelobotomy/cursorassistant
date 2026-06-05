@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from scripts.lifecycle import agent_customization, packs
+from scripts.lifecycle import agent_customization, pack_interview, packs
 
 DEFAULT_ANSWERS_REL = ".cursor/cursor-assistant-answers.json"
 LOCKFILE_TOP_KEYS = frozenset({"profile.selected", "packs.selected", "mcp.enabled"})
@@ -103,7 +103,14 @@ def active_questions(
         for question in agent_customization.agent_questions(package_root)
         if question.get("batch", "agent") in allowed
     ]
-    return preflight + static + agent_filtered
+    selected_packs = packs.resolve_selected_packs(package_root, merged, None)
+    allowed_with_pack = set(allowed) | {pack_interview.PACK_BATCH}
+    pack_filtered = [
+        question
+        for question in pack_interview.pack_questions(package_root, selected_packs)
+        if question_active(question, merged, allowed_with_pack)
+    ]
+    return preflight + static + agent_filtered + pack_filtered
 
 
 def resolve_answers(
@@ -150,6 +157,10 @@ def resolve_answers(
                 resolved[question_id] = answers[question_id]
             elif "default" in question and question_id not in resolved:
                 resolved[question_id] = question["default"]
+        selected_packs = packs.resolve_selected_packs(package_root, resolved, None)
+        resolved.update(
+            pack_interview.resolve_pack_defaults(package_root, answers, selected_packs)
+        )
 
     return resolved
 
@@ -157,19 +168,36 @@ def resolve_answers(
 def answers_to_lockfile_fields(
     answers: dict[str, Any],
     selected_packs: list[str],
+    *,
+    package_root: Path | None = None,
 ) -> dict[str, Any]:
     profile = answers.get("profile.selected", "balanced")
-    setup_answers = {
-        key: value
-        for key, value in answers.items()
-        if key not in LOCKFILE_TOP_KEYS and not is_ephemeral_key(key)
-    }
-    return {
+    if package_root is None:
+        setup_answers = {
+            key: value
+            for key, value in answers.items()
+            if key not in LOCKFILE_TOP_KEYS and not is_ephemeral_key(key)
+        }
+        pack_answers: dict[str, dict[str, Any]] = {}
+    else:
+        setup_all, pack_answers = pack_interview.split_pack_answers(
+            package_root, answers, selected_packs
+        )
+        setup_answers = {
+            key: value
+            for key, value in setup_all.items()
+            if key not in LOCKFILE_TOP_KEYS and not is_ephemeral_key(key)
+        }
+        pack_answers = {pack_id: pack_map for pack_id, pack_map in pack_answers.items() if pack_id in selected_packs}
+    payload: dict[str, Any] = {
         "profile": profile,
         "selectedPacks": selected_packs,
         "mcpEnabled": bool(answers.get("mcp.enabled", False)),
         "setupAnswers": setup_answers,
     }
+    if pack_answers:
+        payload["packAnswers"] = pack_answers
+    return payload
 
 
 def default_answers_path(workspace: Path) -> Path:
@@ -193,6 +221,8 @@ def _question_payload(question: dict[str, Any]) -> dict[str, Any]:
         payload["options"] = question["options"]
     if "default" in question:
         payload["default"] = question["default"]
+    if "packId" in question:
+        payload["packId"] = question["packId"]
     return payload
 
 
@@ -215,10 +245,20 @@ def interview_questions_payload(
         for question in active
         if question["id"] in pending_ids
     ]
+    selected_packs = (
+        packs.resolve_selected_packs(package_root, merged, None) if package_root else []
+    )
+    pending_packs = (
+        pack_interview.pending_pack_ids(package_root, selected_packs, explicit_keys=explicit)
+        if package_root
+        else []
+    )
     return {
         "schemaVersion": interview_data.get("schemaVersion"),
         "active": active_ids,
         "pending": pending_ids,
+        "pendingPacks": pending_packs,
+        "selectedPacks": selected_packs,
         "complete": len(pending_ids) == 0
         and answers_complete(interview_data, merged, package_root=package_root),
         "questions": pending_questions,

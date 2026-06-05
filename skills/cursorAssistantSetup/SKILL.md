@@ -49,6 +49,8 @@ Follow [references/interview-flow.md](references/interview-flow.md):
 
 **Full (+):** `testing.philosophy`.
 
+**Pack (when selected):** per-pack questions from `packs/<id>/interview.json`.
+
 **Conditional:** `lean.reasoning.mode` when lean profile or pack selected.
 
 ## Rules

@@ -10,21 +10,24 @@
       "name": "Lean",
       "summary": "Terse output, count-based summaries, and lighter narration.",
       "status": "active",
-      "tokensPath": "packs/lean/tokens.json"
+      "tokensPath": "packs/lean/tokens.json",
+      "interviewPath": "packs/lean/interview.json"
     },
     {
       "id": "secure",
       "name": "Secure",
       "summary": "OWASP-focused review, threat modeling, and dependency audit skills.",
       "status": "active",
-      "tokensPath": "packs/secure/tokens.json"
+      "tokensPath": "packs/secure/tokens.json",
+      "interviewPath": "packs/secure/interview.json"
     },
     {
       "id": "tdd",
       "name": "TDD",
       "summary": "Red-Green-Refactor discipline, test doubles, and coverage guidance.",
       "status": "active",
-      "tokensPath": "packs/tdd/tokens.json"
+      "tokensPath": "packs/tdd/tokens.json",
+      "interviewPath": "packs/tdd/interview.json"
     }
   ]
 }

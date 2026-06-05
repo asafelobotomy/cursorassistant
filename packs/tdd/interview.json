@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "0.1.0",
+  "questions": [
+    {
+      "id": "tdd.cycle.strictness",
+      "prompt": "TDD cycle strictness for this workspace?",
+      "type": "choice",
+      "batch": "pack",
+      "options": ["strict", "guided"],
+      "default": "guided",
+      "token": "pack:tdd:scope-discipline",
+      "render": {
+        "strict": "Write the failing test before any implementation. One failing test at a time. Do not expand implementation scope beyond what is needed to make the current failing test pass. Refactor only after the test is green. Do not batch multiple behaviors unless the user explicitly scopes them together.",
+        "guided": "Prefer test-first and name the current TDD phase (Red / Green / Refactor). Allow scoping multiple related behaviors upfront when the user states them explicitly; still avoid implementation beyond the agreed scope."
+      }
+    }
+  ]
+}

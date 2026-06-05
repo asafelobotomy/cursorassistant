@@ -10,7 +10,7 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-from scripts.lifecycle import interview
+from scripts.lifecycle import interview, pack_interview, packs
 
 ANSWERS_REL = ".cursor/cursor-assistant-answers.json"
 LOCKFILE_REL = ".cursor/cursorAssistant-lock.json"
@@ -140,12 +140,7 @@ def flatten_lockfile_to_answers(lock: dict[str, Any]) -> dict[str, Any]:
     if isinstance(setup_answers, dict):
         flat.update(setup_answers)
     pack_answers = lock.get("packAnswers")
-    if isinstance(pack_answers, dict):
-        for pack_id, pack_map in pack_answers.items():
-            if isinstance(pack_map, dict):
-                for key, value in pack_map.items():
-                    flat[f"{pack_id}.{key}"] = value
-                    flat[key] = value
+    flat.update(pack_interview.merge_pack_answers_into_flat({}, pack_answers))
     for top_key in ("profile", "selectedPacks", "mcpEnabled"):
         if top_key == "profile" and isinstance(lock.get("profile"), str):
             flat.setdefault("profile.selected", lock["profile"])
@@ -162,6 +157,9 @@ def known_question_ids(package_root: Path) -> set[str]:
     from scripts.lifecycle import agent_customization
 
     ids.update(question["id"] for question in agent_customization.agent_questions(package_root))
+    registry = packs.load_pack_registry(package_root)
+    for pack_id in packs.active_pack_ids(registry):
+        ids.update(pack_interview.pack_question_ids(package_root, [pack_id]))
     return ids
 
 

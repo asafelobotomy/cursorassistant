@@ -17,6 +17,7 @@ from scripts.lifecycle import (
     merge,
     mcp_config,
     mcp_scripts,
+    pack_interview,
     packs,
     preference_tokens,
     workspace_scan,
@@ -26,7 +27,7 @@ from scripts.lifecycle.models import ManagedEntry
 LOCKFILE_REL = Path(".cursor") / "cursorAssistant-lock.json"
 BACKUP_ROOT_REL = Path(".cursor") / ".cursorAssistant-backup"
 TOKEN_PATTERN = re.compile(r"\{\{([A-Za-z0-9_:.-]+)\}\}")
-MIN_LOCKFILE_SCHEMA = "0.5.0"
+MIN_LOCKFILE_SCHEMA = "0.6.0"
 LOCKFILE_REQUIRED_KEYS = ("schemaVersion", "package", "fileHashes")
 
 
@@ -102,6 +103,8 @@ def answers_from_lockfile(lockfile: dict[str, Any]) -> dict[str, Any]:
     setup_answers = lockfile.get("setupAnswers", {})
     if isinstance(setup_answers, dict):
         merged.update(setup_answers)
+    pack_answers = lockfile.get("packAnswers")
+    merged.update(pack_interview.merge_pack_answers_into_flat({}, pack_answers))
     return merged
 
 
@@ -130,6 +133,11 @@ def compute_interview_required(
         return True
 
     interview_data = interview.load_interview(package_root)
+    selected_packs = packs.resolve_selected_packs(package_root, payload, lock)
+    for question_id in pack_interview.pack_question_ids(package_root, selected_packs):
+        if question_id not in payload:
+            return True
+
     if not interview.answers_complete(interview_data, payload, package_root=package_root):
         return True
 
@@ -316,7 +324,7 @@ def _inspect_tokens(workspace: Path, package_root: Path, answers: dict[str, Any]
         from scripts.lifecycle import pack_tokens as pack_tokens_mod
 
         selected = packs.resolve_selected_packs(package_root, answers, None)
-        tokens.update(pack_tokens_mod.pack_tokens(package_root, selected))
+        tokens.update(pack_tokens_mod.pack_tokens(package_root, selected, answers=answers))
     return tokens
 
 
@@ -425,6 +433,20 @@ def inspect(
     setup_answers = lock.get("setupAnswers", {}) if isinstance(lock, dict) else {}
     if not isinstance(setup_answers, dict):
         setup_answers = {}
+    pack_answers = lock.get("packAnswers", {}) if isinstance(lock, dict) else {}
+    if not isinstance(pack_answers, dict):
+        pack_answers = {}
+    pack_answer_count = sum(
+        len(pack_map) for pack_map in pack_answers.values() if isinstance(pack_map, dict)
+    )
+    pending_pack_interview = [
+        pack_id
+        for pack_id in selected_packs
+        if any(
+            question["id"] not in resolved_answers
+            for question in pack_interview.questions_for_pack(package_root, pack_id)
+        )
+    ]
     return {
         "packageName": policy.get("packageName", "cursorAssistant"),
         "packageVersion": package_version(package_root),
@@ -432,6 +454,8 @@ def inspect(
         "interviewRequired": interview_required,
         "interviewDepth": resolved_answers.get("setup.depth", "simple"),
         "setupAnswersCount": len(setup_answers),
+        "packAnswersCount": pack_answer_count,
+        "pendingPackInterview": pending_pack_interview,
         "lockfilePresent": lock is not None,
         "lockfileMalformed": lockfile_is_malformed(lock),
         "repairReasons": repair_reasons,
@@ -595,7 +619,9 @@ def _build_lockfile_payload(
     existing_lock: dict[str, Any] | None,
 ) -> dict[str, Any]:
     policy = load_policy(package_root)
-    lock_fields = interview.answers_to_lockfile_fields(answers, selected_packs)
+    lock_fields = interview.answers_to_lockfile_fields(
+        answers, selected_packs, package_root=package_root
+    )
     hashes = {}
     for entry in entries:
         target = workspace / entry.target_rel
@@ -618,6 +644,8 @@ def _build_lockfile_payload(
         "setupAnswers": lock_fields["setupAnswers"],
         "fileHashes": hashes,
     }
+    if lock_fields.get("packAnswers"):
+        payload["packAnswers"] = lock_fields["packAnswers"]
     write_lockfile(workspace, payload, preserve_timestamps=preserve)
     return payload
 
@@ -684,6 +712,7 @@ def apply_entries(
         "profile": lock_payload.get("profile"),
         "selectedPacks": lock_payload.get("selectedPacks"),
         "setupAnswers": lock_payload.get("setupAnswers"),
+        "packAnswers": lock_payload.get("packAnswers"),
     }
 
 
@@ -721,6 +750,16 @@ def plan_setup(
     }
     if preflight:
         payload["preflight"] = preflight
+    pending_pack_interview = [
+        pack_id
+        for pack_id in selected_packs
+        if any(
+            question["id"] not in resolved_answers
+            for question in pack_interview.questions_for_pack(package_root, pack_id)
+        )
+    ]
+    if pending_pack_interview:
+        payload["pendingPackInterview"] = pending_pack_interview
     if verbose_tokens:
         payload["tokens"] = tokens
     return payload

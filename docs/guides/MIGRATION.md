@@ -1,5 +1,27 @@
 # Migration guide
 
+## v0.17 — pack interview and lockfile packAnswers (breaking for pack users)
+
+### Schema and lockfile
+
+- **Lockfile `schemaVersion` 0.6.0** — adds nested **`packAnswers`** grouped by pack id.
+- **`packs/<id>/interview.json`** — one question per pack (batch `pack`) when the pack is in `packs.selected`.
+- **Flat** `.cursor/cursor-assistant-answers.json` unchanged for copy-from; `configure` splits pack keys into lockfile `packAnswers`.
+- **Removed** legacy short pack token aliases (`pack:review-depth`); use namespaced `{{pack:<packId>:<name>}}`.
+
+### Action
+
+Workspaces on lockfile **0.5.x** with packs selected must re-run the pack interview layer, then `configure --answers`:
+
+```sh
+python3 cursorAssistant.py interview --workspace . --answers .cursor/cursor-assistant-answers.json
+python3 cursorAssistant.py configure --workspace . --answers .cursor/cursor-assistant-answers.json
+```
+
+Fixtures: `tests/fixtures/interview-with-secure.json`, `interview-balanced-lean.json`.
+
+Partial reconfigure: changing `packs.selected` drops deselected pack keys from `packAnswers`; newly selected packs require their pack questions before `configure`.
+
 ## v0.16.1 — pack token loading
 
 ### Pack tokens

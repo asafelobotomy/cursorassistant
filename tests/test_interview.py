@@ -66,6 +66,23 @@ class InterviewTests(unittest.TestCase):
         ids = {question["id"] for question in active}
         self.assertIn("lean.reasoning.mode", ids)
 
+    def test_pending_packs_when_pack_questions_unanswered(self) -> None:
+        data = interview.load_interview(REPO_ROOT)
+        answers = {
+            "setup.depth": "simple",
+            "profile.selected": "balanced",
+            "packs.selected": ["secure"],
+            "mcp.enabled": False,
+        }
+        payload = interview.interview_questions_payload(
+            data,
+            answers,
+            package_root=REPO_ROOT,
+            explicit_keys=set(answers.keys()),
+        )
+        self.assertIn("secure", payload["pendingPacks"])
+        self.assertIn("secure.review.default", payload["pending"])
+
     def test_answers_complete_simple_fixture(self) -> None:
         data = interview.load_interview(REPO_ROOT)
         answers = {

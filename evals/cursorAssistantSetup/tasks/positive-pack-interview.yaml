@@ -1,0 +1,9 @@
+id: positive-pack-interview
+description: "Selected pack triggers pack-layer interview questions"
+prompt: |
+  I selected the secure pack during cursorAssistant setup. Which interview question id should AskQuestion include before configure?
+expected:
+  - "secure.review.default"
+  - "(?i)(pack|batch)"
+tags:
+  - d3

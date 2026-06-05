@@ -1,6 +1,6 @@
 {
   "schemaVersion": "0.4.0",
-  "packageVersion": "0.15.0",
+  "packageVersion": "0.17.0",
   "policySchemaVersion": "0.4.0",
   "managedFiles": [
     {
@@ -277,7 +277,7 @@
       "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:7a210740b4672a3364f600880d69cfb500c5018a13558f97d5f64220406decb7"
+      "hash": "sha256:144cfa32be25ccbd2fc36c1fae95c747baa743766e5ae94d248e4eb5de143414"
     },
     {
       "id": "skills.cursorAssistantSetup.references.interview-flow",
@@ -285,7 +285,7 @@
       "target": ".cursor/skills/cursorAssistantSetup/references/interview-flow.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:84e5eb3cf94030776c46941440f728b8945e5a2af5a667361c7bdfb8754a6612"
+      "hash": "sha256:c8740480b60dc8396578a70f94772060736c5de576cf5b063fed5c63b417e174"
     },
     {
       "id": "skills.cursorAssistantSetup.references.user-rules-step",

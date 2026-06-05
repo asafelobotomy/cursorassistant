@@ -10,7 +10,8 @@
    - `setup.copyFrom.repo` (string, when enabled) — default branch only
    - When enabled: `lifecycle_interview_import` → show `source`, `droppedKeys`, `warnings`; user confirms merge.
 4. Ask **pending** questions for active depth (defaults prefill does not skip confirmation).
-   - Use **AskQuestion** per layer (preflight → setup.depth → simple → advanced/full).
+   - Use **AskQuestion** per layer (preflight → setup.depth → simple → **pack** → advanced/full).
+   - Pack layer runs only for ids in `packs.selected` (`secure.review.default`, `tdd.cycle.strictness`, `lean.andon.default`, …).
    - Do **not** read profile/packs/MCP from the lockfile.
 5. `lifecycle_interview_save` or write `.cursor/cursor-assistant-answers.json` (ephemeral `setup.copyFrom.*` stripped).
 6. `python3 cursorAssistant.py plan-setup --workspace . --answers .cursor/cursor-assistant-answers.json --json`

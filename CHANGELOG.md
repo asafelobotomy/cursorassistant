@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.0] - 2026-06-05
+
+### Added
+
+- Pack-gated interview: `packs/<id>/interview.json` with `interviewPath` in pack registry.
+- Lockfile **`packAnswers`** nested by pack id; schema **0.6.0**.
+- `inspect.pendingPackInterview`, `packAnswersCount`; `plan-setup.pendingPackInterview`.
+- Pack interview fixtures and eval `positive-pack-interview`.
+
+### Changed
+
+- **Breaking:** lockfile **0.6.0** required; workspaces on 0.5.x with packs must re-interview pack layer.
+- Pack interview answers override static `tokens.json` values for the same token key.
+- **Removed** legacy short pack token aliases (`pack:review-depth`, etc.) — namespaced keys only.
+
 ## [0.16.1] - 2026-06-05
 
 ### Added
