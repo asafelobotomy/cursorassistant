@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.1] - 2026-06-05
+
+### Added
+
+- `scripts/lifecycle/pack_tokens.py` — load `packs/<id>/tokens.json` for selected packs.
+- Namespaced pack token keys (`pack:<packId>:<name>`) with one-release legacy aliases for `{{pack:*}}` placeholders.
+- `tokensPath` in `pack-registry.json`; MIGRATION.md § v0.16.1.
+
+### Changed
+
+- `engine._inspect_tokens()` merges pack tokens after agent tokens; `plan-setup` `tokenSummary.pack` populated when packs selected.
+
 ## [0.16.0] - 2026-06-05
 
 ### Added

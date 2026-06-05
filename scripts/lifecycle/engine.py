@@ -312,6 +312,11 @@ def _inspect_tokens(workspace: Path, package_root: Path, answers: dict[str, Any]
     tokens.update(preference_tokens.preference_tokens(answers))
     tokens.update(workspace_scan.scan_workspace_stack(workspace))
     tokens.update(agent_customization.agent_tokens(package_root, answers))
+    if answers is not None:
+        from scripts.lifecycle import pack_tokens as pack_tokens_mod
+
+        selected = packs.resolve_selected_packs(package_root, answers, None)
+        tokens.update(pack_tokens_mod.pack_tokens(package_root, selected))
     return tokens
 
 

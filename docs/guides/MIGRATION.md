@@ -1,5 +1,32 @@
 # Migration guide
 
+## v0.16.1 — pack token loading
+
+### Pack tokens
+
+- **`packs/<id>/tokens.json`** is loaded when a pack is in `packs.selected`.
+- Token keys are **namespaced**: `pack:<packId>:<name>` (e.g. `pack:tdd:scope-discipline`).
+- **Legacy aliases** (`pack:review-depth`, etc.) are emitted for one release when templates still use short keys; the last selected pack in sorted pack-id order wins on collision.
+- **`pack:reasoning-mode`** stays owned by core interview (`lean.reasoning.mode` via `preference_tokens.py`), not pack aliases.
+
+### Action
+
+No lockfile migration. Re-run `configure` or `update` after selecting packs so managed surfaces receive pack tokens in `plan-setup` / `inspect`.
+
+Prefer namespaced placeholders in new content: `{{pack:tdd:scope-discipline}}` instead of `{{pack:scope-discipline}}`.
+
+## v0.16 — copy-from interview and user defaults
+
+### Added
+
+- Preflight `setup.copyFrom.*` (stripped from committed answers); import via MCP `lifecycle_interview_import` or CLI.
+- User defaults: `~/.cursor/cursor-assistant-defaults.json` (explicit save only).
+- MCP interview API tools; `install-from-github.sh` requires interview or `--answers` non-interactively.
+
+### Action
+
+Existing workspaces: no breaking change. New projects can copy answers from a GitHub repo during interview.
+
 ## v0.15 — progressive setup interview (breaking)
 
 ### Schema and lockfile
