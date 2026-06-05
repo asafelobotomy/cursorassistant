@@ -11,6 +11,8 @@ cursorAssistant installs Python MCP servers under `.cursor/mcp/scripts/`. They r
 ## Secrets
 
 - Do not commit API keys into skills, agents, or rules.
+- Do not commit secrets, tokens, credentials, or personal identifiers in `.cursor/cursor-assistant-answers.json` or `~/.cursor/cursor-assistant-defaults.json`. Use environment variables and Cursor **User Rules** for machine-local secrets.
+- Setup **copy-from** import rejects answers files with probable secret key names or token-like values (`lifecycle_interview_import` / `answers_import.py`).
 - Pack skills such as `secretScanning` guide local scans; they do not replace vault rotation or provider revocation.
 - For GitHub Models evals, use **`GITHUB_MODELS_TOKEN`** — avoid setting `GITHUB_TOKEN` to a models-only token if you use `gh` or `git push` in the same shell ([INSTALL.md](INSTALL.md)).
 

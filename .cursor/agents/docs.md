@@ -22,7 +22,7 @@ Create and update documentation that matches the repository. Verify commands, pa
 
 ## Writing style
 
-Use compact sections with imperative steps and minimal runnable examples.
+Match surrounding doc style: clear headers, numbered steps, minimal runnable examples.
 
 ## Rules
 

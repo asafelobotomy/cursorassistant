@@ -17,8 +17,16 @@ bash scripts/sync-cursorassistant-install.sh
 
 ## Terminal: full install (bootstrap + interview)
 
+Interactive terminal (runs `interview` then `configure`):
+
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/install-from-github.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.16.0/scripts/install-from-github.sh | bash -s -- .
+```
+
+Non-interactive (fixture or completed answers file required):
+
+```sh
+bash scripts/install-from-github.sh . --answers tests/fixtures/interview-balanced.json
 ```
 
 ## Terminal: bootstrap only

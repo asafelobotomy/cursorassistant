@@ -21,7 +21,7 @@ Produce an **executable plan** without implementing it.
 
 ## Plan format
 
-Numbered phases with name, affected files, steps, stop condition, risks, and a falsifying check.
+Short numbered phases with goal, affected files, concrete steps, and one verification check.
 
 ## Plan must include
 

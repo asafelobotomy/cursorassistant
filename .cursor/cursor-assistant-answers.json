@@ -1,0 +1,15 @@
+{
+  "setup.depth": "simple",
+  "profile.selected": "balanced",
+  "packs.selected": [],
+  "mcp.enabled": false,
+  "response.style": "balanced",
+  "autonomy.level": "ask-first",
+  "agent.persona": "professional",
+  "testing.philosophy": "always",
+  "lean.reasoning.mode": "compressed",
+  "agent.commit.messageStyle": "conventional-subject-first",
+  "agent.docs.outputStyle": "corpus-match",
+  "agent.planner.planFormat": "tight-phased",
+  "agent.review.reportingThreshold": "critical-high"
+}

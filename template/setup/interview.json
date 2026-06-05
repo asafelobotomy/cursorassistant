@@ -2,6 +2,23 @@
   "schemaVersion": "0.5.0",
   "questions": [
     {
+      "id": "setup.copyFrom.enabled",
+      "prompt": "Copy setup answers from an existing GitHub project?",
+      "type": "boolean",
+      "batch": "preflight",
+      "default": false
+    },
+    {
+      "id": "setup.copyFrom.repo",
+      "prompt": "GitHub repository (owner/repo or https URL) — default branch only",
+      "type": "string",
+      "batch": "preflight",
+      "default": "",
+      "requiredWhen": {
+        "setup.copyFrom.enabled": true
+      }
+    },
+    {
       "id": "setup.depth",
       "prompt": "How much would you like to customise this install?",
       "type": "choice",

@@ -11,6 +11,8 @@ from scripts.lifecycle import agent_customization, packs
 
 DEFAULT_ANSWERS_REL = ".cursor/cursor-assistant-answers.json"
 LOCKFILE_TOP_KEYS = frozenset({"profile.selected", "packs.selected", "mcp.enabled"})
+PREFLIGHT_BATCH = "preflight"
+COPY_FROM_KEY_PREFIX = "setup.copyFrom."
 
 DEPTH_BATCHES: dict[str, set[str]] = {
     "simple": {"setup", "simple", "agent"},
@@ -38,13 +40,23 @@ def _predicate_matches(predicate: dict[str, Any], answers: dict[str, Any]) -> bo
     return False
 
 
+def is_ephemeral_key(key: str) -> bool:
+    return key.startswith(COPY_FROM_KEY_PREFIX)
+
+
+def sanitize_answers_for_save(answers: dict[str, Any]) -> dict[str, Any]:
+    return {key: value for key, value in answers.items() if not is_ephemeral_key(key)}
+
+
 def question_active(
     question: dict[str, Any],
     answers: dict[str, Any],
     allowed_batches: set[str],
 ) -> bool:
     batch = question.get("batch", "simple")
-    if batch not in allowed_batches:
+    if batch == PREFLIGHT_BATCH:
+        allowed = {PREFLIGHT_BATCH}
+    elif batch not in allowed_batches:
         return False
     required_when = question.get("requiredWhen")
     if not required_when:
@@ -75,19 +87,23 @@ def active_questions(
         merged.update(answers)
     depth = str(merged.get("setup.depth", "simple"))
     allowed = DEPTH_BATCHES.get(depth, DEPTH_BATCHES["simple"])
-    static = [
-        question
-        for question in interview.get("questions", [])
-        if question_active(question, merged, allowed)
-    ]
+    preflight: list[dict[str, Any]] = []
+    static: list[dict[str, Any]] = []
+    for question in interview.get("questions", []):
+        batch = question.get("batch", "simple")
+        if batch == PREFLIGHT_BATCH:
+            if question_active(question, merged, {PREFLIGHT_BATCH}):
+                preflight.append(question)
+        elif question_active(question, merged, allowed):
+            static.append(question)
     if package_root is None:
-        return static
+        return preflight + static
     agent_filtered = [
         question
         for question in agent_customization.agent_questions(package_root)
         if question.get("batch", "agent") in allowed
     ]
-    return static + agent_filtered
+    return preflight + static + agent_filtered
 
 
 def resolve_answers(
@@ -146,7 +162,7 @@ def answers_to_lockfile_fields(
     setup_answers = {
         key: value
         for key, value in answers.items()
-        if key not in LOCKFILE_TOP_KEYS
+        if key not in LOCKFILE_TOP_KEYS and not is_ephemeral_key(key)
     }
     return {
         "profile": profile,
@@ -160,26 +176,101 @@ def default_answers_path(workspace: Path) -> Path:
     return workspace / DEFAULT_ANSWERS_REL
 
 
-def write_answers_file(path: Path, answers: dict[str, Any]) -> None:
+def write_answers_file(path: Path, answers: dict[str, Any], *, sanitize: bool = True) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(answers, indent=2) + "\n", encoding="utf-8")
+    payload = sanitize_answers_for_save(answers) if sanitize else dict(answers)
+    path.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
+
+
+def _question_payload(question: dict[str, Any]) -> dict[str, Any]:
+    payload: dict[str, Any] = {
+        "id": question["id"],
+        "prompt": question.get("prompt", question["id"]),
+        "type": question.get("type", "choice"),
+        "batch": question.get("batch", "simple"),
+    }
+    if "options" in question:
+        payload["options"] = question["options"]
+    if "default" in question:
+        payload["default"] = question["default"]
+    return payload
+
+
+def interview_questions_payload(
+    interview_data: dict[str, Any],
+    answers: dict[str, Any] | None,
+    *,
+    package_root: Path | None,
+    explicit_keys: set[str] | None = None,
+) -> dict[str, Any]:
+    explicit = explicit_keys if explicit_keys is not None else set(answers or {})
+    merged = dict(resolve_answers(interview_data, answers, package_root=package_root))
+    if answers:
+        merged.update(answers)
+    active = active_questions(interview_data, merged, package_root=package_root)
+    active_ids = [question["id"] for question in active]
+    pending_ids = [question["id"] for question in active if question["id"] not in explicit]
+    pending_questions = [
+        _question_payload(question)
+        for question in active
+        if question["id"] in pending_ids
+    ]
+    return {
+        "schemaVersion": interview_data.get("schemaVersion"),
+        "active": active_ids,
+        "pending": pending_ids,
+        "complete": len(pending_ids) == 0
+        and answers_complete(interview_data, merged, package_root=package_root),
+        "questions": pending_questions,
+        "answers": merged,
+    }
+
+
+def prefill_answers(
+    interview_data: dict[str, Any],
+    *,
+    package_root: Path,
+    partial: dict[str, Any] | None = None,
+    defaults: dict[str, Any] | None = None,
+    imported: dict[str, Any] | None = None,
+) -> dict[str, Any]:
+    from scripts.lifecycle import user_defaults
+
+    draft: dict[str, Any] = {}
+    if defaults is None:
+        try:
+            defaults = user_defaults.load_defaults()
+        except (OSError, json.JSONDecodeError, ValueError):
+            defaults = None
+    if defaults:
+        draft.update(defaults)
+    if imported:
+        draft.update(imported)
+    if partial:
+        draft.update(partial)
+    return resolve_answers(interview_data, draft, package_root=package_root)
 
 
 def run_terminal_interview(
-    interview: dict[str, Any],
+    interview_data: dict[str, Any],
     *,
     package_root: Path,
     initial: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Prompt on stdin; return answer map keyed by question id."""
-    resolved: dict[str, Any] = dict(initial or {})
+    explicit: set[str] = set(initial.keys()) if initial else set()
+    resolved: dict[str, Any] = dict(
+        prefill_answers(interview_data, package_root=package_root, partial=initial)
+    )
     print("cursorAssistant setup interview\n", file=sys.stderr)
 
     while True:
         pending = [
             question
-            for question in active_questions(interview, resolved, package_root=package_root)
-            if question["id"] not in resolved
+            for question in active_questions(
+                interview_data, resolved, package_root=package_root
+            )
+            if question["id"] not in explicit
         ]
         if not pending:
             break
@@ -189,6 +280,13 @@ def run_terminal_interview(
         qtype = question.get("type", "choice")
         options = question.get("options", [])
         current = resolved.get(question_id)
+
+        if qtype == "string":
+            default = str(question.get("default", "")) if current is None else str(current)
+            raw = input(f"{prompt} [{default}]: ").strip()
+            resolved[question_id] = raw or default
+            explicit.add(question_id)
+            continue
 
         if qtype == "boolean":
             default = bool(question.get("default", False)) if current is None else bool(current)
@@ -205,6 +303,7 @@ def run_terminal_interview(
                     resolved[question_id] = False
                     break
                 print("  Enter y or n.", file=sys.stderr)
+            explicit.add(question_id)
             continue
 
         if qtype == "multi-choice":
@@ -230,6 +329,7 @@ def run_terminal_interview(
                     elif part in options:
                         picked.append(part)
                 resolved[question_id] = picked
+            explicit.add(question_id)
             continue
 
         if qtype == "choice" and options:
@@ -254,12 +354,14 @@ def run_terminal_interview(
                     resolved[question_id] = raw
                     break
                 print("  Invalid choice.", file=sys.stderr)
+            explicit.add(question_id)
             continue
 
         if "default" in question and question_id not in resolved:
             resolved[question_id] = question["default"]
+        explicit.add(question_id)
 
-    return resolve_answers(interview, resolved, package_root=package_root)
+    return resolve_answers(interview_data, resolved, package_root=package_root)
 
 
 def answers_complete(

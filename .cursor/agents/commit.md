@@ -29,7 +29,7 @@ Do not skip surface review for routing-only tweaks to `description` or `AGENTS.m
 
 ## Commit message style
 
-Use Conventional Commits with a subject and a body explaining intent when the diff alone is unclear.
+Use Conventional Commits with a precise subject; add a body only for breaking changes or unclear rationale.
 
 ## Package repo (cursorAssistant source tree)
 

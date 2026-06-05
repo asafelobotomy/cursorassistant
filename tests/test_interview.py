@@ -11,6 +11,29 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 
 class InterviewTests(unittest.TestCase):
+    def test_preflight_questions_always_active_first(self) -> None:
+        data = interview.load_interview(REPO_ROOT)
+        active = interview.active_questions(data, {}, package_root=REPO_ROOT)
+        ids = [question["id"] for question in active]
+        self.assertEqual(ids[0], "setup.copyFrom.enabled")
+        self.assertIn("setup.depth", ids)
+
+    def test_copy_from_repo_inactive_when_disabled(self) -> None:
+        data = interview.load_interview(REPO_ROOT)
+        answers = {"setup.copyFrom.enabled": False}
+        active = interview.active_questions(data, answers, package_root=REPO_ROOT)
+        ids = {question["id"] for question in active}
+        self.assertIn("setup.copyFrom.enabled", ids)
+        self.assertNotIn("setup.copyFrom.repo", ids)
+
+    def test_questions_payload_marks_defaults_as_pending(self) -> None:
+        data = interview.load_interview(REPO_ROOT)
+        payload = interview.interview_questions_payload(
+            data, {}, package_root=REPO_ROOT, explicit_keys=set()
+        )
+        self.assertIn("setup.copyFrom.enabled", payload["pending"])
+        self.assertFalse(payload["complete"])
+
     def test_simple_depth_excludes_advanced_questions(self) -> None:
         data = interview.load_interview(REPO_ROOT)
         answers = {

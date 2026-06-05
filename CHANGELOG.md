@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.16.0] - 2026-06-05
+
+### Added
+
+- Phase D1: MCP interview API (`lifecycle_interview_questions`, `_import`, `_save`, `lifecycle_defaults_load` / `_save`).
+- Copy-from preflight (`setup.copyFrom.*`) with GitHub public raw + private `gh` import (`answers_import.py`).
+- User defaults at `~/.cursor/cursor-assistant-defaults.json` (`user_defaults.py`).
+- `plan-setup` grouped `tokenSummary`; CLI `interview --questions-json`, `defaults-load` / `defaults-save`.
+- Install page returning-user UI; D1 evals for copy-from and secret import guardrails.
+- [TOKEN_AND_PACK_INTERVIEW_PLAN.md](docs/project/TOKEN_AND_PACK_INTERVIEW_PLAN.md) (Phases D1–D5).
+
+### Changed
+
+- `install-from-github.sh` runs interactive `interview` before `configure`; non-TTY requires `--answers`.
+- `cursorAssistantSetup` skill: preflight flow, MCP tools, `## When not to use`; SECURITY.md answers denylist.
+
 ## [0.15.0] - 2026-06-04
 
 ### Added

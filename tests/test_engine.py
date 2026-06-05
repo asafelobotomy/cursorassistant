@@ -191,6 +191,8 @@ class EngineTests(unittest.TestCase):
             plan = engine.plan_setup(workspace, REPO_ROOT)
             self.assertEqual(plan["command"], "plan-setup")
             self.assertGreater(len(plan["wouldWrite"]), 0)
+            self.assertIn("tokenSummary", plan)
+            self.assertGreater(plan["tokenCount"], 0)
 
     def test_factory_restore_rewrites_all(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:

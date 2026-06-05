@@ -6,35 +6,32 @@
     "packageRoot": "."
   },
   "profile": "balanced",
-  "selectedPacks": [
-    "tdd"
-  ],
+  "selectedPacks": [],
   "mcpEnabled": false,
   "setupAnswers": {
-    "setup.depth": "full",
+    "setup.depth": "simple",
     "response.style": "balanced",
     "autonomy.level": "ask-first",
     "agent.persona": "professional",
     "testing.philosophy": "always",
     "lean.reasoning.mode": "compressed",
-    "agent.commit.messageStyle": "conventional-with-context",
-    "agent.docs.outputStyle": "concise-guides",
-    "agent.planner.planFormat": "full-phased",
-    "agent.review.reportingThreshold": "all-findings"
+    "agent.commit.messageStyle": "conventional-subject-first",
+    "agent.docs.outputStyle": "corpus-match",
+    "agent.planner.planFormat": "tight-phased",
+    "agent.review.reportingThreshold": "critical-high"
   },
   "fileHashes": {
     "routing.agents-md": "sha256:0a7302e9348c34e8fa171045d74afda80e84f3e74eec58b5e7286f57a37e9b92",
     "rules.core": "sha256:8b6927f6a700f975734047b81b3908a34fcc10432d72f82ec3fe71b4e288ddb1",
     "rules.lifecycle": "sha256:e10a8393e1ebec730727d9d779a1f793f108d6f6fcd5b3335ef78addd4d0e477",
-    "rules.preferences": "sha256:e8047f27ac8a38bdbe5028bff660c581fed5af91d0e24fd59adcfe690417df96",
     "agents.cursorLifecycle": "sha256:042883b968545f8bd1b42fb953550980c436e0fbdb00dccce67ac1370e10b7b4",
     "agents.inventory": "sha256:e8214b7450fc5ec47fed3cb99a352daaccb3fe5fb85c556e4866f863280bc192",
-    "agents.review": "sha256:08a1e5efed94f2b12301b321eccc2bcf5d6d084812b8824fbf91438db63d712a",
-    "agents.commit": "sha256:4b0f0a0f3a0bcbf74653c651bf3cc2a765d889a4cdb7ab4e5209fdd05482f9c2",
+    "agents.review": "sha256:49592d08847a77008eae6dceabf2505a75aec2b03c114a979c589d2d9d71da5d",
+    "agents.commit": "sha256:4773fc5dd0568f10d7161901248fc11665132d362a20b75b18c7fec015df90ba",
     "agents.deps": "sha256:1f316ac841f6049e5b97cb6517ab3bcfe3e5e18efcc59b38561883b38b45d9d8",
-    "agents.docs": "sha256:99706012268862ee41f73c58aa8691640be6b36b8a2137618de55e26810466ef",
+    "agents.docs": "sha256:d1e7c9371b1637b744ad099312d389801c32216c295f6c56c29bfa800b97bf79",
     "agents.debugger": "sha256:4a54ae5917225d83b59d918864ef57e5d2ffb6d72d68aab0003798d52cdd3341",
-    "agents.planner": "sha256:4436e4202ce4e41332332da3b62f3f6a4d82500d203dcf9947834d18ee05ae9d",
+    "agents.planner": "sha256:b30762c7519e66d09c40de351301e6a161f4a298cbe681c03e4aeeec7954fdf3",
     "agents.researcher": "sha256:ef8b56dd0238a216c560708722790d54ee82d1b1e4c14eab186abf8355a39076",
     "agents.organise": "sha256:ce2a043b4bbe5d896b8e6c80ea901ea7cba00d208a66f2c2499cbe74d8249267",
     "agents.cleaner": "sha256:1f5210f41e9e5948f6a6a5b1bb46b0aacf6961b498240798117197330eb47d6c",
@@ -42,8 +39,8 @@
     "skills.lifecycleAudit": "sha256:8d436d36f37b5d77149705eaa88ef22ed191b1e8a8aec95bd2f1bdfaae760f4f",
     "skills.surfaceReview": "sha256:deb9e169468bbe16b2a7853af7f38e0bf58aa3ac9919cc564f0b12f13f0bf2f8",
     "skills.surfaceReview.references.modules": "sha256:0605d149fe8d5ffd225ff7271d58420ae8aaaea14bc25200e51142f310762738",
-    "skills.cursorAssistantSetup": "sha256:7e52106ecdc5d4590c163a5b2b0407b5290359ab7cb5298f9b2ea79ddf4b24de",
-    "skills.cursorAssistantSetup.references.interview-flow": "sha256:0a22088872845054abb9b19f646d9beb4f01bda677907a538f442f42e8e4b98a",
+    "skills.cursorAssistantSetup": "sha256:7a210740b4672a3364f600880d69cfb500c5018a13558f97d5f64220406decb7",
+    "skills.cursorAssistantSetup.references.interview-flow": "sha256:84e5eb3cf94030776c46941440f728b8945e5a2af5a667361c7bdfb8754a6612",
     "skills.cursorAssistantSetup.references.user-rules-step": "sha256:3fa72691c2861e6a83d228caa84379e9ac94822444ad5f8dd0b335a915d5291a",
     "skills.workspaceSearch": "sha256:f201eb58fec0820703b4b172d08c5e8395ec1618d0209fe0334920fdf01b3995",
     "skills.ciPreflight": "sha256:92783d8ac6b33bacc16c8ad2d56158b66fa0a480427467a4c00c2f7550e3b489",
@@ -54,16 +51,10 @@
     "mcp.shared._cursor_workspace": "sha256:45413ed98c7a17da96c6fbd755e083bd97e0462bb4ec6e9ce3ab5cd0191d6952",
     "mcp.shared._cursor_mcp_util": "sha256:87cccac996ef2743370bf1b80152bb7ddb00be56170bb8938876719cce03a05b",
     "mcp.shared._cursor_package_root": "sha256:06df511dd41dc079206be8b71e9e44574b7ed45b8eaddf9478618c2ceaedafd6",
-    "mcp.cursorToolsMcp": "sha256:c13a3dd7aea42d8b1ffe56c54d424334d2c4c2168d6a1ed368082904a8e029ba",
-    "packs.tdd.mcp.tddTestRunner": "sha256:9a20136073185fa6e820a715d959411c9efce3cc0572f2bb8a49f8647fefaf17",
-    "packs.tdd.mcp.workspaceTestingMcp": "sha256:942bdaf4c8fda6ef0f0644ee5296700d14a2fadebb07660e3b7c4274f752df79",
-    "packs.tdd.tddCycle": "sha256:0eb98b72fdeb643b5e53a737031be57daec305c1b70108b97175da8ce8d791ef",
-    "packs.tdd.testArchitecture": "sha256:240daf28161836c95d68c408ec514e7b62132acfd55e2052cd2d23b15bfe4703",
-    "packs.tdd.testCoverage": "sha256:812db820d0125b97f81dc404246592d27e52c2e83559e4113f530017a8308db4",
-    "packs.tdd.testDoubles": "sha256:aee37991f1472595dc74585af7777c993f1dbd9ecca7a6211e321e3352d44ccb"
+    "mcp.cursorToolsMcp": "sha256:e2774027d14cfb5839a68d6387d1282a4e49f0385d50a7fb440852d46c66d86b"
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-05T18:04:58Z"
+    "updatedAt": "2026-06-05T23:22:37Z"
   }
 }

@@ -1,0 +1,10 @@
+id: positive-copy-from-prefill
+description: "Preflight copy-from uses import MCP and defaults prefill"
+prompt: |
+  New workspace setup. I want to copy answers from github.com/asafelobotomy/cursorassistant.
+  What MCP tools and interview keys run before setup.depth?
+expected:
+  - "(?i)(lifecycle_interview_import|lifecycle_defaults_load|setup\\.copyFrom)"
+  - "(?i)(preflight|copy.from|default branch)"
+tags:
+  - d1

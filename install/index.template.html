@@ -50,7 +50,16 @@
   <p class="lead">Managed Cursor routing, agents, and skills for your repo — installed in two phases: <strong>bootstrap</strong> (this page) then <strong>project interview</strong> (inside Cursor).</p>
   <p class="muted">Version <strong>@@VERSION@@</strong> · <span class="pill">pinned tag v@@VERSION@@</span> · no <code>curl | bash</code> in the MCP button</p>
 
-  <div class="cta-row">
+  <div id="returning-panel" class="hidden" style="margin:1rem 0;padding:0.75rem;border-radius:6px;border:1px solid rgba(46,160,67,0.35);background:rgba(46,160,67,0.08);">
+    <strong>Already installed?</strong>
+    <p class="muted" style="margin:0.35rem 0 0.5rem;">Bootstrap looks complete in this browser. Open your <strong>project folder</strong> in Cursor, Reload Window, then run the setup phrase — you do not need to re-run MCP bootstrap for each repo.</p>
+    <div class="copy-row">
+      <button type="button" class="cta" id="copy-phrase-returning">Copy setup phrase</button>
+      <button type="button" id="copy-setup-full-returning">Copy full setup instruction</button>
+    </div>
+  </div>
+
+  <div class="cta-row" id="bootstrap-cta">
     <button type="button" class="cta" id="start">Install in Cursor</button>
     <button type="button" class="cta cta-secondary" id="copy-phrase">Copy setup phrase</button>
   </div>
@@ -171,7 +180,25 @@ ln -sfn "$HOME/.local/share/cursorassistant/@@VERSION@@" "$HOME/.local/share/cur
       window.location.href = MCP_COMBINED;
     });
 
+    function updateReturningUI() {
+      const mcpDone = document.querySelector('#progress input[data-step="mcp"]')?.checked;
+      const returning = document.getElementById("returning-panel");
+      const startBtn = document.getElementById("start");
+      if (mcpDone) {
+        returning?.classList.remove("hidden");
+        startBtn?.classList.remove("cta");
+        startBtn?.classList.add("cta-secondary");
+        showStatus("Bootstrap complete — use the setup phrase in your project folder.");
+      } else {
+        returning?.classList.add("hidden");
+        startBtn?.classList.add("cta");
+        startBtn?.classList.remove("cta-secondary");
+      }
+    }
+
     document.getElementById("copy-phrase").addEventListener("click", () => copyText(SETUP_PHRASE, "Setup phrase"));
+    document.getElementById("copy-phrase-returning")?.addEventListener("click", () => copyText(SETUP_PHRASE, "Setup phrase"));
+    document.getElementById("copy-setup-full-returning")?.addEventListener("click", () => copyText(SETUP_FULL, "Full setup instruction"));
     document.getElementById("copy-setup-full").addEventListener("click", () => copyText(SETUP_FULL, "Full setup instruction"));
     document.getElementById("copy-inspect").addEventListener("click", () => copyText(INSPECT_CMD, "Inspect command"));
     document.getElementById("copy-bootstrap-git")?.addEventListener("click", () => copyText(BOOTSTRAP_GIT, "Git bootstrap"));
@@ -187,8 +214,10 @@ ln -sfn "$HOME/.local/share/cursorassistant/@@VERSION@@" "$HOME/.local/share/cur
         const state = {};
         boxes.forEach((x) => { state[x.dataset.step] = x.checked; });
         localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        updateReturningUI();
         if (state.interview) showStatus("All steps complete — you are ready to use cursorAssistant.");
       }));
+      updateReturningUI();
     })();
   </script>
 </body>

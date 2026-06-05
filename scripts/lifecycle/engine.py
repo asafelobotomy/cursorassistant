@@ -315,6 +315,43 @@ def _inspect_tokens(workspace: Path, package_root: Path, answers: dict[str, Any]
     return tokens
 
 
+def _group_token_summary(tokens: dict[str, str]) -> dict[str, dict[str, str]]:
+    workspace_keys = frozenset(
+        {"TEST_COMMAND", "PRIMARY_LANGUAGE", "PACKAGE_MANAGER", "WORKSPACE_NAME", "PROFILE"}
+    )
+    preference_keys = frozenset(
+        {
+            "RESPONSE_STYLE",
+            "AUTONOMY_LEVEL",
+            "AGENT_PERSONA",
+            "TESTING_PHILOSOPHY",
+            "pack:reasoning-mode",
+        }
+    )
+    groups: dict[str, dict[str, str]] = {
+        "package": {},
+        "workspace": {},
+        "preferences": {},
+        "agent": {},
+        "pack": {},
+        "other": {},
+    }
+    for key, value in sorted(tokens.items()):
+        if key == "PACKAGE_VERSION":
+            groups["package"][key] = value
+        elif key in workspace_keys:
+            groups["workspace"][key] = value
+        elif key in preference_keys:
+            groups["preferences"][key] = value
+        elif key.startswith("agent:"):
+            groups["agent"][key] = value
+        elif key.startswith("pack:"):
+            groups["pack"][key] = value
+        else:
+            groups["other"][key] = value
+    return {name: group for name, group in groups.items() if group}
+
+
 def inspect(
     workspace: Path,
     package_root: Path,
@@ -649,6 +686,8 @@ def plan_setup(
     workspace: Path,
     package_root: Path,
     answers: dict[str, Any] | None = None,
+    *,
+    verbose_tokens: bool = False,
 ) -> dict[str, Any]:
     existing_lock = read_lockfile(workspace)
     resolved_answers, selected_packs = _resolve_context(package_root, answers, existing_lock)
@@ -656,7 +695,12 @@ def plan_setup(
     to_write = [
         row for row in report["files"] if row["status"] in {"missing", "stale"}
     ]
-    return {
+    tokens = _inspect_tokens(workspace, package_root, resolved_answers)
+    token_summary = _group_token_summary(tokens)
+    preflight: dict[str, Any] = {}
+    if resolved_answers.get("setup.copyFrom.enabled") and resolved_answers.get("setup.copyFrom.repo"):
+        preflight["copyFromRepo"] = resolved_answers.get("setup.copyFrom.repo")
+    payload: dict[str, Any] = {
         "command": "plan-setup",
         "installState": report["installState"],
         "repairReasons": report["repairReasons"],
@@ -665,7 +709,16 @@ def plan_setup(
         "files": report["files"],
         "profile": resolved_answers.get("profile.selected", "balanced"),
         "selectedPacks": selected_packs,
+        "interviewDepth": resolved_answers.get("setup.depth", "simple"),
+        "mcpEnabled": conditions.mcp_enabled(resolved_answers),
+        "tokenSummary": token_summary,
+        "tokenCount": len(tokens),
     }
+    if preflight:
+        payload["preflight"] = preflight
+    if verbose_tokens:
+        payload["tokens"] = tokens
+    return payload
 
 
 def setup(

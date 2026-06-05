@@ -154,7 +154,7 @@
       "target": ".cursor/mcp/scripts/cursorToolsMcp.py",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:c13a3dd7aea42d8b1ffe56c54d424334d2c4c2168d6a1ed368082904a8e029ba",
+      "hash": "sha256:e2774027d14cfb5839a68d6387d1282a4e49f0385d50a7fb440852d46c66d86b",
       "requiredWhen": []
     },
     {
@@ -277,7 +277,7 @@
       "target": ".cursor/skills/cursorAssistantSetup/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:7e52106ecdc5d4590c163a5b2b0407b5290359ab7cb5298f9b2ea79ddf4b24de"
+      "hash": "sha256:7a210740b4672a3364f600880d69cfb500c5018a13558f97d5f64220406decb7"
     },
     {
       "id": "skills.cursorAssistantSetup.references.interview-flow",
@@ -285,7 +285,7 @@
       "target": ".cursor/skills/cursorAssistantSetup/references/interview-flow.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:0a22088872845054abb9b19f646d9beb4f01bda677907a538f442f42e8e4b98a"
+      "hash": "sha256:84e5eb3cf94030776c46941440f728b8945e5a2af5a667361c7bdfb8754a6612"
     },
     {
       "id": "skills.cursorAssistantSetup.references.user-rules-step",

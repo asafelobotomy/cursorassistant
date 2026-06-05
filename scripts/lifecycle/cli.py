@@ -90,6 +90,8 @@ def build_parser() -> argparse.ArgumentParser:
         ("interview", "Run setup interview; save answers JSON in the workspace"),
         ("configure", "Interview (TTY) or --answers + install into workspace"),
         ("setup", "Deprecated — use interview + configure --answers"),
+        ("defaults-load", "Read ~/.cursor/cursor-assistant-defaults.json"),
+        ("defaults-save", "Write user defaults after explicit confirmation"),
         ("update", "Write stale or missing managed files only"),
         ("repair", "Fix lockfile drift and incomplete installs"),
         ("factory-restore", "Force reinstall of all managed files"),
@@ -101,6 +103,21 @@ def build_parser() -> argparse.ArgumentParser:
                 "--save-answers",
                 metavar="PATH",
                 help=f"Where to write answers (default: {interview.DEFAULT_ANSWERS_REL})",
+            )
+            subparser.add_argument(
+                "--questions-json",
+                action="store_true",
+                help="Emit active/pending interview questions as JSON (no TTY required)",
+            )
+            subparser.add_argument(
+                "--import-repo",
+                help="GitHub repo URL to merge into draft answers before questions/save",
+            )
+        if name == "plan-setup":
+            subparser.add_argument(
+                "--verbose",
+                action="store_true",
+                help="Include full token map in plan-setup output",
             )
         if name == "configure":
             subparser.add_argument(
@@ -125,16 +142,46 @@ def _run_interview(
     *,
     answers: dict | None,
     save_answers: str | None,
+    questions_json: bool = False,
+    import_repo: str | None = None,
 ) -> dict:
+    from scripts.lifecycle import answers_import, user_defaults
+
     interview_data = interview.load_interview(package_root)
-    if answers is not None:
-        resolved = interview.resolve_answers(
-            interview_data, answers, package_root=package_root
+    draft = dict(answers or {})
+    if import_repo:
+        imported = answers_import.import_from_repo(
+            import_repo,
+            package_root=package_root,
+            base_answers=draft,
         )
+        draft = imported["merged"]
+    else:
+        draft = interview.prefill_answers(
+            interview_data,
+            package_root=package_root,
+            partial=draft,
+        )
+
+    if questions_json:
+        payload = interview.interview_questions_payload(
+            interview_data, draft, package_root=package_root
+        )
+        return {"command": "interview-questions", **payload}
+
+    if answers is not None and not import_repo and not sys.stdin.isatty():
+        resolved = interview.resolve_answers(
+            interview_data, draft, package_root=package_root
+        )
+        if not interview.answers_complete(interview_data, resolved, package_root=package_root):
+            raise ValueError(
+                "interview_required: --answers file is missing required interview keys"
+            )
     elif sys.stdin.isatty():
         resolved = interview.run_terminal_interview(
             interview_data,
             package_root=package_root,
+            initial=draft,
         )
     else:
         raise _interview_required_error()
@@ -145,10 +192,12 @@ def _run_interview(
         else interview.default_answers_path(workspace)
     )
     interview.write_answers_file(out_path, resolved)
+    saved = interview.sanitize_answers_for_save(resolved)
     return {
         "command": "interview",
-        "answers": resolved,
+        "answers": saved,
         "answersPath": str(out_path.relative_to(workspace)),
+        "defaultsPath": str(user_defaults.defaults_path()),
     }
 
 
@@ -247,14 +296,43 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "inspect":
             result = engine.inspect(workspace, package_root, answers=answers)
         elif args.command == "plan-setup":
-            result = engine.plan_setup(workspace, package_root, answers=answers)
+            result = engine.plan_setup(
+                workspace,
+                package_root,
+                answers=answers,
+                verbose_tokens=getattr(args, "verbose", False),
+            )
         elif args.command == "interview":
             result = _run_interview(
                 workspace,
                 package_root,
                 answers=answers,
                 save_answers=getattr(args, "save_answers", None),
+                questions_json=getattr(args, "questions_json", False),
+                import_repo=getattr(args, "import_repo", None),
             )
+        elif args.command == "defaults-load":
+            from scripts.lifecycle import user_defaults
+
+            loaded = user_defaults.load_defaults()
+            result = {
+                "command": "defaults-load",
+                "defaults": loaded,
+                "defaultsPath": str(user_defaults.defaults_path()),
+                "present": loaded is not None,
+            }
+        elif args.command == "defaults-save":
+            from scripts.lifecycle import user_defaults
+
+            if not getattr(args, "answers", None):
+                raise ValueError("--answers is required for defaults-save")
+            to_save = _load_answers(args.answers) or {}
+            path = user_defaults.save_defaults(to_save)
+            result = {
+                "command": "defaults-save",
+                "defaultsPath": str(path),
+                "keyCount": len(user_defaults.load_defaults() or {}),
+            }
         elif args.command == "configure":
             result = _run_configure(workspace, package_root, args)
         elif args.command == "update":
