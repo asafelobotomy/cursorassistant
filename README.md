@@ -15,14 +15,16 @@ Setup page (HTTPS): hosted on [asafelobotomy.github.io](https://asafelobotomy.gi
 **Terminal (bootstrap + interview in one step):**
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/install-from-github.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.17.2/scripts/install-from-github.sh | bash -s -- .
 ```
 
 Bootstrap only (interview later via MCP/Agent):
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/bootstrap-from-github.sh | bash
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.17.2/scripts/bootstrap-from-github.sh | bash
 ```
+
+Non-interactive (fixture): `bash scripts/install-from-github.sh . --answers tests/fixtures/interview-balanced.json`
 
 Details: [INSTALL.md](INSTALL.md) · [docs/guides/CURSOR_INSTALL_UX.md](docs/guides/CURSOR_INSTALL_UX.md) · [docs/research/DEEPLINK_INSTALL_RESEARCH.md](docs/research/DEEPLINK_INSTALL_RESEARCH.md)
 
@@ -83,7 +85,9 @@ Full index: [docs/README.md](docs/README.md)
 | [INSTALL.md](INSTALL.md) | Install and update |
 | [docs/guides/CURSOR_INSTALL_UX.md](docs/guides/CURSOR_INSTALL_UX.md) | Install flow in Cursor |
 | [docs/architecture/ARCHITECTURE.md](docs/architecture/ARCHITECTURE.md) | Policy, engine, install flow |
-| [docs/guides/MIGRATION.md](docs/guides/MIGRATION.md) | v0.9 → v0.10 upgrades |
+| [docs/guides/MIGRATION.md](docs/guides/MIGRATION.md) | Upgrades (v0.9 → v0.10+; § v0.16–0.17) |
+| [docs/guides/PREFERENCES_LAYERS.md](docs/guides/PREFERENCES_LAYERS.md) | User defaults vs project prefs vs User Rules |
+| [docs/project/TOKEN_AND_PACK_INTERVIEW_PLAN.md](docs/project/TOKEN_AND_PACK_INTERVIEW_PLAN.md) | Token + pack interview design (D1–D5) |
 | [SECURITY.md](SECURITY.md) | MCP and secrets guidance |
 | [docs/architecture/MCP_LAYOUT.md](docs/architecture/MCP_LAYOUT.md) | Layered MCP manifests |
 | [docs/operations/MCP_MAINTENANCE.md](docs/operations/MCP_MAINTENANCE.md) | MCP scripts and vendoring |

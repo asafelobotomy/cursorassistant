@@ -1,0 +1,9 @@
+id: positive-pack-tokens
+description: "Selected TDD pack surfaces namespaced pack tokens in plan-setup"
+prompt: |
+  packs.selected includes tdd. I ran plan-setup. What token namespace should appear in tokenSummary.pack for TDD scope discipline?
+expected:
+  - "pack:tdd:"
+  - "(?i)(tokenSummary|pack)"
+tags:
+  - d2

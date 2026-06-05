@@ -123,6 +123,16 @@
 - [x] Optional hooks template + [CURSOR_AUTOMATIONS.md](../guides/CURSOR_AUTOMATIONS.md); [PERFORMANCE.md](../architecture/PERFORMANCE.md)
 - [x] Routing eval guardrails; `generate.py` derives `catalog.agents` from install-policy
 
+## v0.16–v0.17 — token expansion and pack interview (Phases D1–D5)
+
+Canonical plan: [TOKEN_AND_PACK_INTERVIEW_PLAN.md](TOKEN_AND_PACK_INTERVIEW_PLAN.md).
+
+- [x] **v0.16.0 (D1)** — MCP interview API; copy-from preflight; user defaults prefill/save; returning-user install page; `install-from-github.sh` requires interview or `--answers`
+- [x] **v0.16.1 (D2)** — `packs/<id>/tokens.json` loaded; namespaced `pack:<id>:<name>` keys
+- [x] **v0.17.0 (D3)** — pack-gated `packs/<id>/interview.json`; lockfile **`packAnswers`** (schema **0.6.0**); legacy pack aliases removed
+- [x] **v0.17.1 (D4)** — agent/skill tokens for **debugger**, **ciPreflight**, **deps**, **inventory** (8-key simple batch); optional `setup.defaults.autoSave`
+- [x] **v0.17.2 (D5)** — docs ([PREFERENCES_LAYERS.md](../guides/PREFERENCES_LAYERS.md)), install-page fixtures, pack/D4 evals, MIGRATION § v0.16–0.17
+
 ## v1.0+
 
 - [ ] Stable 1.0 API for policy and lockfile schema

@@ -5,7 +5,7 @@ Refine the **symlink + MCP bootstrap** install path (github.io → `cursor://` �
 **pack-gated interview questions**. Builds on [INTERVIEW_RESTORATION_PLAN.md](INTERVIEW_RESTORATION_PLAN.md)
 (Phases A–C, shipped **v0.15.0**).
 
-**Status:** Approved for implementation — target **v0.16.0** (D1). Refine in-doc only when implementation discovers blockers.
+**Status:** **Shipped** — D1–D5 complete in **v0.16.0 → v0.17.2** (2026-06-05). Refine in-doc only for follow-on gaps (appendix P1+).
 
 ## Product focus
 
@@ -389,14 +389,15 @@ Optional CLI parity: `interview --questions-json [--answers PATH]` for tests and
 
 **Bundled fixes:**
 
-- [ ] `install-from-github.sh` — require `interview` or `--answers` (v0.15 breaking gap).
-- [ ] `cursorAssistantSetup` SKILL — add `## When not to use` (CI `cursorEval check`).
-- [ ] Install page — returning-user UI + “verify plugin symlink” checklist.
-- [ ] `scripts/lifecycle/answers_import.py` — public raw URL + private via `gh`; default branch only.
-- [ ] User defaults read on prefill; write only on explicit post-configure confirm.
-- [ ] `plan-setup` grouped token summary (+ `--verbose` full text).
-- [ ] `SECURITY.md` + setup skill — answers denylist; warn before commit.
-- [ ] D1 evals: `positive-copy-from-prefill.yaml`, negative secret-in-answers import.
+- [x] `install-from-github.sh` — require `interview` or `--answers` (v0.15 breaking gap).
+- [x] `cursorAssistantSetup` SKILL — add `## When not to use` (CI `cursorEval check`).
+- [x] Install page — returning-user UI + “verify plugin symlink” checklist.
+- [x] `scripts/lifecycle/answers_import.py` — public raw URL + private via `gh`; default branch only.
+- [x] User defaults read on prefill; write only on explicit post-configure confirm.
+- [x] `plan-setup` grouped token summary (+ `--verbose` full text).
+- [x] `SECURITY.md` + setup skill — answers denylist; warn before commit.
+- [x] D1 evals: `positive-copy-from-prefill.yaml`, negative secret-in-answers import.
+- [x] D5: install page fixture links; [PREFERENCES_LAYERS.md](../guides/PREFERENCES_LAYERS.md); ROADMAP § v0.16–0.17.
 
 ---
 
@@ -408,7 +409,7 @@ Optional CLI parity: `interview --questions-json [--answers PATH]` for tests and
 | **D2 — Pack tokens** | Load `tokens.json`; **namespaced** keys; **one-release alias map** for legacy `pack:*`; migrate placeholders | **v0.16.1** |
 | **D3 — Pack interview** | `packs/<id>/interview.json`; **`packAnswers`** lockfile 0.6.0; partial reconfigure; **remove pack token aliases** | **v0.17.0** |
 | **D4 — Core token expansion** | **debugger** → **ciPreflight** → **deps** → **inventory** tokens; optional **`setup.defaults.autoSave`** (advanced) | **v0.17.x** |
-| **D5 — Docs + evals** | Install page; pack-gated evals; MIGRATION § v0.16–0.17 | with D3/D4 |
+| **D5 — Docs + evals** | Install page fixtures; pack-gated evals; MIGRATION § v0.16–0.17; [PREFERENCES_LAYERS.md](../guides/PREFERENCES_LAYERS.md) | **v0.17.2** |
 
 **Order:** D1 → D2 → D3 → D4 → D5.
 
@@ -420,7 +421,7 @@ Optional CLI parity: `interview --questions-json [--answers PATH]` for tests and
 | --- | --- | --- | --- |
 | Unit | MCP interview tools; `answers_complete` with partial; import merge order; strip `setup.copyFrom.*` on save | `pack_tokens()` merge; render in materialize; alias map | pack gating; conditional pack questions; flat → `packAnswers` split |
 | Integration | configure with MCP-saved answers; copy-from public + mocked `gh`; defaults prefill override | lean+tdd both selected collision case | fixture per pack combo |
-| Eval | positive-interview-flow + copy-from prefill; negative secret in import | — | pack selected → pack question in flow |
+| Eval | positive-interview-flow + copy-from prefill; negative secret in import | `positive-pack-tokens` (cursorLifecycle) | pack selected → pack question in flow; `positive-d4-agent-batch` |
 | Dogfood | full interview via skill path; committed `cursor-assistant-answers.json` in package repo | pack tokens visible in `.cursor/agents/review.md` | secure pack strictness question |
 
 ```sh
@@ -470,8 +471,8 @@ Tracked improvements beyond the core D1–D5 table. **P0** items above are folde
 | **Agent batch skip** when copy-from supplies complete keys at depth | Skip redundant AskQuestion if `answers_complete` already true for layer | D1 UX polish |
 | **`plan-setup` diff** | Show added/changed keys vs defaults and import source | D1 or D5 |
 | **PERFORMANCE budget** | D4 exit: `cursorEval tokens` on touched agents/skills; token blocks injected not whole bodies | D4 + [PERFORMANCE_PHASED_PLAN.md](PERFORMANCE_PHASED_PLAN.md) |
-| **ROADMAP** | Add v0.16–v0.17 paragraph linking this plan | D5 docs |
-| **Three-layer prefs doc** | User defaults vs `preferences.mdc` vs User Rules — when to use which | D5 |
+| **ROADMAP** | Add v0.16–v0.17 paragraph linking this plan | D5 docs ✓ |
+| **Three-layer prefs doc** | User defaults vs `preferences.mdc` vs User Rules — when to use which | D5 ✓ |
 
 ### Near-term expansions (v0.16–v0.18)
 
@@ -514,7 +515,8 @@ Token expansion (D2–D4) must not violate frozen roster or skill auto-invoke li
 - [DEEPLINK_INSTALL_RESEARCH.md](../research/DEEPLINK_INSTALL_RESEARCH.md) — `cursor://` limits
 - [MODEL_PINNING.md](../architecture/MODEL_PINNING.md) — no setup model pin upstream
 - [PERFORMANCE_PHASED_PLAN.md](PERFORMANCE_PHASED_PLAN.md) — token budgets and skill scoping
-- [ROADMAP.md](ROADMAP.md) — historical releases (add v0.16–v0.17 when D1 ships)
+- [ROADMAP.md](ROADMAP.md) — v0.16–v0.17 milestone (D1–D5)
+- [PREFERENCES_LAYERS.md](../guides/PREFERENCES_LAYERS.md) — three-layer prefs (D5)
 - Pack token tables: [packs/lean/README.md](../../packs/lean/README.md), [packs/tdd/README.md](../../packs/tdd/README.md), [packs/secure/README.md](../../packs/secure/README.md)
 
 ---
@@ -531,3 +533,4 @@ Token expansion (D2–D4) must not violate frozen roster or skill auto-invoke li
 | 2026-06-05 | Status → approved for D1; open questions cleared |
 | 2026-06-05 | P0 doc fixes: Pre-D1 blockers, prefill merge, import fallbacks, MCP table, D1/D3 configure split |
 | 2026-06-05 | Appendix: Gaps & expansions (P1+ backlog) |
+| 2026-06-05 | **D1–D5 shipped** (v0.16.0–v0.17.2); status → shipped; D5 docs/evals complete |

@@ -1,0 +1,11 @@
+id: positive-d4-agent-batch
+description: "Simple-depth interview includes D4 debugger, ciPreflight, deps, inventory keys"
+prompt: |
+  I am running cursorAssistant setup at simple depth. Which answer keys must the agent/skill batch include before configure?
+expected:
+  - "agent.debugger.diagnosisDepth"
+  - "skill.ciPreflight.runPolicy"
+  - "agent.deps.auditThreshold"
+  - "agent.inventory.mapDepth"
+tags:
+  - d4

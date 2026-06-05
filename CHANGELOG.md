@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.17.2] - 2026-06-05
+
+### Added
+
+- D5 docs: [PREFERENCES_LAYERS.md](docs/guides/PREFERENCES_LAYERS.md); ROADMAP § v0.16–v0.17; MIGRATION overview for Phases D1–D5.
+- Install page fixture links (`interview-balanced`, `interview-with-secure`, `interview-balanced-lean`).
+- Evals: `positive-d4-agent-batch`, `positive-pack-tokens` (cursorLifecycle).
+
+### Changed
+
+- README, INSTALL, CURSOR_INSTALL_UX updated for v0.17 interview flow (copy-from, pack layer, 8-key batch).
+- [TOKEN_AND_PACK_INTERVIEW_PLAN.md](docs/project/TOKEN_AND_PACK_INTERVIEW_PLAN.md) marked shipped (D1–D5).
+
 ## [0.17.1] - 2026-06-05
 
 ### Added

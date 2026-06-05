@@ -92,10 +92,23 @@
     <li>
       <strong>Run the guided interview</strong> — use <code>/cursor-assistant:setup-workspace</code> (recommended).
       Choose setup depth (<code>simple</code> / <code>advanced</code> / <code>full</code>); there is <strong>no silent install</strong>.
-      MCP <code>lifecycle_configure</code> requires <code>answersPath</code> to <code>.cursor/cursor-assistant-answers.json</code> after the interview.
+      Optional preflight: copy answers from another GitHub repo; user defaults prefill the next questions.
+      Selected packs add a <strong>pack layer</strong> (one question per pack) before <code>configure</code>.
+      MCP <code>lifecycle_configure</code> requires <code>answersPath</code> to <code>.cursor/cursor-assistant-answers.json</code>.
       Optional: save IDE-wide prefs as Cursor <strong>User Rules</strong> when depth is advanced or full.
     </li>
   </ol>
+
+  <details>
+    <summary>Template answers &amp; fixtures</summary>
+    <p class="muted">For CI, dogfood, or non-interactive terminal install, start from a fixture and edit packs/depth as needed:</p>
+    <ul>
+      <li><a href="https://github.com/@@REPO@@/blob/v@@VERSION@@/tests/fixtures/interview-balanced.json"><code>interview-balanced.json</code></a> — simple depth, balanced profile</li>
+      <li><a href="https://github.com/@@REPO@@/blob/v@@VERSION@@/tests/fixtures/interview-with-secure.json"><code>interview-with-secure.json</code></a> — secure pack + pack answers</li>
+      <li><a href="https://github.com/@@REPO@@/blob/v@@VERSION@@/tests/fixtures/interview-balanced-lean.json"><code>interview-balanced-lean.json</code></a> — lean pack combo</li>
+    </ul>
+    <p class="muted">Copy to <code>.cursor/cursor-assistant-answers.json</code>, then <code>configure --answers</code>. See <a href="https://github.com/@@REPO@@/blob/v@@VERSION@@/docs/guides/PREFERENCES_LAYERS.md">preferences layers</a> and <a href="https://github.com/@@REPO@@/blob/v@@VERSION@@/docs/guides/MIGRATION.md">MIGRATION.md</a>.</p>
+  </details>
 
   <div class="copy-row">
     <button type="button" id="copy-setup-full">Copy: full setup instruction</button>
@@ -152,7 +165,7 @@ ln -sfn "$HOME/.local/share/cursorassistant/@@VERSION@@" "$HOME/.local/share/cur
   <script>
     const MCP_COMBINED = "@@MCP_COMBINED@@";
     const SETUP_PHRASE = "Set up cursorAssistant in this workspace";
-    const SETUP_FULL = SETUP_PHRASE + " — run the mandatory interview (setup.depth simple/advanced/full), then configure --answers .cursor/cursor-assistant-answers.json. No silent install.";
+    const SETUP_FULL = SETUP_PHRASE + " — run the mandatory interview (setup.depth simple/advanced/full; optional copy-from prefill and pack layer), then configure --answers .cursor/cursor-assistant-answers.json. No silent install.";
     const INSPECT_CMD = "python3 ~/.local/share/cursorassistant/current/cursorAssistant.py inspect --workspace . --json";
     const BOOTSTRAP_GIT = `@@BOOTSTRAP_GIT@@
 ln -sfn "$HOME/.local/share/cursorassistant/@@VERSION@@" "$HOME/.local/share/cursorassistant/current"`;

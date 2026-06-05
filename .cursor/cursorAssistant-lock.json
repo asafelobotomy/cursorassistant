@@ -2,7 +2,7 @@
   "schemaVersion": "0.6.0",
   "package": {
     "name": "cursorAssistant",
-    "version": "0.17.1",
+    "version": "0.17.2",
     "packageRoot": "."
   },
   "profile": "balanced",
@@ -59,6 +59,6 @@
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-05T23:33:05Z"
+    "updatedAt": "2026-06-05T23:39:01Z"
   }
 }

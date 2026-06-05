@@ -7,7 +7,8 @@ cursorAssistant docs are grouped by purpose. **Supported install path:** [INSTAL
 | Doc | Topic |
 | --- | --- |
 | [guides/CURSOR_INSTALL_UX.md](guides/CURSOR_INSTALL_UX.md) | Install flow inside Cursor |
-| [guides/MIGRATION.md](guides/MIGRATION.md) | Upgrading from v0.9 → v0.10+ |
+| [guides/PREFERENCES_LAYERS.md](guides/PREFERENCES_LAYERS.md) | User defaults vs `preferences.mdc` vs User Rules |
+| [guides/MIGRATION.md](guides/MIGRATION.md) | Upgrading (v0.9 → v0.10+; § v0.16–0.17) |
 | [guides/HOOKS.md](guides/HOOKS.md) | Optional user-owned hooks (not lifecycle-managed) |
 | [guides/PUBLISH.md](guides/PUBLISH.md) | GitHub distribution, plugin manifest, releases |
 
@@ -35,7 +36,8 @@ cursorAssistant docs are grouped by purpose. **Supported install path:** [INSTAL
 
 | Doc | Topic |
 | --- | --- |
-| [project/ROADMAP.md](project/ROADMAP.md) | Version milestones (historical names through v0.12+) |
+| [project/ROADMAP.md](project/ROADMAP.md) | Version milestones (through v0.17) |
+| [project/TOKEN_AND_PACK_INTERVIEW_PLAN.md](project/TOKEN_AND_PACK_INTERVIEW_PLAN.md) | Phases D1–D5 (v0.16–v0.17) |
 
 ## Audits (point-in-time)
 

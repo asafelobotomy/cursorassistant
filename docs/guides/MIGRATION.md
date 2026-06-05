@@ -1,5 +1,27 @@
 # Migration guide
 
+## v0.16–v0.17 overview (Phases D1–D5)
+
+Shipped across **v0.16.0 → v0.17.2**. Full design: [TOKEN_AND_PACK_INTERVIEW_PLAN.md](../project/TOKEN_AND_PACK_INTERVIEW_PLAN.md).
+
+| Release | What changed | Action if upgrading |
+| --- | --- | --- |
+| **0.16.0** | Copy-from preflight, user defaults, MCP interview tools | Optional — new projects only |
+| **0.16.1** | Pack `tokens.json` → namespaced keys in materialize | Re-run `configure` after selecting packs |
+| **0.17.0** | Pack interview layer; lockfile **0.6.0** + `packAnswers` | Re-interview pack layer if packs selected |
+| **0.17.1** | 4 new simple-depth agent/skill keys (8-key batch) | Re-interview + `configure --answers` |
+| **0.17.2** | Docs, install fixtures, evals (no schema break) | Read [PREFERENCES_LAYERS.md](PREFERENCES_LAYERS.md) |
+
+**Fixtures** (non-interactive CI or quick dogfood):
+
+- `tests/fixtures/interview-balanced.json` — simple depth, balanced profile
+- `tests/fixtures/interview-with-secure.json` — secure pack + pack interview answers
+- `tests/fixtures/interview-balanced-lean.json` — lean pack combo
+
+**Preferences:** user defaults vs `preferences.mdc` vs User Rules — [PREFERENCES_LAYERS.md](PREFERENCES_LAYERS.md).
+
+---
+
 ## v0.17.1 — extended agent/skill tokens (breaking for existing answers files)
 
 ### Interview expansion (D4)

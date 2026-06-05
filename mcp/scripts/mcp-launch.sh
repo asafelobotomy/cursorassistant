@@ -3,7 +3,7 @@
 # Referenced from install deeplinks — no curl|bash in this path.
 set -euo pipefail
 
-DEFAULT_VERSION="0.17.1"
+DEFAULT_VERSION="0.17.2"
 ALLOWED_REPO="https://github.com/asafelobotomy/cursorassistant.git"
 REPO_URL="${CURSOR_ASSISTANT_REPO:-$ALLOWED_REPO}"
 VERSION="${CURSOR_ASSISTANT_VERSION:-$DEFAULT_VERSION}"

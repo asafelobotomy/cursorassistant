@@ -7,7 +7,7 @@
 3. Open **your project** in Cursor → **Developer: Reload Window**.
 4. In chat: **`/cursor-assistant:setup-workspace`** (recommended) — runs the mandatory **interview**, then `configure --answers`. MCP **`lifecycle_configure`** requires `answersPath` from a completed interview.
 
-The setup page only bootstraps the global package (`~/.local/share/cursorassistant/current`) and **cursorTools** MCP. It does **not** run the interview until step 4 inside Cursor.
+The setup page only bootstraps the global package (`~/.local/share/cursorassistant/current`) and **cursorTools** MCP. It does **not** run the interview until step 4 inside Cursor. The interview supports optional **copy-from** prefill, **user defaults**, a **pack layer** when packs are selected, and an 8-key agent/skill batch at simple depth (v0.17+).
 
 Regenerate the public setup page after version bumps (in the [github.io](https://github.com/asafelobotomy/asafelobotomy.github.io) repo):
 
@@ -20,7 +20,7 @@ bash scripts/sync-cursorassistant-install.sh
 Interactive terminal (runs `interview` then `configure`):
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.16.0/scripts/install-from-github.sh | bash -s -- .
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.17.2/scripts/install-from-github.sh | bash -s -- .
 ```
 
 Non-interactive (fixture or completed answers file required):
@@ -29,10 +29,12 @@ Non-interactive (fixture or completed answers file required):
 bash scripts/install-from-github.sh . --answers tests/fixtures/interview-balanced.json
 ```
 
+Other fixtures: `tests/fixtures/interview-with-secure.json`, `interview-balanced-lean.json` — see [docs/guides/MIGRATION.md](docs/guides/MIGRATION.md).
+
 ## Terminal: bootstrap only
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/bootstrap-from-github.sh | bash
+curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.17.2/scripts/bootstrap-from-github.sh | bash
 ```
 
 Then complete setup in Cursor (step 4 above).
@@ -45,12 +47,12 @@ python3 cursorAssistant.py update --workspace . --answers .cursor/cursor-assista
 
 If `inspect` reports `interviewRequired: true`, re-run the setup interview first (step 4).
 
-`update` syncs managed **files** only; it does not change interview answers or IDE-wide preferences. To change packs or personalization, re-run the interview. After an **advanced** or **full** interview, optionally add **Cursor User Rules** for IDE-wide tone/autonomy — see `skills/cursorAssistantSetup/references/user-rules-step.md`.
+`update` syncs managed **files** only; it does not change interview answers or IDE-wide preferences. To change packs or personalization, re-run the interview. After an **advanced** or **full** interview, optionally add **Cursor User Rules** for IDE-wide tone/autonomy — see [docs/guides/PREFERENCES_LAYERS.md](docs/guides/PREFERENCES_LAYERS.md) and `skills/cursorAssistantSetup/references/user-rules-step.md`.
 
 Refresh bootstrap:
 
 ```sh
-CURSOR_ASSISTANT_VERSION=0.15.0 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.15.0/scripts/bootstrap-from-github.sh | bash
+CURSOR_ASSISTANT_VERSION=0.17.2 curl -fsSL https://raw.githubusercontent.com/asafelobotomy/cursorassistant/v0.17.2/scripts/bootstrap-from-github.sh | bash
 ```
 
 ## Requirements
