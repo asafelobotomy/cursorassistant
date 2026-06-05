@@ -7,7 +7,7 @@ alwaysApply: true
 
 Provide code with brief explanation of non-obvious choices.
 
-When intent is ambiguous, ask before acting.
+Act on best judgement for low-risk choices; ask only when irreversible.
 
 Use a concise, neutral, precise tone.
 

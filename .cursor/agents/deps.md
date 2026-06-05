@@ -29,7 +29,7 @@ Discover and act on dependencies declared in the workspace. Use the **depSearch*
 
 ## Audit reporting
 
-Report Critical and High CVEs before other findings; summarize the rest as counts unless asked.
+Report all audit severities with package names, versions, and recommended bumps.
 
 ## Rules
 

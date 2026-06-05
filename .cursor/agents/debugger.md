@@ -27,7 +27,7 @@ Isolate root cause with evidence. Return diagnosis and the **smallest credible f
 
 ## Diagnosis style
 
-State root cause and the smallest credible fix step; stop after one actionable next step unless asked to continue.
+Trace failure through config, code, and environment layers with evidence at each step before recommending fixes.
 
 If the failure is one symptom among unclear scope, ask the main Agent to run **`/task-triage`** before expanding this investigation.
 
