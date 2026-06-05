@@ -19,6 +19,13 @@ You are the **planner** subagent.
 
 Produce an **executable plan** without implementing it.
 
+## Process
+
+1. Clarify goal, constraints, and scope (use **`/task-triage`** when ambiguous).
+2. Build the file list (create / modify / delete) and ordered phases.
+3. Add verification steps and rollback notes per phase.
+4. Present the read-only plan for approval; main Agent or user executes after sign-off.
+
 ## Plan format
 
 Short numbered phases with goal, affected files, concrete steps, and one verification check.

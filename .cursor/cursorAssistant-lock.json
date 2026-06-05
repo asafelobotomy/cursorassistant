@@ -29,17 +29,17 @@
     "rules.core": "sha256:8b6927f6a700f975734047b81b3908a34fcc10432d72f82ec3fe71b4e288ddb1",
     "rules.lifecycle": "sha256:e10a8393e1ebec730727d9d779a1f793f108d6f6fcd5b3335ef78addd4d0e477",
     "agents.cursorLifecycle": "sha256:042883b968545f8bd1b42fb953550980c436e0fbdb00dccce67ac1370e10b7b4",
-    "agents.inventory": "sha256:c34abe573eb907589669f2e5a29d2ecbe2c31404140f8122e437d1753f61f096",
+    "agents.inventory": "sha256:d2391c47331a9444fc5ef34e62d432623742bcb034656ca94b7ada84be9eb855",
     "agents.review": "sha256:49592d08847a77008eae6dceabf2505a75aec2b03c114a979c589d2d9d71da5d",
     "agents.commit": "sha256:4773fc5dd0568f10d7161901248fc11665132d362a20b75b18c7fec015df90ba",
-    "agents.deps": "sha256:5e9a6c397312d9add099f8df04a7d604c360eac05a34e8b4766efe0826806eff",
-    "agents.docs": "sha256:d1e7c9371b1637b744ad099312d389801c32216c295f6c56c29bfa800b97bf79",
+    "agents.deps": "sha256:f5de5826cd3437d217d304dac96d8579864718c517b58c8d523224787dcd241c",
+    "agents.docs": "sha256:8867b10f9e1c11045c9e255d43eb4bdbec3260ac2e050f0de3d8592e1a4ea2b4",
     "agents.debugger": "sha256:c00342c4d018eb50de38cc16ee582964cde5be3c1e8a615a0516cde90fe4bdad",
-    "agents.planner": "sha256:b30762c7519e66d09c40de351301e6a161f4a298cbe681c03e4aeeec7954fdf3",
+    "agents.planner": "sha256:19b85d1d95e63915df49be2b710611ba12c1420b447bddc2d6297018212bf072",
     "agents.researcher": "sha256:ef8b56dd0238a216c560708722790d54ee82d1b1e4c14eab186abf8355a39076",
     "agents.organise": "sha256:ce2a043b4bbe5d896b8e6c80ea901ea7cba00d208a66f2c2499cbe74d8249267",
     "agents.cleaner": "sha256:1f5210f41e9e5948f6a6a5b1bb46b0aacf6961b498240798117197330eb47d6c",
-    "skills.testing": "sha256:7b385aa324a6cddb3727f99a15899bc6d39c123caefc8fc641781743ee92aaa7",
+    "skills.testing": "sha256:567b5f31c9e3b51848daf182606f3b2f9f494673d290f34f205bc49063eee091",
     "skills.lifecycleAudit": "sha256:8d436d36f37b5d77149705eaa88ef22ed191b1e8a8aec95bd2f1bdfaae760f4f",
     "skills.surfaceReview": "sha256:deb9e169468bbe16b2a7853af7f38e0bf58aa3ac9919cc564f0b12f13f0bf2f8",
     "skills.surfaceReview.references.modules": "sha256:0605d149fe8d5ffd225ff7271d58420ae8aaaea14bc25200e51142f310762738",
@@ -59,6 +59,6 @@
   },
   "timestamps": {
     "appliedAt": "2026-06-03T22:25:19Z",
-    "updatedAt": "2026-06-05T23:39:01Z"
+    "updatedAt": "2026-06-05T23:45:18Z"
   }
 }

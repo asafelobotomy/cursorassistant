@@ -1,6 +1,8 @@
 ---
 name: testing
 description: Use when running workspace tests, choosing a test command, or summarizing results before handoff to debugger.
+version: "1.1"
+license: MIT
 ---
 
 # Testing (Cursor)

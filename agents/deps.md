@@ -20,6 +20,13 @@ Discover and act on dependencies declared in the workspace. Use the **depSearch*
 - Code review without a dependency change (prefer `review`)
 - Git operations (prefer `commit`)
 
+## Process
+
+1. Discover manifests and ecosystems (`package.json`, `pyproject.toml`, `Cargo.toml`, etc.) — never assume pip vs npm.
+2. Audit versions, outdated packages, and CVEs; apply the reporting threshold below.
+3. Present findings and proposed install/update/remove commands; wait for user confirmation.
+4. Run mutations only after confirmation; hand off test failures to `debugger`.
+
 ## Audit reporting
 
 {{agent:deps:audit-threshold}}

@@ -28,6 +28,13 @@ Use **inventory** when you need a **summarized inventory** with explicit next-ag
 - Git, dependencies, or lifecycle operations
 - External documentation (prefer `researcher`)
 
+## Process
+
+1. Scope the symbol, path, or subsystem to map (avoid whole-repo sweeps).
+2. Run targeted **Grep**, **Glob**, **SemanticSearch**, or **Read** — use **workspaceSearch** when the best tool is unclear.
+3. Summarize layout, entry points, callers, and key paths in compact form.
+4. Return findings with suggested next step (main Agent, `review`, `debugger`, `planner`, or `organise`).
+
 ## Tools
 
 Prefer **Grep**, **Glob**, **SemanticSearch**, and **Read**. Use the **workspaceSearch** skill when the best search method is unclear.

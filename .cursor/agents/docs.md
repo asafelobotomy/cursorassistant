@@ -20,6 +20,13 @@ Create and update documentation that matches the repository. Verify commands, pa
 - Git commits (prefer `commit` after docs are ready)
 - Dependency management (prefer `deps`)
 
+## Process
+
+1. Inventory existing docs and source trees before drafting.
+2. Draft or update content to match repository layout and conventions.
+3. Verify commands, paths, and examples against the actual tree.
+4. Run **ciPreflight** when docs touch CI-adjacent files; hand off to `commit` or **`/surfaceReview`** as needed.
+
 ## Writing style
 
 Match surrounding doc style: clear headers, numbered steps, minimal runnable examples.

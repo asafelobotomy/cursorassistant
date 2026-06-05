@@ -41,7 +41,7 @@
       "target": ".cursor/agents/deps.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:3d2c088022104017b3e474cffd41ea561fb8adfd3eca32e28636a45119cff6d3"
+      "hash": "sha256:6d8dde44ec9f0acda02d105aabd0b720ecb89aab6635417574eab65f813a9c09"
     },
     {
       "id": "agents.docs",
@@ -49,7 +49,7 @@
       "target": ".cursor/agents/docs.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:21f9379483988e9f7f7dcec0ddfbbf8c78641753714672593f3a4253b972aba6"
+      "hash": "sha256:86e9aea2adf0d84c4e6d77a0a792c991b6c3b9b8295cd8a41efd6662453a4752"
     },
     {
       "id": "agents.inventory",
@@ -57,7 +57,7 @@
       "target": ".cursor/agents/inventory.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:8f169a8464512092b98fa41f7ba6f6aeb835723f8c95411892b74a30c84cacc7"
+      "hash": "sha256:dd271fe0134d3a0a6d6cff37b1dbc1c24f2e933ac2cd8b4e3ca0d5921cd0f161"
     },
     {
       "id": "agents.organise",
@@ -73,7 +73,7 @@
       "target": ".cursor/agents/planner.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:cd1e520ad1061ce979d5c54227e1587953231abd5b89b8b3ee20b11bd4add5d3"
+      "hash": "sha256:90036d11f2e5fa0bf36b46a73306242b1c0509906c1ede7feb185f73cd455162"
     },
     {
       "id": "agents.researcher",
@@ -481,7 +481,7 @@
       "target": ".cursor/skills/testing/SKILL.md",
       "layer": "core",
       "strategy": "replace",
-      "hash": "sha256:7f245b008cf0bf8c53904fcdf713ab6f4e7bfe2e9f97f8299d7f7ee852cbac34"
+      "hash": "sha256:7fc31159cdd37b0e2012874ea01be1319275c98f6e61642c6935ae9779c73315"
     },
     {
       "id": "packs.secure.threatModel",
